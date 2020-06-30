@@ -1,0 +1,176 @@
+# Linear Regression {#linreg}
+
+```{r linreg-setup, include=F}
+advertising = read_csv(here("data", "Advertising.csv"))
+
+```
+
+
+You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
+
+This chapter is about *linear regression*, a very simple approach for supervised learning. 
+In particular, linear regression is a useful tool for predicting a quantitative response. 
+Linear regression has been around for a long time and is the topic of innumerable textbooks. 
+Though it may seem somewhat dull compared to some of the more modern statistical learning approaches described in later chapters of this book, linear regression is still a useful and widely used statistical learning method. 
+Moreover it serves as a good jumping-off point for newer approaches: as we will see in later chapters, many fancy statistical learning approaches can be seen as generalizations or extensions of linear regression. 
+Consequently, the importance of having a good understanding of linear regression before studying more complex learning methods cannot be overstated. 
+In this chapter, we review some of the key ideas of the linear regression model, as well as the least squares approach that is most commonly used to fit this model.
+
+Recall the `r data_color("Advertising")` data from Chapter 2. 
+Figure 2.1 displays `r data_color("sales")` (in thousands of units) for a particular product as a function of advertising budgets (in thousands of dollars) for `r data_color("TV")`, `r data_color("radio")`, and `r data_color("newspaper")` media. 
+Suppose in our role as statistical consultants we are asked to suggest, on the basis of this data, a marketing plan for next year that will result in high product sales.
+What information would be useful in order to provide such a recommendation? 
+Here are a few important questions that we might seek to address:
+
+1. *Is there a relationship between advertising budget and sales?*  
+  Our first goal should be to determine whether the data provide evidence of an association between advertising expenditure and sales. 
+  If the evidence is weak, then one might argue no money should be spent on advertising!
+
+2. *How strong is the relationship between advertising budget and sales?*  
+  Assuming there is a relationship between advertising and sales, we would like to know the strength of that relationship.
+  In other words, given a certain advertising budget, can we predict sales with a high level of accuracy? 
+  This would be a strong relationship. 
+  Or is a prediction of sales based on advertising expenditure only slightly better than a random guess? 
+  This would be a weak relationship.
+ 
+3. *Which media contribute to sales?*  
+  Do all three media - TV, radio, and newspaper - contribute to sales, or do only one or two of the media contribute? 
+  To answer this question, we must find a way to separate out the individual effects of each medium when we have spent the mony on all three media.
+ 
+4. *How accurately can we estimate the effect of each medium on sales?*  
+  For every dollar spent on advertising in a particular medium, by what amount will sales increase? 
+  How accurately can we predict this amount of increase?
+  
+5. *How accurately can we predict future sales?*  
+  For every given level of television, radio, and newspaper sales, what is our prediction for sales, and what is the accuracy of this prediction?
+  
+6. *Is the relationship linear?*  
+  If there is an approximately straight-line relationship between advertising expenditure in the various media and sales, then linear regression is an appropriate tool.
+  If not, then it may still be possible to transform the predictor of the response so that linear regression can be used.
+  
+7. *Is there synergy among the advertising media?*  
+  Perhaps spending \$50,000 on television advertising and \$50,000 on radio advertising results in more sales than allocating \$100,000 in either television or radio individually. 
+  In marketing, this is known as a *synergy* effect, while in statistics it is called an *interaction* effect.
+  
+It turns out that linear regression can be used to answer each of these questions. 
+We will first discuss all of these questions in a general context, and then return to them in this specific context in Section 3.4.
+
+## Simple Linear Regression {#simple-lin-reg}
+
+*Simple linear regression* lives up to its name: it is a very straightforward approach for predicting a quantitative response *Y* on the basis of a single predictor variable *X*. 
+It assumes that there is an approximately linear relationship between *X* and *Y*. 
+Mathematically we can write this linear relationship as
+
+\begin{equation} 
+  Y \approx \beta_0 + \beta_1X
+  (\#eq:linmod)
+\end{equation} 
+
+You might read "$\approx$" as "*is approximately modeled as*". 
+We will sometimes describe \@ref(eq:linmod) by saying we are *regressing* Y on X (or Y *onto* X). 
+For example, *X* may represent `r data_color("TV")` advertising and *Y* may represent `r data_color("sales")`. 
+Then we can regress `r data_color("sales")` onto `r data_color("TV")` by fitting the model:
+
+$$\textbf{sales} = \beta_0+\beta_1\times\textbf{TV}$$
+
+In Equation \@ref(eq:linmod), $\beta_0$ and $\beta_1$ are two unknown constants that represent the *intercept* and the *slope* terms in the linear model. 
+Together, $\beta_0$ and $\beta_1$ are known as the model *coefficients* or *parameters*. 
+Once we have used our training data to produce estimates $\hat{\beta_0}$ and $\hat{\beta_1}$ for our model parameters, we can predict future sales on the basis of a particular value of TV advertising by computing
+
+\begin{equation} 
+  \hat{y} = \hat{\beta_0} + \hat{\beta_1}x
+  (\#eq:linest)
+\end{equation} 
+
+where $\hat{y}$ indicates a prediction of $Y$ on the basis of $X=x$. 
+Here we use the *hat* symbol, ^ , to denote the estimated value of an unknown parameter or coefficient, or to denote the predicted value of the response.
+
+### Estimating the Coefficients {#simple-coef-est}
+
+In practice, $\beta_0$ and $\beta_1$ are unknown.
+So before we can use \@ref(eq:linmod) to make predictions, we must use data to estimate the coefficients. Let
+
+$$(x_1, y_1), (x_2, y_2), ..., (x_n, y_n)$$
+
+represent *n* observation pairs, each of which consists of a measurement of *X* and a measurement of *Y*.
+In the `r data_color("Advertising")` example, this data set consists of the TV advertising budget and product sales in $n = 200$ different markets.
+(Recall that the data are displayed in **Figure 2.1**.)
+Our goal is to obtain coefficient estimates $\hat{\beta_0}$ and $\hat{\beta_1}$ such that the linear model \@ref(eq:linmod) fits the available data well—that is, so that $y_i \approx \hat{\beta_0}+\hat{\beta_1}x_i$ for $i = 1,...,n$.
+In other words, we want to find an intercept b0 and a slope b1 such that the resulting line is as close as possible to the $n = 200$ data points.
+There are a number of ways of measuring *closeness*.
+However, by far the most common approach involves minimizing the *least squares* criterion, and we take that approach in this chapter.
+Alternative approaches will be considered in Chapter 6.
+
+```{r advertising-lm, fig.align = "center", fig.cap=paste("*For the", data_color("Advertising"), "data, the least squares fit for the regression of", data_color("sales"), "onto", data_color("TV"), "is shown.  The fit is found by minimizing the sum of squared errors.  Each grey line segment represents an error, and the fit makes a compromise by averaging their squares.  In this case a linear fit captures the essence of the relationship, although it is somewhat deficient in the left of the plot.*"), fig.width= 12, fig.asp = 9/16}
+# Fit linear model regressing Sales on TV
+adv_lm = lm(sales~TV, advertising)
+
+# Add the predicted values to the advertising dataframe
+advertising %>% 
+  mutate(predicted = adv_lm$fitted.values) %>% 
+  ggplot(., aes(x=TV, y = sales))+
+  geom_point(colour = "red")+
+  geom_segment(aes(xend = TV, yend = predicted), colour = "grey40")+
+  stat_smooth(method = "lm", se = F, fullrange = T)+
+  scale_x_continuous(n.breaks = 6)+
+  scale_y_continuous(breaks = c(5,10,15,20,25))+
+  labs(y = "Sales")+
+  theme_bw(base_size = 14, base_family = "Roboto")
+  
+```
+
+Let $\hat{y_i} = \hat{\beta_0}+\hat{\beta_1}x_i$ be the prediction for $Y$ based on the *i*th value of $X$. 
+Then $e_i = y_i - \hat{y_i}$ represents the *i*th *residual*—this is the difference between the *i*th observed response value and the *i*th response value that is predicted by our linear model.
+We define the *residual sum of squares* (RSS) as
+$$RSS = {e_1^2}+{e_2^2}+...+{e_n^2},$$
+or equivalently as
+
+\begin{equation} 
+  RSS = (y_1 - \hat{\beta_0} - \hat{\beta_1}x_1)^2 + (y_2 - \hat{\beta_0} - \hat{\beta_1}x_2)^2 + ... + (y_n - \hat{\beta_0} - \hat{\beta_1}x_n)^2.
+  (\#eq:rss)
+\end{equation} 
+
+The least squares approach chooses $\hat{\beta_0}$ and $\hat{\beta_1}$ to minimize the RSS.
+Using some calculus, one can show that the minimizers are
+
+\begin{equation} 
+\begin{aligned}
+  \hat{\beta_1} &= \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i-\bar{y})}{\sum_{i=1}^{n}(x_i-\bar{x})^2},\\
+  \hat{\beta_0} &= \bar{y}-\hat{\beta_1}\bar{x},
+  \end{aligned}
+  (\#eq:rssmin)
+\end{equation} 
+
+where $\bar{y} \equiv \frac{1}{n}\sum_{i=1}^{n}y_i$ and $\bar{x} \equiv \frac{1}{n}\sum_{i=1}^{n}x_i$ are the sample means.
+In other words, \@ref(eq:rssmin) defines the *least squares coefficient estimates* for simple linear regression.
+
+\ref(fig:advertising-lm) displays the simple linear regression fit to the `r data_color("Advertising")` data, where $\hat{\beta_0} = 7.03$ and $\hat{\beta_1} = 0.0475$.
+In other words, according to this approximation, an additional \$1,000 spent on TV advertising is associated with selling approximately 47.5 additional units of the product. 
+In **Figure 3.2**, we have computed RSS for a number of values of $\beta_0$ and $\beta_1$, using the advertising data with `r data_color("sales")` as the response and `r data_color("TV")` as the predictor.
+In each plot, the red dot represents the pair of least squares estimates $(\hat{\beta_0}, \hat{\beta_1})$ given by \@ref(eq:rssmin). 
+These values clearly minimize the RSS.
+
+### Assessing the Accuracy of the Coefficient Estimates {#assess-coef-acc}
+
+Recall from **Equation (2.1)** that we can assume that the *true* relationship between $X$ and $Y$ takes the form $Y = f(X)+\epsilon$ for some unknown function $f$, where $\epsilon$ is a mean-zero random error term.
+If $f$ is to be approximated by a linear function, then we can write this relationship as
+
+\begin{equation}
+  Y = \beta_0+\beta_1X + \epsilon.
+  (\#eq:lin-rel)
+\end{equation} 
+
+Here $\beta_0$ is the intercept term—that is, the expected value of $Y$ when $X=0$ and $\beta_1$ is the slope—the average increase in $Y$ associated with a one-unit increase in $X$.
+The error term is a catch-all for what we miss with this simple model: the true relationship is probably not linear, there may be other variables that cause variation in $Y$, and there may be measurement error.
+We typically assume that the error term is independent of $X$.
+The model given by \ref(eq:lin-rel) defines the *population regression line*, which is the best linear approximation to the true relationship between $X$ and $Y$.^[The assumption of linearity is often a useful working model. 
+However, despite what many textbooks might tell us, we seldom believe that the true relationship is linear.]
+The least squares regression coefficient estimates \ref(eq:rssmin) characterize the *least squares line* \ref(eq:linest).
+The left-hand panel of **Figure 3.3** displays these two lines in a simple simulated example.  We created 100 random Xs, and generated 100 corresponding Ys from the model
+
+\begin{equation}
+  Y = 2+3X+\epsilon
+  (\#eq:sim-mod)
+\end{equation}
+
+where $\epsilon$ was generated from a normal distribution with mean zero.

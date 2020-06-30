@@ -1,0 +1,247 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={An Introduction to Statistical Learning: with Applications in R},
+  pdfauthor={Gareth James, Daniela Witten, Trevor Hastie, \& Robert Tibshirani},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
+
+\title{An Introduction to Statistical Learning: with Applications in R}
+\author{Gareth James, Daniela Witten, Trevor Hastie, \& Robert Tibshirani}
+\date{2020-05-20}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{preface}{%
+\chapter{Preface}\label{preface}}
+
+This is a \emph{sample} book written in \textbf{Markdown}. You can use anything that Pandoc's Markdown supports, e.g., a math equation \(a^2 + b^2 = c^2\).
+
+The \textbf{bookdown} package can be installed from CRAN or Github:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
+\CommentTok{# or the development version}
+\CommentTok{# devtools::install_github("rstudio/bookdown")}
+\end{Highlighting}
+\end{Shaded}
+
+Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading \texttt{\#}.
+
+To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.org/tinytex/}.
+
+I (not an author) am compiling this book for myself in order to learn both ISLR's material and how to use the \textbf{bookdown} package.
+
+\hypertarget{intro}{%
+\chapter{Introduction}\label{intro}}
+
+You can label chapter and section titles using \texttt{\{\#label\}} after them, e.g., we can reference Chapter \ref{intro}. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \ref{methods}.
+
+Figures and tables with captions will be placed in \texttt{figure} and \texttt{table} environments, respectively.
+
+You can write citations, too. For example, we are using the \textbf{bookdown} package \citep{R-bookdown} in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
+
+\hypertarget{linreg}{%
+\chapter{Linear Regression}\label{linreg}}
+
+You can label chapter and section titles using \texttt{\{\#label\}} after them, e.g., we can reference Chapter \ref{intro}. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \ref{methods}.
+
+This chapter is about \emph{linear regression}, a very simple approach for supervised learning.
+In particular, linear regression is a useful tool for predicting a quantitative response.
+Linear regression has been around for a long time and is the topic of innumerable textbooks.
+Though it may seem somewhat dull compared to some of the more modern statistical learning approaches described in later chapters of this book, linear regression is still a useful and widely used statistical learning method.
+Moreover it serves as a good jumping-off point for newer approaches: as we will see in later chapters, many fancy statistical learning approaches can be seen as generalizations or extensions of linear regression.
+Consequently, the importance of having a good understanding of linear regression before studying more complex learning methods cannot be overstated.
+In this chapter, we review some of the key ideas of the linear regression model, as well as the least squares approach that is most commonly used to fit this model.
+
+Recall the \textbf{Advertising} data from Chapter 2.
+Figure 2.1 displays \textbf{sales} (in thousands of units) for a particular product as a function of advertising budgets (in thousands of dollars) for \textbf{TV}, \textbf{radio}, and \textbf{newspaper} media.
+Suppose in our role as statistical consultants we are asked to suggest, on the basis of this data, a marketing plan for next year that will result in high product sales.
+What information would be useful in order to provide such a recommendation?
+Here are a few important questions that we might seek to address:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \emph{Is there a relationship between advertising budget and sales?}\\
+  Our first goal should be to determine whether the data provide evidence of an association between advertising expenditure and sales.
+  If the evidence is weak, then one might argue no money should be spent on advertising!
+\item
+  \emph{How strong is the relationship between advertising budget and sales?}\\
+  Assuming there is a relationship between advertising and sales, we would like to know the strength of that relationship.
+  In other words, given a certain advertising budget, can we predict sales with a high level of accuracy?
+  This would be a strong relationship.
+  Or is a prediction of sales based on advertising expenditure only slightly better than a random guess?
+  This would be a weak relationship.
+\item
+  \emph{Which media contribute to sales?}\\
+  Do all three media - TV, radio, and newspaper - contribute to sales, or do only one or two of the media contribute?
+  To answer this question, we must find a way to separate out the individual effects of each medium when we have spent the mony on all three media.
+\item
+  \emph{How accurately can we estimate the effect of each medium on sales?}\\
+  For every dollar spent on advertising in a particular medium, by what amount will sales increase?
+  How accurately can we predict this amount of increase?
+\item
+  \emph{How accurately can we predict future sales?}\\
+  For every given level of television, radio, and newspaper sales, what is our prediction for sales, and what is the accuracy of this prediction?
+\item
+  \emph{Is the relationship linear?}\\
+  If there is an approximately straight-line relationship between advertising expenditure in the various media and sales, then linear regression is an appropriate tool.
+  If not, then it may still be possible to transform the predictor of the response so that linear regression can be used.
+\item
+  \emph{Is there synergy among the advertising media?}\\
+  Perhaps spending \$50,000 on television advertising and \$50,000 on radio advertising results in more sales than allocating \$100,000 in either television or radio individually.
+  In marketing, this is known as a \emph{synergy} effect, while in statistics it is called an \emph{interaction} effect.
+\end{enumerate}
+
+It turns out that linear regression can be used to answer each of these questions.
+We will first discuss all of these questions in a general context, and then return to them in this specific context in Section 3.4.
+
+\hypertarget{simple-lin-reg}{%
+\section{Simple Linear Regression}\label{simple-lin-reg}}
+
+\emph{Simple linear regression} lives up to its name: it is a very straightforward approach for predicting a quantitative response \emph{Y} on the basis of a single predictor variable \emph{X}.
+It assumes that there is an approximately linear relationship between \emph{X} and \emph{Y}.
+Mathematically we can write this linear relationship as
+
+\begin{equation} 
+  Y \approx \beta_0 + \beta_1X
+  \label{eq:linmod}
+\end{equation}
+
+You might read ``\(\approx\)'' as ``\emph{is approximately modeled as}''.
+We will sometimes describe \eqref{eq:linmod} by saying we are \emph{regressing} Y on X (or Y \emph{onto} X).
+For example, \emph{X} may represent \textbf{TV} advertising and \emph{Y} may represent \textbf{sales}.
+Then we can regress \textbf{sales} onto \textbf{TV} by fitting the model:
+
+\[\textbf{sales} = \beta_0+\beta_1\times\textbf{TV}\]
+
+In Equation \eqref{eq:linmod}, \(\beta_0\) and \(\beta_1\) are two unknown constants that represent the \emph{intercept} and the \emph{slope} terms in the linear model.
+Together, \(\beta_0\) and \(\beta_1\) are known as the model \emph{coefficients} or \emph{parameters}.
+Once we have used our training data to produce estimates \(\hat{\beta_0}\) and \(\hat{\beta_1}\) for our model parameters, we can predict future sales on the basis of a particular value of TV advertising by computing
+
+\begin{equation} 
+  \hat{y} = \hat{\beta_0} + \hat{\beta_1}x
+  \label{eq:linest}
+\end{equation}
+
+where \(\hat{y}\) indicates a prediction of \(Y\) on the basis of \(X=x\).
+Here we use the \emph{hat} symbol, \^{} , to denote the estimated value of an unknown parameter or coefficient, or to denote the predicted value of the response.
+
+\hypertarget{estimating-the-coefficients}{%
+\subsection{Estimating the Coefficients}\label{estimating-the-coefficients}}
+
+  \bibliography{book.bib,packages.bib}
+
+\end{document}
