@@ -26,7 +26,7 @@ library(extrafont)
 knitr::opts_chunk$set(echo=F, warning=F, message=F)
 
 
-data_color <- function(x) {
+data_colour <- function(x) {
   if (knitr::is_latex_output()) {
     sprintf("\\textcolor{%s}{%s}", "#B44C1C", x)
   } else if (knitr::is_html_output()) {
