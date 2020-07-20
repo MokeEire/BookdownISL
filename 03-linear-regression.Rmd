@@ -167,9 +167,9 @@ If $f$ is to be approximated by a linear function, then we can write this relati
 Here $\beta_0$ is the intercept term—that is, the expected value of $Y$ when $X=0$ and $\beta_1$ is the slope—the average increase in $Y$ associated with a one-unit increase in $X$.
 The error term is a catch-all for what we miss with this simple model: the true relationship is probably not linear, there may be other variables that cause variation in $Y$, and there may be measurement error.
 We typically assume that the error term is independent of $X$.
-The model given by \ref(eq:lin-rel) defines the *population regression line*, which is the best linear approximation to the true relationship between $X$ and $Y$.^[The assumption of linearity is often a useful working model. 
+The model given by \@ref(eq:lin-rel) defines the *population regression line*, which is the best linear approximation to the true relationship between $X$ and $Y$.^[The assumption of linearity is often a useful working model. 
 However, despite what many textbooks might tell us, we seldom believe that the true relationship is linear.]
-The least squares regression coefficient estimates \ref(eq:rssmin) characterize the *least squares line* \ref(eq:linest).
+The least squares regression coefficient estimates \@ref(eq:rssmin) characterize the *least squares line* \@ref(eq:linest).
 The left-hand panel of **Figure 3.3** displays these two lines in a simple simulated example.  We created 100 random Xs, and generated 100 corresponding Ys from the model
 
 \begin{equation}
@@ -178,3 +178,467 @@ The left-hand panel of **Figure 3.3** displays these two lines in a simple simul
 \end{equation}
 
 where $\epsilon$ was generated from a normal distribution with mean zero.
+The red line in the left-hand panel of Figure 3.3 displays the *true* relationship, $f(X) = 2 + 3X$, while the blue line is the least squares estimate based on the observed data.
+The true relationship is generally not known for real data, but the least squares line can always be computed using the coefficient estimates given in \@ref(eq:rssmin).
+In other words, in real applications, we hav eaccess to a set of observations from which we can compute the lease squares line; however, the population regression line is unobserved.
+In the right-hand panel of Figure 3.3 we have generated ten different data sets from the model given by \@ref(eq:sim-mod) and plotted the corresponding ten least squares lines. 
+Notice that different data sets generated from the same true model result in slightly different least squares lines, but the unobserved population regression line does not change.
+
+At first glance, the difference between the population regression line and the least squares line may seem subtle and confusing.
+We only have one data set, and so what does it mean that two different lines describe the relationship between the predictor and the response?
+Fundamentally the concept of these two lines is a natural extension of the standard statistical approach of using information from a sample to estimate characteristics of a large population.
+For example, suppose that we are interested in knowing the population mean $\mu$ of some random variable $Y$.  
+Unfortunately, $\mu$ is unknoqn, but we do have access to $n$ observations from $Y$, which we can write as $y_1, ..., y_n$, and which we can use to estimate $\mu$.
+A reasonable estimate is $\hat{\mu} = \bar{y}$, where $\bar{y} = \frac{1}{n}\sum^{n}_{i=1}{y_i}$ is the sample mean.
+The sample mean and the population mean are different, but in general the sample mean will provide a good estimate of the population mean.
+In the same way, the unknown coefficients $\beta_0$ and $\beta_1$ in linear regression define the population regression line.
+We seek to estimate these unknown coefficients using $\hat{\beta_0}$ and $\hat{\beta_1}$ given in \@ref(eq:rssmin).
+These coefficient estimates define the least squares line.
+
+The analogy between linear regression and estimation of the mean of a random variable is an apt one based on the concept of _**bias**_.
+If we use the sample mean $\hat{\mu}$ to estimate $\mu$, this estimate is _**unbiased**_, in the sense that on average, we expect $\hat{\mu}$ to equal $\mu$.
+What exactly does this mean?
+It means that on the basis of one particular set of observations $y_1,...,y_n,\; \hat{\mu}$ might overestimate $\mu$, and on the basis of another set of observations, $\hat{\mu}$ might underestimate $\mu$.
+But if we could average a huge number of estimates of $\mu$ obtained from a huge number of sets of observations, then this average would _exactly_ equal $\mu$. 
+Hence, an unbiased estimator does not _systematically) over- or under-estimate the true parameter.
+The property of unbiasedness holds for the least squares coefficient estimates given by \@ref(eq:rssmin) as well: if we estimate $\beta_0$ and $\beta_1$ on the basis of a particular data set, then the average of these estimates would be spot on!  
+In fact, we can see from the right-hand panel on Figure 3.3 that the average of many least squares lines, each estimated from a separate data set, is pretty close to the true population regression line.
+
+We continue the analogy with the estimation of the population mean $\mu$ of a random variable $Y$.  
+A natural question is as follows: how accurate is the sample mean $\hat{\mu}$ as an estimate of $\mu$?
+We have established that the average of $\hat{\mu}$'s over many data sets will be very close to $\mu$, but that a single estimate $\hat{\mu}$ may be a substantial underestimate or overestimate of $\mu$.
+How far off will that single estimate of $\hat{\mu}$ be?
+In general, we answer this question by computing the _standard error_ of $\hat{\mu}$, written as $SE(\hat{\mu})$.
+We have the well-known formula
+
+\begin{equation}
+Var(\hat{\mu}) = SE(\hat{\mu})^2 = \frac{\sigma^2}{n} (\#eq:mu-se)
+\end{equation}
+
+where $\sigma$ is the standard deviation of each of the realizations $y_i$ of $Y$.^[The formula holds provided that the $n$ observations are uncorrelated.]
+Roughly speaking, the standard error tells us the average amount that this estimate $\hat{\mu}$ differs from the actual value of $\mu$. 
+Equation \@ref(eq:mu-se) also tells us how this deviation shrinks with _n_—themore observations we have, the smaller the standard error of $\hat{\mu}$.
+In a similar vein, we can wonder how close $\hat{\beta_0}$ and $\hat{\beta_1}$ are to the true values $\beta_0$ and $\beta_1$/ 
+To compute the standard errors associated with $\hat{\beta_0}$ and $\hat{\beta_1}$, we use the following formulas:
+
+\begin{equation}
+SE(\hat{\beta_0})^2 = \sigma^2 \left[ \frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^n (x_i - \bar{x})^2} \right] , 
+\hspace{1cm} 
+SE(\hat{\beta_1})^2 = \frac{\sigma^2}{\sum_{i=1}^n (x_i - \bar{x})^2} , (\#eq:beta-se)
+\end{equation}
+
+where $\sigma^2 = Var(\epsilon)$.
+For these formulas to be strictly valid, we need to assume that the errors $\epsilon_i$ for each observation are uncorrelated with common variance $\sigma^2$.
+This is clearly not true in Figure \@ref(fig:advertising-lm), but the formula still turns out to be a good approximation.
+Notice in the formula that $SE(\hat{\beta_1}$ is smaller when the $x_i$ are more spread out; intuitively we have more _leverage_ to estimate a slope when this is the case.
+We also see that $SE(\hat{\beta_0})$ would be the same as $SE(\hat{\mu})$ if $\bar{x}$ were zero (in which case $\hat{\beta_0}$ would be equal to $\bar{y}$).
+In general, $\sigma^2$ is not known, but can be estimated from the data.
+The estimate of $\sigma$ is known as the _residual standard error_, and is given by the formula $RSE = \sqrt{RSS/(n-2)}$.
+Strictly speaking, when $\sigma^2$ is estimated from the data we should write $\widehat{SE}(\hat{\beta_1})$ to indicate that an estimate has been made, but for simplicity of notation we will drop this extra "hat".
+
+Standard errors can be used to compute _confidence intervals_.
+A 95% confidence interval is defined as a range of values such that with 95% probability, the range will contain the true unknown value of the parameter.
+The range is defined in terms of lower and upper limits computed from the sample  of data.
+For linear regression, the 95% confidence interval for $\beta_1$ approximately takes the form 
+
+\begin{equation}
+\hat{\beta_1} \pm 2 \cdot SE(\hat{\beta_1}). (\#eq:b1-ci)
+\end{equation}
+
+That is, there is approximately a 95% chance that the interval
+
+\begin{equation}
+\left[ \hat{\beta_1} - 2 \cdot SE(\hat{\beta_1}), \hat{\beta_1} + 2 \cdot SE(\hat{\beta_1}) \right] (\#eq:b1-interval)
+\end{equation}
+
+will contain the true value of $\beta_1$.^[ _Approximately_ for several reasons. Equation \@ref(eq:b1-interval) relies on the assumption that the errors are Guassian. Also, the factor of 2 in front of the $SE(\hat{\beta_1})$ term will vary slightly depending on the number of observations _n_ in the linear regression.
+To be precise, rather than the number 2, \@ref(eq:b1-interval) should contain the 97.5% quantile of a _t_-distribution with $n-2$ degrees of freedom.
+Details of how to compute the 95% confidence interval precisely in `R` will be preovided later in this chapter.]
+Similarly, a confidence interval for $\beta_0$ approximately takes the form
+
+\begin{equation}
+\hat{\beta_0} \pm 2 \cdot SE(\hat{\beta_0}). (\#eq:b0-ci)
+\end{equation}
+
+In the case of the advertising data, the 95% confidence interval for $\beta_0$ is $[6.130, 7.935]$ and the 95% confidence interval for $\beta_1$ is $[0.042, 0.053]$.
+Therefore, we can conclude that in the absence of any advertising, sales will, on average, fall somewhere between 6,130 and 7,940 units.
+Furthermore, for each \$1,000 increase in television advertising, there will be an average increase in sales of between 42 and 53 units.
+
+Standard errors can also be used to perform *hypothesis tests* on the coefficients.
+The most common hypothesis test involves testing the *null hypothesis* of
+
+\begin{equation}
+H_0: \mathrm{There\ is\ no\ relationship\ between}\ X\ \mathrm{and}\ Y (\#eq:h-null)
+\end{equation}
+
+versus the *alternative hypothesis*
+
+\begin{equation}
+H_a: \mathrm{There\ is\ some\ relationship\ between}\ X\ \mathrm{and}\ Y. (\#eq:h-a)
+\end{equation}
+
+Mathematically, this corresponds to testing
+
+$$H_0: \beta_1 = 0$$
+
+versus
+
+$$H_a: \beta_1 \neq 0.$$
+
+since if $\beta_1 = 0$ then the model \@ref(eq:lin-rel) reduces to $Y = \beta_0 + \epsilon$, and $X$ is not associated with $Y$.
+To test the null hypothesis, we need to determine whether $\hat{\beta_1}$, our estimate for $\beta_1$, is sufficiently far from zero that we can be confident that $\beta_1$ is non-zero. 
+How far is enough?
+This of course depends on the accuracy of $\hat{\beta_1}$—that is, it depends on $SE(\hat{\beta_1})$.
+If $SE(\hat{\beta_1})$ is small, then even relatively small values of $\hat{\beta_1}$ may provide strong evidence that $\beta_1 \neq 0$, and hence that there is a relationship between $X$ and $Y$.
+In contrast, if $SE(\hat{\beta_1})$ is large, then $\hat{\beta_1}$ must be large in absolute value in order for us to reject the null hypothesis.
+In practice, we compute a *t-statistic*, give by
+
+\begin{equation}
+t = \frac{\hat{\beta_1}-0}{SE(\hat{\beta_1})} , (\#eq:t-stat)
+\end{equation}
+
+which measures the number of standard deviations that $\hat{\beta_1}$ is away from 0.
+If there really is no relationship between $X$ and $Y$, then we expect that \@ref(eq:t-stat) will have a *t*-distribution with $n-2$ degrees of freedom.
+The t-distribution has a bell shape and for values of _n_ greater than approximately 30 it is quite similar to the normal distribution.
+Consequently, it is a simple matter to compute the probability of observing any number equal to $|t|$ or larger in absolute value, assuming $\beta_1 = 0$.
+We call this probability the _p-value_.
+Roughly speaking, we interpret the p-value as follows: a small p-value indicates that it is unlikely to observe such a substantial association between the predictor and the response due to chance, in the absence of any real association between the predictor and the response.
+Hence, if we see a small p-value, then we can infer that there is an association between the predictor and the response.
+We _reject the null hypothesis_—that is, we declare a relationship to exist between $X$ and $Y$—if the p-value is amll enough.
+Typical p-value cutoffs for rejecting the null hypothesis are 5 or 1%.
+When $n=30$, these correspond to t-statistics \@ref(eq:t-stat) of around 2 and 2.75, respectively.
+
+{ Table 3.1 goes here }
+
+Table 3.1 provides details of the least squares model for the regression of number of units sold on TV advertising budget for the `r data_colour("Advertising")` data.
+Notice that the coefficients for $\hat{\beta_0}$ and $\hat{\beta_1}$ are very large relative to their standard errors, so the t-statistics are also large; the probabilities of seeing such values if $H_0$ is true are virtually zero.
+Hence we can conclude that $\beta_0 \neq 0$ and $\beta_1 \neq 0$.^[In Table 3.1, a small p-value for the intercept indicates that we can reject the null hpothesis that $\beta_0 = 0$, and a small p-value for `r data_colour("TV")` indicates that we can reject the null hypothesis that $\beta_1 = 0$.
+Rejecting the latter null hypothesis allows us to conclude that there is a relationship between `r data_colour("TV")` and `r data_colour("sales")`.
+Rejecting the former allows us to conclude that in the absence of `r data_colour("TV")` expenditure, `r data_colour("sales")` are non-zero.]
+
+### Assessing the Accuracy of the Model {#assess-model-acc}
+
+Once we have rejected the null hypothesis \@ref(eq:h-null) in favor of the alternative hypothesis \@ref(eq:h-a), it is natural to want to quantify _the extent to which the model fits the data_.
+The quality of a linear regression fit is typically assessed using two related quantities: the _residual standard error_ and the $R^2$ statistic.
+
+Table 3.2 displays the RSE, the $R^2$ statistic, and the F-statistic (to be described in Section 3.2.2) for the linear regression of number of units sold on TV advertising budget.
+
+#### Residual Standard Error {-}
+
+Recall from the model \@ref(eq:lin-rel) that associated with each observation is an error term $\epsilon$.
+Due to the presence of these error terms, even if we knew the true regression line (i.e. even if $\beta_0$ and $\beta_1$ were known), we would not be able to perfectly predict $Y$ from $X$.
+The RSE is an estimate of the standard deviation of $\epsilon$.
+
+{Table 3.2 goes here}
+
+Roughly speaking, it is the average amount that the response will deviate from the true regression line.
+It is computed using the formula
+
+\begin{equation}
+RSE = \sqrt{\frac{1}{n-2}RSS} = \sqrt{\frac{1}{n-2} \sum_{i=1}^{n} (y_i - \hat{y_i})^2} . (\#eq:rse)
+\end{equation}
+
+Note that RSS was defined in Section 3.1.1, and is given by the formula
+
+\begin{equation}
+RSS = \sum_{i=1}^{n} (y_i - \hat{y_i})^2 . (\#eq:rss-redefined)
+\end{equation}
+
+In the case of the advertising data, we see from the linear regression output in Table 3.2 that the RSE is 3.26.
+In other words, actual sales in each market deviate from the true regression line by approximately 3,260 units, on average.
+Another way to think about this is that even if the model were correct and the true values of the unknown coefficients $\beta_0$ and $\beta_1$ were known exactly, any prediction of sales on the basis of TV advertising would still be off by about 3,260 units on average.
+Of course, whether or not 3,260 units is an acceptable prediction error depends on the problem context.
+In the advertising data set, the mean value of `r data_colour("sales")` over all markets is approximately 14,000 units, and so the percentage error is $3,260/14,000 = 23\%$.
+
+The RSE is considered a measure of the _lack of fit_ of the model \@ref(eq:lin-rel) to the data.
+If the predictions obtained using the model are very close to the true outcome values—that is, if $\hat{y_i} \approx y_i$ for $i = 1, ..., n$—then \@ref(eq:rse) will be small, and we can conclude that the model fits the data very well.
+On the other hand, if $\hat{y_i}$ is very far from $y_i$ for one or more observations, then the RSE may be quite large, indicating that the model doesn't fit the data well.
+
+#### _R_^2^ Statistic {-}
+
+The RSE provides an absolute measure of lack of fit of the model \@ref(eq:lin-rel) to the data.
+But since it is measured in the units of $Y$, it is not always clear what constitutes a good RSE.
+The $R^2$ statistic provides an alternative measure of fit.
+It takes the form of a _proportion_—the proportion of variance explained—and so it always takes on a value between 0 and 1, and is independent of the scale of $Y$.
+
+To calculate $R^2$, we use the formula
+
+\begin{equation}
+R^2 = \frac{TSS-RSS}{TSS} = 1 - \frac{RSS}{TSS} (\#eq:rsquared)
+\end{equation}
+
+where $TSS = \sum (y_i - \bar{y})^2$ is the _total sum of squares_, and the RSS is defined in \@ref(eq:rss-redefined).
+TSS measures the total variance in the response $Y$, and can be thought of as the amount of variability inherent in the response before the regression is performed.
+In contrast, RSS measures the amount of variability that is left unexplained after performing the regression.
+Hence, $TSS - RSS$ measures the amount of variability in the response that is explained (or removed) by performing the regression, and $R^2$ measures the _proportion of variability in Y that can be explained using X_. 
+An $R^2$ statistic that is close to 1 indicates that a large proportion of the variability in the response has been explained by the regression.
+A number near 0 indicates that the regression did not explain much of the variability in the response; this might occur because the linear model is wrong, or the inherent error $\sigma^2$ is high, or both.
+In Table 3.2, the $R^2$ was 0.61, and so just under two-thirds of the variability in `r data_colour("sales")` is explained by a linear regression on `r data_colour("TV")`.
+
+The $R^2$ statistic is a measure of the linear relationship between $X$ and $Y$.
+Recall that _correlation_, defined as
+
+\begin{equation}
+Cor(X,Y) = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n} (x_i - \bar{x})^2} \sqrt{\sum_{i=1}^{n} (y_i - \bar{y})^2}}, (\#eq:correlation)
+\end{equation}
+
+is also a measure of the linear relationship between $X$ and $Y$.^[We should note that in fact, the right hand side of \@ref(eq:correlation) is the sample correlation; thus, it would be more correct to write $\widehat{Cor(X,Y)}$; however, we omit the "hat" for ease of notation.]
+This suggests that we might be able to use $r = Cor(X,Y)$ instead of $R^2$ in order to assess the fit of the linear model.
+In fact, it can be shown that in the simple linear regression setting, $R^2 = r^2$.
+In other words, the squared correlation and the $R^2$ statistic are identical.
+However, in the next section we will discuss the multiple linear regression problem, in which we use several predictors simultaneously to predict the response.
+The concept of correlation between the predictors and the response does not extend automatically to this setting, since correlation quantifies the association between a single pair of variables rather than between a larger number of variables.
+We will see that $R^2$ fills this role.
+
+
+## Multiple Linear Regression {#mult-lin-reg}
+
+
+Simple linear regression is a useful approach for predicting a response on the basis of a single predictor variable.
+However, in practice we often have more than one predictor.
+For example, in the `r data_colour("Advertising")` data, we have examined the relationship between sales and TV advertising.
+We also have data for the amount of money spent on advertising on the radio and in newspapers, and we may want to know whether either of these two media is associated with sales.
+How can we extend our analysis of the advertising data in order to accommodate these two additional predictors?
+
+One option is to run three separate simple linear regressions, each of which uses a different advertising medium as a predictor.
+For instance, we can fit a simple linear regression to predict sales on the basis of the amount spent on radio advertisements.
+Results are shown in Table 3.3 (top table).
+We find that a \$1,000 increase in spending on radio advertising is associated with an increase in sales by around 203 units.
+Table 3.3 (bottom table) contains the least squares coefficients for a simple linear regression of sales onto newspaper advertising budget.
+A \$1,000 increase in newspaper advertising budget is associated with an increase in sales by approximately 55 units.
+
+However, the approach of fitting a separate simple linear regression model for each predictor is not entirely satisfactory.
+First of all, it is unclear how to make a single prediction of sales given levels of the three advertising media budgets, since each of the budgets is associated with a separate regression equation.
+Second, each of the three regression equations ignores the other two media in forming estimates for the regression coefficients.
+We will see shortly that if the media budgets are correlated with each other in the 200 markets that constitute our data set, then this can lead to very misleading estimates of the individual media effects on sales.
+
+Instead of fitting a separate simple linear regression model for each predictor, a better approach is to extend the simple linear regression model \@ref(eq:lin-rel) so that it can directly accommodate multiple predictors.
+We can do this by giving each predictor a separate slope coefficient in a single model.
+In general, suppose that we have _p_ distinct predictors.
+Then the multiple linear regression model takes the form
+
+\begin{equation}
+  Y = \beta_0+\beta_1X_1 +\beta_2X_2 + ... +\beta_pX_p + \epsilon,
+  (\#eq:mlin-reg)
+\end{equation} 
+
+where $X_j$ represents the _j_th predictor and $\beta_j$ quantifies the association between that variable and the response.
+We interpret $\beta_j$ as the _average_ effect on $Y$ of a one unit increase in $X_j$, _holding all other predictors fixed_.
+In the advertising example, \@ref(eq:mlin-reg) becomes
+
+\begin{equation}
+  \color{#B44C1C}{\textbf{sales}} = \beta_0 + \beta_1 \times \color{#B44C1C}{\textbf{TV}}+\beta_2 \times \color{#B44C1C}{\textbf{radio}}+\beta_3 \times \color{#B44C1C}{\textbf{newspaper}}+ \epsilon. (\#eq:mlin-reg-adv)
+\end{equation}
+
+### Estimating the Regression Coefficients {#est-reg-coef}
+
+As was the case in the simple linear regression setting, the regression coefficients $\beta_0, \beta_1, ..., \beta_p$ in \@ref(eq:mlin-reg) are unknown, and must be estimated.
+Given estimates $\hat{\beta_0}, \hat{\beta_1}, ..., \hat{\beta_p}$, we can make predictions using the formula
+
+\begin{equation}
+  \hat{y} = \hat{\beta_0}+\hat{\beta_1}x_1 +\hat{\beta_2}x_2 + ... +\hat{\beta_p}x_p + \epsilon,
+  (\#eq:mlin-reg-est)
+\end{equation} 
+
+The parameters are estimated using the same least squares approach that we saw in the context of simple linear regression.
+We choose $\beta_0, \beta_1, ..., \beta_p$ to minimize the sum of squared residuals
+
+\begin{equation} 
+\begin{aligned}
+  RSS &= \sum_{i=1}^{n} (y_i-\hat{y})^2 \\
+      &= \sum_{i=1}^{n} (y_i-\hat{\beta_0} - \hat{\beta_1}x_{i1} - \hat{\beta_2}x_{i2} - ... - \hat{\beta_p}x_{ip})^2.
+  \end{aligned}
+  (\#eq:m-rssmin)
+\end{equation} 
+
+The values $\hat{\beta_0}, \hat{\beta_1}, ..., \hat{\beta_p}$ that minimize \@ref(eq:m-rssmin) are the multiple least squares regression coefficient estimates.
+Unlike the simple linear regression estimates given in \@ref(eq:rssmin), the multiple regression coefficient estimates have somewhat complicated forms that are most easily represented using matrix algebra.
+For this reason, we do not provide them here.
+Any statistical software package can be used to compute these coefficient estimates, and later in this chapter we will show how this can be done in `r data_colour("R")`.
+Figure 3.4 illustrates an example of the least squares fit to a toy data set with $p = 2$ predictors.
+
+Table 3.4 displays the multiple regression coefficient estimates when TV, radio, and advertising budgets are used to predict product sales using the `r data_colour("Advertising")` data.
+We interpret these results as follows: for a given amount of TV and newspaper advertising, spending an additional \$1,000 on radio advertising leads to an increase in sales by approximately 189 units.
+Comparing these coefficient estimates to those displayed in Table 3.1 and 3.3, we notice that the multiple regression coefficient estimates for `r data_colour("TV")` and `r data_colour("radio")` are pretty similar to the simple linear regression coefficient estimates.
+However, while the `r data_colour("newspaper")` regression coefficient estimate in Table 3.3 was significantly non-zero, the coefficient estimate for `r data_colour("newspaper")` in the multiple regression model is close to zero, and the corresponding p-value is no longer significant, with a value around 0.86.
+
+{Table 3.4 goes here}
+
+This illustrates that the simple and multiple regression coefficients can be quite different.
+This difference stems from the fact that in the simple regression case, the slope term represents the average effect of a \$1,000 increase in newspaper advertising, ignoring other predictors such as `r data_colour("TV")` and `r data_colour("radio")`.
+In contrast, in the multiple regression setting, the coefficient for `r data_colour("newspaper")` represents the average effect of increasing newspaper spending by \$1,000 while holding `r data_colour("TV")` and `r data_colour("radio")` fixed.
+
+Does it make sense for the multiple regression to suggest no relationship between `r data_colour("sales")` and `r data_colour("newspaper")` while the simple linear regression implies the opposite? 
+In fact it does. 
+Consider the correlation matrix for the three predictor variables and response variable, displayed in Table 3.5. 
+Notice that the correlation between `r data_colour("radio")` and `r data_colour("newspaper")` is 0.35. 
+This reveals a tendency to spend more on newspaper advertising in markets where more is spent on radio advertising. 
+Now suppose that the multiple regression is correct and newspaper advertising has no direct impact on sales, but radio advertising does increase sales. 
+Then in markets where we spend more on radio our sales will tend to be higher, and as our correlation matrix shows, we also tend to spend more on newspaper advertising in those same markets. 
+Hence, in a simple linear regression which only examines `r data_colour("sales")` versus `r data_colour("newspaper")`, we will observe that higher values of `r data_colour("newspaper")` tend to be associated with higher values of `r data_colour("sales")`, even though newspaper advertising does not actually affect sales. 
+So `r data_colour("newspaper")` sales are a surrogate for `r data_colour("radio")` advertising; newspaper gets “credit” for the effect of `r data_colour("radio")` on `r data_colour("sales")`.
+
+This slightly counterintuitive result is very common in many real life situations. 
+Consider an absurd example to illustrate the point. 
+Running a regression of shark attacks versus ice cream sales for data collected at a given beach community over a period of time would show a positive relationship, similar to that seen between `r data_colour("sales")` and `r data_colour("newspaper")`. 
+Of course no one (yet) has suggested that ice creams should be banned at beaches to reduce shark attacks. 
+In reality, higher temperatures cause more people to visit the beach, which in turn results in more ice cream sales and more shark attacks. 
+A multiple regression of attacks versus ice cream sales and temperature reveals that, as intuition implies, the former predictor is no longer significant after adjusting for temperature.
+
+### Some Important Questions {#important-questions}
+
+When we perform multiple linear regression, we usually are interested in answering a few important questions.
+
+1. *Is at least one of the predictors $X_1 , X_2 , ... , X_p$ useful in predicting the response?*
+
+2. *Do all the predictors help to explain $Y$, or is only a subset of the predictors useful?*
+
+3. *How well does the model fit the data?*
+
+4. *Given a set of predictor values, what response value should we predict, and how accurate is our prediction?*
+
+We now address each of these questions in turn.
+
+#### One: Is There a Relationship Between the Response and Predictors?
+
+Recall that in the simple linear regression setting, in order to determine whether there is a relationship between the response and the predictor we can simply check whether $\beta_1 = 0$. 
+In the multiple regression setting with $p$ predictors, we need to ask whether all of the regression coefficients are zero, i.e. whether $\beta_1 = \beta_2 = ... = \beta_p = 0$. 
+As in the simple linear regression setting, we use a hypothesis test to answer this question. 
+We test the null hypothesis,
+
+$$H_0: \beta_1 = \beta_2 = ... = \beta_p = 0$$
+
+versus the alternative
+
+$$H_a: \mathrm{at\ least\ one\ \beta_j\ is\ non-zero}$$
+
+This hypothesis test is performed by computing the *F-statistic*,
+
+\begin{equation}
+  F = \frac{(TSS-RSS)/p}{RSS/(n-p-1)},
+  (\#eq:fstat)
+\end{equation} 
+
+where, as with simple linear regression, $TSS = \sum{(y_i - \bar{y})^2}$ and $RSS = \sum{(y_i - \hat{y_i})^2}$.
+If the linear model assumptions are correct, one can show that
+
+$$ E\{RSS/(n-p-1)\} = \sigma^2 $$
+
+and that, provided $H_0$ is true.
+
+$$ E\{TSS-RSS/p\} = \sigma^2. $$
+
+Hence, when there is no relationship between the response and predictors, one would expect the F-statistic to take on a value close to 1.
+On the other hand, if $H_a$ is true, then $ E\{TSS-RSS/p\} > \sigma^2 $, so we expect $F$ t obe greater than 1.
+
+The F-statistic for the multiple linear regression model obtained by regressing `r data_colour("sales")` onto `r data_colour("radio")`, `r data_colour("TV")`, and `r data_colour("newspaper")` is shown in Table 3.6. 
+In this example the F-statistic is 570. 
+Since this is far larger than 1, it provides compelling evidence against the null hypothesis $H_0$.
+In other words, the large F-statistic suggests that at least one of the advertising media must be related to `r data_colour("sales")`.
+However, what if the F-statistic had been closer to
+1? How large does the F-statistic need to be before we can reject $H_0$ and conclude that there is a relationship?
+It turns out that the answer depends on the values of $n$ and $p$.
+When $n$ is large, an F-statistic that is just a little larger than 1 might still provide evidence against $H_0$.
+In contrast, a larger F-statistic is needed to reject $H_0$ if $n$ is small.
+When $H_0$ is true, and the errors $\epsilon_i$ have a normal distribution, the F-statistic follows an F-distribution.^[Even if the errors are not normally-distributed, the F-statistic approximately follows an F-distribution provided that the sample size $n$ is large.]
+For any given value of $n$ and $p$, any statistical software package can be used to compute the p-value associated with the F-statistic using this distribution.
+Based on this p-value, we can determine whether or not to reject $H_0$.
+For the advertising data, the p-value associated with the F-statistic in Table 3.6 is essentially zero, so we have extremely strong evidence that at least one of the media is associated with increased `r data_colour("sales")`.
+
+In \@ref(eq:fstat) we are testing $H_0$ that all the coefficients are zero.
+Sometimes we want to test that a partiuclar subset of $q$ of the coefficients are zero.
+This corresponds to a null hypothesis
+
+$$H_0: \beta_{p-q+1} = \beta_{p-q+2} = ... = \beta_p = 0.$$
+
+where for convenience we have put the variables chosen for omission at the end of the list.
+In this case we fit a second model that uses all the variables *except* those last $q$.
+Suppose that the residual sum of squares for that model is $RSS_0$.
+Then the appropriate F-statistic is
+
+\begin{equation}
+  F = \frac{(RSS_0 - RSS)/q}{RSS/(n-p-1)}.
+  (\#eq:fstat2)
+\end{equation} 
+
+Notice that in Table 3.4, for each individual predictor a t-statistic and a p-value were reported. 
+These provide information about whether each individual predictor is related to the response, after adjusting for the other predictors. 
+It turns out that each of these are exactly equivalent^[The squar eof each t-statistic is the corresponding F-statistic.] to the F-test that omits that single variable from the model, leaving all others in—i.e. $q=1$ in \@ref(eq:fstat2).
+So it reports the *partial effect* of adding that variable to the model.
+For instance, as we discussed earlier, these p-values indicate that `r data_colour("TV")` and `r data_colour("radio")` are related to `r data_colour("sales")`, but that there is no evidence that `r data_colour("newspaper")` is associated with `r data_colour("sales")`, in the presence of these two.
+
+Given these individual p-values for each variable, why do we need to look at the overall F-statistic? 
+After all, it seems likely that if any one of the p-values for the individual variables is very small, then *at least one of the predictors is related to the response*. 
+However, this logic is flawed, especially when the number of predictors p is large.
+
+For instance, consider an example in which $p = 100$ and $H_0: \beta_1 = \beta_2 = ... = \beta_p = 0$is true, so no variable is truly associated with the response.
+In this situation, about 5% of the p-values associated with each variable (of the type shown in Table 3.4) will be below 0.05 by chance.
+In other words, we expect to see approximately five *small* p-values even in the absence of any true association between the predictors and the response. 
+In fact, we are almost guaranteed that we will observe at least one p-value below 0.05 by chance!
+Hence, if we use the individual t-statistics and associated p-values in order to decide whether or not there is any association between the variables and the response, there is a very high chance that we will incorrectly conclude that there is a relationship.
+However, the F-statistic does not suffer from this problem because it adjusts for the number of predictors.
+Hence, if $H_0$ is true, there is only a 5% chance that the F-statistic will result in a p-value below 0.05, regardless of the number of predictors or the number of observations.
+
+The approach of using an F-statistic to test for any association between the predictors and the response works when $p$ is relatively small, and certainly small compared to $n$. 
+However, sometimes we have a very large number of variables.
+If $p > n$ then there are more coefficients $\beta_j$ to estimate than observations from which to estimate them.
+In this case we cannot even fit the multiple linear regression model using least squares, so the F-statistic cannot be used, and neither can most of the other concepts that we have seen so far in this chapter.
+When $p$ is large, some of the approaches discussed in the next section, such as *forward selection*, can be used.
+This *high-dimensional* setting is discussed in greater detail in Chapter 6.
+
+
+#### Two: Deciding on Important Variables
+
+#### Three: Model Fit
+
+#### Four: Predictions
+
+## Other Considerations in the Regression Model {#other-reg-cons}
+
+### Qualitative Predictors
+
+#### Predictors with Only Two Levels
+
+#### Qualitative Predictors with More than Two Levels
+
+### Extensions of the Linear Model
+
+#### Removing the Additive Assumption
+
+#### Non-linear Relationships
+
+### Potential Problems
+
+#### Non-linearity of the Data
+
+#### Correlation of Error Terms
+
+#### Non-constant Variance of Error Terms
+
+#### Outliers
+
+#### High Leverage Points
+
+#### Collinearity
+
+## The Marketing Plan
+
+## Comparison of Linear Regression with K-Nearest Neighbors
+
+## Lab: Linear Regression
+
+### Libraries
+
+### Simple Linear Regression
+
+### Multiple Linear Regression
+
+### Interaction Terms
+
+
+### Qualitative Predictors
+
+### Writing Functions
+
+## Exercises
+
