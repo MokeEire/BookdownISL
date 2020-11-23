@@ -3,6 +3,9 @@
 ```{r linreg-setup, include=F}
 advertising = read_csv(here("data", "Advertising.csv"))
 
+credit = read_csv(here("data", "Credit.csv")) %>% 
+  mutate(Student = fct_relabel(Student, ~str_replace_all(., c("No" = "non-student", "Yes" = "student"))))
+
 ```
 
 
