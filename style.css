@@ -1,5 +1,11 @@
+:root {
+  --islr-blue: #1188ce;
+  --white: #ffffff;
+}
+
 p.caption {
   margin-top:10px;
+  color: var(--islr-blue);
 }
 p.caption em {
   color: #777;
@@ -57,13 +63,13 @@ code, kbd, pre, samp, .sourceLine, .sourceCode {
   font-family: "Roboto Light";
 }
 .book .book-summary ul.summary li:not(.chapter) a {
-  color: #1188ce;
+  color: var(--islr-blue);
   font-size:1.7rem;
 }
 
 
 .book .book-header.fixed {
-  color: #1188ce;
+  color: var(--islr-blue);
   border-bottom: 1px solid #1188ce5e;
 }
 
@@ -72,8 +78,13 @@ code, kbd, pre, samp, .sourceLine, .sourceCode {
 .book .book-body .page-wrapper .page-inner section.normal h3, 
 .book .book-body .page-wrapper .page-inner section.normal h4, 
 .book .book-body .page-wrapper .page-inner section.normal h5 {
-  color: #1188ce;
+  color: var(--islr-blue);
   font-family: "Roboto Thin";
+}
+
+.dropdown-menu > li > a:hover, 
+.dropdown-menu > li > a:focus {
+  background-color: var(--islr-blue) !important;
 }
 
 @media (min-width: 600px) {
@@ -84,4 +95,5 @@ code, kbd, pre, samp, .sourceLine, .sourceCode {
     left: 350px;
   }
 }
+  
   
