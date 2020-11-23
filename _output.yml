@@ -1,8 +1,16 @@
 bookdown::gitbook:
+  includes:
+    in_header: hide_code.html
   config:
     toc:
+      collapse: section
       before: |
         <li><a href="http://faculty.marshall.usc.edu/gareth-james/ISL/">An Introduction to Statistical Learning</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     download: ["pdf", "epub"]
+    sharing:
+      github: yes
+      twitter: no
+      facebook: no
+      all: no

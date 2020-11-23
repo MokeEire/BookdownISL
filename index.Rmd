@@ -6,24 +6,25 @@ css: style.css
 split_by: section
 bibliography:
 - book.bib
-- packages.bib
 description: This is a minimal example of using the bookdown package to write a book.
   The output format for this example is bookdown::gitbook.
 documentclass: book
-output:
-  bookdown::gitbook:
-    split_by: "section"
 link-citations: yes
+github-repo: "MokeEire/BookdownISL"
 site: bookdown::bookdown_site
 biblio-style: apalike
 ---
 
 ```{r setup, include=F}
+library(extrafont)
 library(tidyverse)
+library(GGally)
 library(ISLR)
 library(here)
-library(extrafont)
-knitr::opts_chunk$set(echo=F, warning=F, message=F)
+library(gt)
+library(patchwork)
+
+knitr::opts_chunk$set(echo=T, warning=F, message=F)
 
 
 data_colour <- function(x) {
