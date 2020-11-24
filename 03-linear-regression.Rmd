@@ -120,7 +120,6 @@ advertising %>%
   scale_x_continuous(n.breaks = 6)+
   scale_y_continuous(breaks = c(5,10,15,20,25))+
   labs(y = "Sales")+
-  # theme_bw(base_size = 14, base_family = "Roboto")
   theme_islr()
   
 ```
