@@ -1436,7 +1436,59 @@ For instance, we might take the average of the standardized versions of `r data_
 
 ## The Marketing Plan
 
-We now briefly return to the seven questions about the `r data_colour("Advertising")` data
+We now briefly return to the seven questions about the `r data_colour("Advertising")` data that we set out to answer at the beginning of this chapter.
+
+1. *Is there a relationship between advertising sales and budget?*  
+This question can be answered by fitting a multiple regression model of `r data_colour("sales")` onto `r data_colour("TV")`, `r data_colour("radio")`, and `r data_colour("newspaper")`, as in \@ref(eq:mlin-reg-adv), and testing the hypothesis $H_0 : \beta_{\color{#B44C1C}{TV}} = \beta_{\color{#B44C1C}{radio}} = \beta_{\color{#B44C1C}{newspaper}} = 0$. 
+In Section 3.2.2, we showed that the F-statistic can be used to determine whether or not we should reject this null hypothesis.
+In this case the p-value corresponding to the F-statistic in Table 3.6 is very low, indicating clear evidence of a relationship between advertising and sales.
+
+2. *How strong is the relationship?*  
+We discussed two measures of model accuracy in Section 3.1.3.
+First the RSE estimates the standard deviation of the response from the population regression line.
+For the `r data_colour("Advertising")` data, the RSE is $1,681$ units while the mean value for the response is $14,022$, indicating a percentage error of roughly $12\%$.
+Second, the $R^2$ statistic records the percentage of variability in the response that is explained by the predictors.
+The predictors explain almost $90\%$ of the variance in `r data_colour("sales")`.
+The RSE and $R^2$ statistics are displayed in Table 3.6.
+
+3. *Which media contribute to sales?*  
+To answer this question, we can examine the p-values associated with each predictor's t-statistic (Section 3.1.2).
+In the multiple linear regression displayed in Table 3.4, the p-values for `r data_colour("TV")` and `r data_colour("radio")` are low, but the p-value for `r data_colour("newspaper")` is not.
+This suggests that only `r data_colour("TV")` and `r data_colour("radio")` are related to `r data_colour("sales")`. 
+But the interval for `r data_colour("newspaper")` includes zero, indicating that the variable is not statistically significant given the values of `r data_colour("TV")` and `r data_colour("radio")`.
+
+4. *How large is the effect of each medium on sales?*  
+We saw in Section 3.1.2 that the standard error of $\hat{\beta_j}$ can be used to construct confidence intervals for $\beta_j$.
+For the `r data_colour("Advertising")` data, the $95\%$ confidence intervals are as follows: $(0.043, 0.049)$ for `r data_colour("TV")`, $(0.172, 0.206)$ for `r data_colour("radio")`, and $(-0.013, 0.011)$ for `r data_colour("newspaper")`.
+The confidence intervals for `r data_colour("TV")` and `r data_colour("radio")` are narrow and far from zero, providing evidnece that these media are related to `r data_colour("sales")`.
+But the interval for `r data_colour("newspaper")` includes zero, indicating that the variable is not statistically significant given the values of `r data_colour("TV")` and `r data_colour("radio")`.  
+We saw in Section 3.3.3 that collinearity can result in very wide standard errors.
+Could collinearity be the reason that the confidence intervals associated with `r data_colour("newspaper")` is so wide?
+The VIF scores are $1.005$, $1.145$, and $1.145$ for `r data_colour("TV")`, `r data_colour("radio")`, and `r data_colour("newspaper")`, suggesting no evidence of collinearity.  
+In order to assess the association of each medium individually on sales, we can perform three separate simple linear regressions.
+Results are shown in Tables 3.1 and 3.3. 
+There is evidence of an extremely strong association between  `r data_colour("TV")` and `r data_colour("sales")` and between `r data_colour("radio")` and `r data_colour("sales")`.
+There is evidence of a mild association between `r data_colour("newspaper")` and `r data_colour("sales")`, when the values of `r data_colour("TV")` and `r data_colour("radio")` are ignored.
+
+5. *How accurately can we predict future sales?*  
+The response can be predicted using \@ref(eq:mlin-reg-est).
+The accuracy associated with this estimate depends on whether we wish to predict an individual response, $Y = f(X) + \epsilon$, or the average response, $f(X)$ (Section 3.2.2).
+If the former, we use a prediction interval, and if the latter, we use a confidence interval.
+Prediction intervals will always be wider than confidence intervals because they account for the uncertainty associated with $\epsilon$, the irreducible error.
+
+6. *Is the relationship linear?*  
+In Section 3.3.3, we saw that residual plots can be used in order to identify non-linearity.
+If the relationships are linear, then the residual plots should display no pattern.
+In the case of the `r data_colour("Advertising")` data, we observe a non-linear effect in Figure 3.5, though this effect could also be observed in a residual plot.
+In Section 3.3.2, we discussed the inclusion of transformations of the predictors in the linear regression model in order to accommodate non-linear relationships.
+
+7. *Is there synergy among the advertising media?*  
+The standard linear regression model assumes an additive relationship between predictors.
+However, the additive assumption may be unrealistic for certain data sets.
+In Section 3.3.2, we showed how to include an interaction term in the regression model in order to accommodate non-additive relationships. 
+A small p-value associated with the interaction term indicates the presence of such relationships.
+Figure 3.5 suggested that the `r data_colour("Advertising")` data may not be additive.
+Including an interaction term in the model results in a substantial increase in $R^2$, from around $90\%$ to almost $97\%$.
 
 
 
