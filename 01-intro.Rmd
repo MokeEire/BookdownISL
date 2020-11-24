@@ -1,8 +1,12 @@
 # Introduction {#intro}
 
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
+In progress. 
+But for now, in case anyone manages to stumble across this repository, it is probably good to know a few things before you read ahead:
 
-Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
-
-
-You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
+1. This transcription hasn't been proofread just yet so please do put on your critical thinking hats and evaluate the content. 
+You can also [submit any issues as needed](https://github.com/MokeEire/BookdownISL/issues).
+2. I am attempting to stay completely faithful to the text. 
+It cannot be understated -- **this is not my work**, I am merely transcribing and learning. 
+In a bid to use the authors' formatting, words in orange/red are related to `r data_colour("data")`.
+In attempting to bring the user-friendliness of online books to the material, words in blue indicate `r keyword_colour("keywords")`.
+In the book, these words are italicized and marked in the margins of the page.
