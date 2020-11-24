@@ -1,0 +1,2358 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3.3 Other Considerations in the Regression Model | An Introduction to Statistical Learning: with Applications in R</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3.3 Other Considerations in the Regression Model | An Introduction to Statistical Learning: with Applications in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="MokeEire/BookdownISL" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3.3 Other Considerations in the Regression Model | An Introduction to Statistical Learning: with Applications in R" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Gareth James, Daniela Witten, Trevor Hastie, &amp; Robert Tibshirani" />
+
+
+<meta name="date" content="2020-11-23" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="mult-lin-reg.html"/>
+<link rel="next" href="the-marketing-plan.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<script>
+/* ========================================================================
+ * Bootstrap: transition.js v3.3.7
+ * http://getbootstrap.com/javascript/#transitions
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // ============================================================
+
+  function transitionEnd() {
+    var el = document.createElement('bootstrap')
+
+    var transEndEventNames = {
+      WebkitTransition : 'webkitTransitionEnd',
+      MozTransition    : 'transitionend',
+      OTransition      : 'oTransitionEnd otransitionend',
+      transition       : 'transitionend'
+    }
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return { end: transEndEventNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);
+</script>
+<script>
+/* ========================================================================
+ * Bootstrap: collapse.js v3.3.7
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+/* jshint latedef: false */
+
++function ($) {
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = '3.3.7'
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
+    }
+
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
+
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
+      this.$element
+        .trigger('shown.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass('in')) return
+
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass('in')
+
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target')
+      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr('data-target')) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data('bs.collapse')
+    var option  = data ? 'toggle' : $this.data()
+
+    Plugin.call($target, option)
+  })
+
+}(jQuery);
+</script>
+<script>
+window.initializeCodeFolding = function(show) {
+
+  // handlers for show-all and hide all
+  $("#rmd-show-all-code").click(function() {
+    // close the dropdown menu when an option is clicked
+    $("#allCodeButton").dropdown("toggle");
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('show');
+    });
+  });
+  $("#rmd-hide-all-code").click(function() {
+    // close the dropdown menu when an option is clicked
+    $("#allCodeButton").dropdown("toggle");
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('hide');
+    });
+  });
+
+  // index for unique code element ids
+  var currentIndex = 1;
+
+  // select all R code blocks
+  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan');
+  rCodeBlocks.each(function() {
+
+    // create a collapsable div to wrap the code in
+    var div = $('<div class="collapse r-code-collapse"></div>');
+    if (show)
+      div.addClass('in');
+    var id = 'rcode-643E0F36' + currentIndex++;
+    div.attr('id', id);
+    $(this).before(div);
+    $(this).detach().appendTo(div);
+
+    // add a show code button right above
+    var showCodeText = $('<span>' + (show ? 'Hide' : 'Code') + '</span>');
+    var showCodeButton = $('<button type="button" class="btn btn-default btn-xs code-folding-btn pull-right"></button>');
+    showCodeButton.append(showCodeText);
+    showCodeButton
+        .attr('data-toggle', 'collapse')
+        .attr('data-target', '#' + id)
+        .attr('aria-expanded', show)
+        .attr('aria-controls', id);
+
+    var buttonRow = $('<div class="row"></div>');
+    var buttonCol = $('<div class="col-md-12"></div>');
+
+    buttonCol.append(showCodeButton);
+    buttonRow.append(buttonCol);
+
+    div.before(buttonRow);
+
+    // update state of button on show/hide
+    div.on('hidden.bs.collapse', function () {
+      showCodeText.text('Code');
+    });
+    div.on('show.bs.collapse', function () {
+      showCodeText.text('Hide');
+    });
+  });
+
+}
+</script>
+<script>
+/* ========================================================================
+ * Bootstrap: dropdown.js v3.3.7
+ * http://getbootstrap.com/javascript/#dropdowns
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // DROPDOWN CLASS DEFINITION
+  // =========================
+
+  var backdrop = '.dropdown-backdrop'
+  var toggle   = '[data-toggle="dropdown"]'
+  var Dropdown = function (element) {
+    $(element).on('click.bs.dropdown', this.toggle)
+  }
+
+  Dropdown.VERSION = '3.3.7'
+
+  function getParent($this) {
+    var selector = $this.attr('data-target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && /#[A-Za-z]/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    var $parent = selector && $(selector)
+
+    return $parent && $parent.length ? $parent : $this.parent()
+  }
+
+  function clearMenus(e) {
+    if (e && e.which === 3) return
+    $(backdrop).remove()
+    $(toggle).each(function () {
+      var $this         = $(this)
+      var $parent       = getParent($this)
+      var relatedTarget = { relatedTarget: this }
+
+      if (!$parent.hasClass('open')) return
+
+      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
+
+      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this.attr('aria-expanded', 'false')
+      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
+    })
+  }
+
+  Dropdown.prototype.toggle = function (e) {
+    var $this = $(this)
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    clearMenus()
+
+    if (!isActive) {
+      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
+        // if mobile we use a backdrop because click events don't delegate
+        $(document.createElement('div'))
+          .addClass('dropdown-backdrop')
+          .insertAfter($(this))
+          .on('click', clearMenus)
+      }
+
+      var relatedTarget = { relatedTarget: this }
+      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
+
+      if (e.isDefaultPrevented()) return
+
+      $this
+        .trigger('focus')
+        .attr('aria-expanded', 'true')
+
+      $parent
+        .toggleClass('open')
+        .trigger($.Event('shown.bs.dropdown', relatedTarget))
+    }
+
+    return false
+  }
+
+  Dropdown.prototype.keydown = function (e) {
+    if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return
+
+    var $this = $(this)
+
+    e.preventDefault()
+    e.stopPropagation()
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    if (!isActive && e.which != 27 || isActive && e.which == 27) {
+      if (e.which == 27) $parent.find(toggle).trigger('focus')
+      return $this.trigger('click')
+    }
+
+    var desc = ' li:not(.disabled):visible a'
+    var $items = $parent.find('.dropdown-menu' + desc)
+
+    if (!$items.length) return
+
+    var index = $items.index(e.target)
+
+    if (e.which == 38 && index > 0)                 index--         // up
+    if (e.which == 40 && index < $items.length - 1) index++         // down
+    if (!~index)                                    index = 0
+
+    $items.eq(index).trigger('focus')
+  }
+
+
+  // DROPDOWN PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('bs.dropdown')
+
+      if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
+      if (typeof option == 'string') data[option].call($this)
+    })
+  }
+
+  var old = $.fn.dropdown
+
+  $.fn.dropdown             = Plugin
+  $.fn.dropdown.Constructor = Dropdown
+
+
+  // DROPDOWN NO CONFLICT
+  // ====================
+
+  $.fn.dropdown.noConflict = function () {
+    $.fn.dropdown = old
+    return this
+  }
+
+
+  // APPLY TO STANDARD DROPDOWN ELEMENTS
+  // ===================================
+
+  $(document)
+    .on('click.bs.dropdown.data-api', clearMenus)
+    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
+    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
+    .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
+    .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown)
+
+}(jQuery);
+</script>
+<style type="text/css">
+.code-folding-btn {
+  margin-bottom: 4px;
+}
+
+.row { display: flex; }
+.collapse { display: none; }
+.in { display:block }
+.pull-right > .dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.open > .dropdown-menu {
+    display: block;
+    color: #ffffff;
+    background-color: #ffffff;
+    background-image: none;
+    border-color: #92897e;
+}
+
+.dropdown-menu > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857143;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #e95420;
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #e95420;
+  outline: 0;
+}
+.dropdown-menu > .disabled > a,
+.dropdown-menu > .disabled > a:hover,
+.dropdown-menu > .disabled > a:focus {
+  color: #aea79f;
+}
+
+.dropdown-menu > .disabled > a:hover,
+.dropdown-menu > .disabled > a:focus {
+  text-decoration: none;
+  cursor: not-allowed;
+  background-color: transparent;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+
+.btn {
+  display: inline-block;
+  margin-bottom: 1;
+  font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  padding: 4px 8px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.btn:hover,
+.btn:focus,
+.btn.focus {
+  color: #ffffff;
+  text-decoration: none;
+}
+.btn:active,
+.btn.active {
+  background-image: none;
+  outline: 0;
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  opacity: 0.65;
+  box-shadow: none;
+}
+a.btn.disabled,
+fieldset[disabled] a.btn {
+  pointer-events: none;
+}
+.btn-default {
+  color: #ffffff;
+  background-color: #aea79f; #important
+  border-color: #aea79f;
+}
+
+.btn-default:focus,
+.btn-default.focus {
+  color: #ffffff;
+  background-color: #978e83;
+  border-color: #6f675e;
+}
+
+.btn-default:hover {
+  color: #ffffff;
+  background-color: #978e83;
+  border-color: #92897e;
+}
+.btn-default:active,
+.btn-default.active,
+.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+  border-radius: 0;
+}
+.btn-group > .btn:first-child {
+  margin-left: 0;
+}
+.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.btn-group > .btn:last-child:not(:first-child),
+.btn-group > .dropdown-toggle:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.btn-group > .btn-group {
+  float: left;
+}
+.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
+  border-radius: 0;
+}
+.btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child,
+.btn-group > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.btn-group .dropdown-toggle:active,
+.btn-group.open .dropdown-toggle {
+  outline: 0;
+}
+.btn-group > .btn + .dropdown-toggle {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+.btn-group > .btn-lg + .dropdown-toggle {
+  padding-right: 12px;
+  padding-left: 12px;
+}
+.btn-group.open .dropdown-toggle {
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.btn-group.open .dropdown-toggle.btn-link {
+  box-shadow: none;
+}
+
+</style>
+<script>
+var str = '<div class="btn-group pull-right" style="position: fixed; right: 50px; top: 10px; z-index: 200"><button type="button" class="btn btn-default btn-xs dropdown-toggle" id="allCodeButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-_extension-text-contrast=""><span>Code</span> <span class="caret"></span></button><ul class="dropdown-menu" style="min-width: 50px;"><li><a id="rmd-show-all-code" href="#">Show All Code</a></li><li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li></ul></div>';
+document.write(str);
+</script>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "hide");
+});
+</script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="http://faculty.marshall.usc.edu/gareth-james/ISL/">An Introduction to Statistical Learning</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="linreg.html"><a href="linreg.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a><ul>
+<li class="chapter" data-level="3.1" data-path="simple-lin-reg.html"><a href="simple-lin-reg.html"><i class="fa fa-check"></i><b>3.1</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="simple-lin-reg.html"><a href="simple-lin-reg.html#simple-coef-est"><i class="fa fa-check"></i><b>3.1.1</b> Estimating the Coefficients</a></li>
+<li class="chapter" data-level="3.1.2" data-path="simple-lin-reg.html"><a href="simple-lin-reg.html#assess-coef-acc"><i class="fa fa-check"></i><b>3.1.2</b> Assessing the Accuracy of the Coefficient Estimates</a></li>
+<li class="chapter" data-level="3.1.3" data-path="simple-lin-reg.html"><a href="simple-lin-reg.html#assess-model-acc"><i class="fa fa-check"></i><b>3.1.3</b> Assessing the Accuracy of the Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="mult-lin-reg.html"><a href="mult-lin-reg.html"><i class="fa fa-check"></i><b>3.2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="mult-lin-reg.html"><a href="mult-lin-reg.html#est-reg-coef"><i class="fa fa-check"></i><b>3.2.1</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="3.2.2" data-path="mult-lin-reg.html"><a href="mult-lin-reg.html#important-questions"><i class="fa fa-check"></i><b>3.2.2</b> Some Important Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="other-reg-cons.html"><a href="other-reg-cons.html"><i class="fa fa-check"></i><b>3.3</b> Other Considerations in the Regression Model</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="other-reg-cons.html"><a href="other-reg-cons.html#qualitative-predictors"><i class="fa fa-check"></i><b>3.3.1</b> Qualitative Predictors</a></li>
+<li class="chapter" data-level="3.3.2" data-path="other-reg-cons.html"><a href="other-reg-cons.html#extensions-of-the-linear-model"><i class="fa fa-check"></i><b>3.3.2</b> Extensions of the Linear Model</a></li>
+<li class="chapter" data-level="3.3.3" data-path="other-reg-cons.html"><a href="other-reg-cons.html#potential-problems"><i class="fa fa-check"></i><b>3.3.3</b> Potential Problems</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="the-marketing-plan.html"><a href="the-marketing-plan.html"><i class="fa fa-check"></i><b>3.4</b> The Marketing Plan</a></li>
+<li class="chapter" data-level="3.5" data-path="comparison-of-linear-regression-with-k-nearest-neighbors.html"><a href="comparison-of-linear-regression-with-k-nearest-neighbors.html"><i class="fa fa-check"></i><b>3.5</b> Comparison of Linear Regression with K-Nearest Neighbors</a></li>
+<li class="chapter" data-level="3.6" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html"><i class="fa fa-check"></i><b>3.6</b> Lab: Linear Regression</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#libraries"><i class="fa fa-check"></i><b>3.6.1</b> Libraries</a></li>
+<li class="chapter" data-level="3.6.2" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>3.6.2</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="3.6.3" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#multiple-linear-regression"><i class="fa fa-check"></i><b>3.6.3</b> Multiple Linear Regression</a></li>
+<li class="chapter" data-level="3.6.4" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#interaction-terms"><i class="fa fa-check"></i><b>3.6.4</b> Interaction Terms</a></li>
+<li class="chapter" data-level="3.6.5" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#qualitative-predictors-1"><i class="fa fa-check"></i><b>3.6.5</b> Qualitative Predictors</a></li>
+<li class="chapter" data-level="3.6.6" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#writing-functions"><i class="fa fa-check"></i><b>3.6.6</b> Writing Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Introduction to Statistical Learning: with Applications in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="other-reg-cons" class="section level2">
+<h2><span class="header-section-number">3.3</span> Other Considerations in the Regression Model</h2>
+<div id="qualitative-predictors" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Qualitative Predictors</h3>
+<p>In our discussio so far, we have assumed that all variables in our linear regression model are <em>quantitative</em>.
+But in practice, this is not necessarily the case; often some predictors are <em>qualitative</em>.
+For example, the <strong><span style="font-family:monospace; color: #B44C1C;">Credit</span></strong> data set displayed in Figure 3.6 records <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> (average credit card debt for a number of individuals) as well as several quantitative predictors: <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong>, <strong><span style="font-family:monospace; color: #B44C1C;">cards</span></strong> (number of credit cards), <strong><span style="font-family:monospace; color: #B44C1C;">education</span></strong> (years of education), <strong><span style="font-family:monospace; color: #B44C1C;">income</span></strong> (in thousands of dollars), <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> (credit limit), and <strong><span style="font-family:monospace; color: #B44C1C;">rating</span></strong> (credit rating).
+Each panel of Figure 3.6 is a scatterplot for a pair of variables whose identities are given by the corresponding row and column labels.
+For example, the scatterplot directly to the right of the word “Balance” depicts <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> versus <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong>, while the plot directly to the right of “Age” corresponds to <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong> versus <strong><span style="font-family:monospace; color: #B44C1C;">cards</span></strong>.
+In addition to these quantitative variables, we also have four qualitative variables: <strong><span style="font-family:monospace; color: #B44C1C;">gender</span></strong>, <strong><span style="font-family:monospace; color: #B44C1C;">student</span></strong> (student status), <strong><span style="font-family:monospace; color: #B44C1C;">status</span></strong> (marital status), and <strong><span style="font-family:monospace; color: #B44C1C;">ethnicity</span></strong> (Caucasian, African American or Asian).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="other-reg-cons.html#cb4-1"></a><span class="kw">ggpairs</span>(<span class="kw">select</span>(credit, Balance, Age, Cards, Education, Income, Limit, Rating), </span>
+<span id="cb4-2"><a href="other-reg-cons.html#cb4-2"></a>        <span class="dt">upper =</span> <span class="kw">list</span>(<span class="dt">continuous =</span> <span class="kw">wrap</span>(<span class="st">&quot;points&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)), </span>
+<span id="cb4-3"><a href="other-reg-cons.html#cb4-3"></a>        <span class="dt">lower =</span> <span class="kw">list</span>(<span class="dt">continuous =</span> <span class="kw">wrap</span>(<span class="st">&quot;points&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)), </span>
+<span id="cb4-4"><a href="other-reg-cons.html#cb4-4"></a>        <span class="dt">diag =</span> <span class="st">&quot;blank&quot;</span>, </span>
+<span id="cb4-5"><a href="other-reg-cons.html#cb4-5"></a>        <span class="dt">axisLabels =</span> <span class="st">&quot;show&quot;</span>, <span class="dt">switch =</span> <span class="st">&quot;y&quot;</span>)<span class="op">+</span></span>
+<span id="cb4-6"><a href="other-reg-cons.html#cb4-6"></a><span class="st">  </span><span class="kw">theme_islr</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:credit-overview"></span>
+<img src="BookdownISL_files/figure-html/credit-overview-1.png" alt="*The &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;Credit&lt;/span&gt;&lt;/strong&gt; data set contains information about  &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;balance&lt;/span&gt;&lt;/strong&gt; ,  &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;age&lt;/span&gt;&lt;/strong&gt; ,  &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;cards&lt;/span&gt;&lt;/strong&gt; ,  &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;education&lt;/span&gt;&lt;/strong&gt; ,  &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;income&lt;/span&gt;&lt;/strong&gt; ,  &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;limit&lt;/span&gt;&lt;/strong&gt; , and  &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;rating&lt;/span&gt;&lt;/strong&gt;  for a number of potential customers.*" width="1152" />
+<p class="caption">
+FIGURE 3.2: <em>The <strong><span style="font-family:monospace; color: #B44C1C;">Credit</span></strong> data set contains information about <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> , <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong> , <strong><span style="font-family:monospace; color: #B44C1C;">cards</span></strong> , <strong><span style="font-family:monospace; color: #B44C1C;">education</span></strong> , <strong><span style="font-family:monospace; color: #B44C1C;">income</span></strong> , <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> , and <strong><span style="font-family:monospace; color: #B44C1C;">rating</span></strong> for a number of potential customers.</em>
+</p>
+</div>
+<p><strong>TABLE 3.7</strong></p>
+<div id="predictors-with-only-two-levels" class="section level4">
+<h4><span class="header-section-number">3.3.1.1</span> Predictors with Only Two Levels</h4>
+<p>Suppose that we wish to investigate differences in credit card balance between males and females, ignoring the other variables for the moment.
+If a qualitative predictor (also known as a <em>factor</em>) only has two <em>levels</em>, or possible values, then incorporating it into a regression model is very simple.
+We simply create an indicator or <em>dummy variable</em> that takes on two possible numerical values.
+For example, based on the <strong><span style="font-family:monospace; color: #B44C1C;">gender</span></strong> variable, we can create a new variable that takes the form</p>
+<p><span class="math display" id="eq:dummy-gender">\[\begin{equation}
+  x_i =  \begin{cases}
+      1 &amp; \text{if $i$th person is female}\\
+      0 &amp; \text{if $i$th person is male,}\\
+    \end{cases}      
+  \tag{3.26}
+\end{equation}\]</span></p>
+<p>and use this variable as a predictor in the regression equation.
+This results in the model</p>
+<p><span class="math display" id="eq:dummy-eq">\[\begin{equation}
+  y_i = \beta_0 + \beta_1 x_i + \epsilon_i =  \begin{cases}
+                                                  \beta_0 + \beta_1 + \epsilon_i &amp; \text{if $i$th person is female}\\
+                                                  \beta_0 + \epsilon_i &amp; \text{if $i$th person is male.}\\
+                                              \end{cases}      
+  \tag{3.27}
+\end{equation}\]</span></p>
+<p>Now <span class="math inline">\(\beta_0\)</span> can be interpreted as the average credit card balance among males, <span class="math inline">\(\beta_0 + \beta_1\)</span> as the average credit card balance among females, and <span class="math inline">\(\beta_1\)</span> as the average diﬀerence in credit card balance between females and males.</p>
+<p>Table 3.7 displays the coeﬃcient estimates and other information associated with the model <a href="other-reg-cons.html#eq:dummy-eq">(3.27)</a>.
+The average credit card debt for males is estimated to be $509.80, whereas females are estimated to carry $19.73 in additional debt for a total of $509.80 + $19.73 = $529.53.
+However, we notice that the p-value for the dummy variable is very high.
+This indicates that there is no statistical evidence of a difference in average credit card balance between the genders.</p>
+<p>The decision to code females as 1 and males as 0 in <a href="other-reg-cons.html#eq:dummy-eq">(3.27)</a> is arbitrary, and has no effect on the regression fit, but does alter the interpretation of the coefficients.
+If we had coded males as 1 and females as 0, then the estimates for <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> would have been 529.53 and 19.73, respectively, leading once again to a prediction of credit card debt of $529.53 for females.
+Alternatively, instead of a 0/1 coding scheme, we could create a dummy variable</p>
+<p><span class="math display">\[
+x_i = \begin{cases}
+    1 &amp; \text{if $i$th person is female}\\
+    -1 &amp; \text{if $i$th person is male,}\\
+    \end{cases}  
+\]</span></p>
+<p>and use this variable in the regression equation.
+This results in the model</p>
+<p><span class="math display">\[
+  y_i = \beta_0 + \beta_1 x_i + \epsilon_i =  \begin{cases}
+                                                  \beta_0 + \beta_1 + \epsilon_i &amp; \text{if $i$th person is female}\\
+                                                  \beta_0 - \beta_1 + \epsilon_i &amp; \text{if $i$th person is male.}\\
+                                              \end{cases}      
+\]</span></p>
+<p>Now <span class="math inline">\(\beta_0\)</span> can be interpreted as the overall average credit card balance (ignoring the gender effect), and <span class="math inline">\(\beta_1\)</span> is the amount that females are above the average and males are below the average.
+In this example, the estimate for <span class="math inline">\(\beta_0\)</span> would be <span class="math inline">\(\$519.665\)</span>, halfway between the male and female averages of <span class="math inline">\(\$509.80\)</span> and <span class="math inline">\(\$529.53\)</span>.
+The estimate for <span class="math inline">\(\beta_1\)</span> would be <span class="math inline">\(\$9.865\)</span>, which is half of <span class="math inline">\(\$19.73\)</span>, the average difference between females and males.
+It is important to note that the final predictions of the credit balances of males and females will be identical regardless of the coding scheme used.
+The only difference is in the way that the coefficients are interpreted.</p>
+</div>
+<div id="qualitative-predictors-with-more-than-two-levels" class="section level4">
+<h4><span class="header-section-number">3.3.1.2</span> Qualitative Predictors with More than Two Levels</h4>
+<p>When a qualitative predictor has more than two levels, a single dummy variable cannot represent all possible values.
+In this situation, we can create additional dummy variables.
+For example, for the <strong><span style="font-family:monospace; color: #B44C1C;">ethnicity</span></strong> variable we create two dummy variables. The first could be</p>
+<p><span class="math display" id="eq:dummy-asian">\[\begin{equation}
+  x_i1 = \begin{cases}
+      1 &amp; \text{if $i$th person is Asian}\\
+      0 &amp; \text{if $i$th person is not Asian}\\
+      \end{cases}      
+  \tag{3.28}
+\end{equation}\]</span></p>
+<p>and the second could be</p>
+<p><span class="math display" id="eq:dummy-caucasian">\[\begin{equation}
+  x_i2 = \begin{cases}
+      1 &amp; \text{if $i$th person is Caucasian}\\
+      0 &amp; \text{if $i$th person is not Caucasian}\\
+      \end{cases}      
+  \tag{3.29}
+\end{equation}\]</span></p>
+<p>Then both of these variables can be used in the regression equation, in order to obtain the model</p>
+<p><span class="math display" id="eq:dummy-ethnicity">\[\begin{equation}
+  y_i = \beta_0 + \beta_1 x_i1 + \beta_2 x_i2 + \epsilon_i = \begin{cases}
+    \beta_0 + \beta_1 + \epsilon_i &amp; \text{if $i$th person is Asian}\\
+    \beta_0 + \beta_2 + \epsilon_i &amp; \text{if $i$th person is Caucasian}\\
+    \beta_0 + \epsilon_i &amp; \text{if $i$th person is African American.}\\
+                                              \end{cases}      
+  \tag{3.30}
+\end{equation}\]</span></p>
+<p>Now <span class="math inline">\(\beta_0\)</span> can be interpreted as the average credit card balance for African Americans, <span class="math inline">\(\beta_1\)</span> can be interpreted as the difference in average balance between the Asian and African American categories, and <span class="math inline">\(\beta_2\)</span> can be interpreted as the difference in the average balance between the Caucasian and African American categories.
+There will always be one fewer dummy variables than the number of levels.
+The level with no dummy variable — African American in this example — is known as the <em>baseline</em>.</p>
+<p><strong>TABLE 3.8</strong></p>
+<p>From Table 3.8, we see that the estimated <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> for the baseline, African American is <span class="math inline">\(\$531.00\)</span>.
+It is estimated that the Asian category will have <span class="math inline">\(\$18.69\)</span> less debt than the African American category, and that the Caucasian category will have <span class="math inline">\(\$12.50\)</span> less debt than the African American category.
+However, the p-values associated with the coefficient estimates for the two dummy variables are very large, suggesting no statistical evidence of a real difference in credit card balance between the ethnicities.
+Once again, the level selected as the baseline category is arbitrary, and the final predictions for each group will be the same regardless of this choice.
+However, the coefficients and their p-values do depend on the choice of dummy variable coding.
+Rather than rely on the individual coefficients, we can use an F-test to test <span class="math inline">\(H_0 : \beta_1 = \beta_2 = 0\)</span>; this does not depend on the coding.
+This F-test has a p-value of <span class="math inline">\(0.96\)</span>, indicating that we cannot reject the null hypothesis that there is no relationship between <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">ethnicity</span></strong>.</p>
+<p>Using this dummy variable approach presents no difficulties when using both quantitative and qualitative predictors.
+For example, to regress <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> on both a quantitative variable such as <strong><span style="font-family:monospace; color: #B44C1C;">income</span></strong> and a qualitative variable such as <strong><span style="font-family:monospace; color: #B44C1C;">student</span></strong>, we must simply create a dummy variable for <strong><span style="font-family:monospace; color: #B44C1C;">student</span></strong> and then fit a multiple regression model using <strong><span style="font-family:monospace; color: #B44C1C;">income</span></strong> and the dummy variable as predictors for credit card balance.</p>
+<p>There are many different ways of coding qualitative variables besides the dummy variable approach taken here.
+All of these approaches lead to equivalent model fits, but the coefficients are different and have different interpretations, and are designed to measure particular <em>contrasts</em>.
+This topic is beyond the scope of the book, and so we will not pursue it further.</p>
+</div>
+</div>
+<div id="extensions-of-the-linear-model" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> Extensions of the Linear Model</h3>
+<p>The standard linear regression model <a href="mult-lin-reg.html#eq:mlin-reg">(3.19)</a> provides interpretable results and works quite well on many real-world problems.
+However, it makes several highly restrictive assumptions that are often violated in practice.
+Two of the most important assumptions state that the relationship between the predictors and response are <em>additive</em> and <em>linear.</em>
+The additive assumption means that the effect of changes in a predictor <span class="math inline">\(X_j\)</span> on the response <span class="math inline">\(Y\)</span> is independent of the values of the other predictors.
+The linear assumption states that the change in the response <span class="math inline">\(Y\)</span> due to a one-unit change in <span class="math inline">\(X_j\)</span> is constant, regardless of the value of <span class="math inline">\(X_j\)</span>.
+In this book, we examine a number of sophisticated methods that relax these two assumptions.
+Here, we briefly examine some common classical approaches for extending the linear model.</p>
+<div id="removing-the-additive-assumption" class="section level4">
+<h4><span class="header-section-number">3.3.2.1</span> Removing the Additive Assumption</h4>
+<p>In our previous analysis of the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data, we concluded that both <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> seem to be associated with <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
+The linear model that forms the basis for this conclusion assumed that the effect on <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> of increasing one advertising medium is independent of the amount spent on the other media.
+For example, the linear model (<a href="mult-lin-reg.html#eq:mlin-reg-adv">(3.20)</a>) states that the average effect on <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> of a one-unit increase in <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> is always <span class="math inline">\(\beta_1\)</span>, regardless of the amount spent on <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>.</p>
+<p>However, this simple model may be incorrect.
+Suppose that spending money on radio advertising actually increases the effectiveness of TV advertising, so that the slope term for <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> should increase as <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> increases.
+In this situation, given a fixed budget of <span class="math inline">\(\$100,000\)</span>, spending half on <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> and half on <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> may increaes <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> more than allocating the entire amount to either <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> or to <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>.
+In marketing, this is known as a <em>synergy</em> effect, and in statistics it is referred to as an <em>interaction</em> effect.
+Figure 3.5 suggests that such an effect may be present in the advertising data.
+Notice that when levels of either <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> or <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are low, then the true <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> are lower than predicted by the linear model.
+But when advertising is split between the two media, then the model tends to underestimate <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.</p>
+<p>Consider the standard linear regression model with two variables.</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \epsilon\]</span></p>
+<p>According to this model, if we increase X_1 by one unit, then <span class="math inline">\(Y\)</span> will increase by an average of <span class="math inline">\(\beta_1\)</span> units.
+Notice that the presence of <span class="math inline">\(X_2\)</span> does not alter this statement — that is, regardless of the value of <span class="math inline">\(X_2\)</span>, a one-unit increase in <span class="math inline">\(X_1\)</span> will lead to a <span class="math inline">\(\beta_1\)</span>-unit increase in <span class="math inline">\(Y\)</span>.
+One way of extending this model to allow for interaction effects is to include a third predictor, called an <em>interaction term</em>, which is constructed by computing the product of <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>. This results in the model</p>
+<p><span class="math display" id="eq:interactionterm">\[\begin{equation}
+  Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1 X_2 + \epsilon    
+  \tag{3.31}
+\end{equation}\]</span></p>
+<p>How does inclusion of this interaction term relax the additive assumption?
+Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be rewritten as</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="other-reg-cons.html#cb5-1"></a>interaction_model =<span class="st"> </span><span class="kw">lm</span>(sales <span class="op">~</span><span class="st"> </span>TV<span class="op">+</span>radio<span class="op">+</span>TV<span class="op">*</span>radio, </span>
+<span id="cb5-2"><a href="other-reg-cons.html#cb5-2"></a>                       <span class="dt">data =</span> advertising)</span>
+<span id="cb5-3"><a href="other-reg-cons.html#cb5-3"></a></span>
+<span id="cb5-4"><a href="other-reg-cons.html#cb5-4"></a><span class="kw">reg_table</span>(interaction_model) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb5-5"><a href="other-reg-cons.html#cb5-5"></a><span class="st">  </span><span class="kw">tab_source_note</span>(<span class="kw">md</span>(<span class="kw">str_c</span>(<span class="st">&quot;&lt;span style=&#39;color:#1188ce&#39;&gt;TABLE 3.9.&lt;/span&gt;&quot;</span>, <span class="st">&quot;*For the &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;Advertising&quot;</span>), <span class="st">&quot; data, least squares coefficient estimates associated with the regression of &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;sales&quot;</span>), <span class="st">&quot; onto &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;TV&quot;</span>), <span class="st">&quot; and &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;radio&quot;</span>), <span class="st">&quot;, with an interaction term, as in (3.33)*&quot;</span>)))</span></code></pre></div>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#kyvykbtztg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: black;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#kyvykbtztg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kyvykbtztg .gt_title {
+  color: black;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#kyvykbtztg .gt_subtitle {
+  color: black;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#kyvykbtztg .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kyvykbtztg .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: black;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: black;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kyvykbtztg .gt_col_heading {
+  color: black;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#kyvykbtztg .gt_column_spanner_outer {
+  color: black;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#kyvykbtztg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#kyvykbtztg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#kyvykbtztg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: black;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#kyvykbtztg .gt_group_heading {
+  padding: 8px;
+  color: black;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#kyvykbtztg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: black;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#kyvykbtztg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#kyvykbtztg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#kyvykbtztg .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#kyvykbtztg .gt_stub {
+  color: black;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#kyvykbtztg .gt_summary_row {
+  color: black;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kyvykbtztg .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#kyvykbtztg .gt_grand_summary_row {
+  color: black;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kyvykbtztg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#kyvykbtztg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#kyvykbtztg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: black;
+}
+
+#kyvykbtztg .gt_footnotes {
+  color: black;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kyvykbtztg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#kyvykbtztg .gt_sourcenotes {
+  color: black;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kyvykbtztg .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#kyvykbtztg .gt_left {
+  text-align: left;
+}
+
+#kyvykbtztg .gt_center {
+  text-align: center;
+}
+
+#kyvykbtztg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#kyvykbtztg .gt_font_normal {
+  font-weight: normal;
+}
+
+#kyvykbtztg .gt_font_bold {
+  font-weight: bold;
+}
+
+#kyvykbtztg .gt_font_italic {
+  font-style: italic;
+}
+
+#kyvykbtztg .gt_super {
+  font-size: 65%;
+}
+
+#kyvykbtztg .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="kyvykbtztg" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-right-width: 2px; border-right-style: solid; border-right-color: #000000;"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Coefficient</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Std. Error</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">t-statistic</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">p-value</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: #000000; border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;"><div class='gt_from_md'><p><span style='color:#B44C1C'>Intercept</span></p>
+</div></td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">6.7502</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.248</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">27.23</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">&lt;0.0001</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: #000000; border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;"><div class='gt_from_md'><p><span style='color:#B44C1C'>TV</span></p>
+</div></td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.0191</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.002</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">12.70</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">&lt;0.0001</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: #000000; border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;"><div class='gt_from_md'><p><span style='color:#B44C1C'>radio</span></p>
+</div></td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.0289</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.009</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">3.24</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.0014</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: #000000; border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;"><div class='gt_from_md'><p><span style='color:#B44C1C'>TV<em> X </em>radio</span></p>
+</div></td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.0011</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.000</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">20.73</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">&lt;0.0001</td>
+    </tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="5"><span style='color:#1188ce'>TABLE 3.9.</span><em>For the <strong><span style='font-family:monospace; color: #B44C1C;'>Advertising</span></strong> data, least squares coefficient estimates associated with the regression of <strong><span style='font-family:monospace; color: #B44C1C;'>sales</span></strong> onto <strong><span style='font-family:monospace; color: #B44C1C;'>TV</span></strong> and <strong><span style='font-family:monospace; color: #B44C1C;'>radio</span></strong>, with an interaction term, as in (3.33)</em></td>
+    </tr>
+  </tfoot>
+  
+</table></div>
+<p><span class="math display" id="eq:interaction-rewritten">\[\begin{equation} 
+\begin{aligned}
+  Y &amp;= \beta_0 + (\beta_1 + \beta_3 X_2) X_1 + \beta_2 X_2 + \epsilon \\
+      &amp;= \beta_0 + \tilde{\beta_1} X_1 + \beta_2 X_2 + \epsilon
+  \end{aligned}
+  \tag{3.32}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\tilde{\beta_1} = \beta_1 + \beta_3 X_2\)</span>.
+Since <span class="math inline">\(\tilde{\beta_1}\)</span> changes with <span class="math inline">\(X_2\)</span>, the effect of <span class="math inline">\(X_1\)</span> on <span class="math inline">\(Y\)</span> is no longer constant: adjusting <span class="math inline">\(X_2\)</span> will change the impact of <span class="math inline">\(X_1\)</span> on <span class="math inline">\(Y\)</span>.</p>
+<p>For example, suppose we are interested in studying the productivity of a factory.
+We wish to predict the number of <strong><span style="font-family:monospace; color: #B44C1C;">units</span></strong> produced on the basis of the number of production <strong><span style="font-family:monospace; color: #B44C1C;">lines</span></strong> and the total number of <strong><span style="font-family:monospace; color: #B44C1C;">workers</span></strong>.
+It seems likely that the effect of increasing the number of production lines will depend on the number of workers, since if no workers are available to operate the lines, then increasing the number of lines will not increase production.
+This suggests that it would be appropriate to include an interaction term between <strong><span style="font-family:monospace; color: #B44C1C;">lines</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">workers</span></strong> in a linear model to predict <strong><span style="font-family:monospace; color: #B44C1C;">units</span></strong>.
+Suppose that when we fit the model, we obtain</p>
+<p><span class="math display">\[
+\begin{aligned}
+  \color{#B44C1C}{units} &amp;\approx 1.2 + 3.4 \times \color{#B44C1C}{workers} + 1.4 \times (\color{#B44C1C}{{lines}} \times \color{#B44C1C}{{workers}}) \\
+      &amp;= 1.2 + (3.4 + 1.4 \times \color{#B44C1C}{{workers}}) \times \color{#B44C1C}{{lines}} + 0.22 \times \color{#B44C1C}{{workers}}.
+  \end{aligned}
+\]</span></p>
+<p>In other words, adding an additional line will increase the number of units produced by <span class="math inline">\(3.4 + 1.4 \times \color{#B44C1C}{workers}\)</span>.
+Hence the more <strong><span style="font-family:monospace; color: #B44C1C;">workers</span></strong> we have, the stronger the effect of <strong><span style="font-family:monospace; color: #B44C1C;">lines</span></strong> will be.</p>
+<p>We now return to the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> example.
+A linear model that uses <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>, <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong>, and an interaction between the two to predict <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> takes the form</p>
+<p><span class="math display" id="eq:adv-interaction">\[\begin{equation}
+  \begin{aligned}
+  \color{#B44C1C}{sales} &amp;\approx \beta_0 + \beta_1 \times \color{#B44C1C}{TV} + \beta_2 \times \color{#B44C1C}{radio} + \beta_3 \times (\color{#B44C1C}{{radio}} \times \color{#B44C1C}{{TV}}) + \epsilon \\
+      &amp;= \beta_0 + (\beta_1 + \beta_3 \times \color{#B44C1C}{radio}) \times \color{#B44C1C}{TV} + \beta_2 \times \color{#B44C1C}{radio} + \epsilon.
+  \end{aligned}
+  \tag{3.33}
+\end{equation}\]</span></p>
+<p>We can interpret <span class="math inline">\(\beta_3\)</span> as the increase in effectiveness of TV advertising for a one-unit increase in radio advertising (or vice-versa).
+The coefficients that result from fitting the model <a href="other-reg-cons.html#eq:adv-interaction">(3.33)</a> are given in Table 3.9.</p>
+<p>The results in Table 3.9 strongly suggest that the model that includes the interaction term is superior to the model that contains only <em>main effects</em>.
+The p-value for the interaction term <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong><span class="math inline">\(\times\)</span><strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>, is extremely low, indicating there is strong evidence for <span class="math inline">\(H_a : \beta_3 \neq 0\)</span>.
+In other words, it is clear that the true relationship is not additive.
+The <span class="math inline">\(R^2\)</span> for the model <a href="other-reg-cons.html#eq:adv-interaction">(3.33)</a> is <span class="math inline">\(96.8\%\)</span>, compared to only <span class="math inline">\(89.7\%\)</span> for the model that predicts <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> using <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> without an interaction term.
+This means that <span class="math inline">\((96.8 - 89.7)/(100 - 89.7) = 69\%\)</span> of the variability in <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> that remains after fitting the additive model has been explained by the interaction term.
+The coefficient estimates in Table 3.9 suggest that an increase in TV advertising of <span class="math inline">\(\$1,000\)</span> is associated with increased sales of <span class="math inline">\((\hat{\beta_1} + \hat{\beta_3} \times \color{#B44C1C}{radio}) \times 1,000 = 19 + 1.1 \times \color{#B44C1C}{radio}\)</span> units.
+And an increase in radio advertising of <span class="math inline">\(\$1,000\)</span> will be associated with an increase in sales of <span class="math inline">\((\hat{\beta_2} + \hat{\beta_3} \times \color{#B44C1C}{TV}) \times 1,000 = 29 + 1.1 \times \color{#B44C1C}{TV}\)</span> units.</p>
+<p>In this example, the p-values associated with <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong>, <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>, and the interaction term all are statistically significant (Table 3.9), and so it is obvious that all three variables should be included in the model.
+However, it is sometimes the case that an interaction term has a very small p-value, but the associated main effects (in this case, <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>) do not.
+The <em>hierarchical principle</em> states that <em>if we include an interaction in a model, we should also include the main effects, even if the p-values associated with their coefficients are not significant</em>.
+In other words, if the interaction between <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> seems important, then we should include both <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> in the model even if their coefficient estimates have large p-values.
+The rationale for this principle is that if <span class="math inline">\(X_1 \times X_2\)</span> is related to the response, then whether or not the coefficients of <span class="math inline">\(X_1\)</span> or <span class="math inline">\(X_2\)</span> are exactly zero is of little interest.
+Also <span class="math inline">\(X_1 \times X_2\)</span> is typically correlated with <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, and so leaving them out tends to alter the meaning of the interaction.</p>
+<p>In the previous example, we considered an interaction between <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>, both of which are quantitative variables.
+However, the concept of interactions applies just as well to qualitative variables.
+In fact, an interaction between a qualitative variable and a quantitative variable has a particularly nice interpretation.
+Consider the <strong><span style="font-family:monospace; color: #B44C1C;">Credit</span></strong> data set from Section 3.3.1, and suppose that we wish to predict <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> using the <strong><span style="font-family:monospace; color: #B44C1C;">income</span></strong> (quantitative) and <strong><span style="font-family:monospace; color: #B44C1C;">student</span></strong> (qualitative) variables.
+In the absence of an interaction term, the model takes the form</p>
+<p><span class="math display" id="eq:qual-nointeraction">\[\begin{equation}
+\begin{aligned}
+  \color{#B44C1C}{balance}_i &amp;\approx \beta_0 + \beta_1 \times \color{#B44C1C}{income}_i + \begin{cases}
+                            \beta_2 &amp; \text{if $i$th person is a student}\\
+                            0 &amp; \text{if $i$th person is not a student}\\
+                            \end{cases} \\
+                            &amp;= \beta_1 \times \color{#B44C1C}{income}_i + \begin{cases}
+                            \beta_0 + \beta_2 &amp; \text{if $i$th person is a student}\\
+                            \beta_0 &amp; \text{if $i$th person is not a student}\\
+                            \end{cases}
+                        
+\end{aligned}
+\tag{3.34}
+\end{equation}\]</span></p>
+<p>Notice that this amounts to fitting two parallel lines to the data, one for students and one for non-students.
+The lines for students and non-students have different intercepts, <span class="math inline">\(\beta_0 + \beta_2\)</span> versus <span class="math inline">\(\beta_0\)</span>, but the same slope, <span class="math inline">\(\beta_1\)</span>.
+This is illustrated in the left-hand panel of Figure 3.7.
+The fact that the lines are parallel means that the average effect on <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> of a one-unit increase in <strong><span style="font-family:monospace; color: #B44C1C;">income</span></strong> does not depend on whether or not the individual is a student.
+This represents a potentially serious limitation of the model, since in fact a change in <strong><span style="font-family:monospace; color: #B44C1C;">income</span></strong> may have a very different effect on the credit card balance of a student versus a non-student.</p>
+<p>This limitation can be addressed by adding an interaction variable, created by multiplying <strong><span style="font-family:monospace; color: #B44C1C;">income</span></strong> with the dummy variable for <strong><span style="font-family:monospace; color: #B44C1C;">student</span></strong>.
+Our model now becomes</p>
+<p><span class="math display" id="eq:qual-interaction">\[\begin{equation}
+\begin{aligned}
+  \color{#B44C1C}{balance}_i &amp;\approx \beta_0 + \beta_1 \times \color{#B44C1C}{income}_i + \begin{cases}
+                            \beta_2 + \beta_3 \times \color{#B44C1C}{income}_i &amp; \text{if student}\\
+                            0 &amp; \text{if not student}\\
+                            \end{cases} \\
+                            &amp;= \begin{cases}
+                            (\beta_0 + \beta_2) + (\beta_1 + \beta_3) \times \color{#B44C1C}{income}_i &amp; \text{if student}\\
+                            \beta_0 + \beta_1 \times \color{#B44C1C}{income}_i &amp; \text{if not student}\\
+                            \end{cases}
+                        
+\end{aligned}
+\tag{3.35}
+\end{equation}\]</span></p>
+<p>Once again, we have two different regression lines for the students and the non-students.
+But now those regression lines have different intercepts, <span class="math inline">\(\beta_0 + \beta_2\)</span> versus <span class="math inline">\(\beta_0\)</span>, as well as different slopes, <span class="math inline">\(\beta_1 + \beta_3\)</span> versus <span class="math inline">\(\beta_1\)</span>.
+This allows for the possibility that changes in income may affect the credit card balances of students and non-students differently.
+The right-hand panel of Figure 3.7 shows the estimated relationships between <strong><span style="font-family:monospace; color: #B44C1C;">income</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> for students and non-students in <a href="other-reg-cons.html#eq:qual-interaction">(3.35)</a>.
+We note that the slope for students is lower than the slope for non-students.
+This suggests that increases in income are associated with smaller increases in credit card balance among students as compared to non-students.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="other-reg-cons.html#cb6-1"></a><span class="co"># glimpse(Credit)</span></span>
+<span id="cb6-2"><a href="other-reg-cons.html#cb6-2"></a></span>
+<span id="cb6-3"><a href="other-reg-cons.html#cb6-3"></a><span class="co"># create multiple linear model</span></span>
+<span id="cb6-4"><a href="other-reg-cons.html#cb6-4"></a>credit_lm =<span class="st"> </span><span class="kw">lm</span>(Balance<span class="op">~</span>Income<span class="op">+</span>Student, <span class="dt">data =</span> credit)</span>
+<span id="cb6-5"><a href="other-reg-cons.html#cb6-5"></a><span class="co"># summary(credit_lm)</span></span>
+<span id="cb6-6"><a href="other-reg-cons.html#cb6-6"></a></span>
+<span id="cb6-7"><a href="other-reg-cons.html#cb6-7"></a><span class="co"># set axes and colour scale</span></span>
+<span id="cb6-8"><a href="other-reg-cons.html#cb6-8"></a>cred_x_axis =<span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">150</span>), </span>
+<span id="cb6-9"><a href="other-reg-cons.html#cb6-9"></a>                                 <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">155</span>))</span>
+<span id="cb6-10"><a href="other-reg-cons.html#cb6-10"></a>cred_y_axis =<span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Balance&quot;</span>, </span>
+<span id="cb6-11"><a href="other-reg-cons.html#cb6-11"></a>                     <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">200</span>, <span class="dv">600</span>, <span class="dv">1000</span>, <span class="dv">1400</span>), </span>
+<span id="cb6-12"><a href="other-reg-cons.html#cb6-12"></a>                     <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">200</span>, <span class="dv">1400</span>))</span>
+<span id="cb6-13"><a href="other-reg-cons.html#cb6-13"></a>cred_colour_scale =<span class="st"> </span><span class="kw">scale_colour_manual</span>(<span class="dt">name =</span> <span class="ot">NULL</span>, </span>
+<span id="cb6-14"><a href="other-reg-cons.html#cb6-14"></a>                                        <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>))</span>
+<span id="cb6-15"><a href="other-reg-cons.html#cb6-15"></a></span>
+<span id="cb6-16"><a href="other-reg-cons.html#cb6-16"></a>credit_no_interaction =<span class="st"> </span>credit <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb6-17"><a href="other-reg-cons.html#cb6-17"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">balance_pred =</span> <span class="kw">predict</span>(credit_lm, credit)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb6-18"><a href="other-reg-cons.html#cb6-18"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x =</span> Income, <span class="dt">y =</span> balance_pred, <span class="dt">colour =</span> Student))<span class="op">+</span></span>
+<span id="cb6-19"><a href="other-reg-cons.html#cb6-19"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F)<span class="op">+</span></span>
+<span id="cb6-20"><a href="other-reg-cons.html#cb6-20"></a><span class="st">  </span>cred_x_axis<span class="op">+</span></span>
+<span id="cb6-21"><a href="other-reg-cons.html#cb6-21"></a><span class="st">  </span>cred_y_axis<span class="op">+</span></span>
+<span id="cb6-22"><a href="other-reg-cons.html#cb6-22"></a><span class="st">  </span>cred_colour_scale<span class="op">+</span></span>
+<span id="cb6-23"><a href="other-reg-cons.html#cb6-23"></a><span class="st">  </span><span class="kw">theme_islr</span>()<span class="op">+</span></span>
+<span id="cb6-24"><a href="other-reg-cons.html#cb6-24"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb6-25"><a href="other-reg-cons.html#cb6-25"></a></span>
+<span id="cb6-26"><a href="other-reg-cons.html#cb6-26"></a><span class="co"># create multiple linear model w/interaction</span></span>
+<span id="cb6-27"><a href="other-reg-cons.html#cb6-27"></a>credit_lm_int =<span class="st"> </span><span class="kw">lm</span>(Balance<span class="op">~</span>Income<span class="op">+</span>Student<span class="op">+</span>Income<span class="op">*</span>Student, <span class="dt">data =</span> credit)</span>
+<span id="cb6-28"><a href="other-reg-cons.html#cb6-28"></a><span class="co"># summary(credit_lm_int)</span></span>
+<span id="cb6-29"><a href="other-reg-cons.html#cb6-29"></a></span>
+<span id="cb6-30"><a href="other-reg-cons.html#cb6-30"></a>credit_interaction =<span class="st"> </span>credit <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb6-31"><a href="other-reg-cons.html#cb6-31"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">balance_pred =</span> <span class="kw">predict</span>(credit_lm_int, credit)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb6-32"><a href="other-reg-cons.html#cb6-32"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x =</span> Income, <span class="dt">y =</span> balance_pred, <span class="dt">colour =</span> Student))<span class="op">+</span></span>
+<span id="cb6-33"><a href="other-reg-cons.html#cb6-33"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F)<span class="op">+</span></span>
+<span id="cb6-34"><a href="other-reg-cons.html#cb6-34"></a><span class="st">  </span>cred_x_axis<span class="op">+</span></span>
+<span id="cb6-35"><a href="other-reg-cons.html#cb6-35"></a><span class="st">  </span>cred_y_axis<span class="op">+</span></span>
+<span id="cb6-36"><a href="other-reg-cons.html#cb6-36"></a><span class="st">  </span>cred_colour_scale<span class="op">+</span></span>
+<span id="cb6-37"><a href="other-reg-cons.html#cb6-37"></a><span class="st">  </span><span class="kw">theme_islr</span>()<span class="op">+</span></span>
+<span id="cb6-38"><a href="other-reg-cons.html#cb6-38"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="kw">c</span>(.<span class="dv">25</span>, <span class="fl">.91</span>), <span class="dt">legend.margin =</span> <span class="kw">margin</span>())</span>
+<span id="cb6-39"><a href="other-reg-cons.html#cb6-39"></a></span>
+<span id="cb6-40"><a href="other-reg-cons.html#cb6-40"></a>credit_no_interaction <span class="op">+</span><span class="st"> </span>credit_interaction<span class="op">+</span></span>
+<span id="cb6-41"><a href="other-reg-cons.html#cb6-41"></a><span class="st">  </span><span class="kw">plot_layout</span>(<span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">widths =</span> <span class="kw">c</span>(.<span class="dv">5</span>, <span class="fl">.5</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:credit-lm"></span>
+<img src="BookdownISL_files/figure-html/credit-lm-1.png" alt="*For the &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;Credit&lt;/span&gt;&lt;/strong&gt; data, the least squares lines are shown for prediction of &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;balance&lt;/span&gt;&lt;/strong&gt; from &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;income&lt;/span&gt;&lt;/strong&gt; for students and non-students.* Left: *The model (3.34) was fit. There is no interaction between &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;income&lt;/span&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;student&lt;/span&gt;&lt;/strong&gt;.* Right: *The model (3.35) was fit. There is an interaction term between &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;income&lt;/span&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;student&lt;/span&gt;&lt;/strong&gt;.*" width="1152" />
+<p class="caption">
+FIGURE 3.3: <em>For the <strong><span style="font-family:monospace; color: #B44C1C;">Credit</span></strong> data, the least squares lines are shown for prediction of <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> from <strong><span style="font-family:monospace; color: #B44C1C;">income</span></strong> for students and non-students.</em> Left: <em>The model (3.34) was fit. There is no interaction between <strong><span style="font-family:monospace; color: #B44C1C;">income</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">student</span></strong>.</em> Right: <em>The model (3.35) was fit. There is an interaction term between <strong><span style="font-family:monospace; color: #B44C1C;">income</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">student</span></strong>.</em>
+</p>
+</div>
+</div>
+<div id="non-linear-relationships" class="section level4">
+<h4><span class="header-section-number">3.3.2.2</span> Non-linear Relationships</h4>
+<p>As discussed previously, the linear regression model <a href="mult-lin-reg.html#eq:mlin-reg">(3.19)</a> assumes a linear relationship between the response and predictors.
+But in some cases, the true relationship between the response and the predictors may be non-linear.
+Here we present a very simple way to directly extend the linear model to accommodate non-linear relationships, using <em>polynomial regression</em>.
+In later chapters, we will present more complex approaches for performing non-linear fits in more general settings.</p>
+<p>Consider Figure 3.8, in which the <strong><span style="font-family:monospace; color: #B44C1C;">mpg</span></strong> (gas mileage in miles per gallon) versus <strong><span style="font-family:monospace; color: #B44C1C;">horsepower</span></strong> is shown for a number of cars in the <strong><span style="font-family:monospace; color: #B44C1C;">Auto</span></strong> data set.</p>
+<p>FIGURE 3.8</p>
+<p>The orange line represents the linear regression fit.
+There is a pronounced relationship between <strong><span style="font-family:monospace; color: #B44C1C;">mpg</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">horsepower</span></strong>, but it seems clear that this relationship is in fact non-linear: the data suggest a curved relationship.
+A simple approach for incorporating non-linear associations in a linear model is to include transformed versions of the predictors in the model.
+For example, the points in Figure 3.8 seem to have a <em>quadratic</em> shape, suggesting that a model of the form</p>
+<p><span class="math display" id="eq:mpg-quad">\[\begin{equation}
+  \color{#B44C1C}{mpg} = \beta_0 + \beta_1 \times \color{#B44C1C}{horsepower} + \beta_2 \times \color{#B44C1C}{horsepower^2} + \epsilon
+  \tag{3.36}
+\end{equation}\]</span></p>
+<p>may provide a better fit.
+Equation <a href="other-reg-cons.html#eq:mpg-quad">(3.36)</a> involves predicting <strong><span style="font-family:monospace; color: #B44C1C;">mpg</span></strong> using a non-linear function of <strong><span style="font-family:monospace; color: #B44C1C;">horsepower</span></strong>.
+<em>But it is still a linear model!</em>
+That is, <a href="other-reg-cons.html#eq:mpg-quad">(3.36)</a> is simply a multiple linear regression model with <span class="math inline">\(X_1 = \color{#B44C1C}{horsepower}\)</span> and <span class="math inline">\(X_2 = \color{#B44C1C}{horsepower^2}\)</span>.
+So we can use standard linear regression software to estimate <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, and <span class="math inline">\(\beta_2\)</span> in order to produce a non-linear fit.
+The blue curve in Figure 3.8 shows the resulting quadratic fit to the data.
+The quadratic fit appears to be substantially better than the fit obtained when just the linear term is included.
+The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class="math inline">\(0.688\)</span>, compared to <span class="math inline">\(0.606\)</span> for the linear fit, and the p-value in Table 3.10 for the quadratic term is highly significant.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="other-reg-cons.html#cb7-1"></a>mpg_lm =<span class="st"> </span><span class="kw">lm</span>(mpg<span class="op">~</span>horsepower<span class="op">+</span><span class="kw">I</span>(horsepower<span class="op">^</span><span class="dv">2</span>), <span class="dt">data =</span> Auto)</span>
+<span id="cb7-2"><a href="other-reg-cons.html#cb7-2"></a></span>
+<span id="cb7-3"><a href="other-reg-cons.html#cb7-3"></a><span class="kw">reg_table</span>(mpg_lm) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb7-4"><a href="other-reg-cons.html#cb7-4"></a><span class="st">  </span><span class="kw">tab_source_note</span>(<span class="kw">md</span>(<span class="kw">str_c</span>(<span class="st">&quot;&lt;span style=&#39;color:#1188ce&#39;&gt;TABLE 3.10.&lt;/span&gt;&quot;</span>, <span class="st">&quot; *For the &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;Auto&quot;</span>), <span class="st">&quot; data set, least squares coefficient estimates associated with the regression of &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;mpg&quot;</span>), <span class="st">&quot; onto &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;horsepower&quot;</span>), <span class="st">&quot; and &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;horsepower^2&quot;</span>), <span class="st">&quot;.*&quot;</span>)))</span></code></pre></div>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#tdwvfqzjqo .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: black;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tdwvfqzjqo .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tdwvfqzjqo .gt_title {
+  color: black;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tdwvfqzjqo .gt_subtitle {
+  color: black;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tdwvfqzjqo .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tdwvfqzjqo .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: black;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: black;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tdwvfqzjqo .gt_col_heading {
+  color: black;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tdwvfqzjqo .gt_column_spanner_outer {
+  color: black;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tdwvfqzjqo .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tdwvfqzjqo .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tdwvfqzjqo .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: black;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tdwvfqzjqo .gt_group_heading {
+  padding: 8px;
+  color: black;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tdwvfqzjqo .gt_empty_group_heading {
+  padding: 0.5px;
+  color: black;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tdwvfqzjqo .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tdwvfqzjqo .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tdwvfqzjqo .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tdwvfqzjqo .gt_stub {
+  color: black;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#tdwvfqzjqo .gt_summary_row {
+  color: black;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tdwvfqzjqo .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#tdwvfqzjqo .gt_grand_summary_row {
+  color: black;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tdwvfqzjqo .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tdwvfqzjqo .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tdwvfqzjqo .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: black;
+}
+
+#tdwvfqzjqo .gt_footnotes {
+  color: black;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tdwvfqzjqo .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#tdwvfqzjqo .gt_sourcenotes {
+  color: black;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tdwvfqzjqo .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#tdwvfqzjqo .gt_left {
+  text-align: left;
+}
+
+#tdwvfqzjqo .gt_center {
+  text-align: center;
+}
+
+#tdwvfqzjqo .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tdwvfqzjqo .gt_font_normal {
+  font-weight: normal;
+}
+
+#tdwvfqzjqo .gt_font_bold {
+  font-weight: bold;
+}
+
+#tdwvfqzjqo .gt_font_italic {
+  font-style: italic;
+}
+
+#tdwvfqzjqo .gt_super {
+  font-size: 65%;
+}
+
+#tdwvfqzjqo .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="tdwvfqzjqo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-right-width: 2px; border-right-style: solid; border-right-color: #000000;"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Coefficient</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Std. Error</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">t-statistic</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">p-value</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: #000000; border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;"><div class='gt_from_md'><p><span style='color:#B44C1C'>Intercept</span></p>
+</div></td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">56.9001</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">1.800</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">31.60</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">&lt;0.0001</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: #000000; border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;"><div class='gt_from_md'><p><span style='color:#B44C1C'>horsepower</span></p>
+</div></td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">&minus;0.4662</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.031</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">&minus;14.98</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">&lt;0.0001</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: #000000; border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;"><div class='gt_from_md'><p><span style='color:#B44C1C'>horsepower^2</span></p>
+</div></td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.0012</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.000</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">10.08</td>
+      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">&lt;0.0001</td>
+    </tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="5"><span style='color:#1188ce'>TABLE 3.10.</span> <em>For the <strong><span style='font-family:monospace; color: #B44C1C;'>Auto</span></strong> data set, least squares coefficient estimates associated with the regression of <strong><span style='font-family:monospace; color: #B44C1C;'>mpg</span></strong> onto <strong><span style='font-family:monospace; color: #B44C1C;'>horsepower</span></strong> and <strong><span style='font-family:monospace; color: #B44C1C;'>horsepower^2</span></strong>.</em></td>
+    </tr>
+  </tfoot>
+  
+</table></div>
+<p>If including <span class="math inline">\(\color{#B44C1C}{horsepower^2}\)</span> led to such a big improvement in the model, why not include <span class="math inline">\(\color{#B44C1C}{horsepower^3}\)</span>, <span class="math inline">\(\color{#B44C1C}{horsepower^4}\)</span>, or even <span class="math inline">\(\color{#B44C1C}{horsepower^5}\)</span>?
+The green curve in Figure 3.8 displays the fit that results from including all polynomials up to fifth degree in the model <a href="other-reg-cons.html#eq:mpg-quad">(3.36)</a>.
+The resulting fit seems unnecessarily wiggly—that is, it is unclear that including the additional terms really has led to a better fit to the data.</p>
+<p>The approach that we have just described for extending the linear model to accommodate non-linear relationships is known as <em>polynomial regression</em>, since we have included polynomial functions of the predictors in the regression model.
+We further explore this approach and other non-linear extensions of the linear model in Chapter 7.</p>
+</div>
+</div>
+<div id="potential-problems" class="section level3">
+<h3><span class="header-section-number">3.3.3</span> Potential Problems</h3>
+<p>When we fit a linear regression model to a particular data set, many problems may occur.
+Most common among these are the following:</p>
+<ol style="list-style-type: decimal">
+<li><em>Non linearity of the response-predictor relationships.</em></li>
+<li><em>Correlation of error terms.</em></li>
+<li><em>Non-constant variance of error terms.</em></li>
+<li><em>Outliers.</em></li>
+<li><em>High-leverage points.</em></li>
+<li><em>Collinearity.</em></li>
+</ol>
+<p>In practice, identifying and overcoming these problems is as much an art as a science.
+Many pages in countless books have been written on this topic.
+Since the linear regression model is not our primary focus here, we will provide only a brief summary of some key points.</p>
+<div id="non-linearity-of-the-data" class="section level4">
+<h4><span class="header-section-number">3.3.3.1</span> 1. Non-linearity of the Data</h4>
+<p>The linear regression model assumes that there is a straight-line relationships between the predictors and the response.
+If the true relationship is far from linear, then virtually all conclusions that we draw from the fit are suspect.
+In addition, the prediction accuracy of the model can be significantly reduced.</p>
+<p><em>Residual plots</em> are a useful graphical tool for identifying non-linearity.
+Given a simple linear regression model, we can plot the residuals <span class="math inline">\(e_i = y_i - \hat{y_i}\)</span>, versus the predictor <span class="math inline">\(x_i\)</span>.
+In the case of a multiple linear regression model, since there are multiple predictors, we instead plot the residuals versus the predicted (or <em>fitted</em>) values <span class="math inline">\(\hat{y_i}\)</span>.
+Ideally, the residual plot will show no discernible pattern.
+The presence of a pattern may indicate a problem with some aspect of the linear model.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="other-reg-cons.html#cb8-1"></a><span class="co"># fit simple linear model</span></span>
+<span id="cb8-2"><a href="other-reg-cons.html#cb8-2"></a>mpg_lm_simple =<span class="st"> </span><span class="kw">lm</span>(mpg<span class="op">~</span>horsepower, <span class="dt">data =</span> Auto)</span>
+<span id="cb8-3"><a href="other-reg-cons.html#cb8-3"></a></span>
+<span id="cb8-4"><a href="other-reg-cons.html#cb8-4"></a><span class="co"># make dataframe of residuals and fitted values for simple linear model</span></span>
+<span id="cb8-5"><a href="other-reg-cons.html#cb8-5"></a>linear_fit =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">Residuals =</span> mpg_lm_simple<span class="op">$</span>residuals,</span>
+<span id="cb8-6"><a href="other-reg-cons.html#cb8-6"></a>                    <span class="dt">fitted =</span> mpg_lm_simple<span class="op">$</span>fitted.values,</span>
+<span id="cb8-7"><a href="other-reg-cons.html#cb8-7"></a>                    <span class="dt">fit_type =</span> <span class="st">&quot;Residual Plot for Linear Fit&quot;</span>)</span>
+<span id="cb8-8"><a href="other-reg-cons.html#cb8-8"></a></span>
+<span id="cb8-9"><a href="other-reg-cons.html#cb8-9"></a><span class="co"># make dataframe of residuals and fitted values for multiple linear model w/quadratic predictor</span></span>
+<span id="cb8-10"><a href="other-reg-cons.html#cb8-10"></a>quad_fit =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">Residuals =</span> mpg_lm<span class="op">$</span>residuals,</span>
+<span id="cb8-11"><a href="other-reg-cons.html#cb8-11"></a>                    <span class="dt">fitted =</span> mpg_lm<span class="op">$</span>fitted.values,</span>
+<span id="cb8-12"><a href="other-reg-cons.html#cb8-12"></a>                    <span class="dt">fit_type =</span> <span class="st">&quot;Residual Plot for Quadratic Fit&quot;</span>)</span>
+<span id="cb8-13"><a href="other-reg-cons.html#cb8-13"></a></span>
+<span id="cb8-14"><a href="other-reg-cons.html#cb8-14"></a><span class="co"># assign consistent plot elements</span></span>
+<span id="cb8-15"><a href="other-reg-cons.html#cb8-15"></a>res_zeroline =<span class="st"> </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">colour =</span> <span class="st">&quot;grey50&quot;</span>)</span>
+<span id="cb8-16"><a href="other-reg-cons.html#cb8-16"></a>mpg_x_axis =<span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Fitted values&quot;</span>, </span>
+<span id="cb8-17"><a href="other-reg-cons.html#cb8-17"></a>                                <span class="dt">breaks =</span> scales<span class="op">::</span><span class="kw">pretty_breaks</span>(<span class="dt">n =</span> <span class="dv">6</span>))</span>
+<span id="cb8-18"><a href="other-reg-cons.html#cb8-18"></a>mpg_y_axis =<span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> scales<span class="op">::</span><span class="kw">pretty_breaks</span>(<span class="dt">n =</span> <span class="dv">7</span>))</span>
+<span id="cb8-19"><a href="other-reg-cons.html#cb8-19"></a></span>
+<span id="cb8-20"><a href="other-reg-cons.html#cb8-20"></a><span class="co"># plot linear fit</span></span>
+<span id="cb8-21"><a href="other-reg-cons.html#cb8-21"></a>linear_plot =<span class="st"> </span>linear_fit <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb8-22"><a href="other-reg-cons.html#cb8-22"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x =</span> fitted, <span class="dt">y =</span> Residuals))<span class="op">+</span></span>
+<span id="cb8-23"><a href="other-reg-cons.html#cb8-23"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>, <span class="dt">colour =</span> <span class="st">&quot;grey30&quot;</span>)<span class="op">+</span></span>
+<span id="cb8-24"><a href="other-reg-cons.html#cb8-24"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> F, , <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
+<span id="cb8-25"><a href="other-reg-cons.html#cb8-25"></a><span class="st">  </span>res_zeroline<span class="op">+</span></span>
+<span id="cb8-26"><a href="other-reg-cons.html#cb8-26"></a><span class="st">  </span>mpg_x_axis<span class="op">+</span></span>
+<span id="cb8-27"><a href="other-reg-cons.html#cb8-27"></a><span class="st">  </span>mpg_y_axis<span class="op">+</span></span>
+<span id="cb8-28"><a href="other-reg-cons.html#cb8-28"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="kw">unique</span>(linear_fit<span class="op">$</span>fit_type))<span class="op">+</span></span>
+<span id="cb8-29"><a href="other-reg-cons.html#cb8-29"></a><span class="st">  </span><span class="kw">theme_islr</span>()<span class="op">+</span></span>
+<span id="cb8-30"><a href="other-reg-cons.html#cb8-30"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">.5</span>))</span>
+<span id="cb8-31"><a href="other-reg-cons.html#cb8-31"></a></span>
+<span id="cb8-32"><a href="other-reg-cons.html#cb8-32"></a><span class="co"># plot quad fit</span></span>
+<span id="cb8-33"><a href="other-reg-cons.html#cb8-33"></a>quad_plot =<span class="st"> </span>quad_fit <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb8-34"><a href="other-reg-cons.html#cb8-34"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x =</span> fitted, <span class="dt">y =</span> Residuals))<span class="op">+</span></span>
+<span id="cb8-35"><a href="other-reg-cons.html#cb8-35"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>, <span class="dt">colour =</span> <span class="st">&quot;grey30&quot;</span>)<span class="op">+</span></span>
+<span id="cb8-36"><a href="other-reg-cons.html#cb8-36"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> F, , <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
+<span id="cb8-37"><a href="other-reg-cons.html#cb8-37"></a><span class="st">  </span>res_zeroline<span class="op">+</span></span>
+<span id="cb8-38"><a href="other-reg-cons.html#cb8-38"></a><span class="st">  </span>mpg_x_axis<span class="op">+</span></span>
+<span id="cb8-39"><a href="other-reg-cons.html#cb8-39"></a><span class="st">  </span>mpg_y_axis<span class="op">+</span></span>
+<span id="cb8-40"><a href="other-reg-cons.html#cb8-40"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="kw">unique</span>(quad_fit<span class="op">$</span>fit_type))<span class="op">+</span></span>
+<span id="cb8-41"><a href="other-reg-cons.html#cb8-41"></a><span class="st">  </span><span class="kw">theme_islr</span>()<span class="op">+</span></span>
+<span id="cb8-42"><a href="other-reg-cons.html#cb8-42"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">.5</span>))</span>
+<span id="cb8-43"><a href="other-reg-cons.html#cb8-43"></a></span>
+<span id="cb8-44"><a href="other-reg-cons.html#cb8-44"></a><span class="co"># add the plots together</span></span>
+<span id="cb8-45"><a href="other-reg-cons.html#cb8-45"></a>linear_plot <span class="op">+</span><span class="st"> </span>quad_plot</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:auto-res-plot"></span>
+<img src="BookdownISL_files/figure-html/auto-res-plot-1.png" alt="*Plots of residuals versus predicted (or fitted) values for the &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;Auto&lt;/span&gt;&lt;/strong&gt; data set. In each plot, the red line is a smooth fit to the residuals, intended to make it easier to identify a trend.* Left: *A linear regression of &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;mpg&lt;/span&gt;&lt;/strong&gt; on &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;horsepower&lt;/span&gt;&lt;/strong&gt;. A strong pattern in the residuals indicates non-linearity in the data.* Right: *A linear regression of &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;mpg&lt;/span&gt;&lt;/strong&gt; on &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;horsepower&lt;/span&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;horsepower^2&lt;/span&gt;&lt;/strong&gt;. There is little pattern in the residuals.*" width="1152" />
+<p class="caption">
+FIGURE 3.4: <em>Plots of residuals versus predicted (or fitted) values for the <strong><span style="font-family:monospace; color: #B44C1C;">Auto</span></strong> data set. In each plot, the red line is a smooth fit to the residuals, intended to make it easier to identify a trend.</em> Left: <em>A linear regression of <strong><span style="font-family:monospace; color: #B44C1C;">mpg</span></strong> on <strong><span style="font-family:monospace; color: #B44C1C;">horsepower</span></strong>. A strong pattern in the residuals indicates non-linearity in the data.</em> Right: <em>A linear regression of <strong><span style="font-family:monospace; color: #B44C1C;">mpg</span></strong> on <strong><span style="font-family:monospace; color: #B44C1C;">horsepower</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">horsepower^2</span></strong>. There is little pattern in the residuals.</em>
+</p>
+</div>
+<p>The left panel of Figure 3.9 displays a residual plot from the linear regression of <strong><span style="font-family:monospace; color: #B44C1C;">mpg</span></strong> onto <strong><span style="font-family:monospace; color: #B44C1C;">horsepower</span></strong> on the <strong><span style="font-family:monospace; color: #B44C1C;">Auto</span></strong> data set that was illustrated in Figure 3.8.
+The red line is a smooth fit to the residuals, which is displayed in order to make it easier to identify any trends.
+The residuals exhibit a clear U-shape, which provides a strong indication of non-linearity in the data.
+In contract, the right-hand panel of Figure 3.9 displays the residual plot that results from the model <a href="other-reg-cons.html#eq:mpg-quad">(3.36)</a>, which contains a quadratic term.
+There appears to be little pattern in the residuals, suggesting that the quadratic term improves the fit to the data.</p>
+<p>If the residual plot indicates that there are non-linear associations in the data, then a simple approach is to use non-linear transformations of the predictors, such as log <span class="math inline">\(X\)</span>, <span class="math inline">\(\sqrt{X}\)</span>, and <span class="math inline">\(X^2\)</span>, in the regression model.
+In the later chapters of this book, we will discuss other more advanced non-linear approaches for addressing this issue.</p>
+</div>
+<div id="correlation-of-error-terms" class="section level4">
+<h4><span class="header-section-number">3.3.3.2</span> 2. Correlation of Error Terms</h4>
+<p>An important assumption of the linear regression model is that the error terms <span class="math inline">\(\epsilon_1, \epsilon_2, ..., \epsilon_n\)</span>, are uncorrelated.
+What does this mean?
+For instance, if the errors are uncorrelated, then the fact that <span class="math inline">\(\epsilon_i\)</span> is positive provides little or no information abou the sign of <span class="math inline">\(\epsilon_{i+1}\)</span>.
+The standard errors that are computed for the estimated regression coefficients or the fitted values are based on the assumption of uncorrelated error terms.
+If in fact there is correlation among the error terms, then the estimated standard errors will tend to underestimate the true standard errors.
+As a result, confidence and prediction intervals will be narrower than they should be.
+For example, a <span class="math inline">\(95\%\)</span> confidence interval may in reality have a much lower probability than <span class="math inline">\(0.95\)</span> of containing the true value of the parameter.
+In addition, p-values associated with the model will be lower than they should be: this could cause us to erroneously conclude that a parameter is statistically significant.
+In short, if the error terms are correlated, we may have an unwarranted sense of confidence in our model.</p>
+<p>As an extreme example, suppose we accidentally doubled our data, leading to observations and error terms identical in pairs.
+If we ignored this, our standard error calculations would be as if we had a sample size of <span class="math inline">\(2n\)</span>, when in fact we only have <span class="math inline">\(n\)</span> samples.
+Our estimated parameters would be the same for <span class="math inline">\(2n\)</span> samples as for the <span class="math inline">\(n\)</span> samples, but the confidence intervals would be narrower by a factor of <span class="math inline">\(\sqrt{2}\)</span>!</p>
+<p>Why might correlations among the error terms occur?
+Such correlations frequently occur in the context of <em>time series</em> data, which consists of observations for which measurements are obtained at discrete points in time.
+In many cases, observations that are obtained at adjacent time points will have positively correlated errors.
+In order to determine if this is the case for a given data set, we can plot the residuals from our model as a function of time.
+If the errors are uncorrelated, then there should be no discernible pattern.
+On the other hand, if the error terms are positively correlated, then we may see <em>tracking</em> in the residuals—that is, adjacent residuals may have similar values.
+Figure 3.10 provides an illustration.
+In the top panel, we see the residuals from a linear regression fit to data generated with uncorrelated errors.
+There is no evidence of a time-related trend in the residuals.
+In contrast, the residuals in the bottom panel are from a data set in which adjacent errors had a correlation of <span class="math inline">\(0.9\)</span>.
+Now there is a clear pattern in the residuals—adjacent residuals tend to take on similar values.
+Finally, the center panel illustrates a more moerate case in which the residuals had a correlation of <span class="math inline">\(0.5\)</span>.
+There is still evidence of tracking, but the pattern is less clear.</p>
+<p>Many methods have been developed to properly take account of correlations in the error terms in time series data.
+Correlation among the error terms can also occur outside of time series data.
+For instance, consider a study in which individuals’ heights are predicted from their weights.
+The assumption of uncorrelated errors could be violated if some of the individuals in the study are members of the same family, or eat the same diet, or have been exposed to the same environmental factors.
+In general, the assumption of uncorrelated errors is extremely important for linear regression as well as for other statistical methods, and good experimental design is crucial in order to mitigate the risk of such correlations.</p>
+<p>FIGURE 3.10</p>
+</div>
+<div id="non-constant-variance-of-error-terms" class="section level4">
+<h4><span class="header-section-number">3.3.3.3</span> 3. Non-constant Variance of Error Terms</h4>
+<p>Another important assumption of the linear regression model is that the error terms have a constant variance, <span class="math inline">\(Var(\epsilon_i) = \sigma^2\)</span>.
+The standard errors, confidence intervals, and hypothesis tests associated with the linear model rely upon this assumption.</p>
+<p>Unfortunately, it is often the case that the variances of the error terms are non-constant.
+For instance, the variances of the error terms may increase with the value of the response.
+One can identify non-constant variances in the errors, or <em>heteroscedasticity</em>, from the presence of a <em>funnel shape</em> in the residuals plot.
+An example is shown in the left-hand panel of Figure 3.11, in which the magnitude of the residuals tends to increase with the fitted values.
+When faced with this problem, one possible solution is to transform the response <span class="math inline">\(Y\)</span> using a concave function such as log <span class="math inline">\(Y\)</span> or <span class="math inline">\(\sqrt{Y}\)</span>.
+Such a transformation results in a greater amount of shrinkage of the larger responses, leading to a reduction in heteroscedasticity.
+The right-hand panel of Figure 3.11 displays the residual plot after transforming the response using log <span class="math inline">\(Y\)</span>.
+The residuals now appear to have constant variance, though there is some evidence of a slight non-linear relationship in the data.</p>
+<p>FIGURE 3.11</p>
+<p>Sometimes we have a good idea of the variance of each response.
+For example, the <em>i</em>th response could be an average of <span class="math inline">\(n_i\)</span> raw observations.
+If each of these raw observations is uncorrelated with variance <span class="math inline">\(\sigma^2\)</span> then our average has variance <span class="math inline">\(\sigma_i^2 = \sigma^2/n_i\)</span>.
+In this case a simple remedy is to fit our model by <em>weighted least squares</em>, with weights proportional to the inverse variances—i.e. <span class="math inline">\(w_i = n_i\)</span> in this case.
+Most linear regression software allows for observation weights.</p>
+</div>
+<div id="outliers" class="section level4">
+<h4><span class="header-section-number">3.3.3.4</span> 4. Outliers</h4>
+<p>An <em>outlier</em> is a point for which <span class="math inline">\(y_i\)</span> is far from the value predicted by the model.
+Outliers can arise for a variety of reasons, such as incorrect recording of an observation during data collection.</p>
+<p>The red point (observation 20) in the left-hand panel of Figure 3.12 illustrates a typical outlier.
+The red solid line is the least squares regression fit, while the blue dashed line is the least squares fit after removal of the outlier.
+In this case, removing the outlier has little effect on the least squares line: it leads to almost no change in the slope, and a miniscule reduction in the intercept.
+It is typical for an outlier that does not have an unusual predictor value to have little effect on the least squares fit.
+However, even if an outlier does not have much effect on the least squares fit, it can cause other problems.
+For instance, in this example, the RSE is <span class="math inline">\(1.09\)</span> when the outlier is included in the regression, but it is only <span class="math inline">\(0.77\)</span> when the outlier is removed.
+Since the RSE is used to compute confidence intervals and p-values, such a dramatic increase caused by a single data point can have implications for the interpretation of the fit.
+Similarly, inclusion of the outlier causes the <span class="math inline">\(R^2\)</span> to decline from <span class="math inline">\(0.892\)</span> to <span class="math inline">\(0.805\)</span>.</p>
+<p>FIGURE 3.12</p>
+<p>Residual plots can be used to identify outliers.
+In this example, the outlier is clearly visible in the residual plot illustrated in the center panel of Figure 3.12.
+But in practice, it can be difficult to decide how large a residual needs to be before we consider the point to be an outlier.
+To address this problem, instead of plotting the residuals, we can plot the <em>studentized residuals</em>, computed by dividing each residual <span class="math inline">\(e_i\)</span> by its estimated standard error.
+Observations whose studentized residuals are greater than 3 in absolute value are possible outliers.
+In the right-hand panel of Figure 3.12, the outlier’s studentized residual exceeds 6, while all other observations have studentized residuals between <span class="math inline">\(-2\)</span> and <span class="math inline">\(2\)</span>.</p>
+<p>If we believe that an outlier has occurred due to an error in data collection or recording, then one solution is to simply remove the observation.
+However, care should be taken, since an outlier may instead indicate a deficiency with the model, such as a missing predictor.</p>
+</div>
+<div id="high-leverage-points" class="section level4">
+<h4><span class="header-section-number">3.3.3.5</span> 5. High Leverage Points</h4>
+<p>We just saw that outliers are observations for which response <span class="math inline">\(y_i\)</span> is unusual given the predictor <span class="math inline">\(x_i\)</span>.
+In contrast, observations with <em>high leverage</em> have an unusual value for <span class="math inline">\(x_i\)</span>.
+For example, observation 41 in the left-hand panel of Figure 3.13 has high leverage, in that the predictor value for this observation is large relative to the other observations.
+(Note that the data displayed in Figure 3.13 are the same as the data in Figure 3.12, but with the addition of a single high leverage observation.)</p>
+<p>FIGURE 3.13</p>
+<p>The red solid line is the least squares fit to the data, while the blue dashed line is the fit produced when observation 41 is removed.
+Comparing the left-hand panels of Figures 3.12 and 3.13, we observe that removing the high leverage observation has a much more substantial impact on the least squares line than removing the outlier.
+In fact, high leverage observations tend to have a sizable impact on the estimated regression line.
+It is cause for concern if the least squares line is heavily affected by just a couple of observations, because any problems with these points may invalidate the entire fit.
+For this reason, it is important to identify high leverage observations.</p>
+<p>In a simple linear regression, high leverage observations are fairly easy to identify, since we can simply look for observations for which the predictor value is outside of the normal range of the observations.
+But in a multiple linear regression with many predictors, it is possible to have an observation that is well within the range of each individual predictor’s values, but that is unusual in terms of the full set of predictors.
+An example is shown in the center panel of Figure 3.13, for a data set with two predictors, <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>.
+Most of the observations’ predictor values fall within the blue dashed ellipse, but the red observation is well outside of this range.
+But neither its value for <span class="math inline">\(X_1\)</span> nor its value for <span class="math inline">\(X_2\)</span> is unusual.
+So if we examine just <span class="math inline">\(X_1\)</span> or just <span class="math inline">\(X_2\)</span>, we will fail to notice this high leverage point.
+This problem is more pronounced in multiple regression settings with more than two predictors, because then there is no simple way to plot all dimensions of the data simultaneously.</p>
+<p>In order to quantify an observation’s leverage, we compute the <em>leverage statistic</em>.
+A large value of this statistic indicates an observation with high leverage.
+For a simple linear regression</p>
+<p><span class="math display" id="eq:leverage-stat">\[\begin{equation}
+h_i = \frac{1}{n} + \frac{(x_i - \bar{x})^2}{\sum_{i&#39; = 1}^n{(x_{i&#39;} - \bar{x})^2}} .
+\tag{3.37}
+\end{equation}\]</span></p>
+<p>It is clear from this equation that <span class="math inline">\(h_i\)</span> increases with the distance of <span class="math inline">\(x_i\)</span> from <span class="math inline">\(\bar{x}\)</span>.
+There is a simple extension of <span class="math inline">\(h_i\)</span> to the case of multiple predictors, though we do not provide the formula here.
+The leverage statistic <span class="math inline">\(h_i\)</span> is always between <span class="math inline">\(1/n\)</span> and 1, and the average leverage for all the observations is always equal to <span class="math inline">\((p+1) / n\)</span>.
+So if a given observation has a leverage statistic that greatly exceeds <span class="math inline">\((p + 1) / n\)</span>, then we may suspect that the corresponding point has high leverage.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="other-reg-cons.html#cb9-1"></a>coll_x_axis =<span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> scales<span class="op">::</span><span class="kw">pretty_breaks</span>(<span class="dv">6</span>))</span>
+<span id="cb9-2"><a href="other-reg-cons.html#cb9-2"></a></span>
+<span id="cb9-3"><a href="other-reg-cons.html#cb9-3"></a>(<span class="kw">ggplot</span>(credit, <span class="kw">aes</span>(<span class="dt">x =</span> Limit, <span class="dt">y =</span> Age))<span class="op">+</span></span>
+<span id="cb9-4"><a href="other-reg-cons.html#cb9-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
+<span id="cb9-5"><a href="other-reg-cons.html#cb9-5"></a><span class="st">  </span>coll_x_axis<span class="op">+</span></span>
+<span id="cb9-6"><a href="other-reg-cons.html#cb9-6"></a><span class="st">  </span><span class="kw">theme_islr</span>())<span class="op">+</span></span>
+<span id="cb9-7"><a href="other-reg-cons.html#cb9-7"></a><span class="st">  </span>(<span class="kw">ggplot</span>(credit, <span class="kw">aes</span>(<span class="dt">x =</span> Limit, <span class="dt">y =</span> Rating))<span class="op">+</span></span>
+<span id="cb9-8"><a href="other-reg-cons.html#cb9-8"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
+<span id="cb9-9"><a href="other-reg-cons.html#cb9-9"></a><span class="st">    </span>coll_x_axis<span class="op">+</span></span>
+<span id="cb9-10"><a href="other-reg-cons.html#cb9-10"></a><span class="st">    </span><span class="kw">theme_islr</span>())</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:collinearity-plot"></span>
+<img src="BookdownISL_files/figure-html/collinearity-plot-1.png" alt="*Scatterplots of the observations from the &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;Credit&lt;/span&gt;&lt;/strong&gt; data set.* Left: *A plot of &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;age&lt;/span&gt;&lt;/strong&gt; versus &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;limit&lt;/span&gt;&lt;/strong&gt;. These two variables are not collinear.* Right: *A plot of &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;rating&lt;/span&gt;&lt;/strong&gt; versus &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;limit&lt;/span&gt;&lt;/strong&gt;. There is high collinearity.*" width="1152" />
+<p class="caption">
+FIGURE 3.5: <em>Scatterplots of the observations from the <strong><span style="font-family:monospace; color: #B44C1C;">Credit</span></strong> data set.</em> Left: <em>A plot of <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong> versus <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong>. These two variables are not collinear.</em> Right: <em>A plot of <strong><span style="font-family:monospace; color: #B44C1C;">rating</span></strong> versus <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong>. There is high collinearity.</em>
+</p>
+</div>
+<p>The right-hand panel of Figure 3.13 provides a plot of the studentized residuals versus <span class="math inline">\(h_i\)</span> for the data in the left-hand panel of Figure 3.13.
+Observation 41 stands out as having a very high leverage statistic as well as a high studentized residual.
+In other words, it is an outlier as well as a high leverage observation.
+This is a particularly dangerous combination!
+This plot also reveals the reason that observation 20 had relatively little effect on the least squares fit in Figure 3.12: it has low leverage.</p>
+</div>
+<div id="collinearity" class="section level4">
+<h4><span class="header-section-number">3.3.3.6</span> 6. Collinearity</h4>
+<p><em>Collinearity</em> refers to the situation in which two or more predictor variables are closely related to one another.
+The concept of collinearity is illustrated in Figure 3.14 using the <strong><span style="font-family:monospace; color: #B44C1C;">Credit</span></strong> data set.
+In the left-hand panel of Figure 3.14, the two predictors <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong> appear to have no obvious relationship.
+In contrast, in the right-hand panel of Figure 3.14, the predictors <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">rating</span></strong> are very highly correlated with each other, and we say that they are <em>collinear</em>.
+The presence of collinearity can pose problems in the regression context, since it can be difficult to separate out the individual effects of collinear variables on the response.
+In other words, since <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">rating</span></strong> tend to increase or decrease together, it can be difficult to determine how each one separately is associated with the response, <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong>.
+Figure 3.15 illustrates some of the difficulties that can result from the collinearity.
+The left-hand panel of Figure 3.15 is a contour plot of the RSS <a href="simple-lin-reg.html#eq:rss">(3.3)</a> associated with different possible coefficient estimates for the regression of <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> on <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong>.
+Each ellipse represents a set of coefficients that correspond to the same RSS, with ellipses nearest to the center taking on the lowest values of RSS.
+The black dots and associated dashed lines represent the coefficient estimates that result in the smallest possible RSS—in other words, these are the least squares estimates.
+The axes for <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong> have been scaled so that the plot includes possible coefficient estimates that are up to four standard errors on either side of the least squares estimates.
+Thus the plot includes all plausible values for the coefficients.
+For example, we see that the true <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> coefficient is almost certainly somewhere between <span class="math inline">\(0.15\)</span> and <span class="math inline">\(0.20\)</span>.</p>
+<p>FIGURE 3.15</p>
+<p>In contrast, the right-hand panel of Figure 3.15 displays contour plots of the RSS associated with possible coefficient estimates for the regression of <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> onto <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">rating</span></strong>, which we know to highly collinear.
+Now the contours run along a narrow valley; there is a broad range of values for the coefficient estimates that result in equal values for RSS.
+Hence a small change in the data could cause the pair of coefficient values that yield the smallest RSS—that is, the least squares estimates—to move anywhere along this valley.
+This results in a great deal of uncertainty in the coefficient estimates.
+Notice that the scale for the <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> coefficient now runs from roughly <span class="math inline">\(-0.2\)</span> to <span class="math inline">\(0.2\)</span>; this is an eight-fold increase over the plausible range of the <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> coefficient in the regression with <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong>.
+Interestingly, even though the <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">rating</span></strong> coefficients now have much more individual uncertainty, they will almost certainly lie somewhere in this contour valley.
+For example, we would not expect the true value of the <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">rating</span></strong> coefficients to be <span class="math inline">\(-0.1\)</span> and <span class="math inline">\(1\)</span> respectively, even though such a value is plausible for each coefficient individually.</p>
+<p>TABLE 3.11</p>
+<p>Since collinearity reduces the accuracy of the estimates of the regression coefficients, it causes the standard error for <span class="math inline">\(\hat{\beta_j}\)</span> to grow.
+Recall that the <em>t-statistic</em> for each predictor is calculated by dividing <span class="math inline">\(\hat{\beta_j}\)</span> by its standard error.
+Consequently, collinearity results in a decline in the <em>t</em>-statistic.
+As a result, in the presence of collinearity, we may fail to reject <span class="math inline">\(H_0 : \beta_j = 0\)</span>.
+This means that the <em>power</em> of the hypothesis test—the probability of correctly detecting a <em>non-zero</em> coefficient—is reduced by collinearity.
+Table 3.11 compares the coefficient estimates obtained from the two separate multiple regression models.
+The first is a regression of <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> on <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> and the second is a regression of <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> on <strong><span style="font-family:monospace; color: #B44C1C;">rating</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong>.
+In the first regression both <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> are highly significant with very small p-values.
+In the second, the collinearity between <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">rating</span></strong> has caused the standard error for the <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> coefficient estimate to increase by a factor of 12 and the p-value to increase to <span class="math inline">\(0.701\)</span>.
+In other words, the importance of the <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> variable has been masked due to the presence of collinearity.
+To avoid such a situation, it is desirable to identify and address potential collinearity problems while fitting the model.</p>
+<p>A simple way to detect collinearity is to look at a correlation matrix of the predictors.
+An element of this matrix that is large in absolute value indicates a pair of highly correlated variables, and therefore a collinearity problem in the data.
+Unfortunately, not all collinearity problems can be detected by inspection of the correlation matrix: it is possible for collinearity to exist between three or more variables even if no pair of variables has a particularly high correlation.
+We call this situation <em>multicollinearity</em>.
+Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the <em>variance inflation factor</em> (VIF).
+The VIF is the ratio of the variance of <span class="math inline">\(\hat{\beta_j}\)</span> when fitting the full model divided by the variance of <span class="math inline">\(\hat{\beta_j}\)</span> if fit on its own.
+The smallest possible value for the VIF is 1, which indicates the complete absence of collinearity.
+Typically in practice there is a small amount of collinearity among the predictors.
+As a rule of thumb, a VIF value that exceeds 5 or 10 indicates a problematic amount of collinearity.
+The VIF for each variable can be computed using the formula</p>
+<p><span class="math display">\[
+VIF(\hat{\beta_j}) = \frac{1}{1 - R_{X_j|X_{-j}}^2} .
+\]</span>
+where <span class="math inline">\(R_{X_j|X_{-j}}^2\)</span> is the <span class="math inline">\(R^2\)</span> from a regression of <span class="math inline">\(X_j\)</span> onto all of the other predictors.
+If <span class="math inline">\(R_{X_j|X_{-j}}^2\)</span> is close to one, then collinearity is present, and so the VIF will be large.</p>
+<p>In the <strong><span style="font-family:monospace; color: #B44C1C;">Credit</span></strong> data, a regression of <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> on <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong>, <strong><span style="font-family:monospace; color: #B44C1C;">rating</span></strong>, and <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> indicates that the predictors have VIF values of <span class="math inline">\(1.01\)</span>, <span class="math inline">\(160.67\)</span>, and <span class="math inline">\(160.59\)</span>.
+As we suspected, there is considerable collinearity in the data!</p>
+<p>When faced with the problem of collinearity, there are two simple solutions.
+The first is to drop one of the problematic variables from the regression.
+This can usually be done without much compromise to the regression fit, since the presence of collinearity implies that the information that this variable provides about the response is redundant in the presence of other variables.
+For instance, if we regress <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> onto <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong>, without the <strong><span style="font-family:monospace; color: #B44C1C;">rating</span></strong> predictor, then the resulting VIF values are close to the minimum possible value of 1, and the <span class="math inline">\(R^2\)</span> drops from <span class="math inline">\(0.754\)</span> to <span class="math inline">\(0.75\)</span>.
+So dropping <strong><span style="font-family:monospace; color: #B44C1C;">rating</span></strong> from the set of predictors has effectively solved the collinearity problem without compromising the fit.
+The second solution is to combine the collinear variables together into a single predictor.
+For instance, we might take the average of the standardized versions of <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">rating</span></strong> in order to create a new variable that measures <em>credit worthiness</em>.</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="mult-lin-reg.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-marketing-plan.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["BookdownISL.pdf", "BookdownISL.epub"],
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
