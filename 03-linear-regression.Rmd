@@ -730,29 +730,686 @@ Note that both intervals are centered at 11,256, but that the prediction interva
 
 ### Qualitative Predictors
 
+In our discussio so far, we have assumed that all variables in our linear regression model are *quantitative*.
+But in practice, this is not necessarily the case; often some predictors are *qualitative*.
+For example, the `r data_colour("Credit")` data set displayed in Figure 3.6 records `r data_colour("balance")` (average credit card debt for a number of individuals) as well as several quantitative predictors: `r data_colour("age")`, `r data_colour("cards")` (number of credit cards), `r data_colour("education")` (years of education), `r data_colour("income")` (in thousands of dollars), `r data_colour("limit")` (credit limit), and `r data_colour("rating")` (credit rating).
+Each panel of Figure 3.6 is a scatterplot for a pair of variables whose identities are given by the corresponding row and column labels.
+For example, the scatterplot directly to the right of the word "Balance" depicts `r data_colour("balance")` versus `r data_colour("age")`, while the plot directly to the right of "Age" corresponds to `r data_colour("age")` versus `r data_colour("cards")`.
+In addition to these quantitative variables, we also have four qualitative variables: `r data_colour("gender")`, `r data_colour("student")` (student status), `r data_colour("status")` (marital status), and `r data_colour("ethnicity")` (Caucasian, African American or Asian).
+
+```{r credit-overview, fig.align = "center", fig.cap=paste("*The", data_colour("Credit"), "data set contains information about ", data_colour("balance"), ", ", data_colour("age"), ", ", data_colour("cards"), ", ", data_colour("education"), ", ", data_colour("income"), ", ", data_colour("limit"), ", and ", data_colour("rating"), " for a number of potential customers.*"), fig.width= 12, fig.asp = 1}
+ggpairs(select(credit, Balance, Age, Cards, Education, Income, Limit, Rating), 
+        upper = list(continuous = wrap("points", colour = "blue")), 
+        lower = list(continuous = wrap("points", colour = "blue")), 
+        diag = "blank", 
+        axisLabels = "show", switch = "y")+
+  theme_islr()
+```
+
+**TABLE 3.7**
+
 #### Predictors with Only Two Levels
+
+Suppose that we wish to investigate differences in credit card balance between males and females, ignoring the other variables for the moment.
+If a qualitative predictor (also known as a *factor*) only has two *levels*, or possible values, then incorporating it into a regression model is very simple.
+We simply create an indicator or *dummy variable* that takes on two possible numerical values.
+For example, based on the `r data_colour("gender")` variable, we can create a new variable that takes the form
+
+\begin{equation}
+  x_i =  \begin{cases}
+      1 & \text{if $i$th person is female}\\
+      0 & \text{if $i$th person is male,}\\
+    \end{cases}      
+  (\#eq:dummy-gender)
+\end{equation} 
+
+and use this variable as a predictor in the regression equation.
+This results in the model
+
+\begin{equation}
+  y_i = \beta_0 + \beta_1 x_i + \epsilon_i =  \begin{cases}
+                                                  \beta_0 + \beta_1 + \epsilon_i & \text{if $i$th person is female}\\
+                                                  \beta_0 + \epsilon_i & \text{if $i$th person is male.}\\
+                                              \end{cases}      
+  (\#eq:dummy-eq)
+\end{equation} 
+    
+Now $\beta_0$ can be interpreted as the average credit card balance among males, $\beta_0 + \beta_1$ as the average credit card balance among females, and $\beta_1$ as the average diﬀerence in credit card balance between females and males.
+
+Table 3.7 displays the coeﬃcient estimates and other information associated with the model \@ref(eq:dummy-eq).
+The average credit card debt for males is estimated to be \$509.80, whereas females are estimated to carry \$19.73 in additional debt for a total of \$509.80 + \$19.73 = \$529.53. 
+However, we notice that the p-value for the dummy variable is very high. 
+This indicates that there is no statistical evidence of a difference in average credit card balance between the genders.
+
+The decision to code females as 1 and males as 0 in \@ref(eq:dummy-eq) is arbitrary, and has no effect on the regression fit, but does alter the interpretation of the coefficients. 
+If we had coded males as 1 and females as 0, then the estimates for $\beta_0$ and $\beta_1$ would have been 529.53 and 19.73, respectively, leading once again to a prediction of credit card debt of \$529.53 for females.
+Alternatively, instead of a 0/1 coding scheme, we could create a dummy variable
+
+$$
+x_i = \begin{cases}
+    1 & \text{if $i$th person is female}\\
+    -1 & \text{if $i$th person is male,}\\
+    \end{cases}  
+$$
+
+and use this variable in the regression equation.
+This results in the model
+
+$$
+  y_i = \beta_0 + \beta_1 x_i + \epsilon_i =  \begin{cases}
+                                                  \beta_0 + \beta_1 + \epsilon_i & \text{if $i$th person is female}\\
+                                                  \beta_0 - \beta_1 + \epsilon_i & \text{if $i$th person is male.}\\
+                                              \end{cases}      
+$$
+
+Now $\beta_0$ can be interpreted as the overall average credit card balance (ignoring the gender effect), and $\beta_1$ is the amount that females are above the average and males are below the average.
+In this example, the estimate for $\beta_0$ would be $\$519.665$, halfway between the male and female averages of $\$509.80$ and $\$529.53$.
+The estimate for $\beta_1$ would be $\$9.865$, which is half of $\$19.73$, the average difference between females and males.
+It is important to note that the final predictions of the credit balances of males and females will be identical regardless of the coding scheme used.
+The only difference is in the way that the coefficients are interpreted.
 
 #### Qualitative Predictors with More than Two Levels
 
+When a qualitative predictor has more than two levels, a single dummy variable cannot represent all possible values. 
+In this situation, we can create additional dummy variables. 
+For example, for the `r data_colour("ethnicity")` variable we create two dummy variables. The first could be
+
+\begin{equation}
+  x_i1 = \begin{cases}
+      1 & \text{if $i$th person is Asian}\\
+      0 & \text{if $i$th person is not Asian}\\
+      \end{cases}      
+  (\#eq:dummy-asian)
+\end{equation} 
+
+and the second could be
+
+\begin{equation}
+  x_i2 = \begin{cases}
+      1 & \text{if $i$th person is Caucasian}\\
+      0 & \text{if $i$th person is not Caucasian}\\
+      \end{cases}      
+  (\#eq:dummy-caucasian)
+\end{equation} 
+
+Then both of these variables can be used in the regression equation, in order to obtain the model
+
+\begin{equation}
+  y_i = \beta_0 + \beta_1 x_i1 + \beta_2 x_i2 + \epsilon_i = \begin{cases}
+    \beta_0 + \beta_1 + \epsilon_i & \text{if $i$th person is Asian}\\
+    \beta_0 + \beta_2 + \epsilon_i & \text{if $i$th person is Caucasian}\\
+    \beta_0 + \epsilon_i & \text{if $i$th person is African American.}\\
+                                              \end{cases}      
+  (\#eq:dummy-ethnicity)
+\end{equation} 
+
+Now $\beta_0$ can be interpreted as the average credit card balance for African Americans, $\beta_1$ can be interpreted as the difference in average balance between the Asian and African American categories, and $\beta_2$ can be interpreted as the difference in the average balance between the Caucasian and African American categories.
+There will always be one fewer dummy variables than the number of levels.
+The level with no dummy variable — African American in this example — is known as the *baseline*.
+
+**TABLE 3.8**
+
+From Table 3.8, we see that the estimated `r data_colour("balance")` for the baseline, African American is $\$531.00$.
+It is estimated that the Asian category will have $\$18.69$ less debt than the African American category, and that the Caucasian category will have $\$12.50$ less debt than the African American category.
+However, the p-values associated with the coefficient estimates for the two dummy variables are very large, suggesting no statistical evidence of a real difference in credit card balance between the ethnicities.
+Once again, the level selected as the baseline category is arbitrary, and the final predictions for each group will be the same regardless of this choice. 
+However, the coefficients and their p-values do depend on the choice of dummy variable coding. 
+Rather than rely on the individual coefficients, we can use an F-test to test $H_0 : \beta_1 = \beta_2 = 0$; this does not depend on the coding.
+This F-test has a p-value of $0.96$, indicating that we cannot reject the null hypothesis that there is no relationship between `r data_colour("balance")` and `r data_colour("ethnicity")`.
+
+Using this dummy variable approach presents no difficulties when using both quantitative and qualitative predictors.
+For example, to regress `r data_colour("balance")` on both a quantitative variable such as `r data_colour("income")` and a qualitative variable such as `r data_colour("student")`, we must simply create a dummy variable for `r data_colour("student")` and then fit a multiple regression model using `r data_colour("income")` and the dummy variable as predictors for credit card balance.
+
+There are many different ways of coding qualitative variables besides the dummy variable approach taken here.
+All of these approaches lead to equivalent model fits, but the coefficients are different and have different interpretations, and are designed to measure particular *contrasts*.
+This topic is beyond the scope of the book, and so we will not pursue it further.
+
 ### Extensions of the Linear Model
+
+The standard linear regression model \@ref(eq:mlin-reg) provides interpretable results and works quite well on many real-world problems. 
+However, it makes several highly restrictive assumptions that are often violated in practice. 
+Two of the most important assumptions state that the relationship between the predictors and response are *additive* and *linear.* 
+The additive assumption means that the effect of changes in a predictor $X_j$ on the response $Y$ is independent of the values of the other predictors.
+The linear assumption states that the change in the response $Y$ due to a one-unit change in $X_j$ is constant, regardless of the value of $X_j$.
+In this book, we examine a number of sophisticated methods that relax these two assumptions.
+Here, we briefly examine some common classical approaches for extending the linear model.
 
 #### Removing the Additive Assumption
 
+In our previous analysis of the `r data_colour('Advertising')` data, we concluded that both `r data_colour('TV')` and `r data_colour('radio')` seem to be associated with `r data_colour('sales')`.
+The linear model that forms the basis for this conclusion assumed that the effect on `r data_colour('sales')` of increasing one advertising medium is independent of the amount spent on the other media.
+For example, the linear model (\@ref(eq:mlin-reg-adv)) states that the average effect on `r data_colour('sales')` of a one-unit increase in `r data_colour('TV')` is always $\beta_1$, regardless of the amount spent on `r data_colour('radio')`.
+
+However, this simple model may be incorrect.
+Suppose that spending money on radio advertising actually increases the effectiveness of TV advertising, so that the slope term for `r data_colour('TV')` should increase as `r data_colour('radio')` increases.
+In this situation, given a fixed budget of $\$100,000$, spending half on `r data_colour('radio')` and half on `r data_colour('TV')` may increaes `r data_colour('sales')` more than allocating the entire amount to either `r data_colour('TV')` or to `r data_colour('radio')`.
+In marketing, this is known as a *synergy* effect, and in statistics it is referred to as an *interaction* effect.
+Figure 3.5 suggests that such an effect may be present in the advertising data.
+Notice that when levels of either `r data_colour('TV')` or `r data_colour('radio')` are low, then the true `r data_colour('sales')` are lower than predicted by the linear model.
+But when advertising is split between the two media, then the model tends to underestimate `r data_colour('sales')`.
+
+Consider the standard linear regression model with two variables.
+
+$$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \epsilon$$
+
+According to this model, if we increase X_1 by one unit, then $Y$ will increase by an average of $\beta_1$ units.
+Notice that the presence of $X_2$ does not alter this statement — that is, regardless of the value of $X_2$, a one-unit increase in $X_1$ will lead to a $\beta_1$-unit increase in $Y$.
+One way of extending this model to allow for interaction effects is to include a third predictor, called an *interaction term*, which is constructed by computing the product of $X_1$ and $X_2$. This results in the model
+
+\begin{equation}
+  Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_1 X_2 + \epsilon    
+  (\#eq:interactionterm)
+\end{equation} 
+
+How does inclusion of this interaction term relax the additive assumption?
+Notice that \@ref(eq:interactionterm) can be rewritten as
+
+```{r interaction-term-table, fig.align = "center", fig.cap=str_c("*For the ", data_colour("Advertising"), " data, least squares coefficient estimates associated with the regression of ", data_colour("sales"), " onto ", data_colour("TV"), " and ", data_colour("radio"), ", with an interaction term, as in (3.33)*"), fig.width= 12, fig.asp = 9/16}
+
+interaction_model = lm(sales ~ TV+radio+TV*radio, 
+                       data = advertising)
+
+reg_table(interaction_model) %>% 
+  tab_source_note(md(str_c("<span style='color:#1188ce'>TABLE 3.9.</span>", "*For the ", data_colour("Advertising"), " data, least squares coefficient estimates associated with the regression of ", data_colour("sales"), " onto ", data_colour("TV"), " and ", data_colour("radio"), ", with an interaction term, as in (3.33)*")))
+```
+
+
+\begin{equation} 
+\begin{aligned}
+  Y &= \beta_0 + (\beta_1 + \beta_3 X_2) X_1 + \beta_2 X_2 + \epsilon \\
+      &= \beta_0 + \tilde{\beta_1} X_1 + \beta_2 X_2 + \epsilon
+  \end{aligned}
+  (\#eq:interaction-rewritten)
+\end{equation} 
+
+where $\tilde{\beta_1} = \beta_1 + \beta_3 X_2$.
+Since $\tilde{\beta_1}$ changes with $X_2$, the effect of $X_1$ on $Y$ is no longer constant: adjusting $X_2$ will change the impact of $X_1$ on $Y$.
+
+For example, suppose we are interested in studying the productivity of a factory. 
+We wish to predict the number of `r data_colour('units')` produced on the basis of the number of production `r data_colour('lines')` and the total number of `r data_colour('workers')`.
+It seems likely that the effect of increasing the number of production lines will depend on the number of workers, since if no workers are available to operate the lines, then increasing the number of lines will not increase production.
+This suggests that it would be appropriate to include an interaction term between `r data_colour('lines')` and `r data_colour('workers')` in a linear model to predict `r data_colour('units')`.
+Suppose that when we fit the model, we obtain
+
+$$
+\begin{aligned}
+  \color{#B44C1C}{units} &\approx 1.2 + 3.4 \times \color{#B44C1C}{workers} + 1.4 \times (\color{#B44C1C}{{lines}} \times \color{#B44C1C}{{workers}}) \\
+      &= 1.2 + (3.4 + 1.4 \times \color{#B44C1C}{{workers}}) \times \color{#B44C1C}{{lines}} + 0.22 \times \color{#B44C1C}{{workers}}.
+  \end{aligned}
+$$
+
+In other words, adding an additional line will increase the number of units produced by $3.4 + 1.4 \times \color{#B44C1C}{workers}$.
+Hence the more `r data_colour('workers')` we have, the stronger the effect of `r data_colour('lines')` will be.
+
+We now return to the `r data_colour('Advertising')` example.
+A linear model that uses `r data_colour('radio')`, `r data_colour('TV')`, and an interaction between the two to predict `r data_colour('sales')` takes the form
+
+\begin{equation}
+  \begin{aligned}
+  \color{#B44C1C}{sales} &\approx \beta_0 + \beta_1 \times \color{#B44C1C}{TV} + \beta_2 \times \color{#B44C1C}{radio} + \beta_3 \times (\color{#B44C1C}{{radio}} \times \color{#B44C1C}{{TV}}) + \epsilon \\
+      &= \beta_0 + (\beta_1 + \beta_3 \times \color{#B44C1C}{radio}) \times \color{#B44C1C}{TV} + \beta_2 \times \color{#B44C1C}{radio} + \epsilon.
+  \end{aligned}
+  (\#eq:adv-interaction)
+\end{equation}
+
+We can interpret $\beta_3$ as the increase in effectiveness of TV advertising for a one-unit increase in radio advertising (or vice-versa).
+The coefficients that result from fitting the model \@ref(eq:adv-interaction) are given in Table 3.9.
+
+The results in Table 3.9 strongly suggest that the model that includes the interaction term is superior to the model that contains only *main effects*.
+The p-value for the interaction term `r data_colour("TV")`$\times$`r data_colour("radio")`, is extremely low, indicating there is strong evidence for $H_a : \beta_3 \neq 0$.
+In other words, it is clear that the true relationship is not additive.
+The $R^2$ for the model \@ref(eq:adv-interaction) is $96.8\%$, compared to only $89.7\%$ for the model that predicts `r data_colour("sales")` using `r data_colour("TV")` and `r data_colour("radio")` without an interaction term.
+This means that $(96.8 - 89.7)/(100 - 89.7) = 69\%$ of the variability in `r data_colour("sales")` that remains after fitting the additive model has been explained by the interaction term.
+The coefficient estimates in Table 3.9 suggest that an increase in TV advertising of $\$1,000$ is associated with increased sales of $(\hat{\beta_1} + \hat{\beta_3} \times \color{#B44C1C}{radio}) \times 1,000 = 19 + 1.1 \times \color{#B44C1C}{radio}$ units. 
+And an increase in radio advertising of $\$1,000$ will be associated with an increase in sales of $(\hat{\beta_2} + \hat{\beta_3} \times \color{#B44C1C}{TV}) \times 1,000 = 29 + 1.1 \times \color{#B44C1C}{TV}$ units.
+
+In this example, the p-values associated with `r data_colour("TV")`, `r data_colour("radio")`, and the interaction term all are statistically significant (Table 3.9), and so it is obvious that all three variables should be included in the model.
+However, it is sometimes the case that an interaction term has a very small p-value, but the associated main effects (in this case, `r data_colour("TV")` and `r data_colour("radio")`) do not.
+The *hierarchical principle* states that *if we include an interaction in a model, we should also include the main effects, even if the p-values associated with their coefficients are not significant*.
+In other words, if the interaction between $X_1$ and $X_2$ seems important, then we should include both $X_1$ and $X_2$ in the model even if their coefficient estimates have large p-values.
+The rationale for this principle is that if $X_1 \times X_2$ is related to the response, then whether or not the coefficients of $X_1$ or $X_2$ are exactly zero is of little interest.
+Also $X_1 \times X_2$ is typically correlated with $X_1$ and $X_2$, and so leaving them out tends to alter the meaning of the interaction.
+
+In the previous example, we considered an interaction between `r data_colour("TV")` and `r data_colour("radio")`, both of which are quantitative variables.
+However, the concept of interactions applies just as well to qualitative variables.
+In fact, an interaction between a qualitative variable and a quantitative variable has a particularly nice interpretation.
+Consider the `r data_colour("Credit")` data set from Section 3.3.1, and suppose that we wish to predict `r data_colour("balance")` using the `r data_colour("income")` (quantitative) and `r data_colour("student")` (qualitative) variables.
+In the absence of an interaction term, the model takes the form
+
+\begin{equation}
+\begin{aligned}
+  \color{#B44C1C}{balance}_i &\approx \beta_0 + \beta_1 \times \color{#B44C1C}{income}_i + \begin{cases}
+                            \beta_2 & \text{if $i$th person is a student}\\
+                            0 & \text{if $i$th person is not a student}\\
+                            \end{cases} \\
+                            &= \beta_1 \times \color{#B44C1C}{income}_i + \begin{cases}
+                            \beta_0 + \beta_2 & \text{if $i$th person is a student}\\
+                            \beta_0 & \text{if $i$th person is not a student}\\
+                            \end{cases}
+                        
+\end{aligned}
+(\#eq:qual-nointeraction)
+\end{equation}
+
+Notice that this amounts to fitting two parallel lines to the data, one for students and one for non-students.
+The lines for students and non-students have different intercepts, $\beta_0 + \beta_2$ versus $\beta_0$, but the same slope, $\beta_1$.
+This is illustrated in the left-hand panel of Figure 3.7.
+The fact that the lines are parallel means that the average effect on `r data_colour("balance")` of a one-unit increase in `r data_colour("income")` does not depend on whether or not the individual is a student.
+This represents a potentially serious limitation of the model, since in fact a change in `r data_colour("income")` may have a very different effect on the credit card balance of a student versus a non-student.
+
+This limitation can be addressed by adding an interaction variable, created by multiplying `r data_colour("income")` with the dummy variable for `r data_colour("student")`.
+Our model now becomes
+
+\begin{equation}
+\begin{aligned}
+  \color{#B44C1C}{balance}_i &\approx \beta_0 + \beta_1 \times \color{#B44C1C}{income}_i + \begin{cases}
+                            \beta_2 + \beta_3 \times \color{#B44C1C}{income}_i & \text{if student}\\
+                            0 & \text{if not student}\\
+                            \end{cases} \\
+                            &= \begin{cases}
+                            (\beta_0 + \beta_2) + (\beta_1 + \beta_3) \times \color{#B44C1C}{income}_i & \text{if student}\\
+                            \beta_0 + \beta_1 \times \color{#B44C1C}{income}_i & \text{if not student}\\
+                            \end{cases}
+                        
+\end{aligned}
+(\#eq:qual-interaction)
+\end{equation}
+
+Once again, we have two different regression lines for the students and the non-students.
+But now those regression lines have different intercepts, $\beta_0 + \beta_2$ versus $\beta_0$, as well as different slopes, $\beta_1 + \beta_3$ versus $\beta_1$.
+This allows for the possibility that changes in income may affect the credit card balances of students and non-students differently.
+The right-hand panel of Figure 3.7 shows the estimated relationships between `r data_colour("income")` and `r data_colour("balance")` for students and non-students in \@ref(eq:qual-interaction).
+We note that the slope for students is lower than the slope for non-students.
+This suggests that increases in income are associated with smaller increases in credit card balance among students as compared to non-students.
+
+```{r credit-lm, fig.align = "center", fig.cap=str_c("*For the ", data_colour("Credit"), " data, the least squares lines are shown for prediction of ", data_colour("balance"), " from ", data_colour("income"), " for students and non-students.* Left: *The model (3.34) was fit. There is no interaction between ", data_colour("income"), " and ", data_colour("student"), ".* Right: *The model (3.35) was fit. There is an interaction term between ", data_colour("income"), " and ", data_colour("student"), ".*"), fig.width= 12, fig.asp = 9/21}
+# glimpse(Credit)
+
+# create multiple linear model
+credit_lm = lm(Balance~Income+Student, data = credit)
+# summary(credit_lm)
+
+# set axes and colour scale
+cred_x_axis = scale_x_continuous(breaks = c(0, 50, 100, 150), 
+                                 limits = c(0, 155))
+cred_y_axis = scale_y_continuous(name = "Balance", 
+                     breaks = c(200, 600, 1000, 1400), 
+                     limits = c(200, 1400))
+cred_colour_scale = scale_colour_manual(name = NULL, 
+                                        values = c("black","red"))
+
+credit_no_interaction = credit %>% 
+  mutate(balance_pred = predict(credit_lm, credit)) %>% 
+  ggplot(., aes(x = Income, y = balance_pred, colour = Student))+
+  stat_smooth(method = "lm", se = F)+
+  cred_x_axis+
+  cred_y_axis+
+  cred_colour_scale+
+  theme_islr()+
+  theme(legend.position = "none")
+
+# create multiple linear model w/interaction
+credit_lm_int = lm(Balance~Income+Student+Income*Student, data = credit)
+# summary(credit_lm_int)
+
+credit_interaction = credit %>% 
+  mutate(balance_pred = predict(credit_lm_int, credit)) %>% 
+  ggplot(., aes(x = Income, y = balance_pred, colour = Student))+
+  stat_smooth(method = "lm", se = F)+
+  cred_x_axis+
+  cred_y_axis+
+  cred_colour_scale+
+  theme_islr()+
+  theme(legend.position = c(.25, .91), legend.margin = margin())
+
+credit_no_interaction + credit_interaction+
+  plot_layout(nrow = 1, widths = c(.5, .5))
+```
+
+
 #### Non-linear Relationships
+
+As discussed previously, the linear regression model \@ref(eq:mlin-reg) assumes a linear relationship between the response and predictors.
+But in some cases, the true relationship between the response and the predictors may be non-linear.
+Here we present a very simple way to directly extend the linear model to accommodate non-linear relationships, using *polynomial regression*.
+In later chapters, we will present more complex approaches for performing non-linear fits in more general settings.
+
+Consider Figure 3.8, in which the `r data_colour("mpg")` (gas mileage in miles per gallon) versus `r data_colour("horsepower")` is shown for a number of cars in the `r data_colour("Auto")` data set.
+
+FIGURE 3.8
+
+The orange line represents the linear regression fit.
+There is a pronounced relationship between `r data_colour("mpg")` and `r data_colour("horsepower")`, but it seems clear that this relationship is in fact non-linear: the data suggest a curved relationship.
+A simple approach for incorporating non-linear associations in a linear model is to include transformed versions of the predictors in the model.
+For example, the points in Figure 3.8 seem to have a *quadratic* shape, suggesting that a model of the form
+
+\begin{equation}
+  \color{#B44C1C}{mpg} = \beta_0 + \beta_1 \times \color{#B44C1C}{horsepower} + \beta_2 \times \color{#B44C1C}{horsepower^2} + \epsilon
+  (\#eq:mpg-quad)
+\end{equation}
+
+may provide a better fit.
+Equation \@ref(eq:mpg-quad) involves predicting `r data_colour("mpg")` using a non-linear function of `r data_colour("horsepower")`.
+*But it is still a linear model!*
+That is, \@ref(eq:mpg-quad) is simply a multiple linear regression model with $X_1 = \color{#B44C1C}{horsepower}$ and $X_2 = \color{#B44C1C}{horsepower^2}$.
+So we can use standard linear regression software to estimate $\beta_0$, $\beta_1$, and $\beta_2$ in order to produce a non-linear fit.
+The blue curve in Figure 3.8 shows the resulting quadratic fit to the data.
+The quadratic fit appears to be substantially better than the fit obtained when just the linear term is included.
+The $R^2$ of the quadratic fit is $0.688$, compared to $0.606$ for the linear fit, and the p-value in Table 3.10 for the quadratic term is highly significant.
+
+```{r mpg-lm}
+mpg_lm = lm(mpg~horsepower+I(horsepower^2), data = Auto)
+
+reg_table(mpg_lm) %>% 
+  tab_source_note(md(str_c("<span style='color:#1188ce'>TABLE 3.10.</span>", " *For the ", data_colour("Auto"), " data set, least squares coefficient estimates associated with the regression of ", data_colour("mpg"), " onto ", data_colour("horsepower"), " and ", data_colour("horsepower^2"), ".*")))
+```
+
+
+If including $\color{#B44C1C}{horsepower^2}$ led to such a big improvement in the model, why not include $\color{#B44C1C}{horsepower^3}$, $\color{#B44C1C}{horsepower^4}$, or even $\color{#B44C1C}{horsepower^5}$?
+The green curve in Figure 3.8 displays the fit that results from including all polynomials up to fifth degree in the model \@ref(eq:mpg-quad).
+The resulting fit seems unnecessarily wiggly—that is, it is unclear that including the additional terms really has led to a better fit to the data.
+
+The approach that we have just described for extending the linear model to accommodate non-linear relationships is known as *polynomial regression*, since we have included polynomial functions of the predictors in the regression model.
+We further explore this approach and other non-linear extensions of the linear model in Chapter 7.
+
 
 ### Potential Problems
 
-#### Non-linearity of the Data
+When we fit a linear regression model to a particular data set, many problems may occur.
+Most common among these are the following:
 
-#### Correlation of Error Terms
+1. *Non linearity of the response-predictor relationships.*
+2. *Correlation of error terms.*
+3. *Non-constant variance of error terms.*
+4. *Outliers.*
+5. *High-leverage points.*
+6. *Collinearity.*
 
-#### Non-constant Variance of Error Terms
+In practice, identifying and overcoming these problems is as much an art as a science.
+Many pages in countless books have been written on this topic.
+Since the linear regression model is not our primary focus here, we will provide only a brief summary of some key points.
 
-#### Outliers
+#### 1. Non-linearity of the Data
 
-#### High Leverage Points
+The linear regression model assumes that there is a straight-line relationships between the predictors and the response.
+If the true relationship is far from linear, then virtually all conclusions that we draw from the fit are suspect.
+In addition, the prediction accuracy of the model can be significantly reduced.
 
-#### Collinearity
+*Residual plots* are a useful graphical tool for identifying non-linearity.
+Given a simple linear regression model, we can plot the residuals $e_i = y_i - \hat{y_i}$, versus the predictor $x_i$.
+In the case of a multiple linear regression model, since there are multiple predictors, we instead plot the residuals versus the predicted (or *fitted*) values $\hat{y_i}$.
+Ideally, the residual plot will show no discernible pattern.
+The presence of a pattern may indicate a problem with some aspect of the linear model.
+
+```{r auto-res-plot, fig.align = "center", fig.cap=str_c("*Plots of residuals versus predicted (or fitted) values for the ", data_colour("Auto"), " data set. In each plot, the red line is a smooth fit to the residuals, intended to make it easier to identify a trend.* Left: *A linear regression of ", data_colour("mpg"), " on ", data_colour("horsepower"), ". A strong pattern in the residuals indicates non-linearity in the data.* Right: *A linear regression of ", data_colour("mpg"), " on ", data_colour("horsepower"), " and ", data_colour("horsepower^2"), ". There is little pattern in the residuals.*"), fig.width= 12, fig.asp = 9/21}
+# fit simple linear model
+mpg_lm_simple = lm(mpg~horsepower, data = Auto)
+
+# make dataframe of residuals and fitted values for simple linear model
+linear_fit = tibble(Residuals = mpg_lm_simple$residuals,
+                    fitted = mpg_lm_simple$fitted.values,
+                    fit_type = "Residual Plot for Linear Fit")
+
+# make dataframe of residuals and fitted values for multiple linear model w/quadratic predictor
+quad_fit = tibble(Residuals = mpg_lm$residuals,
+                    fitted = mpg_lm$fitted.values,
+                    fit_type = "Residual Plot for Quadratic Fit")
+
+# assign consistent plot elements
+res_zeroline = geom_hline(yintercept = 0, colour = "grey50")
+mpg_x_axis = scale_x_continuous(name = "Fitted values", 
+                                breaks = scales::pretty_breaks(n = 6))
+mpg_y_axis = scale_y_continuous(breaks = scales::pretty_breaks(n = 7))
+
+# plot linear fit
+linear_plot = linear_fit %>% 
+  ggplot(., aes(x = fitted, y = Residuals))+
+  geom_point(shape = 1, colour = "grey30")+
+  geom_smooth(se = F, , colour = "red")+
+  res_zeroline+
+  mpg_x_axis+
+  mpg_y_axis+
+  labs(subtitle = unique(linear_fit$fit_type))+
+  theme_islr()+
+  theme(plot.subtitle = element_text(hjust = .5))
+
+# plot quad fit
+quad_plot = quad_fit %>% 
+  ggplot(., aes(x = fitted, y = Residuals))+
+  geom_point(shape = 1, colour = "grey30")+
+  geom_smooth(se = F, , colour = "red")+
+  res_zeroline+
+  mpg_x_axis+
+  mpg_y_axis+
+  labs(subtitle = unique(quad_fit$fit_type))+
+  theme_islr()+
+  theme(plot.subtitle = element_text(hjust = .5))
+
+# add the plots together
+linear_plot + quad_plot
+```
+
+The left panel of Figure 3.9 displays a residual plot from the linear regression of `r data_colour("mpg")` onto `r data_colour("horsepower")` on the `r data_colour("Auto")` data set that was illustrated in Figure 3.8.
+The red line is a smooth fit to the residuals, which is displayed in order to make it easier to identify any trends.
+The residuals exhibit a clear U-shape, which provides a strong indication of non-linearity in the data.
+In contract, the right-hand panel of Figure 3.9 displays the residual plot that results from the model \@ref(eq:mpg-quad), which contains a quadratic term.
+There appears to be little pattern in the residuals, suggesting that the quadratic term improves the fit to the data.
+
+If the residual plot indicates that there are non-linear associations in the data, then a simple approach is to use non-linear transformations of the predictors, such as log $X$, $\sqrt{X}$, and $X^2$, in the regression model.
+In the later chapters of this book, we will discuss other more advanced non-linear approaches for addressing this issue.
+
+#### 2. Correlation of Error Terms
+
+An important assumption of the linear regression model is that the error terms $\epsilon_1, \epsilon_2, ..., \epsilon_n$, are uncorrelated.
+What does this mean?
+For instance, if the errors are uncorrelated, then the fact that $\epsilon_i$ is positive provides little or no information abou the sign of $\epsilon_{i+1}$.
+The standard errors that are computed for the estimated regression coefficients or the fitted values are based on the assumption of uncorrelated error terms.
+If in fact there is correlation among the error terms, then the estimated standard errors will tend to underestimate the true standard errors.
+As a result, confidence and prediction intervals will be narrower than they should be.
+For example, a $95\%$ confidence interval may in reality have a much lower probability than $0.95$ of containing the true value of the parameter.
+In addition, p-values associated with the model will be lower than they should be: this could cause us to erroneously conclude that a parameter is statistically significant. 
+In short, if the error terms are correlated, we may have an unwarranted sense of confidence in our model.
+
+As an extreme example, suppose we accidentally doubled our data, leading to observations and error terms identical in pairs.
+If we ignored this, our standard error calculations would be as if we had a sample size of $2n$, when in fact we only have $n$ samples. 
+Our estimated parameters would be the same for $2n$ samples as for the $n$ samples, but the confidence intervals would be narrower by a factor of $\sqrt{2}$!
+
+Why might correlations among the error terms occur?
+Such correlations frequently occur in the context of *time series* data, which consists of observations for which measurements are obtained at discrete points in time.
+In many cases, observations that are obtained at adjacent time points will have positively correlated errors.
+In order to determine if this is the case for a given data set, we can plot the residuals from our model as a function of time.
+If the errors are uncorrelated, then there should be no discernible pattern.
+On the other hand, if the error terms are positively correlated, then we may see *tracking* in the residuals—that is, adjacent residuals may have similar values.
+Figure 3.10 provides an illustration.
+In the top panel, we see the residuals from a linear regression fit to data generated with uncorrelated errors.
+There is no evidence of a time-related trend in the residuals.
+In contrast, the residuals in the bottom panel are from a data set in which adjacent errors had a correlation of $0.9$.
+Now there is a clear pattern in the residuals—adjacent residuals tend to take on similar values.
+Finally, the center panel illustrates a more moerate case in which the residuals had a correlation of $0.5$.
+There is still evidence of tracking, but the pattern is less clear.
+
+Many methods have been developed to properly take account of correlations in the error terms in time series data.
+Correlation among the error terms can also occur outside of time series data.
+For instance, consider a study in which individuals' heights are predicted from their weights. 
+The assumption of uncorrelated errors could be violated if some of the individuals in the study are members of the same family, or eat the same diet, or have been exposed to the same environmental factors.
+In general, the assumption of uncorrelated errors is extremely important for linear regression as well as for other statistical methods, and good experimental design is crucial in order to mitigate the risk of such correlations.
+
+FIGURE 3.10
+
+#### 3. Non-constant Variance of Error Terms
+
+Another important assumption of the linear regression model is that the error terms have a constant variance, $Var(\epsilon_i) = \sigma^2$.
+The standard errors, confidence intervals, and hypothesis tests associated with the linear model rely upon this assumption.
+
+Unfortunately, it is often the case that the variances of the error terms are non-constant.
+For instance, the variances of the error terms may increase with the value of the response.
+One can identify non-constant variances in the errors, or *heteroscedasticity*, from the presence of a *funnel shape* in the residuals plot.
+An example is shown in the left-hand panel of Figure 3.11, in which the magnitude of the residuals tends to increase with the fitted values.
+When faced with this problem, one possible solution is to transform the response $Y$ using a concave function such as log $Y$ or $\sqrt{Y}$.
+Such a transformation results in a greater amount of shrinkage of the larger responses, leading to a reduction in heteroscedasticity.
+The right-hand panel of Figure 3.11 displays the residual plot after transforming the response using log $Y$.
+The residuals now appear to have constant variance, though there is some evidence of a slight non-linear relationship in the data.
+
+FIGURE 3.11
+
+Sometimes we have a good idea of the variance of each response.
+For example, the *i*th response could be an average of $n_i$ raw observations.
+If each of these raw observations is uncorrelated with variance $\sigma^2$ then our average has variance $\sigma_i^2 = \sigma^2/n_i$.
+In this case a simple remedy is to fit our model by *weighted least squares*, with weights proportional to the inverse variances—i.e. $w_i = n_i$ in this case.
+Most linear regression software allows for observation weights.
+
+#### 4. Outliers
+
+An *outlier* is a point for which $y_i$ is far from the value predicted by the model.
+Outliers can arise for a variety of reasons, such as incorrect recording of an observation during data collection.
+
+The red point (observation 20) in the left-hand panel of Figure 3.12 illustrates a typical outlier.
+The red solid line is the least squares regression fit, while the blue dashed line is the least squares fit after removal of the outlier.
+In this case, removing the outlier has little effect on the least squares line: it leads to almost no change in the slope, and a miniscule reduction in the intercept.
+It is typical for an outlier that does not have an unusual predictor value to have little effect on the least squares fit.
+However, even if an outlier does not have much effect on the least squares fit, it can cause other problems. 
+For instance, in this example, the RSE is $1.09$ when the outlier is included in the regression, but it is only $0.77$ when the outlier is removed.
+Since the RSE is used to compute confidence intervals and p-values, such a dramatic increase caused by a single data point can have implications for the interpretation of the fit.
+Similarly, inclusion of the outlier causes the $R^2$ to decline from $0.892$ to $0.805$.
+
+FIGURE 3.12
+
+Residual plots can be used to identify outliers.
+In this example, the outlier is clearly visible in the residual plot illustrated in the center panel of Figure 3.12.
+But in practice, it can be difficult to decide how large a residual needs to be before we consider the point to be an outlier.
+To address this problem, instead of plotting the residuals, we can plot the *studentized residuals*, computed by dividing each residual $e_i$ by its estimated standard error.
+Observations whose studentized residuals are greater than 3 in absolute value are possible outliers.
+In the right-hand panel of Figure 3.12, the outlier's studentized residual exceeds 6, while all other observations have studentized residuals between $-2$ and $2$.
+
+If we believe that an outlier has occurred due to an error in data collection or recording, then one solution is to simply remove the observation.
+However, care should be taken, since an outlier may instead indicate a deficiency with the model, such as a missing predictor.
+
+#### 5. High Leverage Points
+
+We just saw that outliers are observations for which response $y_i$ is unusual given the predictor $x_i$.
+In contrast, observations with *high leverage* have an unusual value for $x_i$.
+For example, observation 41 in the left-hand panel of Figure 3.13 has high leverage, in that the predictor value for this observation is large relative to the other observations.
+(Note that the data displayed in Figure 3.13 are the same as the data in Figure 3.12, but with the addition of a single high leverage observation.)
+
+FIGURE 3.13
+
+The red solid line is the least squares fit to the data, while the blue dashed line is the fit produced when observation 41 is removed.
+Comparing the left-hand panels of Figures 3.12 and 3.13, we observe that removing the high leverage observation has a much more substantial impact on the least squares line than removing the outlier.
+In fact, high leverage observations tend to have a sizable impact on the estimated regression line.
+It is cause for concern if the least squares line is heavily affected by just a couple of observations, because any problems with these points may invalidate the entire fit.
+For this reason, it is important to identify high leverage observations.
+
+In a simple linear regression, high leverage observations are fairly easy to identify, since we can simply look for observations for which the predictor value is outside of the normal range of the observations.
+But in a multiple linear regression with many predictors, it is possible to have an observation that is well within the range of each individual predictor's values, but that is unusual in terms of the full set of predictors.
+An example is shown in the center panel of Figure 3.13, for a data set with two predictors, $X_1$ and $X_2$.
+Most of the observations' predictor values fall within the blue dashed ellipse, but the red observation is well outside of this range.
+But neither its value for $X_1$ nor its value for $X_2$ is unusual.
+So if we examine just $X_1$ or just $X_2$, we will fail to notice this high leverage point.
+This problem is more pronounced in multiple regression settings with more than two predictors, because then there is no simple way to plot all dimensions of the data simultaneously.
+
+In order to quantify an observation's leverage, we compute the *leverage statistic*.
+A large value of this statistic indicates an observation with high leverage.
+For a simple linear regression
+
+\begin{equation}
+h_i = \frac{1}{n} + \frac{(x_i - \bar{x})^2}{\sum_{i' = 1}^n{(x_{i'} - \bar{x})^2}} .
+(\#eq:leverage-stat)
+\end{equation}
+
+It is clear from this equation that $h_i$ increases with the distance of $x_i$ from $\bar{x}$.
+There is a simple extension of $h_i$ to the case of multiple predictors, though we do not provide the formula here.
+The leverage statistic $h_i$ is always between $1/n$ and 1, and the average leverage for all the observations is always equal to $(p+1) / n$.
+So if a given observation has a leverage statistic that greatly exceeds $(p + 1) / n$, then we may suspect that the corresponding point has high leverage.
+
+
+```{r  collinearity-plot, fig.align = "center", fig.cap=str_c("*Scatterplots of the observations from the ", data_colour("Credit"), " data set.* Left: *A plot of ", data_colour("age"), " versus ", data_colour("limit"), ". These two variables are not collinear.* Right: *A plot of ", data_colour("rating"), " versus ", data_colour("limit"), ". There is high collinearity.*"), fig.width= 12, fig.asp = 9/21}
+coll_x_axis = scale_x_continuous(breaks = scales::pretty_breaks(6))
+
+(ggplot(credit, aes(x = Limit, y = Age))+
+  geom_point(shape = 1, colour = "red")+
+  coll_x_axis+
+  theme_islr())+
+  (ggplot(credit, aes(x = Limit, y = Rating))+
+    geom_point(shape = 1, colour = "red")+
+    coll_x_axis+
+    theme_islr())
+```
+
+
+The right-hand panel of Figure 3.13 provides a plot of the studentized residuals versus $h_i$ for the data in the left-hand panel of Figure 3.13.
+Observation 41 stands out as having a very high leverage statistic as well as a high studentized residual.
+In other words, it is an outlier as well as a high leverage observation.
+This is a particularly dangerous combination!
+This plot also reveals the reason that observation 20 had relatively little effect on the least squares fit in Figure 3.12: it has low leverage.
+
+#### 6. Collinearity
+
+*Collinearity* refers to the situation in which two or more predictor variables are closely related to one another.
+The concept of collinearity is illustrated in Figure 3.14 using the `r data_colour("Credit")` data set.
+In the left-hand panel of Figure 3.14, the two predictors `r data_colour("limit")` and `r data_colour("age")` appear to have no obvious relationship.
+In contrast, in the right-hand panel of Figure 3.14, the predictors `r data_colour("limit")` and `r data_colour("rating")` are very highly correlated with each other, and we say that they are *collinear*.
+The presence of collinearity can pose problems in the regression context, since it can be difficult to separate out the individual effects of collinear variables on the response.
+In other words, since `r data_colour("limit")` and `r data_colour("rating")` tend to increase or decrease together, it can be difficult to determine how each one separately is associated with the response, `r data_colour("balance")`.
+Figure 3.15 illustrates some of the difficulties that can result from the collinearity.
+The left-hand panel of Figure 3.15 is a contour plot of the RSS \@ref(eq:rss) associated with different possible coefficient estimates for the regression of `r data_colour("balance")` on `r data_colour("limit")` and `r data_colour("age")`.
+Each ellipse represents a set of coefficients that correspond to the same RSS, with ellipses nearest to the center taking on the lowest values of RSS.
+The black dots and associated dashed lines represent the coefficient estimates that result in the smallest possible RSS—in other words, these are the least squares estimates.
+The axes for `r data_colour("limit")` and `r data_colour("age")` have been scaled so that the plot includes possible coefficient estimates that are up to four standard errors on either side of the least squares estimates.
+Thus the plot includes all plausible values for the coefficients.
+For example, we see that the true `r data_colour("limit")` coefficient is almost certainly somewhere between $0.15$ and $0.20$.
+
+FIGURE 3.15
+
+In contrast, the right-hand panel of Figure 3.15 displays contour plots of the RSS associated with possible coefficient estimates for the regression of `r data_colour("balance")` onto `r data_colour("limit")` and `r data_colour("rating")`, which we know to highly collinear.
+Now the contours run along a narrow valley; there is a broad range of values for the coefficient estimates that result in equal values for RSS.
+Hence a small change in the data could cause the pair of coefficient values that yield the smallest RSS—that is, the least squares estimates—to move anywhere along this valley.
+This results in a great deal of uncertainty in the coefficient estimates.
+Notice that the scale for the `r data_colour("limit")` coefficient now runs from roughly $-0.2$ to $0.2$; this is an eight-fold increase over the plausible range of the `r data_colour("limit")` coefficient in the regression with `r data_colour("age")`.
+Interestingly, even though the `r data_colour("limit")` and `r data_colour("rating")` coefficients now have much more individual uncertainty, they will almost certainly lie somewhere in this contour valley.
+For example, we would not expect the true value of the `r data_colour("limit")` and `r data_colour("rating")` coefficients to be $-0.1$ and $1$ respectively, even though such a value is plausible for each coefficient individually.
+
+TABLE 3.11
+
+Since collinearity reduces the accuracy of the estimates of the regression coefficients, it causes the standard error for $\hat{\beta_j}$ to grow.
+Recall that the *t-statistic* for each predictor is calculated by dividing $\hat{\beta_j}$ by its standard error.
+Consequently, collinearity results in a decline in the *t*-statistic.
+As a result, in the presence of collinearity, we may fail to reject $H_0 : \beta_j = 0$.
+This means that the *power* of the hypothesis test—the probability of correctly detecting a *non-zero* coefficient—is reduced by collinearity.
+Table 3.11 compares the coefficient estimates obtained from the two separate multiple regression models.
+The first is a regression of `r data_colour("balance")` on `r data_colour("age")` and `r data_colour("limit")` and the second is a regression of `r data_colour("balance")` on `r data_colour("rating")` and `r data_colour("limit")`. 
+In the first regression both `r data_colour("age")` and `r data_colour("limit")` are highly significant with very small p-values.
+In the second, the collinearity between `r data_colour("limit")` and `r data_colour("rating")` has caused the standard error for the `r data_colour("limit")` coefficient estimate to increase by a factor of 12 and the p-value to increase to $0.701$.
+In other words, the importance of the `r data_colour("limit")` variable has been masked due to the presence of collinearity.
+To avoid such a situation, it is desirable to identify and address potential collinearity problems while fitting the model.
+
+A simple way to detect collinearity is to look at a correlation matrix of the predictors.
+An element of this matrix that is large in absolute value indicates a pair of highly correlated variables, and therefore a collinearity problem in the data.
+Unfortunately, not all collinearity problems can be detected by inspection of the correlation matrix: it is possible for collinearity to exist between three or more variables even if no pair of variables has a particularly high correlation.
+We call this situation *multicollinearity*.
+Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the *variance inflation factor* (VIF).
+The VIF is the ratio of the variance of $\hat{\beta_j}$ when fitting the full model divided by the variance of $\hat{\beta_j}$ if fit on its own.
+The smallest possible value for the VIF is 1, which indicates the complete absence of collinearity.
+Typically in practice there is a small amount of collinearity among the predictors.
+As a rule of thumb, a VIF value that exceeds 5 or 10 indicates a problematic amount of collinearity.
+The VIF for each variable can be computed using the formula
+
+$$
+VIF(\hat{\beta_j}) = \frac{1}{1 - R_{X_j|X_{-j}}^2} .
+$$
+where $R_{X_j|X_{-j}}^2$ is the $R^2$ from a regression of $X_j$ onto all of the other predictors.
+If $R_{X_j|X_{-j}}^2$ is close to one, then collinearity is present, and so the VIF will be large.
+
+In the `r data_colour("Credit")` data, a regression of `r data_colour("balance")` on `r data_colour("age")`, `r data_colour("rating")`, and `r data_colour("limit")` indicates that the predictors have VIF values of $1.01$, $160.67$, and $160.59$.
+As we suspected, there is considerable collinearity in the data!
+
+When faced with the problem of collinearity, there are two simple solutions. 
+The first is to drop one of the problematic variables from the regression.
+This can usually be done without much compromise to the regression fit, since the presence of collinearity implies that the information that this variable provides about the response is redundant in the presence of other variables.
+For instance, if we regress `r data_colour("balance")` onto `r data_colour("age")` and `r data_colour("limit")`, without the `r data_colour("rating")` predictor, then the resulting VIF values are close to the minimum possible value of 1, and the $R^2$ drops from $0.754$ to $0.75$.
+So dropping `r data_colour("rating")` from the set of predictors has effectively solved the collinearity problem without compromising the fit.
+The second solution is to combine the collinear variables together into a single predictor.
+For instance, we might take the average of the standardized versions of `r data_colour("limit")` and `r data_colour("rating")` in order to create a new variable that measures *credit worthiness*.
+
 
 ## The Marketing Plan
 
