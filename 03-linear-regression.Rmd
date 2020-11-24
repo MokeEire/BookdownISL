@@ -156,6 +156,8 @@ In **Figure 3.2**, we have computed RSS for a number of values of $\beta_0$ and 
 In each plot, the red dot represents the pair of least squares estimates $(\hat{\beta_0}, \hat{\beta_1})$ given by \@ref(eq:rssmin). 
 These values clearly minimize the RSS.
 
+[FIGURE 3.2 HERE]
+
 
 
 ### Assessing the Accuracy of the Coefficient Estimates {#assess-coef-acc}
