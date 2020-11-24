@@ -478,6 +478,14 @@ However, while the `r data_colour("newspaper")` regression coefficient estimate 
 
 {Table 3.4 goes here}
 
+```{r table3-4, fig.align = "center", fig.width= 12, fig.asp = 9/16}
+advertising_mlin_reg = lm(sales~TV+radio+newspaper, data = advertising)
+
+reg_table(advertising_mlin_reg) %>% 
+  tab_source_note(md(str_c("<span style='color:#1188ce'>TABLE 3.4.</span> ", "*For the ", data_colour("Advertising"), " data, least squares coefficient estimates of the multiple linear regression of number of units sold on radio, TV, and newspaper advertising budgets.*")))
+```
+
+
 This illustrates that the simple and multiple regression coefficients can be quite different.
 This difference stems from the fact that in the simple regression case, the slope term represents the average effect of a \$1,000 increase in newspaper advertising, ignoring other predictors such as `r data_colour("TV")` and `r data_colour("radio")`.
 In contrast, in the multiple regression setting, the coefficient for `r data_colour("newspaper")` represents the average effect of increasing newspaper spending by \$1,000 while holding `r data_colour("TV")` and `r data_colour("radio")` fixed.
