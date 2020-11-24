@@ -920,12 +920,12 @@ For example, the <strong><span style="font-family:monospace; color: #B44C1C;">Cr
 Each panel of Figure 3.6 is a scatterplot for a pair of variables whose identities are given by the corresponding row and column labels.
 For example, the scatterplot directly to the right of the word “Balance” depicts <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> versus <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong>, while the plot directly to the right of “Age” corresponds to <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong> versus <strong><span style="font-family:monospace; color: #B44C1C;">cards</span></strong>.
 In addition to these quantitative variables, we also have four qualitative variables: <strong><span style="font-family:monospace; color: #B44C1C;">gender</span></strong>, <strong><span style="font-family:monospace; color: #B44C1C;">student</span></strong> (student status), <strong><span style="font-family:monospace; color: #B44C1C;">status</span></strong> (marital status), and <strong><span style="font-family:monospace; color: #B44C1C;">ethnicity</span></strong> (Caucasian, African American or Asian).</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="other-reg-cons.html#cb4-1"></a><span class="kw">ggpairs</span>(<span class="kw">select</span>(credit, Balance, Age, Cards, Education, Income, Limit, Rating), </span>
-<span id="cb4-2"><a href="other-reg-cons.html#cb4-2"></a>        <span class="dt">upper =</span> <span class="kw">list</span>(<span class="dt">continuous =</span> <span class="kw">wrap</span>(<span class="st">&quot;points&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)), </span>
-<span id="cb4-3"><a href="other-reg-cons.html#cb4-3"></a>        <span class="dt">lower =</span> <span class="kw">list</span>(<span class="dt">continuous =</span> <span class="kw">wrap</span>(<span class="st">&quot;points&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)), </span>
-<span id="cb4-4"><a href="other-reg-cons.html#cb4-4"></a>        <span class="dt">diag =</span> <span class="st">&quot;blank&quot;</span>, </span>
-<span id="cb4-5"><a href="other-reg-cons.html#cb4-5"></a>        <span class="dt">axisLabels =</span> <span class="st">&quot;show&quot;</span>, <span class="dt">switch =</span> <span class="st">&quot;y&quot;</span>)<span class="op">+</span></span>
-<span id="cb4-6"><a href="other-reg-cons.html#cb4-6"></a><span class="st">  </span><span class="kw">theme_islr</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="other-reg-cons.html#cb3-1"></a><span class="kw">ggpairs</span>(<span class="kw">select</span>(credit, Balance, Age, Cards, Education, Income, Limit, Rating), </span>
+<span id="cb3-2"><a href="other-reg-cons.html#cb3-2"></a>        <span class="dt">upper =</span> <span class="kw">list</span>(<span class="dt">continuous =</span> <span class="kw">wrap</span>(<span class="st">&quot;points&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)), </span>
+<span id="cb3-3"><a href="other-reg-cons.html#cb3-3"></a>        <span class="dt">lower =</span> <span class="kw">list</span>(<span class="dt">continuous =</span> <span class="kw">wrap</span>(<span class="st">&quot;points&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)), </span>
+<span id="cb3-4"><a href="other-reg-cons.html#cb3-4"></a>        <span class="dt">diag =</span> <span class="st">&quot;blank&quot;</span>, </span>
+<span id="cb3-5"><a href="other-reg-cons.html#cb3-5"></a>        <span class="dt">axisLabels =</span> <span class="st">&quot;show&quot;</span>, <span class="dt">switch =</span> <span class="st">&quot;y&quot;</span>)<span class="op">+</span></span>
+<span id="cb3-6"><a href="other-reg-cons.html#cb3-6"></a><span class="st">  </span><span class="kw">theme_islr</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:credit-overview"></span>
 <img src="BookdownISL_files/figure-html/credit-overview-1.png" alt="*The &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;Credit&lt;/span&gt;&lt;/strong&gt; data set contains information about  &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;balance&lt;/span&gt;&lt;/strong&gt; ,  &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;age&lt;/span&gt;&lt;/strong&gt; ,  &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;cards&lt;/span&gt;&lt;/strong&gt; ,  &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;education&lt;/span&gt;&lt;/strong&gt; ,  &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;income&lt;/span&gt;&lt;/strong&gt; ,  &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;limit&lt;/span&gt;&lt;/strong&gt; , and  &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;rating&lt;/span&gt;&lt;/strong&gt;  for a number of potential customers.*" width="1152" />
 <p class="caption">
@@ -936,8 +936,8 @@ FIGURE 3.2: <em>The <strong><span style="font-family:monospace; color: #B44C1C;"
 <div id="predictors-with-only-two-levels" class="section level4">
 <h4><span class="header-section-number">3.3.1.1</span> Predictors with Only Two Levels</h4>
 <p>Suppose that we wish to investigate differences in credit card balance between males and females, ignoring the other variables for the moment.
-If a qualitative predictor (also known as a <em>factor</em>) only has two <em>levels</em>, or possible values, then incorporating it into a regression model is very simple.
-We simply create an indicator or <em>dummy variable</em> that takes on two possible numerical values.
+If a qualitative predictor (also known as a <strong><span style="font-family:monospace; color: #1188ce;">factor</span></strong>) only has two <strong><span style="font-family:monospace; color: #1188ce;">levels</span></strong>, or possible values, then incorporating it into a regression model is very simple.
+We simply create an indicator or <strong><span style="font-family:monospace; color: #1188ce;">dummy variable</span></strong> that takes on two possible numerical values.
 For example, based on the <strong><span style="font-family:monospace; color: #B44C1C;">gender</span></strong> variable, we can create a new variable that takes the form</p>
 <p><span class="math display" id="eq:dummy-gender">\[\begin{equation}
   x_i =  \begin{cases}
@@ -1014,7 +1014,7 @@ For example, for the <strong><span style="font-family:monospace; color: #B44C1C;
 \end{equation}\]</span></p>
 <p>Now <span class="math inline">\(\beta_0\)</span> can be interpreted as the average credit card balance for African Americans, <span class="math inline">\(\beta_1\)</span> can be interpreted as the difference in average balance between the Asian and African American categories, and <span class="math inline">\(\beta_2\)</span> can be interpreted as the difference in the average balance between the Caucasian and African American categories.
 There will always be one fewer dummy variables than the number of levels.
-The level with no dummy variable — African American in this example — is known as the <em>baseline</em>.</p>
+The level with no dummy variable — African American in this example — is known as the <strong><span style="font-family:monospace; color: #1188ce;">baseline</span></strong>.</p>
 <p><strong>TABLE 3.8</strong></p>
 <p>From Table 3.8, we see that the estimated <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> for the baseline, African American is <span class="math inline">\(\$531.00\)</span>.
 It is estimated that the Asian category will have <span class="math inline">\(\$18.69\)</span> less debt than the African American category, and that the Caucasian category will have <span class="math inline">\(\$12.50\)</span> less debt than the African American category.
@@ -1026,7 +1026,7 @@ This F-test has a p-value of <span class="math inline">\(0.96\)</span>, indicati
 <p>Using this dummy variable approach presents no difficulties when using both quantitative and qualitative predictors.
 For example, to regress <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> on both a quantitative variable such as <strong><span style="font-family:monospace; color: #B44C1C;">income</span></strong> and a qualitative variable such as <strong><span style="font-family:monospace; color: #B44C1C;">student</span></strong>, we must simply create a dummy variable for <strong><span style="font-family:monospace; color: #B44C1C;">student</span></strong> and then fit a multiple regression model using <strong><span style="font-family:monospace; color: #B44C1C;">income</span></strong> and the dummy variable as predictors for credit card balance.</p>
 <p>There are many different ways of coding qualitative variables besides the dummy variable approach taken here.
-All of these approaches lead to equivalent model fits, but the coefficients are different and have different interpretations, and are designed to measure particular <em>contrasts</em>.
+All of these approaches lead to equivalent model fits, but the coefficients are different and have different interpretations, and are designed to measure particular <strong><span style="font-family:monospace; color: #1188ce;">contrasts</span></strong>.
 This topic is beyond the scope of the book, and so we will not pursue it further.</p>
 </div>
 </div>
@@ -1034,7 +1034,7 @@ This topic is beyond the scope of the book, and so we will not pursue it further
 <h3><span class="header-section-number">3.3.2</span> Extensions of the Linear Model</h3>
 <p>The standard linear regression model <a href="mult-lin-reg.html#eq:mlin-reg">(3.19)</a> provides interpretable results and works quite well on many real-world problems.
 However, it makes several highly restrictive assumptions that are often violated in practice.
-Two of the most important assumptions state that the relationship between the predictors and response are <em>additive</em> and <em>linear.</em>
+Two of the most important assumptions state that the relationship between the predictors and response are <strong><span style="font-family:monospace; color: #1188ce;">additive</span></strong> and <strong><span style="font-family:monospace; color: #1188ce;">linear</span></strong>.
 The additive assumption means that the effect of changes in a predictor <span class="math inline">\(X_j\)</span> on the response <span class="math inline">\(Y\)</span> is independent of the values of the other predictors.
 The linear assumption states that the change in the response <span class="math inline">\(Y\)</span> due to a one-unit change in <span class="math inline">\(X_j\)</span> is constant, regardless of the value of <span class="math inline">\(X_j\)</span>.
 In this book, we examine a number of sophisticated methods that relax these two assumptions.
@@ -1062,16 +1062,16 @@ One way of extending this model to allow for interaction effects is to include a
 \end{equation}\]</span></p>
 <p>How does inclusion of this interaction term relax the additive assumption?
 Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be rewritten as</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="other-reg-cons.html#cb5-1"></a>interaction_model =<span class="st"> </span><span class="kw">lm</span>(sales <span class="op">~</span><span class="st"> </span>TV<span class="op">+</span>radio<span class="op">+</span>TV<span class="op">*</span>radio, </span>
-<span id="cb5-2"><a href="other-reg-cons.html#cb5-2"></a>                       <span class="dt">data =</span> advertising)</span>
-<span id="cb5-3"><a href="other-reg-cons.html#cb5-3"></a></span>
-<span id="cb5-4"><a href="other-reg-cons.html#cb5-4"></a><span class="kw">reg_table</span>(interaction_model) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb5-5"><a href="other-reg-cons.html#cb5-5"></a><span class="st">  </span><span class="kw">tab_source_note</span>(<span class="kw">md</span>(<span class="kw">str_c</span>(<span class="st">&quot;&lt;span style=&#39;color:#1188ce&#39;&gt;TABLE 3.9.&lt;/span&gt;&quot;</span>, <span class="st">&quot;*For the &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;Advertising&quot;</span>), <span class="st">&quot; data, least squares coefficient estimates associated with the regression of &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;sales&quot;</span>), <span class="st">&quot; onto &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;TV&quot;</span>), <span class="st">&quot; and &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;radio&quot;</span>), <span class="st">&quot;, with an interaction term, as in (3.33)*&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="other-reg-cons.html#cb4-1"></a>interaction_model =<span class="st"> </span><span class="kw">lm</span>(sales <span class="op">~</span><span class="st"> </span>TV<span class="op">+</span>radio<span class="op">+</span>TV<span class="op">*</span>radio, </span>
+<span id="cb4-2"><a href="other-reg-cons.html#cb4-2"></a>                       <span class="dt">data =</span> advertising)</span>
+<span id="cb4-3"><a href="other-reg-cons.html#cb4-3"></a></span>
+<span id="cb4-4"><a href="other-reg-cons.html#cb4-4"></a><span class="kw">reg_table</span>(interaction_model) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb4-5"><a href="other-reg-cons.html#cb4-5"></a><span class="st">  </span><span class="kw">tab_source_note</span>(<span class="kw">md</span>(<span class="kw">str_c</span>(<span class="st">&quot;&lt;span style=&#39;color:#1188ce&#39;&gt;TABLE 3.9.&lt;/span&gt;&quot;</span>, <span class="st">&quot;*For the &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;Advertising&quot;</span>), <span class="st">&quot; data, least squares coefficient estimates associated with the regression of &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;sales&quot;</span>), <span class="st">&quot; onto &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;TV&quot;</span>), <span class="st">&quot; and &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;radio&quot;</span>), <span class="st">&quot;, with an interaction term, as in (3.33)*&quot;</span>)))</span></code></pre></div>
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#kyvykbtztg .gt_table {
+#ngltfddybu .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1096,7 +1096,7 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   border-left-color: #D3D3D3;
 }
 
-#kyvykbtztg .gt_heading {
+#ngltfddybu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1108,7 +1108,7 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   border-right-color: #D3D3D3;
 }
 
-#kyvykbtztg .gt_title {
+#ngltfddybu .gt_title {
   color: black;
   font-size: 125%;
   font-weight: initial;
@@ -1118,7 +1118,7 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   border-bottom-width: 0;
 }
 
-#kyvykbtztg .gt_subtitle {
+#ngltfddybu .gt_subtitle {
   color: black;
   font-size: 85%;
   font-weight: initial;
@@ -1128,13 +1128,13 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   border-top-width: 0;
 }
 
-#kyvykbtztg .gt_bottom_border {
+#ngltfddybu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kyvykbtztg .gt_col_headings {
+#ngltfddybu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: black;
@@ -1149,7 +1149,7 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   border-right-color: #D3D3D3;
 }
 
-#kyvykbtztg .gt_col_heading {
+#ngltfddybu .gt_col_heading {
   color: black;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1169,7 +1169,7 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   overflow-x: hidden;
 }
 
-#kyvykbtztg .gt_column_spanner_outer {
+#ngltfddybu .gt_column_spanner_outer {
   color: black;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1181,15 +1181,15 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   padding-right: 4px;
 }
 
-#kyvykbtztg .gt_column_spanner_outer:first-child {
+#ngltfddybu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kyvykbtztg .gt_column_spanner_outer:last-child {
+#ngltfddybu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kyvykbtztg .gt_column_spanner {
+#ngltfddybu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -1201,7 +1201,7 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   width: 100%;
 }
 
-#kyvykbtztg .gt_group_heading {
+#ngltfddybu .gt_group_heading {
   padding: 8px;
   color: black;
   background-color: #FFFFFF;
@@ -1223,7 +1223,7 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   vertical-align: middle;
 }
 
-#kyvykbtztg .gt_empty_group_heading {
+#ngltfddybu .gt_empty_group_heading {
   padding: 0.5px;
   color: black;
   background-color: #FFFFFF;
@@ -1238,15 +1238,15 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   vertical-align: middle;
 }
 
-#kyvykbtztg .gt_from_md > :first-child {
+#ngltfddybu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kyvykbtztg .gt_from_md > :last-child {
+#ngltfddybu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kyvykbtztg .gt_row {
+#ngltfddybu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1265,7 +1265,7 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   overflow-x: hidden;
 }
 
-#kyvykbtztg .gt_stub {
+#ngltfddybu .gt_stub {
   color: black;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1277,7 +1277,7 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   padding-left: 12px;
 }
 
-#kyvykbtztg .gt_summary_row {
+#ngltfddybu .gt_summary_row {
   color: black;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1287,7 +1287,7 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   padding-right: 5px;
 }
 
-#kyvykbtztg .gt_first_summary_row {
+#ngltfddybu .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1297,7 +1297,7 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   border-top-color: #D3D3D3;
 }
 
-#kyvykbtztg .gt_grand_summary_row {
+#ngltfddybu .gt_grand_summary_row {
   color: black;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1307,7 +1307,7 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   padding-right: 5px;
 }
 
-#kyvykbtztg .gt_first_grand_summary_row {
+#ngltfddybu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1317,11 +1317,11 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   border-top-color: #D3D3D3;
 }
 
-#kyvykbtztg .gt_striped {
+#ngltfddybu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kyvykbtztg .gt_table_body {
+#ngltfddybu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1330,7 +1330,7 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   border-bottom-color: black;
 }
 
-#kyvykbtztg .gt_footnotes {
+#ngltfddybu .gt_footnotes {
   color: black;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1344,13 +1344,13 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   border-right-color: #D3D3D3;
 }
 
-#kyvykbtztg .gt_footnote {
+#ngltfddybu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#kyvykbtztg .gt_sourcenotes {
+#ngltfddybu .gt_sourcenotes {
   color: black;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1364,46 +1364,46 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
   border-right-color: #D3D3D3;
 }
 
-#kyvykbtztg .gt_sourcenote {
+#ngltfddybu .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#kyvykbtztg .gt_left {
+#ngltfddybu .gt_left {
   text-align: left;
 }
 
-#kyvykbtztg .gt_center {
+#ngltfddybu .gt_center {
   text-align: center;
 }
 
-#kyvykbtztg .gt_right {
+#ngltfddybu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kyvykbtztg .gt_font_normal {
+#ngltfddybu .gt_font_normal {
   font-weight: normal;
 }
 
-#kyvykbtztg .gt_font_bold {
+#ngltfddybu .gt_font_bold {
   font-weight: bold;
 }
 
-#kyvykbtztg .gt_font_italic {
+#ngltfddybu .gt_font_italic {
   font-style: italic;
 }
 
-#kyvykbtztg .gt_super {
+#ngltfddybu .gt_super {
   font-size: 65%;
 }
 
-#kyvykbtztg .gt_footnote_marks {
+#ngltfddybu .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="kyvykbtztg" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="ngltfddybu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -1488,7 +1488,7 @@ A linear model that uses <strong><span style="font-family:monospace; color: #B44
 \end{equation}\]</span></p>
 <p>We can interpret <span class="math inline">\(\beta_3\)</span> as the increase in effectiveness of TV advertising for a one-unit increase in radio advertising (or vice-versa).
 The coefficients that result from fitting the model <a href="other-reg-cons.html#eq:adv-interaction">(3.33)</a> are given in Table 3.9.</p>
-<p>The results in Table 3.9 strongly suggest that the model that includes the interaction term is superior to the model that contains only <em>main effects</em>.
+<p>The results in Table 3.9 strongly suggest that the model that includes the interaction term is superior to the model that contains only <strong><span style="font-family:monospace; color: #1188ce;">main effects</span></strong>.
 The p-value for the interaction term <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong><span class="math inline">\(\times\)</span><strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>, is extremely low, indicating there is strong evidence for <span class="math inline">\(H_a : \beta_3 \neq 0\)</span>.
 In other words, it is clear that the true relationship is not additive.
 The <span class="math inline">\(R^2\)</span> for the model <a href="other-reg-cons.html#eq:adv-interaction">(3.33)</a> is <span class="math inline">\(96.8\%\)</span>, compared to only <span class="math inline">\(89.7\%\)</span> for the model that predicts <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> using <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> without an interaction term.
@@ -1497,7 +1497,7 @@ The coefficient estimates in Table 3.9 suggest that an increase in TV advertisin
 And an increase in radio advertising of <span class="math inline">\(\$1,000\)</span> will be associated with an increase in sales of <span class="math inline">\((\hat{\beta_2} + \hat{\beta_3} \times \color{#B44C1C}{TV}) \times 1,000 = 29 + 1.1 \times \color{#B44C1C}{TV}\)</span> units.</p>
 <p>In this example, the p-values associated with <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong>, <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>, and the interaction term all are statistically significant (Table 3.9), and so it is obvious that all three variables should be included in the model.
 However, it is sometimes the case that an interaction term has a very small p-value, but the associated main effects (in this case, <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>) do not.
-The <em>hierarchical principle</em> states that <em>if we include an interaction in a model, we should also include the main effects, even if the p-values associated with their coefficients are not significant</em>.
+The <strong><span style="font-family:monospace; color: #1188ce;">hirearchical principle</span></strong> states that <em>if we include an interaction in a model, we should also include the main effects, even if the p-values associated with their coefficients are not significant</em>.
 In other words, if the interaction between <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> seems important, then we should include both <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> in the model even if their coefficient estimates have large p-values.
 The rationale for this principle is that if <span class="math inline">\(X_1 \times X_2\)</span> is related to the response, then whether or not the coefficients of <span class="math inline">\(X_1\)</span> or <span class="math inline">\(X_2\)</span> are exactly zero is of little interest.
 Also <span class="math inline">\(X_1 \times X_2\)</span> is typically correlated with <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, and so leaving them out tends to alter the meaning of the interaction.</p>
@@ -1547,47 +1547,47 @@ This allows for the possibility that changes in income may affect the credit car
 The right-hand panel of Figure 3.7 shows the estimated relationships between <strong><span style="font-family:monospace; color: #B44C1C;">income</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> for students and non-students in <a href="other-reg-cons.html#eq:qual-interaction">(3.35)</a>.
 We note that the slope for students is lower than the slope for non-students.
 This suggests that increases in income are associated with smaller increases in credit card balance among students as compared to non-students.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="other-reg-cons.html#cb6-1"></a><span class="co"># glimpse(Credit)</span></span>
-<span id="cb6-2"><a href="other-reg-cons.html#cb6-2"></a></span>
-<span id="cb6-3"><a href="other-reg-cons.html#cb6-3"></a><span class="co"># create multiple linear model</span></span>
-<span id="cb6-4"><a href="other-reg-cons.html#cb6-4"></a>credit_lm =<span class="st"> </span><span class="kw">lm</span>(Balance<span class="op">~</span>Income<span class="op">+</span>Student, <span class="dt">data =</span> credit)</span>
-<span id="cb6-5"><a href="other-reg-cons.html#cb6-5"></a><span class="co"># summary(credit_lm)</span></span>
-<span id="cb6-6"><a href="other-reg-cons.html#cb6-6"></a></span>
-<span id="cb6-7"><a href="other-reg-cons.html#cb6-7"></a><span class="co"># set axes and colour scale</span></span>
-<span id="cb6-8"><a href="other-reg-cons.html#cb6-8"></a>cred_x_axis =<span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">150</span>), </span>
-<span id="cb6-9"><a href="other-reg-cons.html#cb6-9"></a>                                 <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">155</span>))</span>
-<span id="cb6-10"><a href="other-reg-cons.html#cb6-10"></a>cred_y_axis =<span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Balance&quot;</span>, </span>
-<span id="cb6-11"><a href="other-reg-cons.html#cb6-11"></a>                     <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">200</span>, <span class="dv">600</span>, <span class="dv">1000</span>, <span class="dv">1400</span>), </span>
-<span id="cb6-12"><a href="other-reg-cons.html#cb6-12"></a>                     <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">200</span>, <span class="dv">1400</span>))</span>
-<span id="cb6-13"><a href="other-reg-cons.html#cb6-13"></a>cred_colour_scale =<span class="st"> </span><span class="kw">scale_colour_manual</span>(<span class="dt">name =</span> <span class="ot">NULL</span>, </span>
-<span id="cb6-14"><a href="other-reg-cons.html#cb6-14"></a>                                        <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>))</span>
-<span id="cb6-15"><a href="other-reg-cons.html#cb6-15"></a></span>
-<span id="cb6-16"><a href="other-reg-cons.html#cb6-16"></a>credit_no_interaction =<span class="st"> </span>credit <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb6-17"><a href="other-reg-cons.html#cb6-17"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">balance_pred =</span> <span class="kw">predict</span>(credit_lm, credit)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb6-18"><a href="other-reg-cons.html#cb6-18"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x =</span> Income, <span class="dt">y =</span> balance_pred, <span class="dt">colour =</span> Student))<span class="op">+</span></span>
-<span id="cb6-19"><a href="other-reg-cons.html#cb6-19"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F)<span class="op">+</span></span>
-<span id="cb6-20"><a href="other-reg-cons.html#cb6-20"></a><span class="st">  </span>cred_x_axis<span class="op">+</span></span>
-<span id="cb6-21"><a href="other-reg-cons.html#cb6-21"></a><span class="st">  </span>cred_y_axis<span class="op">+</span></span>
-<span id="cb6-22"><a href="other-reg-cons.html#cb6-22"></a><span class="st">  </span>cred_colour_scale<span class="op">+</span></span>
-<span id="cb6-23"><a href="other-reg-cons.html#cb6-23"></a><span class="st">  </span><span class="kw">theme_islr</span>()<span class="op">+</span></span>
-<span id="cb6-24"><a href="other-reg-cons.html#cb6-24"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
-<span id="cb6-25"><a href="other-reg-cons.html#cb6-25"></a></span>
-<span id="cb6-26"><a href="other-reg-cons.html#cb6-26"></a><span class="co"># create multiple linear model w/interaction</span></span>
-<span id="cb6-27"><a href="other-reg-cons.html#cb6-27"></a>credit_lm_int =<span class="st"> </span><span class="kw">lm</span>(Balance<span class="op">~</span>Income<span class="op">+</span>Student<span class="op">+</span>Income<span class="op">*</span>Student, <span class="dt">data =</span> credit)</span>
-<span id="cb6-28"><a href="other-reg-cons.html#cb6-28"></a><span class="co"># summary(credit_lm_int)</span></span>
-<span id="cb6-29"><a href="other-reg-cons.html#cb6-29"></a></span>
-<span id="cb6-30"><a href="other-reg-cons.html#cb6-30"></a>credit_interaction =<span class="st"> </span>credit <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb6-31"><a href="other-reg-cons.html#cb6-31"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">balance_pred =</span> <span class="kw">predict</span>(credit_lm_int, credit)) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb6-32"><a href="other-reg-cons.html#cb6-32"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x =</span> Income, <span class="dt">y =</span> balance_pred, <span class="dt">colour =</span> Student))<span class="op">+</span></span>
-<span id="cb6-33"><a href="other-reg-cons.html#cb6-33"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F)<span class="op">+</span></span>
-<span id="cb6-34"><a href="other-reg-cons.html#cb6-34"></a><span class="st">  </span>cred_x_axis<span class="op">+</span></span>
-<span id="cb6-35"><a href="other-reg-cons.html#cb6-35"></a><span class="st">  </span>cred_y_axis<span class="op">+</span></span>
-<span id="cb6-36"><a href="other-reg-cons.html#cb6-36"></a><span class="st">  </span>cred_colour_scale<span class="op">+</span></span>
-<span id="cb6-37"><a href="other-reg-cons.html#cb6-37"></a><span class="st">  </span><span class="kw">theme_islr</span>()<span class="op">+</span></span>
-<span id="cb6-38"><a href="other-reg-cons.html#cb6-38"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="kw">c</span>(.<span class="dv">25</span>, <span class="fl">.91</span>), <span class="dt">legend.margin =</span> <span class="kw">margin</span>())</span>
-<span id="cb6-39"><a href="other-reg-cons.html#cb6-39"></a></span>
-<span id="cb6-40"><a href="other-reg-cons.html#cb6-40"></a>credit_no_interaction <span class="op">+</span><span class="st"> </span>credit_interaction<span class="op">+</span></span>
-<span id="cb6-41"><a href="other-reg-cons.html#cb6-41"></a><span class="st">  </span><span class="kw">plot_layout</span>(<span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">widths =</span> <span class="kw">c</span>(.<span class="dv">5</span>, <span class="fl">.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="other-reg-cons.html#cb5-1"></a><span class="co"># glimpse(Credit)</span></span>
+<span id="cb5-2"><a href="other-reg-cons.html#cb5-2"></a></span>
+<span id="cb5-3"><a href="other-reg-cons.html#cb5-3"></a><span class="co"># create multiple linear model</span></span>
+<span id="cb5-4"><a href="other-reg-cons.html#cb5-4"></a>credit_lm =<span class="st"> </span><span class="kw">lm</span>(Balance<span class="op">~</span>Income<span class="op">+</span>Student, <span class="dt">data =</span> credit)</span>
+<span id="cb5-5"><a href="other-reg-cons.html#cb5-5"></a><span class="co"># summary(credit_lm)</span></span>
+<span id="cb5-6"><a href="other-reg-cons.html#cb5-6"></a></span>
+<span id="cb5-7"><a href="other-reg-cons.html#cb5-7"></a><span class="co"># set axes and colour scale</span></span>
+<span id="cb5-8"><a href="other-reg-cons.html#cb5-8"></a>cred_x_axis =<span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">150</span>), </span>
+<span id="cb5-9"><a href="other-reg-cons.html#cb5-9"></a>                                 <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">155</span>))</span>
+<span id="cb5-10"><a href="other-reg-cons.html#cb5-10"></a>cred_y_axis =<span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Balance&quot;</span>, </span>
+<span id="cb5-11"><a href="other-reg-cons.html#cb5-11"></a>                     <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">200</span>, <span class="dv">600</span>, <span class="dv">1000</span>, <span class="dv">1400</span>), </span>
+<span id="cb5-12"><a href="other-reg-cons.html#cb5-12"></a>                     <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">200</span>, <span class="dv">1400</span>))</span>
+<span id="cb5-13"><a href="other-reg-cons.html#cb5-13"></a>cred_colour_scale =<span class="st"> </span><span class="kw">scale_colour_manual</span>(<span class="dt">name =</span> <span class="ot">NULL</span>, </span>
+<span id="cb5-14"><a href="other-reg-cons.html#cb5-14"></a>                                        <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;red&quot;</span>))</span>
+<span id="cb5-15"><a href="other-reg-cons.html#cb5-15"></a></span>
+<span id="cb5-16"><a href="other-reg-cons.html#cb5-16"></a>credit_no_interaction =<span class="st"> </span>credit <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb5-17"><a href="other-reg-cons.html#cb5-17"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">balance_pred =</span> <span class="kw">predict</span>(credit_lm, credit)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb5-18"><a href="other-reg-cons.html#cb5-18"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x =</span> Income, <span class="dt">y =</span> balance_pred, <span class="dt">colour =</span> Student))<span class="op">+</span></span>
+<span id="cb5-19"><a href="other-reg-cons.html#cb5-19"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F)<span class="op">+</span></span>
+<span id="cb5-20"><a href="other-reg-cons.html#cb5-20"></a><span class="st">  </span>cred_x_axis<span class="op">+</span></span>
+<span id="cb5-21"><a href="other-reg-cons.html#cb5-21"></a><span class="st">  </span>cred_y_axis<span class="op">+</span></span>
+<span id="cb5-22"><a href="other-reg-cons.html#cb5-22"></a><span class="st">  </span>cred_colour_scale<span class="op">+</span></span>
+<span id="cb5-23"><a href="other-reg-cons.html#cb5-23"></a><span class="st">  </span><span class="kw">theme_islr</span>()<span class="op">+</span></span>
+<span id="cb5-24"><a href="other-reg-cons.html#cb5-24"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb5-25"><a href="other-reg-cons.html#cb5-25"></a></span>
+<span id="cb5-26"><a href="other-reg-cons.html#cb5-26"></a><span class="co"># create multiple linear model w/interaction</span></span>
+<span id="cb5-27"><a href="other-reg-cons.html#cb5-27"></a>credit_lm_int =<span class="st"> </span><span class="kw">lm</span>(Balance<span class="op">~</span>Income<span class="op">+</span>Student<span class="op">+</span>Income<span class="op">*</span>Student, <span class="dt">data =</span> credit)</span>
+<span id="cb5-28"><a href="other-reg-cons.html#cb5-28"></a><span class="co"># summary(credit_lm_int)</span></span>
+<span id="cb5-29"><a href="other-reg-cons.html#cb5-29"></a></span>
+<span id="cb5-30"><a href="other-reg-cons.html#cb5-30"></a>credit_interaction =<span class="st"> </span>credit <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb5-31"><a href="other-reg-cons.html#cb5-31"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">balance_pred =</span> <span class="kw">predict</span>(credit_lm_int, credit)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb5-32"><a href="other-reg-cons.html#cb5-32"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x =</span> Income, <span class="dt">y =</span> balance_pred, <span class="dt">colour =</span> Student))<span class="op">+</span></span>
+<span id="cb5-33"><a href="other-reg-cons.html#cb5-33"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F)<span class="op">+</span></span>
+<span id="cb5-34"><a href="other-reg-cons.html#cb5-34"></a><span class="st">  </span>cred_x_axis<span class="op">+</span></span>
+<span id="cb5-35"><a href="other-reg-cons.html#cb5-35"></a><span class="st">  </span>cred_y_axis<span class="op">+</span></span>
+<span id="cb5-36"><a href="other-reg-cons.html#cb5-36"></a><span class="st">  </span>cred_colour_scale<span class="op">+</span></span>
+<span id="cb5-37"><a href="other-reg-cons.html#cb5-37"></a><span class="st">  </span><span class="kw">theme_islr</span>()<span class="op">+</span></span>
+<span id="cb5-38"><a href="other-reg-cons.html#cb5-38"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="kw">c</span>(.<span class="dv">25</span>, <span class="fl">.91</span>), <span class="dt">legend.margin =</span> <span class="kw">margin</span>())</span>
+<span id="cb5-39"><a href="other-reg-cons.html#cb5-39"></a></span>
+<span id="cb5-40"><a href="other-reg-cons.html#cb5-40"></a>credit_no_interaction <span class="op">+</span><span class="st"> </span>credit_interaction<span class="op">+</span></span>
+<span id="cb5-41"><a href="other-reg-cons.html#cb5-41"></a><span class="st">  </span><span class="kw">plot_layout</span>(<span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">widths =</span> <span class="kw">c</span>(.<span class="dv">5</span>, <span class="fl">.5</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:credit-lm"></span>
 <img src="BookdownISL_files/figure-html/credit-lm-1.png" alt="*For the &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;Credit&lt;/span&gt;&lt;/strong&gt; data, the least squares lines are shown for prediction of &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;balance&lt;/span&gt;&lt;/strong&gt; from &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;income&lt;/span&gt;&lt;/strong&gt; for students and non-students.* Left: *The model (3.34) was fit. There is no interaction between &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;income&lt;/span&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;student&lt;/span&gt;&lt;/strong&gt;.* Right: *The model (3.35) was fit. There is an interaction term between &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;income&lt;/span&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;student&lt;/span&gt;&lt;/strong&gt;.*" width="1152" />
 <p class="caption">
@@ -1599,14 +1599,14 @@ FIGURE 3.3: <em>For the <strong><span style="font-family:monospace; color: #B44C
 <h4><span class="header-section-number">3.3.2.2</span> Non-linear Relationships</h4>
 <p>As discussed previously, the linear regression model <a href="mult-lin-reg.html#eq:mlin-reg">(3.19)</a> assumes a linear relationship between the response and predictors.
 But in some cases, the true relationship between the response and the predictors may be non-linear.
-Here we present a very simple way to directly extend the linear model to accommodate non-linear relationships, using <em>polynomial regression</em>.
+Here we present a very simple way to directly extend the linear model to accommodate non-linear relationships, using <strong><span style="font-family:monospace; color: #1188ce;">polynomial regression</span></strong>.
 In later chapters, we will present more complex approaches for performing non-linear fits in more general settings.</p>
 <p>Consider Figure 3.8, in which the <strong><span style="font-family:monospace; color: #B44C1C;">mpg</span></strong> (gas mileage in miles per gallon) versus <strong><span style="font-family:monospace; color: #B44C1C;">horsepower</span></strong> is shown for a number of cars in the <strong><span style="font-family:monospace; color: #B44C1C;">Auto</span></strong> data set.</p>
 <p>FIGURE 3.8</p>
 <p>The orange line represents the linear regression fit.
 There is a pronounced relationship between <strong><span style="font-family:monospace; color: #B44C1C;">mpg</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">horsepower</span></strong>, but it seems clear that this relationship is in fact non-linear: the data suggest a curved relationship.
 A simple approach for incorporating non-linear associations in a linear model is to include transformed versions of the predictors in the model.
-For example, the points in Figure 3.8 seem to have a <em>quadratic</em> shape, suggesting that a model of the form</p>
+For example, the points in Figure 3.8 seem to have a <strong><span style="font-family:monospace; color: #1188ce;">quadratic</span></strong> shape, suggesting that a model of the form</p>
 <p><span class="math display" id="eq:mpg-quad">\[\begin{equation}
   \color{#B44C1C}{mpg} = \beta_0 + \beta_1 \times \color{#B44C1C}{horsepower} + \beta_2 \times \color{#B44C1C}{horsepower^2} + \epsilon
   \tag{3.36}
@@ -1619,15 +1619,15 @@ So we can use standard linear regression software to estimate <span class="math 
 The blue curve in Figure 3.8 shows the resulting quadratic fit to the data.
 The quadratic fit appears to be substantially better than the fit obtained when just the linear term is included.
 The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class="math inline">\(0.688\)</span>, compared to <span class="math inline">\(0.606\)</span> for the linear fit, and the p-value in Table 3.10 for the quadratic term is highly significant.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="other-reg-cons.html#cb7-1"></a>mpg_lm =<span class="st"> </span><span class="kw">lm</span>(mpg<span class="op">~</span>horsepower<span class="op">+</span><span class="kw">I</span>(horsepower<span class="op">^</span><span class="dv">2</span>), <span class="dt">data =</span> Auto)</span>
-<span id="cb7-2"><a href="other-reg-cons.html#cb7-2"></a></span>
-<span id="cb7-3"><a href="other-reg-cons.html#cb7-3"></a><span class="kw">reg_table</span>(mpg_lm) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb7-4"><a href="other-reg-cons.html#cb7-4"></a><span class="st">  </span><span class="kw">tab_source_note</span>(<span class="kw">md</span>(<span class="kw">str_c</span>(<span class="st">&quot;&lt;span style=&#39;color:#1188ce&#39;&gt;TABLE 3.10.&lt;/span&gt;&quot;</span>, <span class="st">&quot; *For the &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;Auto&quot;</span>), <span class="st">&quot; data set, least squares coefficient estimates associated with the regression of &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;mpg&quot;</span>), <span class="st">&quot; onto &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;horsepower&quot;</span>), <span class="st">&quot; and &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;horsepower^2&quot;</span>), <span class="st">&quot;.*&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="other-reg-cons.html#cb6-1"></a>mpg_lm =<span class="st"> </span><span class="kw">lm</span>(mpg<span class="op">~</span>horsepower<span class="op">+</span><span class="kw">I</span>(horsepower<span class="op">^</span><span class="dv">2</span>), <span class="dt">data =</span> Auto)</span>
+<span id="cb6-2"><a href="other-reg-cons.html#cb6-2"></a></span>
+<span id="cb6-3"><a href="other-reg-cons.html#cb6-3"></a><span class="kw">reg_table</span>(mpg_lm) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb6-4"><a href="other-reg-cons.html#cb6-4"></a><span class="st">  </span><span class="kw">tab_source_note</span>(<span class="kw">md</span>(<span class="kw">str_c</span>(<span class="st">&quot;&lt;span style=&#39;color:#1188ce&#39;&gt;TABLE 3.10.&lt;/span&gt;&quot;</span>, <span class="st">&quot; *For the &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;Auto&quot;</span>), <span class="st">&quot; data set, least squares coefficient estimates associated with the regression of &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;mpg&quot;</span>), <span class="st">&quot; onto &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;horsepower&quot;</span>), <span class="st">&quot; and &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;horsepower^2&quot;</span>), <span class="st">&quot;.*&quot;</span>)))</span></code></pre></div>
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#tdwvfqzjqo .gt_table {
+#njoqlbwqhp .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1652,7 +1652,7 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   border-left-color: #D3D3D3;
 }
 
-#tdwvfqzjqo .gt_heading {
+#njoqlbwqhp .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1664,7 +1664,7 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   border-right-color: #D3D3D3;
 }
 
-#tdwvfqzjqo .gt_title {
+#njoqlbwqhp .gt_title {
   color: black;
   font-size: 125%;
   font-weight: initial;
@@ -1674,7 +1674,7 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   border-bottom-width: 0;
 }
 
-#tdwvfqzjqo .gt_subtitle {
+#njoqlbwqhp .gt_subtitle {
   color: black;
   font-size: 85%;
   font-weight: initial;
@@ -1684,13 +1684,13 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   border-top-width: 0;
 }
 
-#tdwvfqzjqo .gt_bottom_border {
+#njoqlbwqhp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tdwvfqzjqo .gt_col_headings {
+#njoqlbwqhp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: black;
@@ -1705,7 +1705,7 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   border-right-color: #D3D3D3;
 }
 
-#tdwvfqzjqo .gt_col_heading {
+#njoqlbwqhp .gt_col_heading {
   color: black;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1725,7 +1725,7 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   overflow-x: hidden;
 }
 
-#tdwvfqzjqo .gt_column_spanner_outer {
+#njoqlbwqhp .gt_column_spanner_outer {
   color: black;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1737,15 +1737,15 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   padding-right: 4px;
 }
 
-#tdwvfqzjqo .gt_column_spanner_outer:first-child {
+#njoqlbwqhp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tdwvfqzjqo .gt_column_spanner_outer:last-child {
+#njoqlbwqhp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tdwvfqzjqo .gt_column_spanner {
+#njoqlbwqhp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: black;
@@ -1757,7 +1757,7 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   width: 100%;
 }
 
-#tdwvfqzjqo .gt_group_heading {
+#njoqlbwqhp .gt_group_heading {
   padding: 8px;
   color: black;
   background-color: #FFFFFF;
@@ -1779,7 +1779,7 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   vertical-align: middle;
 }
 
-#tdwvfqzjqo .gt_empty_group_heading {
+#njoqlbwqhp .gt_empty_group_heading {
   padding: 0.5px;
   color: black;
   background-color: #FFFFFF;
@@ -1794,15 +1794,15 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   vertical-align: middle;
 }
 
-#tdwvfqzjqo .gt_from_md > :first-child {
+#njoqlbwqhp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tdwvfqzjqo .gt_from_md > :last-child {
+#njoqlbwqhp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tdwvfqzjqo .gt_row {
+#njoqlbwqhp .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1821,7 +1821,7 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   overflow-x: hidden;
 }
 
-#tdwvfqzjqo .gt_stub {
+#njoqlbwqhp .gt_stub {
   color: black;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1833,7 +1833,7 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   padding-left: 12px;
 }
 
-#tdwvfqzjqo .gt_summary_row {
+#njoqlbwqhp .gt_summary_row {
   color: black;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1843,7 +1843,7 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   padding-right: 5px;
 }
 
-#tdwvfqzjqo .gt_first_summary_row {
+#njoqlbwqhp .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1853,7 +1853,7 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   border-top-color: #D3D3D3;
 }
 
-#tdwvfqzjqo .gt_grand_summary_row {
+#njoqlbwqhp .gt_grand_summary_row {
   color: black;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1863,7 +1863,7 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   padding-right: 5px;
 }
 
-#tdwvfqzjqo .gt_first_grand_summary_row {
+#njoqlbwqhp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1873,11 +1873,11 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   border-top-color: #D3D3D3;
 }
 
-#tdwvfqzjqo .gt_striped {
+#njoqlbwqhp .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tdwvfqzjqo .gt_table_body {
+#njoqlbwqhp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1886,7 +1886,7 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   border-bottom-color: black;
 }
 
-#tdwvfqzjqo .gt_footnotes {
+#njoqlbwqhp .gt_footnotes {
   color: black;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1900,13 +1900,13 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   border-right-color: #D3D3D3;
 }
 
-#tdwvfqzjqo .gt_footnote {
+#njoqlbwqhp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#tdwvfqzjqo .gt_sourcenotes {
+#njoqlbwqhp .gt_sourcenotes {
   color: black;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1920,46 +1920,46 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
   border-right-color: #D3D3D3;
 }
 
-#tdwvfqzjqo .gt_sourcenote {
+#njoqlbwqhp .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#tdwvfqzjqo .gt_left {
+#njoqlbwqhp .gt_left {
   text-align: left;
 }
 
-#tdwvfqzjqo .gt_center {
+#njoqlbwqhp .gt_center {
   text-align: center;
 }
 
-#tdwvfqzjqo .gt_right {
+#njoqlbwqhp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tdwvfqzjqo .gt_font_normal {
+#njoqlbwqhp .gt_font_normal {
   font-weight: normal;
 }
 
-#tdwvfqzjqo .gt_font_bold {
+#njoqlbwqhp .gt_font_bold {
   font-weight: bold;
 }
 
-#tdwvfqzjqo .gt_font_italic {
+#njoqlbwqhp .gt_font_italic {
   font-style: italic;
 }
 
-#tdwvfqzjqo .gt_super {
+#njoqlbwqhp .gt_super {
   font-size: 65%;
 }
 
-#tdwvfqzjqo .gt_footnote_marks {
+#njoqlbwqhp .gt_footnote_marks {
   font-style: italic;
   font-size: 65%;
 }
 </style>
-<div id="tdwvfqzjqo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<div id="njoqlbwqhp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   
   <thead class="gt_col_headings">
     <tr>
@@ -2030,56 +2030,56 @@ Since the linear regression model is not our primary focus here, we will provide
 <p>The linear regression model assumes that there is a straight-line relationships between the predictors and the response.
 If the true relationship is far from linear, then virtually all conclusions that we draw from the fit are suspect.
 In addition, the prediction accuracy of the model can be significantly reduced.</p>
-<p><em>Residual plots</em> are a useful graphical tool for identifying non-linearity.
+<p><strong><span style="font-family:monospace; color: #1188ce;">Residual plots</span></strong> are a useful graphical tool for identifying non-linearity.
 Given a simple linear regression model, we can plot the residuals <span class="math inline">\(e_i = y_i - \hat{y_i}\)</span>, versus the predictor <span class="math inline">\(x_i\)</span>.
-In the case of a multiple linear regression model, since there are multiple predictors, we instead plot the residuals versus the predicted (or <em>fitted</em>) values <span class="math inline">\(\hat{y_i}\)</span>.
+In the case of a multiple linear regression model, since there are multiple predictors, we instead plot the residuals versus the predicted (or <strong><span style="font-family:monospace; color: #1188ce;">fitted</span></strong>) values <span class="math inline">\(\hat{y_i}\)</span>.
 Ideally, the residual plot will show no discernible pattern.
 The presence of a pattern may indicate a problem with some aspect of the linear model.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="other-reg-cons.html#cb8-1"></a><span class="co"># fit simple linear model</span></span>
-<span id="cb8-2"><a href="other-reg-cons.html#cb8-2"></a>mpg_lm_simple =<span class="st"> </span><span class="kw">lm</span>(mpg<span class="op">~</span>horsepower, <span class="dt">data =</span> Auto)</span>
-<span id="cb8-3"><a href="other-reg-cons.html#cb8-3"></a></span>
-<span id="cb8-4"><a href="other-reg-cons.html#cb8-4"></a><span class="co"># make dataframe of residuals and fitted values for simple linear model</span></span>
-<span id="cb8-5"><a href="other-reg-cons.html#cb8-5"></a>linear_fit =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">Residuals =</span> mpg_lm_simple<span class="op">$</span>residuals,</span>
-<span id="cb8-6"><a href="other-reg-cons.html#cb8-6"></a>                    <span class="dt">fitted =</span> mpg_lm_simple<span class="op">$</span>fitted.values,</span>
-<span id="cb8-7"><a href="other-reg-cons.html#cb8-7"></a>                    <span class="dt">fit_type =</span> <span class="st">&quot;Residual Plot for Linear Fit&quot;</span>)</span>
-<span id="cb8-8"><a href="other-reg-cons.html#cb8-8"></a></span>
-<span id="cb8-9"><a href="other-reg-cons.html#cb8-9"></a><span class="co"># make dataframe of residuals and fitted values for multiple linear model w/quadratic predictor</span></span>
-<span id="cb8-10"><a href="other-reg-cons.html#cb8-10"></a>quad_fit =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">Residuals =</span> mpg_lm<span class="op">$</span>residuals,</span>
-<span id="cb8-11"><a href="other-reg-cons.html#cb8-11"></a>                    <span class="dt">fitted =</span> mpg_lm<span class="op">$</span>fitted.values,</span>
-<span id="cb8-12"><a href="other-reg-cons.html#cb8-12"></a>                    <span class="dt">fit_type =</span> <span class="st">&quot;Residual Plot for Quadratic Fit&quot;</span>)</span>
-<span id="cb8-13"><a href="other-reg-cons.html#cb8-13"></a></span>
-<span id="cb8-14"><a href="other-reg-cons.html#cb8-14"></a><span class="co"># assign consistent plot elements</span></span>
-<span id="cb8-15"><a href="other-reg-cons.html#cb8-15"></a>res_zeroline =<span class="st"> </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">colour =</span> <span class="st">&quot;grey50&quot;</span>)</span>
-<span id="cb8-16"><a href="other-reg-cons.html#cb8-16"></a>mpg_x_axis =<span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Fitted values&quot;</span>, </span>
-<span id="cb8-17"><a href="other-reg-cons.html#cb8-17"></a>                                <span class="dt">breaks =</span> scales<span class="op">::</span><span class="kw">pretty_breaks</span>(<span class="dt">n =</span> <span class="dv">6</span>))</span>
-<span id="cb8-18"><a href="other-reg-cons.html#cb8-18"></a>mpg_y_axis =<span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> scales<span class="op">::</span><span class="kw">pretty_breaks</span>(<span class="dt">n =</span> <span class="dv">7</span>))</span>
-<span id="cb8-19"><a href="other-reg-cons.html#cb8-19"></a></span>
-<span id="cb8-20"><a href="other-reg-cons.html#cb8-20"></a><span class="co"># plot linear fit</span></span>
-<span id="cb8-21"><a href="other-reg-cons.html#cb8-21"></a>linear_plot =<span class="st"> </span>linear_fit <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb8-22"><a href="other-reg-cons.html#cb8-22"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x =</span> fitted, <span class="dt">y =</span> Residuals))<span class="op">+</span></span>
-<span id="cb8-23"><a href="other-reg-cons.html#cb8-23"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>, <span class="dt">colour =</span> <span class="st">&quot;grey30&quot;</span>)<span class="op">+</span></span>
-<span id="cb8-24"><a href="other-reg-cons.html#cb8-24"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> F, , <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
-<span id="cb8-25"><a href="other-reg-cons.html#cb8-25"></a><span class="st">  </span>res_zeroline<span class="op">+</span></span>
-<span id="cb8-26"><a href="other-reg-cons.html#cb8-26"></a><span class="st">  </span>mpg_x_axis<span class="op">+</span></span>
-<span id="cb8-27"><a href="other-reg-cons.html#cb8-27"></a><span class="st">  </span>mpg_y_axis<span class="op">+</span></span>
-<span id="cb8-28"><a href="other-reg-cons.html#cb8-28"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="kw">unique</span>(linear_fit<span class="op">$</span>fit_type))<span class="op">+</span></span>
-<span id="cb8-29"><a href="other-reg-cons.html#cb8-29"></a><span class="st">  </span><span class="kw">theme_islr</span>()<span class="op">+</span></span>
-<span id="cb8-30"><a href="other-reg-cons.html#cb8-30"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">.5</span>))</span>
-<span id="cb8-31"><a href="other-reg-cons.html#cb8-31"></a></span>
-<span id="cb8-32"><a href="other-reg-cons.html#cb8-32"></a><span class="co"># plot quad fit</span></span>
-<span id="cb8-33"><a href="other-reg-cons.html#cb8-33"></a>quad_plot =<span class="st"> </span>quad_fit <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb8-34"><a href="other-reg-cons.html#cb8-34"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x =</span> fitted, <span class="dt">y =</span> Residuals))<span class="op">+</span></span>
-<span id="cb8-35"><a href="other-reg-cons.html#cb8-35"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>, <span class="dt">colour =</span> <span class="st">&quot;grey30&quot;</span>)<span class="op">+</span></span>
-<span id="cb8-36"><a href="other-reg-cons.html#cb8-36"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> F, , <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
-<span id="cb8-37"><a href="other-reg-cons.html#cb8-37"></a><span class="st">  </span>res_zeroline<span class="op">+</span></span>
-<span id="cb8-38"><a href="other-reg-cons.html#cb8-38"></a><span class="st">  </span>mpg_x_axis<span class="op">+</span></span>
-<span id="cb8-39"><a href="other-reg-cons.html#cb8-39"></a><span class="st">  </span>mpg_y_axis<span class="op">+</span></span>
-<span id="cb8-40"><a href="other-reg-cons.html#cb8-40"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="kw">unique</span>(quad_fit<span class="op">$</span>fit_type))<span class="op">+</span></span>
-<span id="cb8-41"><a href="other-reg-cons.html#cb8-41"></a><span class="st">  </span><span class="kw">theme_islr</span>()<span class="op">+</span></span>
-<span id="cb8-42"><a href="other-reg-cons.html#cb8-42"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">.5</span>))</span>
-<span id="cb8-43"><a href="other-reg-cons.html#cb8-43"></a></span>
-<span id="cb8-44"><a href="other-reg-cons.html#cb8-44"></a><span class="co"># add the plots together</span></span>
-<span id="cb8-45"><a href="other-reg-cons.html#cb8-45"></a>linear_plot <span class="op">+</span><span class="st"> </span>quad_plot</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="other-reg-cons.html#cb7-1"></a><span class="co"># fit simple linear model</span></span>
+<span id="cb7-2"><a href="other-reg-cons.html#cb7-2"></a>mpg_lm_simple =<span class="st"> </span><span class="kw">lm</span>(mpg<span class="op">~</span>horsepower, <span class="dt">data =</span> Auto)</span>
+<span id="cb7-3"><a href="other-reg-cons.html#cb7-3"></a></span>
+<span id="cb7-4"><a href="other-reg-cons.html#cb7-4"></a><span class="co"># make dataframe of residuals and fitted values for simple linear model</span></span>
+<span id="cb7-5"><a href="other-reg-cons.html#cb7-5"></a>linear_fit =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">Residuals =</span> mpg_lm_simple<span class="op">$</span>residuals,</span>
+<span id="cb7-6"><a href="other-reg-cons.html#cb7-6"></a>                    <span class="dt">fitted =</span> mpg_lm_simple<span class="op">$</span>fitted.values,</span>
+<span id="cb7-7"><a href="other-reg-cons.html#cb7-7"></a>                    <span class="dt">fit_type =</span> <span class="st">&quot;Residual Plot for Linear Fit&quot;</span>)</span>
+<span id="cb7-8"><a href="other-reg-cons.html#cb7-8"></a></span>
+<span id="cb7-9"><a href="other-reg-cons.html#cb7-9"></a><span class="co"># make dataframe of residuals and fitted values for multiple linear model w/quadratic predictor</span></span>
+<span id="cb7-10"><a href="other-reg-cons.html#cb7-10"></a>quad_fit =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">Residuals =</span> mpg_lm<span class="op">$</span>residuals,</span>
+<span id="cb7-11"><a href="other-reg-cons.html#cb7-11"></a>                    <span class="dt">fitted =</span> mpg_lm<span class="op">$</span>fitted.values,</span>
+<span id="cb7-12"><a href="other-reg-cons.html#cb7-12"></a>                    <span class="dt">fit_type =</span> <span class="st">&quot;Residual Plot for Quadratic Fit&quot;</span>)</span>
+<span id="cb7-13"><a href="other-reg-cons.html#cb7-13"></a></span>
+<span id="cb7-14"><a href="other-reg-cons.html#cb7-14"></a><span class="co"># assign consistent plot elements</span></span>
+<span id="cb7-15"><a href="other-reg-cons.html#cb7-15"></a>res_zeroline =<span class="st"> </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">colour =</span> <span class="st">&quot;grey50&quot;</span>)</span>
+<span id="cb7-16"><a href="other-reg-cons.html#cb7-16"></a>mpg_x_axis =<span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">name =</span> <span class="st">&quot;Fitted values&quot;</span>, </span>
+<span id="cb7-17"><a href="other-reg-cons.html#cb7-17"></a>                                <span class="dt">breaks =</span> scales<span class="op">::</span><span class="kw">pretty_breaks</span>(<span class="dt">n =</span> <span class="dv">6</span>))</span>
+<span id="cb7-18"><a href="other-reg-cons.html#cb7-18"></a>mpg_y_axis =<span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> scales<span class="op">::</span><span class="kw">pretty_breaks</span>(<span class="dt">n =</span> <span class="dv">7</span>))</span>
+<span id="cb7-19"><a href="other-reg-cons.html#cb7-19"></a></span>
+<span id="cb7-20"><a href="other-reg-cons.html#cb7-20"></a><span class="co"># plot linear fit</span></span>
+<span id="cb7-21"><a href="other-reg-cons.html#cb7-21"></a>linear_plot =<span class="st"> </span>linear_fit <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb7-22"><a href="other-reg-cons.html#cb7-22"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x =</span> fitted, <span class="dt">y =</span> Residuals))<span class="op">+</span></span>
+<span id="cb7-23"><a href="other-reg-cons.html#cb7-23"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>, <span class="dt">colour =</span> <span class="st">&quot;grey30&quot;</span>)<span class="op">+</span></span>
+<span id="cb7-24"><a href="other-reg-cons.html#cb7-24"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> F, , <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
+<span id="cb7-25"><a href="other-reg-cons.html#cb7-25"></a><span class="st">  </span>res_zeroline<span class="op">+</span></span>
+<span id="cb7-26"><a href="other-reg-cons.html#cb7-26"></a><span class="st">  </span>mpg_x_axis<span class="op">+</span></span>
+<span id="cb7-27"><a href="other-reg-cons.html#cb7-27"></a><span class="st">  </span>mpg_y_axis<span class="op">+</span></span>
+<span id="cb7-28"><a href="other-reg-cons.html#cb7-28"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="kw">unique</span>(linear_fit<span class="op">$</span>fit_type))<span class="op">+</span></span>
+<span id="cb7-29"><a href="other-reg-cons.html#cb7-29"></a><span class="st">  </span><span class="kw">theme_islr</span>()<span class="op">+</span></span>
+<span id="cb7-30"><a href="other-reg-cons.html#cb7-30"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">.5</span>))</span>
+<span id="cb7-31"><a href="other-reg-cons.html#cb7-31"></a></span>
+<span id="cb7-32"><a href="other-reg-cons.html#cb7-32"></a><span class="co"># plot quad fit</span></span>
+<span id="cb7-33"><a href="other-reg-cons.html#cb7-33"></a>quad_plot =<span class="st"> </span>quad_fit <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb7-34"><a href="other-reg-cons.html#cb7-34"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x =</span> fitted, <span class="dt">y =</span> Residuals))<span class="op">+</span></span>
+<span id="cb7-35"><a href="other-reg-cons.html#cb7-35"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>, <span class="dt">colour =</span> <span class="st">&quot;grey30&quot;</span>)<span class="op">+</span></span>
+<span id="cb7-36"><a href="other-reg-cons.html#cb7-36"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> F, , <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
+<span id="cb7-37"><a href="other-reg-cons.html#cb7-37"></a><span class="st">  </span>res_zeroline<span class="op">+</span></span>
+<span id="cb7-38"><a href="other-reg-cons.html#cb7-38"></a><span class="st">  </span>mpg_x_axis<span class="op">+</span></span>
+<span id="cb7-39"><a href="other-reg-cons.html#cb7-39"></a><span class="st">  </span>mpg_y_axis<span class="op">+</span></span>
+<span id="cb7-40"><a href="other-reg-cons.html#cb7-40"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="kw">unique</span>(quad_fit<span class="op">$</span>fit_type))<span class="op">+</span></span>
+<span id="cb7-41"><a href="other-reg-cons.html#cb7-41"></a><span class="st">  </span><span class="kw">theme_islr</span>()<span class="op">+</span></span>
+<span id="cb7-42"><a href="other-reg-cons.html#cb7-42"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">.5</span>))</span>
+<span id="cb7-43"><a href="other-reg-cons.html#cb7-43"></a></span>
+<span id="cb7-44"><a href="other-reg-cons.html#cb7-44"></a><span class="co"># add the plots together</span></span>
+<span id="cb7-45"><a href="other-reg-cons.html#cb7-45"></a>linear_plot <span class="op">+</span><span class="st"> </span>quad_plot</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:auto-res-plot"></span>
 <img src="BookdownISL_files/figure-html/auto-res-plot-1.png" alt="*Plots of residuals versus predicted (or fitted) values for the &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;Auto&lt;/span&gt;&lt;/strong&gt; data set. In each plot, the red line is a smooth fit to the residuals, intended to make it easier to identify a trend.* Left: *A linear regression of &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;mpg&lt;/span&gt;&lt;/strong&gt; on &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;horsepower&lt;/span&gt;&lt;/strong&gt;. A strong pattern in the residuals indicates non-linearity in the data.* Right: *A linear regression of &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;mpg&lt;/span&gt;&lt;/strong&gt; on &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;horsepower&lt;/span&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;horsepower^2&lt;/span&gt;&lt;/strong&gt;. There is little pattern in the residuals.*" width="1152" />
 <p class="caption">
@@ -2109,11 +2109,11 @@ In short, if the error terms are correlated, we may have an unwarranted sense of
 If we ignored this, our standard error calculations would be as if we had a sample size of <span class="math inline">\(2n\)</span>, when in fact we only have <span class="math inline">\(n\)</span> samples.
 Our estimated parameters would be the same for <span class="math inline">\(2n\)</span> samples as for the <span class="math inline">\(n\)</span> samples, but the confidence intervals would be narrower by a factor of <span class="math inline">\(\sqrt{2}\)</span>!</p>
 <p>Why might correlations among the error terms occur?
-Such correlations frequently occur in the context of <em>time series</em> data, which consists of observations for which measurements are obtained at discrete points in time.
+Such correlations frequently occur in the context of <strong><span style="font-family:monospace; color: #1188ce;">time series</span></strong> data, which consists of observations for which measurements are obtained at discrete points in time.
 In many cases, observations that are obtained at adjacent time points will have positively correlated errors.
 In order to determine if this is the case for a given data set, we can plot the residuals from our model as a function of time.
 If the errors are uncorrelated, then there should be no discernible pattern.
-On the other hand, if the error terms are positively correlated, then we may see <em>tracking</em> in the residuals—that is, adjacent residuals may have similar values.
+On the other hand, if the error terms are positively correlated, then we may see <strong><span style="font-family:monospace; color: #1188ce;">tracking</span></strong> in the residuals—that is, adjacent residuals may have similar values.
 Figure 3.10 provides an illustration.
 In the top panel, we see the residuals from a linear regression fit to data generated with uncorrelated errors.
 There is no evidence of a time-related trend in the residuals.
@@ -2134,7 +2134,7 @@ In general, the assumption of uncorrelated errors is extremely important for lin
 The standard errors, confidence intervals, and hypothesis tests associated with the linear model rely upon this assumption.</p>
 <p>Unfortunately, it is often the case that the variances of the error terms are non-constant.
 For instance, the variances of the error terms may increase with the value of the response.
-One can identify non-constant variances in the errors, or <em>heteroscedasticity</em>, from the presence of a <em>funnel shape</em> in the residuals plot.
+One can identify non-constant variances in the errors, or <strong><span style="font-family:monospace; color: #1188ce;">heteroscedasticity</span></strong>, from the presence of a <em>funnel shape</em> in the residuals plot.
 An example is shown in the left-hand panel of Figure 3.11, in which the magnitude of the residuals tends to increase with the fitted values.
 When faced with this problem, one possible solution is to transform the response <span class="math inline">\(Y\)</span> using a concave function such as log <span class="math inline">\(Y\)</span> or <span class="math inline">\(\sqrt{Y}\)</span>.
 Such a transformation results in a greater amount of shrinkage of the larger responses, leading to a reduction in heteroscedasticity.
@@ -2144,12 +2144,12 @@ The residuals now appear to have constant variance, though there is some evidenc
 <p>Sometimes we have a good idea of the variance of each response.
 For example, the <em>i</em>th response could be an average of <span class="math inline">\(n_i\)</span> raw observations.
 If each of these raw observations is uncorrelated with variance <span class="math inline">\(\sigma^2\)</span> then our average has variance <span class="math inline">\(\sigma_i^2 = \sigma^2/n_i\)</span>.
-In this case a simple remedy is to fit our model by <em>weighted least squares</em>, with weights proportional to the inverse variances—i.e. <span class="math inline">\(w_i = n_i\)</span> in this case.
+In this case a simple remedy is to fit our model by <strong><span style="font-family:monospace; color: #1188ce;">weighted least squares</span></strong>, with weights proportional to the inverse variances—i.e. <span class="math inline">\(w_i = n_i\)</span> in this case.
 Most linear regression software allows for observation weights.</p>
 </div>
 <div id="outliers" class="section level4">
 <h4><span class="header-section-number">3.3.3.4</span> 4. Outliers</h4>
-<p>An <em>outlier</em> is a point for which <span class="math inline">\(y_i\)</span> is far from the value predicted by the model.
+<p>An <strong><span style="font-family:monospace; color: #1188ce;">outlier</span></strong> is a point for which <span class="math inline">\(y_i\)</span> is far from the value predicted by the model.
 Outliers can arise for a variety of reasons, such as incorrect recording of an observation during data collection.</p>
 <p>The red point (observation 20) in the left-hand panel of Figure 3.12 illustrates a typical outlier.
 The red solid line is the least squares regression fit, while the blue dashed line is the least squares fit after removal of the outlier.
@@ -2163,7 +2163,7 @@ Similarly, inclusion of the outlier causes the <span class="math inline">\(R^2\)
 <p>Residual plots can be used to identify outliers.
 In this example, the outlier is clearly visible in the residual plot illustrated in the center panel of Figure 3.12.
 But in practice, it can be difficult to decide how large a residual needs to be before we consider the point to be an outlier.
-To address this problem, instead of plotting the residuals, we can plot the <em>studentized residuals</em>, computed by dividing each residual <span class="math inline">\(e_i\)</span> by its estimated standard error.
+To address this problem, instead of plotting the residuals, we can plot the <strong><span style="font-family:monospace; color: #1188ce;">studentized residuals</span></strong>, computed by dividing each residual <span class="math inline">\(e_i\)</span> by its estimated standard error.
 Observations whose studentized residuals are greater than 3 in absolute value are possible outliers.
 In the right-hand panel of Figure 3.12, the outlier’s studentized residual exceeds 6, while all other observations have studentized residuals between <span class="math inline">\(-2\)</span> and <span class="math inline">\(2\)</span>.</p>
 <p>If we believe that an outlier has occurred due to an error in data collection or recording, then one solution is to simply remove the observation.
@@ -2172,7 +2172,7 @@ However, care should be taken, since an outlier may instead indicate a deficienc
 <div id="high-leverage-points" class="section level4">
 <h4><span class="header-section-number">3.3.3.5</span> 5. High Leverage Points</h4>
 <p>We just saw that outliers are observations for which response <span class="math inline">\(y_i\)</span> is unusual given the predictor <span class="math inline">\(x_i\)</span>.
-In contrast, observations with <em>high leverage</em> have an unusual value for <span class="math inline">\(x_i\)</span>.
+In contrast, observations with <strong><span style="font-family:monospace; color: #1188ce;">high leverage</span></strong> have an unusual value for <span class="math inline">\(x_i\)</span>.
 For example, observation 41 in the left-hand panel of Figure 3.13 has high leverage, in that the predictor value for this observation is large relative to the other observations.
 (Note that the data displayed in Figure 3.13 are the same as the data in Figure 3.12, but with the addition of a single high leverage observation.)</p>
 <p>FIGURE 3.13</p>
@@ -2188,7 +2188,7 @@ Most of the observations’ predictor values fall within the blue dashed ellipse
 But neither its value for <span class="math inline">\(X_1\)</span> nor its value for <span class="math inline">\(X_2\)</span> is unusual.
 So if we examine just <span class="math inline">\(X_1\)</span> or just <span class="math inline">\(X_2\)</span>, we will fail to notice this high leverage point.
 This problem is more pronounced in multiple regression settings with more than two predictors, because then there is no simple way to plot all dimensions of the data simultaneously.</p>
-<p>In order to quantify an observation’s leverage, we compute the <em>leverage statistic</em>.
+<p>In order to quantify an observation’s leverage, we compute the <strong><span style="font-family:monospace; color: #1188ce;">leverage statistic</span></strong>.
 A large value of this statistic indicates an observation with high leverage.
 For a simple linear regression</p>
 <p><span class="math display" id="eq:leverage-stat">\[\begin{equation}
@@ -2199,16 +2199,16 @@ h_i = \frac{1}{n} + \frac{(x_i - \bar{x})^2}{\sum_{i&#39; = 1}^n{(x_{i&#39;} - \
 There is a simple extension of <span class="math inline">\(h_i\)</span> to the case of multiple predictors, though we do not provide the formula here.
 The leverage statistic <span class="math inline">\(h_i\)</span> is always between <span class="math inline">\(1/n\)</span> and 1, and the average leverage for all the observations is always equal to <span class="math inline">\((p+1) / n\)</span>.
 So if a given observation has a leverage statistic that greatly exceeds <span class="math inline">\((p + 1) / n\)</span>, then we may suspect that the corresponding point has high leverage.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="other-reg-cons.html#cb9-1"></a>coll_x_axis =<span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> scales<span class="op">::</span><span class="kw">pretty_breaks</span>(<span class="dv">6</span>))</span>
-<span id="cb9-2"><a href="other-reg-cons.html#cb9-2"></a></span>
-<span id="cb9-3"><a href="other-reg-cons.html#cb9-3"></a>(<span class="kw">ggplot</span>(credit, <span class="kw">aes</span>(<span class="dt">x =</span> Limit, <span class="dt">y =</span> Age))<span class="op">+</span></span>
-<span id="cb9-4"><a href="other-reg-cons.html#cb9-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
-<span id="cb9-5"><a href="other-reg-cons.html#cb9-5"></a><span class="st">  </span>coll_x_axis<span class="op">+</span></span>
-<span id="cb9-6"><a href="other-reg-cons.html#cb9-6"></a><span class="st">  </span><span class="kw">theme_islr</span>())<span class="op">+</span></span>
-<span id="cb9-7"><a href="other-reg-cons.html#cb9-7"></a><span class="st">  </span>(<span class="kw">ggplot</span>(credit, <span class="kw">aes</span>(<span class="dt">x =</span> Limit, <span class="dt">y =</span> Rating))<span class="op">+</span></span>
-<span id="cb9-8"><a href="other-reg-cons.html#cb9-8"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
-<span id="cb9-9"><a href="other-reg-cons.html#cb9-9"></a><span class="st">    </span>coll_x_axis<span class="op">+</span></span>
-<span id="cb9-10"><a href="other-reg-cons.html#cb9-10"></a><span class="st">    </span><span class="kw">theme_islr</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="other-reg-cons.html#cb8-1"></a>coll_x_axis =<span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> scales<span class="op">::</span><span class="kw">pretty_breaks</span>(<span class="dv">6</span>))</span>
+<span id="cb8-2"><a href="other-reg-cons.html#cb8-2"></a></span>
+<span id="cb8-3"><a href="other-reg-cons.html#cb8-3"></a>(<span class="kw">ggplot</span>(credit, <span class="kw">aes</span>(<span class="dt">x =</span> Limit, <span class="dt">y =</span> Age))<span class="op">+</span></span>
+<span id="cb8-4"><a href="other-reg-cons.html#cb8-4"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
+<span id="cb8-5"><a href="other-reg-cons.html#cb8-5"></a><span class="st">  </span>coll_x_axis<span class="op">+</span></span>
+<span id="cb8-6"><a href="other-reg-cons.html#cb8-6"></a><span class="st">  </span><span class="kw">theme_islr</span>())<span class="op">+</span></span>
+<span id="cb8-7"><a href="other-reg-cons.html#cb8-7"></a><span class="st">  </span>(<span class="kw">ggplot</span>(credit, <span class="kw">aes</span>(<span class="dt">x =</span> Limit, <span class="dt">y =</span> Rating))<span class="op">+</span></span>
+<span id="cb8-8"><a href="other-reg-cons.html#cb8-8"></a><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">1</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
+<span id="cb8-9"><a href="other-reg-cons.html#cb8-9"></a><span class="st">    </span>coll_x_axis<span class="op">+</span></span>
+<span id="cb8-10"><a href="other-reg-cons.html#cb8-10"></a><span class="st">    </span><span class="kw">theme_islr</span>())</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:collinearity-plot"></span>
 <img src="BookdownISL_files/figure-html/collinearity-plot-1.png" alt="*Scatterplots of the observations from the &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;Credit&lt;/span&gt;&lt;/strong&gt; data set.* Left: *A plot of &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;age&lt;/span&gt;&lt;/strong&gt; versus &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;limit&lt;/span&gt;&lt;/strong&gt;. These two variables are not collinear.* Right: *A plot of &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;rating&lt;/span&gt;&lt;/strong&gt; versus &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;limit&lt;/span&gt;&lt;/strong&gt;. There is high collinearity.*" width="1152" />
 <p class="caption">
@@ -2223,7 +2223,7 @@ This plot also reveals the reason that observation 20 had relatively little effe
 </div>
 <div id="collinearity" class="section level4">
 <h4><span class="header-section-number">3.3.3.6</span> 6. Collinearity</h4>
-<p><em>Collinearity</em> refers to the situation in which two or more predictor variables are closely related to one another.
+<p><strong><span style="font-family:monospace; color: #1188ce;">Collinearity</span></strong> refers to the situation in which two or more predictor variables are closely related to one another.
 The concept of collinearity is illustrated in Figure 3.14 using the <strong><span style="font-family:monospace; color: #B44C1C;">Credit</span></strong> data set.
 In the left-hand panel of Figure 3.14, the two predictors <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong> appear to have no obvious relationship.
 In contrast, in the right-hand panel of Figure 3.14, the predictors <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">rating</span></strong> are very highly correlated with each other, and we say that they are <em>collinear</em>.
@@ -2249,7 +2249,7 @@ For example, we would not expect the true value of the <strong><span style="font
 Recall that the <em>t-statistic</em> for each predictor is calculated by dividing <span class="math inline">\(\hat{\beta_j}\)</span> by its standard error.
 Consequently, collinearity results in a decline in the <em>t</em>-statistic.
 As a result, in the presence of collinearity, we may fail to reject <span class="math inline">\(H_0 : \beta_j = 0\)</span>.
-This means that the <em>power</em> of the hypothesis test—the probability of correctly detecting a <em>non-zero</em> coefficient—is reduced by collinearity.
+This means that the <strong><span style="font-family:monospace; color: #1188ce;">power</span></strong> of the hypothesis test—the probability of correctly detecting a <em>non-zero</em> coefficient—is reduced by collinearity.
 Table 3.11 compares the coefficient estimates obtained from the two separate multiple regression models.
 The first is a regression of <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> on <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> and the second is a regression of <strong><span style="font-family:monospace; color: #B44C1C;">balance</span></strong> on <strong><span style="font-family:monospace; color: #B44C1C;">rating</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong>.
 In the first regression both <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">limit</span></strong> are highly significant with very small p-values.
@@ -2259,8 +2259,8 @@ To avoid such a situation, it is desirable to identify and address potential col
 <p>A simple way to detect collinearity is to look at a correlation matrix of the predictors.
 An element of this matrix that is large in absolute value indicates a pair of highly correlated variables, and therefore a collinearity problem in the data.
 Unfortunately, not all collinearity problems can be detected by inspection of the correlation matrix: it is possible for collinearity to exist between three or more variables even if no pair of variables has a particularly high correlation.
-We call this situation <em>multicollinearity</em>.
-Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the <em>variance inflation factor</em> (VIF).
+We call this situation <strong><span style="font-family:monospace; color: #1188ce;">multicollinearity</span></strong>.
+Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the <strong><span style="font-family:monospace; color: #1188ce;">variance inflation factor</span></strong> (VIF).
 The VIF is the ratio of the variance of <span class="math inline">\(\hat{\beta_j}\)</span> when fitting the full model divided by the variance of <span class="math inline">\(\hat{\beta_j}\)</span> if fit on its own.
 The smallest possible value for the VIF is 1, which indicates the complete absence of collinearity.
 Typically in practice there is a small amount of collinearity among the predictors.

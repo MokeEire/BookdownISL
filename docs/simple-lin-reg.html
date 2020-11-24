@@ -912,7 +912,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="simple-lin-reg" class="section level2">
 <h2><span class="header-section-number">3.1</span> Simple Linear Regression</h2>
-<p><em>Simple linear regression</em> lives up to its name: it is a very straightforward approach for predicting a quantitative response <em>Y</em> on the basis of a single predictor variable <em>X</em>.
+<p><strong><span style="font-family:monospace; color: #1188ce;">Simple linear regression</span></strong> lives up to its name: it is a very straightforward approach for predicting a quantitative response <em>Y</em> on the basis of a single predictor variable <em>X</em>.
 It assumes that there is an approximately linear relationship between <em>X</em> and <em>Y</em>.
 Mathematically we can write this linear relationship as</p>
 <p><span class="math display" id="eq:linmod">\[\begin{equation} 
@@ -924,8 +924,8 @@ We will sometimes describe <a href="simple-lin-reg.html#eq:linmod">(3.1)</a> by 
 For example, <em>X</em> may represent <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> advertising and <em>Y</em> may represent <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
 Then we can regress <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> onto <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> by fitting the model:</p>
 <p><span class="math display">\[\color{#B44C1C}{\textbf{sales}} = \beta_0+\beta_1\times\color{#B44C1C}{\textbf{TV}}\]</span></p>
-<p>In Equation <a href="simple-lin-reg.html#eq:linmod">(3.1)</a>, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are two unknown constants that represent the <em>intercept</em> and the <em>slope</em> terms in the linear model.
-Together, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are known as the model <em>coefficients</em> or <em>parameters</em>.
+<p>In Equation <a href="simple-lin-reg.html#eq:linmod">(3.1)</a>, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are two unknown constants that represent the <strong><span style="font-family:monospace; color: #1188ce;">intercept</span></strong> and the <strong><span style="font-family:monospace; color: #1188ce;">slope</span></strong> terms in the linear model.
+Together, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are known as the model <strong><span style="font-family:monospace; color: #1188ce;">coefficients</span></strong> or <strong><span style="font-family:monospace; color: #1188ce;">parameters</span></strong>.
 Once we have used our training data to produce estimates <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> for our model parameters, we can predict future sales on the basis of a particular value of TV advertising by computing</p>
 <p><span class="math display" id="eq:linest">\[\begin{equation} 
   \hat{y} = \hat{\beta_0} + \hat{\beta_1}x
@@ -944,23 +944,23 @@ In the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising<
 Our goal is to obtain coefficient estimates <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> such that the linear model <a href="simple-lin-reg.html#eq:linmod">(3.1)</a> fits the available data well—that is, so that <span class="math inline">\(y_i \approx \hat{\beta_0}+\hat{\beta_1}x_i\)</span> for <span class="math inline">\(i = 1,...,n\)</span>.
 In other words, we want to find an intercept b0 and a slope b1 such that the resulting line is as close as possible to the <span class="math inline">\(n = 200\)</span> data points.
 There are a number of ways of measuring <em>closeness</em>.
-However, by far the most common approach involves minimizing the <em>least squares</em> criterion, and we take that approach in this chapter.
+However, by far the most common approach involves minimizing the <strong><span style="font-family:monospace; color: #1188ce;">least squares</span></strong> criterion, and we take that approach in this chapter.
 Alternative approaches will be considered in Chapter 6.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="simple-lin-reg.html#cb2-1"></a><span class="co"># Fit linear model regressing Sales on TV</span></span>
-<span id="cb2-2"><a href="simple-lin-reg.html#cb2-2"></a>adv_lm =<span class="st"> </span><span class="kw">lm</span>(sales<span class="op">~</span>TV, advertising)</span>
-<span id="cb2-3"><a href="simple-lin-reg.html#cb2-3"></a></span>
-<span id="cb2-4"><a href="simple-lin-reg.html#cb2-4"></a><span class="co"># Add the predicted values to the advertising dataframe</span></span>
-<span id="cb2-5"><a href="simple-lin-reg.html#cb2-5"></a>advertising <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb2-6"><a href="simple-lin-reg.html#cb2-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">predicted =</span> adv_lm<span class="op">$</span>fitted.values) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb2-7"><a href="simple-lin-reg.html#cb2-7"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x=</span>TV, <span class="dt">y =</span> sales))<span class="op">+</span></span>
-<span id="cb2-8"><a href="simple-lin-reg.html#cb2-8"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
-<span id="cb2-9"><a href="simple-lin-reg.html#cb2-9"></a><span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">xend =</span> TV, <span class="dt">yend =</span> predicted), <span class="dt">colour =</span> <span class="st">&quot;grey40&quot;</span>)<span class="op">+</span></span>
-<span id="cb2-10"><a href="simple-lin-reg.html#cb2-10"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F, <span class="dt">fullrange =</span> T)<span class="op">+</span></span>
-<span id="cb2-11"><a href="simple-lin-reg.html#cb2-11"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">n.breaks =</span> <span class="dv">6</span>)<span class="op">+</span></span>
-<span id="cb2-12"><a href="simple-lin-reg.html#cb2-12"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">25</span>))<span class="op">+</span></span>
-<span id="cb2-13"><a href="simple-lin-reg.html#cb2-13"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Sales&quot;</span>)<span class="op">+</span></span>
-<span id="cb2-14"><a href="simple-lin-reg.html#cb2-14"></a><span class="st">  </span><span class="co"># theme_bw(base_size = 14, base_family = &quot;Roboto&quot;)</span></span>
-<span id="cb2-15"><a href="simple-lin-reg.html#cb2-15"></a><span class="st">  </span><span class="kw">theme_islr</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="simple-lin-reg.html#cb1-1"></a><span class="co"># Fit linear model regressing Sales on TV</span></span>
+<span id="cb1-2"><a href="simple-lin-reg.html#cb1-2"></a>adv_lm =<span class="st"> </span><span class="kw">lm</span>(sales<span class="op">~</span>TV, advertising)</span>
+<span id="cb1-3"><a href="simple-lin-reg.html#cb1-3"></a></span>
+<span id="cb1-4"><a href="simple-lin-reg.html#cb1-4"></a><span class="co"># Add the predicted values to the advertising dataframe</span></span>
+<span id="cb1-5"><a href="simple-lin-reg.html#cb1-5"></a>advertising <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb1-6"><a href="simple-lin-reg.html#cb1-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">predicted =</span> adv_lm<span class="op">$</span>fitted.values) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb1-7"><a href="simple-lin-reg.html#cb1-7"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">x=</span>TV, <span class="dt">y =</span> sales))<span class="op">+</span></span>
+<span id="cb1-8"><a href="simple-lin-reg.html#cb1-8"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
+<span id="cb1-9"><a href="simple-lin-reg.html#cb1-9"></a><span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">xend =</span> TV, <span class="dt">yend =</span> predicted), <span class="dt">colour =</span> <span class="st">&quot;grey40&quot;</span>)<span class="op">+</span></span>
+<span id="cb1-10"><a href="simple-lin-reg.html#cb1-10"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> F, <span class="dt">fullrange =</span> T)<span class="op">+</span></span>
+<span id="cb1-11"><a href="simple-lin-reg.html#cb1-11"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">n.breaks =</span> <span class="dv">6</span>)<span class="op">+</span></span>
+<span id="cb1-12"><a href="simple-lin-reg.html#cb1-12"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">25</span>))<span class="op">+</span></span>
+<span id="cb1-13"><a href="simple-lin-reg.html#cb1-13"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> <span class="st">&quot;Sales&quot;</span>)<span class="op">+</span></span>
+<span id="cb1-14"><a href="simple-lin-reg.html#cb1-14"></a><span class="st">  </span><span class="co"># theme_bw(base_size = 14, base_family = &quot;Roboto&quot;)</span></span>
+<span id="cb1-15"><a href="simple-lin-reg.html#cb1-15"></a><span class="st">  </span><span class="kw">theme_islr</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:advertising-lm"></span>
 <img src="BookdownISL_files/figure-html/advertising-lm-1.png" alt="*For the &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;Advertising&lt;/span&gt;&lt;/strong&gt; data, the least squares fit for the regression of &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;sales&lt;/span&gt;&lt;/strong&gt; onto &lt;strong&gt;&lt;span style='font-family:monospace; color: #B44C1C;'&gt;TV&lt;/span&gt;&lt;/strong&gt; is shown.  The fit is found by minimizing the sum of squared errors.  Each grey line segment represents an error, and the fit makes a compromise by averaging their squares.  In this case a linear fit captures the essence of the relationship, although it is somewhat deficient in the left of the plot.*" width="1152" />
 <p class="caption">
@@ -968,8 +968,8 @@ FIGURE 3.1: <em>For the <strong><span style="font-family:monospace; color: #B44C
 </p>
 </div>
 <p>Let <span class="math inline">\(\hat{y_i} = \hat{\beta_0}+\hat{\beta_1}x_i\)</span> be the prediction for <span class="math inline">\(Y\)</span> based on the <em>i</em>th value of <span class="math inline">\(X\)</span>.
-Then <span class="math inline">\(e_i = y_i - \hat{y_i}\)</span> represents the <em>i</em>th <em>residual</em>—this is the difference between the <em>i</em>th observed response value and the <em>i</em>th response value that is predicted by our linear model.
-We define the <em>residual sum of squares</em> (RSS) as
+Then <span class="math inline">\(e_i = y_i - \hat{y_i}\)</span> represents the <em>i</em>th <strong><span style="font-family:monospace; color: #1188ce;">residual</span></strong>—this is the difference between the <em>i</em>th observed response value and the <em>i</em>th response value that is predicted by our linear model.
+We define the <strong><span style="font-family:monospace; color: #1188ce;">residual sum of squares</span></strong> (RSS) as
 <span class="math display">\[RSS = {e_1^2}+{e_2^2}+...+{e_n^2},\]</span>
 or equivalently as</p>
 <p><span class="math display" id="eq:rss">\[\begin{equation} 
@@ -992,6 +992,7 @@ In other words, according to this approximation, an additional $1,000 spent on T
 In <strong>Figure 3.2</strong>, we have computed RSS for a number of values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, using the advertising data with <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> as the response and <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> as the predictor.
 In each plot, the red dot represents the pair of least squares estimates <span class="math inline">\((\hat{\beta_0}, \hat{\beta_1})\)</span> given by <a href="simple-lin-reg.html#eq:rssmin">(3.4)</a>.
 These values clearly minimize the RSS.</p>
+<p>[FIGURE 3.2 HERE]</p>
 </div>
 <div id="assess-coef-acc" class="section level3">
 <h3><span class="header-section-number">3.1.2</span> Assessing the Accuracy of the Coefficient Estimates</h3>
@@ -1003,10 +1004,11 @@ If <span class="math inline">\(f\)</span> is to be approximated by a linear func
 \end{equation}\]</span></p>
 <p>Here <span class="math inline">\(\beta_0\)</span> is the intercept term—that is, the expected value of <span class="math inline">\(Y\)</span> when <span class="math inline">\(X=0\)</span> and <span class="math inline">\(\beta_1\)</span> is the slope—the average increase in <span class="math inline">\(Y\)</span> associated with a one-unit increase in <span class="math inline">\(X\)</span>.
 The error term is a catch-all for what we miss with this simple model: the true relationship is probably not linear, there may be other variables that cause variation in <span class="math inline">\(Y\)</span>, and there may be measurement error.
-We typically assume that the error term is independent of <span class="math inline">\(X\)</span>.
-The model given by <a href="simple-lin-reg.html#eq:lin-rel">(3.5)</a> defines the <em>population regression line</em>, which is the best linear approximation to the true relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
-The least squares regression coefficient estimates <a href="simple-lin-reg.html#eq:rssmin">(3.4)</a> characterize the <em>least squares line</em> <a href="simple-lin-reg.html#eq:linest">(3.2)</a>.
-The left-hand panel of <strong>Figure 3.3</strong> displays these two lines in a simple simulated example. We created 100 random Xs, and generated 100 corresponding Ys from the model</p>
+We typically assume that the error term is independent of <span class="math inline">\(X\)</span>.</p>
+<p>The model given by <a href="simple-lin-reg.html#eq:lin-rel">(3.5)</a> defines the <strong><span style="font-family:monospace; color: #1188ce;">population regression line</span></strong>, which is the best linear approximation to the true relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
+The least squares regression coefficient estimates <a href="simple-lin-reg.html#eq:rssmin">(3.4)</a> characterize the <strong><span style="font-family:monospace; color: #1188ce;">least squares line</span></strong> <a href="simple-lin-reg.html#eq:linest">(3.2)</a>.</p>
+<p>[FIGURE 3.3 HERE]</p>
+<p>The left-hand panel of <strong>Figure 3.3</strong> displays these two lines in a simple simulated example. We created 100 random Xs, and generated 100 corresponding Ys from the model</p>
 <p><span class="math display" id="eq:sim-mod">\[\begin{equation}
   Y = 2+3X+\epsilon
   \tag{3.6}
@@ -1027,8 +1029,8 @@ The sample mean and the population mean are different, but in general the sample
 In the same way, the unknown coefficients <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> in linear regression define the population regression line.
 We seek to estimate these unknown coefficients using <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> given in <a href="simple-lin-reg.html#eq:rssmin">(3.4)</a>.
 These coefficient estimates define the least squares line.</p>
-<p>The analogy between linear regression and estimation of the mean of a random variable is an apt one based on the concept of <em><strong>bias</strong></em>.
-If we use the sample mean <span class="math inline">\(\hat{\mu}\)</span> to estimate <span class="math inline">\(\mu\)</span>, this estimate is <em><strong>unbiased</strong></em>, in the sense that on average, we expect <span class="math inline">\(\hat{\mu}\)</span> to equal <span class="math inline">\(\mu\)</span>.
+<p>The analogy between linear regression and estimation of the mean of a random variable is an apt one based on the concept of <strong><span style="font-family:monospace; color: #1188ce;">bias</span></strong>.
+If we use the sample mean <span class="math inline">\(\hat{\mu}\)</span> to estimate <span class="math inline">\(\mu\)</span>, this estimate is <strong><span style="font-family:monospace; color: #1188ce;">unbiased</span></strong>, in the sense that on average, we expect <span class="math inline">\(\hat{\mu}\)</span> to equal <span class="math inline">\(\mu\)</span>.
 What exactly does this mean?
 It means that on the basis of one particular set of observations <span class="math inline">\(y_1,...,y_n,\; \hat{\mu}\)</span> might overestimate <span class="math inline">\(\mu\)</span>, and on the basis of another set of observations, <span class="math inline">\(\hat{\mu}\)</span> might underestimate <span class="math inline">\(\mu\)</span>.
 But if we could average a huge number of estimates of <span class="math inline">\(\mu\)</span> obtained from a huge number of sets of observations, then this average would <em>exactly</em> equal <span class="math inline">\(\mu\)</span>.
@@ -1039,7 +1041,7 @@ In fact, we can see from the right-hand panel on Figure 3.3 that the average of 
 A natural question is as follows: how accurate is the sample mean <span class="math inline">\(\hat{\mu}\)</span> as an estimate of <span class="math inline">\(\mu\)</span>?
 We have established that the average of <span class="math inline">\(\hat{\mu}\)</span>’s over many data sets will be very close to <span class="math inline">\(\mu\)</span>, but that a single estimate <span class="math inline">\(\hat{\mu}\)</span> may be a substantial underestimate or overestimate of <span class="math inline">\(\mu\)</span>.
 How far off will that single estimate of <span class="math inline">\(\hat{\mu}\)</span> be?
-In general, we answer this question by computing the <em>standard error</em> of <span class="math inline">\(\hat{\mu}\)</span>, written as <span class="math inline">\(SE(\hat{\mu})\)</span>.
+In general, we answer this question by computing the <strong><span style="font-family:monospace; color: #1188ce;">standard error</span></strong> of <span class="math inline">\(\hat{\mu}\)</span>, written as <span class="math inline">\(SE(\hat{\mu})\)</span>.
 We have the well-known formula</p>
 <p><span class="math display" id="eq:mu-se">\[\begin{equation}
 Var(\hat{\mu}) = SE(\hat{\mu})^2 = \frac{\sigma^2}{n} \tag{3.7}
@@ -1060,9 +1062,9 @@ This is clearly not true in Figure <a href="simple-lin-reg.html#fig:advertising-
 Notice in the formula that <span class="math inline">\(SE(\hat{\beta_1}\)</span> is smaller when the <span class="math inline">\(x_i\)</span> are more spread out; intuitively we have more <em>leverage</em> to estimate a slope when this is the case.
 We also see that <span class="math inline">\(SE(\hat{\beta_0})\)</span> would be the same as <span class="math inline">\(SE(\hat{\mu})\)</span> if <span class="math inline">\(\bar{x}\)</span> were zero (in which case <span class="math inline">\(\hat{\beta_0}\)</span> would be equal to <span class="math inline">\(\bar{y}\)</span>).
 In general, <span class="math inline">\(\sigma^2\)</span> is not known, but can be estimated from the data.
-The estimate of <span class="math inline">\(\sigma\)</span> is known as the <em>residual standard error</em>, and is given by the formula <span class="math inline">\(RSE = \sqrt{RSS/(n-2)}\)</span>.
+The estimate of <span class="math inline">\(\sigma\)</span> is known as the <strong><span style="font-family:monospace; color: #1188ce;">residual standard error</span></strong>, and is given by the formula <span class="math inline">\(RSE = \sqrt{RSS/(n-2)}\)</span>.
 Strictly speaking, when <span class="math inline">\(\sigma^2\)</span> is estimated from the data we should write <span class="math inline">\(\widehat{SE}(\hat{\beta_1})\)</span> to indicate that an estimate has been made, but for simplicity of notation we will drop this extra “hat”.</p>
-<p>Standard errors can be used to compute <em>confidence intervals</em>.
+<p>Standard errors can be used to compute <strong><span style="font-family:monospace; color: #1188ce;">confidence intervals</span></strong>.
 A 95% confidence interval is defined as a range of values such that with 95% probability, the range will contain the true unknown value of the parameter.
 The range is defined in terms of lower and upper limits computed from the sample of data.
 For linear regression, the 95% confidence interval for <span class="math inline">\(\beta_1\)</span> approximately takes the form</p>
@@ -1081,12 +1083,12 @@ Similarly, a confidence interval for <span class="math inline">\(\beta_0\)</span
 <p>In the case of the advertising data, the 95% confidence interval for <span class="math inline">\(\beta_0\)</span> is <span class="math inline">\([6.130, 7.935]\)</span> and the 95% confidence interval for <span class="math inline">\(\beta_1\)</span> is <span class="math inline">\([0.042, 0.053]\)</span>.
 Therefore, we can conclude that in the absence of any advertising, sales will, on average, fall somewhere between 6,130 and 7,940 units.
 Furthermore, for each $1,000 increase in television advertising, there will be an average increase in sales of between 42 and 53 units.</p>
-<p>Standard errors can also be used to perform <em>hypothesis tests</em> on the coefficients.
-The most common hypothesis test involves testing the <em>null hypothesis</em> of</p>
+<p>Standard errors can also be used to perform <strong><span style="font-family:monospace; color: #1188ce;">hypothesis tests</span></strong> on the coefficients.
+The most common hypothesis test involves testing the <strong><span style="font-family:monospace; color: #1188ce;">null hypothesis</span></strong> of</p>
 <p><span class="math display" id="eq:h-null">\[\begin{equation}
 H_0: \mathrm{There\ is\ no\ relationship\ between}\ X\ \mathrm{and}\ Y \tag{3.12}
 \end{equation}\]</span></p>
-<p>versus the <em>alternative hypothesis</em></p>
+<p>versus the <strong><span style="font-family:monospace; color: #1188ce;">alternative hypothesis</span></strong></p>
 <p><span class="math display" id="eq:h-a">\[\begin{equation}
 H_a: \mathrm{There\ is\ some\ relationship\ between}\ X\ \mathrm{and}\ Y. \tag{3.13}
 \end{equation}\]</span></p>
@@ -1100,7 +1102,7 @@ How far is enough?
 This of course depends on the accuracy of <span class="math inline">\(\hat{\beta_1}\)</span>—that is, it depends on <span class="math inline">\(SE(\hat{\beta_1})\)</span>.
 If <span class="math inline">\(SE(\hat{\beta_1})\)</span> is small, then even relatively small values of <span class="math inline">\(\hat{\beta_1}\)</span> may provide strong evidence that <span class="math inline">\(\beta_1 \neq 0\)</span>, and hence that there is a relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.
 In contrast, if <span class="math inline">\(SE(\hat{\beta_1})\)</span> is large, then <span class="math inline">\(\hat{\beta_1}\)</span> must be large in absolute value in order for us to reject the null hypothesis.
-In practice, we compute a <em>t-statistic</em>, give by</p>
+In practice, we compute a <strong><span style="font-family:monospace; color: #1188ce;">t-statistic</span></strong>, give by</p>
 <p><span class="math display" id="eq:t-stat">\[\begin{equation}
 t = \frac{\hat{\beta_1}-0}{SE(\hat{\beta_1})} , \tag{3.14}
 \end{equation}\]</span></p>
@@ -1108,7 +1110,7 @@ t = \frac{\hat{\beta_1}-0}{SE(\hat{\beta_1})} , \tag{3.14}
 If there really is no relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, then we expect that <a href="simple-lin-reg.html#eq:t-stat">(3.14)</a> will have a <em>t</em>-distribution with <span class="math inline">\(n-2\)</span> degrees of freedom.
 The t-distribution has a bell shape and for values of <em>n</em> greater than approximately 30 it is quite similar to the normal distribution.
 Consequently, it is a simple matter to compute the probability of observing any number equal to <span class="math inline">\(|t|\)</span> or larger in absolute value, assuming <span class="math inline">\(\beta_1 = 0\)</span>.
-We call this probability the <em>p-value</em>.
+We call this probability the <strong><span style="font-family:monospace; color: #1188ce;">p-value</span></strong>.
 Roughly speaking, we interpret the p-value as follows: a small p-value indicates that it is unlikely to observe such a substantial association between the predictor and the response due to chance, in the absence of any real association between the predictor and the response.
 Hence, if we see a small p-value, then we can infer that there is an association between the predictor and the response.
 We <em>reject the null hypothesis</em>—that is, we declare a relationship to exist between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>—if the p-value is amll enough.
@@ -1122,7 +1124,7 @@ Hence we can conclude that <span class="math inline">\(\beta_0 \neq 0\)</span> a
 <div id="assess-model-acc" class="section level3">
 <h3><span class="header-section-number">3.1.3</span> Assessing the Accuracy of the Model</h3>
 <p>Once we have rejected the null hypothesis <a href="simple-lin-reg.html#eq:h-null">(3.12)</a> in favor of the alternative hypothesis <a href="simple-lin-reg.html#eq:h-a">(3.13)</a>, it is natural to want to quantify <em>the extent to which the model fits the data</em>.
-The quality of a linear regression fit is typically assessed using two related quantities: the <em>residual standard error</em> and the <span class="math inline">\(R^2\)</span> statistic.</p>
+The quality of a linear regression fit is typically assessed using two related quantities: the <em>residual standard error</em> and the <span class="math inline">\(\color{#1188ce}{R^2}\)</span> statistic.</p>
 <p>Table 3.2 displays the RSE, the <span class="math inline">\(R^2\)</span> statistic, and the F-statistic (to be described in Section 3.2.2) for the linear regression of number of units sold on TV advertising budget.</p>
 <div id="residual-standard-error" class="section level4 unnumbered">
 <h4>Residual Standard Error</h4>
@@ -1158,7 +1160,7 @@ It takes the form of a <em>proportion</em>—the proportion of variance explaine
 <p><span class="math display" id="eq:rsquared">\[\begin{equation}
 R^2 = \frac{TSS-RSS}{TSS} = 1 - \frac{RSS}{TSS} \tag{3.17}
 \end{equation}\]</span></p>
-<p>where <span class="math inline">\(TSS = \sum (y_i - \bar{y})^2\)</span> is the <em>total sum of squares</em>, and the RSS is defined in <a href="simple-lin-reg.html#eq:rss-redefined">(3.16)</a>.
+<p>where <span class="math inline">\(TSS = \sum (y_i - \bar{y})^2\)</span> is the <strong><span style="font-family:monospace; color: #1188ce;">total sum of squares</span></strong>, and the RSS is defined in <a href="simple-lin-reg.html#eq:rss-redefined">(3.16)</a>.
 TSS measures the total variance in the response <span class="math inline">\(Y\)</span>, and can be thought of as the amount of variability inherent in the response before the regression is performed.
 In contrast, RSS measures the amount of variability that is left unexplained after performing the regression.
 Hence, <span class="math inline">\(TSS - RSS\)</span> measures the amount of variability in the response that is explained (or removed) by performing the regression, and <span class="math inline">\(R^2\)</span> measures the <em>proportion of variability in Y that can be explained using X</em>.
@@ -1166,7 +1168,7 @@ An <span class="math inline">\(R^2\)</span> statistic that is close to 1 indicat
 A number near 0 indicates that the regression did not explain much of the variability in the response; this might occur because the linear model is wrong, or the inherent error <span class="math inline">\(\sigma^2\)</span> is high, or both.
 In Table 3.2, the <span class="math inline">\(R^2\)</span> was 0.61, and so just under two-thirds of the variability in <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> is explained by a linear regression on <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong>.</p>
 <p>The <span class="math inline">\(R^2\)</span> statistic is a measure of the linear relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.
-Recall that <em>correlation</em>, defined as</p>
+Recall that <strong><span style="font-family:monospace; color: #1188ce;">correlation</span></strong>, defined as</p>
 <p><span class="math display" id="eq:correlation">\[\begin{equation}
 Cor(X,Y) = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n} (x_i - \bar{x})^2} \sqrt{\sum_{i=1}^{n} (y_i - \bar{y})^2}}, \tag{3.18}
 \end{equation}\]</span></p>

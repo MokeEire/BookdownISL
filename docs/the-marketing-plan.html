@@ -913,24 +913,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="the-marketing-plan" class="section level2">
 <h2><span class="header-section-number">3.4</span> The Marketing Plan</h2>
 <p>We now briefly return to the seven questions about the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data that we set out to answer at the beginning of this chapter.</p>
-<ol style="list-style-type: decimal">
-<li><p><em>Is there a relationship between advertising sales and budget?</em><br />
+<p><callout>Click each question to see the answer, but it might be worth thinking about yourself before checking!</callout></p>
+<details>
+<summary>1. <em>Is there a relationship between advertising sales and budget?</em></summary><br />
 This question can be answered by fitting a multiple regression model of <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> onto <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong>, <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>, and <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong>, as in <a href="mult-lin-reg.html#eq:mlin-reg-adv">(3.20)</a>, and testing the hypothesis <span class="math inline">\(H_0 : \beta_{\color{#B44C1C}{TV}} = \beta_{\color{#B44C1C}{radio}} = \beta_{\color{#B44C1C}{newspaper}} = 0\)</span>.
 In Section 3.2.2, we showed that the F-statistic can be used to determine whether or not we should reject this null hypothesis.
-In this case the p-value corresponding to the F-statistic in Table 3.6 is very low, indicating clear evidence of a relationship between advertising and sales.</p></li>
-<li><p><em>How strong is the relationship?</em><br />
+In this case the p-value corresponding to the F-statistic in Table 3.6 is very low, indicating clear evidence of a relationship between advertising and sales.
+</details>
+<details>
+<summary>2. <em>How strong is the relationship?</em></summary><br />
 We discussed two measures of model accuracy in Section 3.1.3.
 First the RSE estimates the standard deviation of the response from the population regression line.
 For the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data, the RSE is <span class="math inline">\(1,681\)</span> units while the mean value for the response is <span class="math inline">\(14,022\)</span>, indicating a percentage error of roughly <span class="math inline">\(12\%\)</span>.
 Second, the <span class="math inline">\(R^2\)</span> statistic records the percentage of variability in the response that is explained by the predictors.
 The predictors explain almost <span class="math inline">\(90\%\)</span> of the variance in <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
-The RSE and <span class="math inline">\(R^2\)</span> statistics are displayed in Table 3.6.</p></li>
-<li><p><em>Which media contribute to sales?</em><br />
+The RSE and <span class="math inline">\(R^2\)</span> statistics are displayed in Table 3.6.
+</details>
+<details>
+<summary>3. <em>Which media contribute to sales?</em></summary><br />
 To answer this question, we can examine the p-values associated with each predictor’s t-statistic (Section 3.1.2).
 In the multiple linear regression displayed in Table 3.4, the p-values for <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are low, but the p-value for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> is not.
 This suggests that only <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are related to <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
-But the interval for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> includes zero, indicating that the variable is not statistically significant given the values of <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>.</p></li>
-<li><p><em>How large is the effect of each medium on sales?</em><br />
+But the interval for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> includes zero, indicating that the variable is not statistically significant given the values of <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>.
+</details>
+<details>
+<summary>4. <em>How large is the effect of each medium on sales?</em></summary><br />
 We saw in Section 3.1.2 that the standard error of <span class="math inline">\(\hat{\beta_j}\)</span> can be used to construct confidence intervals for <span class="math inline">\(\beta_j\)</span>.
 For the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data, the <span class="math inline">\(95\%\)</span> confidence intervals are as follows: <span class="math inline">\((0.043, 0.049)\)</span> for <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong>, <span class="math inline">\((0.172, 0.206)\)</span> for <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>, and <span class="math inline">\((-0.013, 0.011)\)</span> for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong>.
 The confidence intervals for <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are narrow and far from zero, providing evidnece that these media are related to <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
@@ -941,18 +948,22 @@ The VIF scores are <span class="math inline">\(1.005\)</span>, <span class="math
 In order to assess the association of each medium individually on sales, we can perform three separate simple linear regressions.
 Results are shown in Tables 3.1 and 3.3.
 There is evidence of an extremely strong association between <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> and between <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
-There is evidence of a mild association between <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>, when the values of <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are ignored.</p></li>
-<li><p><em>How accurately can we predict future sales?</em><br />
+There is evidence of a mild association between <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>, when the values of <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are ignored.
+</details>
+<details>
+<summary>5. <em>How accurately can we predict future sales?</em></summary><br />
 The response can be predicted using <a href="mult-lin-reg.html#eq:mlin-reg-est">(3.21)</a>.
 The accuracy associated with this estimate depends on whether we wish to predict an individual response, <span class="math inline">\(Y = f(X) + \epsilon\)</span>, or the average response, <span class="math inline">\(f(X)\)</span> (Section 3.2.2).
 If the former, we use a prediction interval, and if the latter, we use a confidence interval.
-Prediction intervals will always be wider than confidence intervals because they account for the uncertainty associated with <span class="math inline">\(\epsilon\)</span>, the irreducible error.</p></li>
-<li><p><em>Is the relationship linear?</em><br />
+Prediction intervals will always be wider than confidence intervals because they account for the uncertainty associated with <span class="math inline">\(\epsilon\)</span>, the irreducible error.
+</details>
+<details>
+<summary>6. <em>Is the relationship linear?</em></summary><br />
 In Section 3.3.3, we saw that residual plots can be used in order to identify non-linearity.
 If the relationships are linear, then the residual plots should display no pattern.
 In the case of the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data, we observe a non-linear effect in Figure 3.5, though this effect could also be observed in a residual plot.
-In Section 3.3.2, we discussed the inclusion of transformations of the predictors in the linear regression model in order to accommodate non-linear relationships.</p></li>
-</ol>
+In Section 3.3.2, we discussed the inclusion of transformations of the predictors in the linear regression model in order to accommodate non-linear relationships.
+</details>
 <details>
 <summary>7. <em>Is there synergy among the advertising media?</em></summary><br />
 The standard linear regression model assumes an additive relationship between predictors.
