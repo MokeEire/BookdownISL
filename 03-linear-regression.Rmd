@@ -58,6 +58,11 @@ Here are a few important questions that we might seek to address:
 It turns out that linear regression can be used to answer each of these questions. 
 We will first discuss all of these questions in a general context, and then return to them in this specific context in Section 3.4.
 
+
+
+
+
+
 ## Simple Linear Regression {#simple-lin-reg}
 
 *Simple linear regression* lives up to its name: it is a very straightforward approach for predicting a quantitative response *Y* on the basis of a single predictor variable *X*. 
@@ -395,6 +400,11 @@ The concept of correlation between the predictors and the response does not exte
 We will see that $R^2$ fills this role.
 
 
+
+
+
+
+
 ## Multiple Linear Regression {#mult-lin-reg}
 
 
@@ -724,6 +734,11 @@ On the other hand, a *prediction interval* can be used to quantify the uncertain
 Given that \$100,000 is spent on `r data_colour("TV")` advertising and \$20,000 is spent on `r data_colour("radio")` advertising in that city the 95% prediction interval is [7,930, 14,580]. 
 We interpret this to mean that 95% of intervals of this form will contain the true value of *Y* for this city.
 Note that both intervals are centered at 11,256, but that the prediction interval is substantially wider than the confidence interval, reflecting the increased uncertainty about `r data_colour("sales")` for a given city in comparison to the average `r data_colour("sales")` over many locations.
+
+
+
+
+
 
 
 ## Other Considerations in the Regression Model {#other-reg-cons}
@@ -1413,7 +1428,19 @@ For instance, we might take the average of the standardized versions of `r data_
 
 ## The Marketing Plan
 
+We now briefly return to the seven questions about the `r data_colour("Advertising")` data
+
+
+
+
+
+
 ## Comparison of Linear Regression with K-Nearest Neighbors
+
+
+
+
+
 
 ## Lab: Linear Regression
 
@@ -1429,6 +1456,11 @@ For instance, we might take the average of the standardized versions of `r data_
 ### Qualitative Predictors
 
 ### Writing Functions
+
+
+
+
+
 
 ## Exercises
 
