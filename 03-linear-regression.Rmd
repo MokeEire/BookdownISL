@@ -8,9 +8,6 @@ credit = read_csv(here("data", "Credit.csv")) %>%
 
 ```
 
-
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
-
 This chapter is about *linear regression*, a very simple approach for supervised learning. 
 In particular, linear regression is a useful tool for predicting a quantitative response. 
 Linear regression has been around for a long time and is the topic of innumerable textbooks. 
