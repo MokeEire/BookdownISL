@@ -3,7 +3,6 @@ title: "An Introduction to Statistical Learning: with Applications in R"
 author: "Gareth James, Daniela Witten, Trevor Hastie, & Robert Tibshirani"
 date: "`r Sys.Date()`"
 css: style.css
-split_by: section
 bibliography:
 - book.bib
 description: This is a minimal example of using the bookdown package to write a book.
