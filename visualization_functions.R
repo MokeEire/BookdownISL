@@ -29,18 +29,45 @@ theme_islr = function(){
     )
 }
 
-reg_table = function(reg_model){
+options(
+  reactable.theme = reactableTheme(
+    color = "#333",
+    headerStyle = list(
+      borderBottom = "2px solid black"
+    ),
+    tableStyle = list(
+      borderTop = "2px solid black",
+      borderBottom = "2px solid black"
+    )
+  )
+)
+rt_caption = function(text, tab_num){
+  
+  p(class = "caption",
+      span(class = "tab-num",
+           str_c("TABLE ", tab_num, ".")
+           ),
+      em(
+        HTML(text)
+      )
+      )
+}
+
+prep_reg_table = function(reg_model){
   summary(reg_model)$coefficients %>% 
     as_tibble(rownames = "term") %>% 
     rename(Coefficient = Estimate, 
            `t-statistic` = `t value`, 
            pval = `Pr(>|t|)`) %>% 
-    mutate(term = str_replace_all(term, c("\\:" = "<em> X </em>",
+    mutate(term = str_replace_all(term, c("\\:" = " X ",
                                           "I(?=\\()|[\\(\\)]" = "")),
-           term = str_c("<span style='color:#B44C1C'>", term, "</span>"),
            `p-value` = case_when(pval < .0001 ~ "<0.0001",
                                  T ~ str_c(round(pval, 4)))) %>%
-    select(-pval) %>% 
+    select(-pval)
+}
+
+reg_table = function(reg_df){
+   reg_df %>% 
     gt() %>% 
     cols_label(term ="") %>% 
     cols_align(columns = vars(`p-value`), align = "right") %>% 

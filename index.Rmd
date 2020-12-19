@@ -21,6 +21,8 @@ library(GGally)
 library(ISLR)
 library(here)
 library(gt)
+library(reactable)
+library(htmltools)
 library(patchwork)
 
 knitr::opts_chunk$set(echo=T, warning=F, message=F)
@@ -32,7 +34,11 @@ data_colour <- function(x) {
   } else if (knitr::is_html_output()) {
     sprintf("<strong><span style='font-family:monospace; color: %s;'>%s</span></strong>", "#B44C1C", 
       x)
-  } else x
+  } else 
+    strong(
+      span(class = "data-colour",
+           x)
+    )
 }
 
 keyword_colour <- function(x) {
