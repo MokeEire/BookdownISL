@@ -1,6 +1,8 @@
 :root {
   --islr-blue: #1188ce;
   --white: #ffffff;
+  --font-col: #333;
+  --font-mono: "Roboto Mono"
 }
 
 p.caption {
