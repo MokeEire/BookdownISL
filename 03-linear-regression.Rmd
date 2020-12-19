@@ -478,13 +478,38 @@ We interpret these results as follows: for a given amount of TV and newspaper ad
 Comparing these coefficient estimates to those displayed in Table 3.1 and 3.3, we notice that the multiple regression coefficient estimates for `r data_colour("TV")` and `r data_colour("radio")` are pretty similar to the simple linear regression coefficient estimates.
 However, while the `r data_colour("newspaper")` regression coefficient estimate in Table 3.3 was significantly non-zero, the coefficient estimate for `r data_colour("newspaper")` in the multiple regression model is close to zero, and the corresponding p-value is no longer significant, with a value around 0.86.
 
-{Table 3.4 goes here}
+```{r table3-4-code, ref.label = 'table3-4', eval=F, echo=T}
+```
 
-```{r table3-4, fig.align = "center", fig.width= 12, fig.asp = 9/16}
+
+```{r table3-4, fig.align = "center", fig.width= 12, fig.asp = 9/16, cache = T, echo=F}
+# estimate linear model
 advertising_mlin_reg = lm(sales~TV+radio+newspaper, data = advertising)
 
-reg_table(advertising_mlin_reg) %>% 
-  tab_source_note(md(str_c("<span style='color:#1188ce'>TABLE 3.4.</span> ", "*For the ", data_colour("Advertising"), " data, least squares coefficient estimates of the multiple linear regression of number of units sold on radio, TV, and newspaper advertising budgets.*")))
+# Clean up the model output
+prep_reg_table(advertising_mlin_reg) %>% 
+  # use reactable to produce the table
+  reactable(
+    borderless = T,
+    sortable = F,
+    defaultColDef = colDef(format = colFormat(digits = 3)),
+    # Specific column formats
+    columns = list(
+      term = colDef(
+        name = "",
+        style = list(borderRight = "2px solid black",
+                                 color = "#B44C1C",
+                                 fontFamily = "Roboto Mono"),
+        headerStyle = list(borderRight = "2px solid black")),
+      `t-statistic` = colDef(format = colFormat(digits = 2))
+    )
+  )
+
+# Put the caption beneath the table
+rt_caption(
+  text = str_c("For the ", data_colour("Advertising"), " data, least squares coefficient estimates of the multiple linear regression of number of units sold on radio, TV, and newspaper advertising budgets."), 
+  tab_num = 3.4
+  )
 ```
 
 
@@ -929,13 +954,39 @@ One way of extending this model to allow for interaction effects is to include a
 How does inclusion of this interaction term relax the additive assumption?
 Notice that \@ref(eq:interactionterm) can be rewritten as
 
-```{r interaction-term-table, fig.align = "center", fig.cap=str_c("*For the ", data_colour("Advertising"), " data, least squares coefficient estimates associated with the regression of ", data_colour("sales"), " onto ", data_colour("TV"), " and ", data_colour("radio"), ", with an interaction term, as in (3.33)*"), fig.width= 12, fig.asp = 9/16}
+```{r interaction-term-code, ref.label='interaction-term-table', echo=T, eval=F}
+```
 
+
+```{r interaction-term-table, echo=FALSE}
+# estimate the linear model
 interaction_model = lm(sales ~ TV+radio+TV*radio, 
                        data = advertising)
 
-reg_table(interaction_model) %>% 
-  tab_source_note(md(str_c("<span style='color:#1188ce'>TABLE 3.9.</span>", "*For the ", data_colour("Advertising"), " data, least squares coefficient estimates associated with the regression of ", data_colour("sales"), " onto ", data_colour("TV"), " and ", data_colour("radio"), ", with an interaction term, as in (3.33)*")))
+# Clean up the model output
+prep_reg_table(interaction_model) %>% 
+  # use reactable to produce the table
+  reactable(
+    borderless = T,
+    sortable = F,
+    defaultColDef = colDef(format = colFormat(digits = 3)),
+    # Specific column formats
+    columns = list(
+      term = colDef(
+        name = "",
+        style = list(borderRight = "2px solid black",
+                                 color = "#B44C1C",
+                                 fontFamily = "Roboto Mono"),
+        headerStyle = list(borderRight = "2px solid black")),
+      `t-statistic` = colDef(format = colFormat(digits = 2))
+    )
+  )
+
+# Put the caption beneath the table
+rt_caption(
+  text = str_c("For the ", data_colour("Advertising"), " data, least squares coefficient estimates associated with the regression of ", data_colour("sales"), " onto ", data_colour("TV"), " and ", data_colour("radio"), ", with an interaction term, as in (3.33)"), 
+  tab_num = 3.9
+  )
 ```
 
 
@@ -1122,11 +1173,41 @@ The blue curve in Figure 3.8 shows the resulting quadratic fit to the data.
 The quadratic fit appears to be substantially better than the fit obtained when just the linear term is included.
 The $R^2$ of the quadratic fit is $0.688$, compared to $0.606$ for the linear fit, and the p-value in Table 3.10 for the quadratic term is highly significant.
 
-```{r mpg-lm}
+```{r mpg-lm-code, ref.label='mpg-lm', echo=T, eval=F}
+```
+
+
+```{r mpg-lm, echo=F}
 mpg_lm = lm(mpg~horsepower+I(horsepower^2), data = Auto)
 
-reg_table(mpg_lm) %>% 
-  tab_source_note(md(str_c("<span style='color:#1188ce'>TABLE 3.10.</span>", " *For the ", data_colour("Auto"), " data set, least squares coefficient estimates associated with the regression of ", data_colour("mpg"), " onto ", data_colour("horsepower"), " and ", data_colour("horsepower^2"), ".*")))
+
+# estimate the linear model
+mpg_lm = lm(mpg~horsepower+I(horsepower^2), data = Auto)
+
+# Clean up the model output
+prep_reg_table(mpg_lm) %>% 
+  # use reactable to produce the table
+  reactable(
+    borderless = T,
+    sortable = F,
+    defaultColDef = colDef(format = colFormat(digits = 3)),
+    # Specific column formats
+    columns = list(
+      term = colDef(
+        name = "",
+        style = list(borderRight = "2px solid black",
+                                 color = "#B44C1C",
+                                 fontFamily = "Roboto Mono"),
+        headerStyle = list(borderRight = "2px solid black")),
+      `t-statistic` = colDef(format = colFormat(digits = 2))
+    )
+  )
+
+# Put the caption beneath the table
+rt_caption(
+  text = str_c("For the ", data_colour("Auto"), " data set, least squares coefficient estimates associated with the regression of ", data_colour("mpg"), " onto ", data_colour("horsepower"), " and ", data_colour("horsepower^2"), "."), 
+  tab_num = "3.10"
+  )
 ```
 
 
