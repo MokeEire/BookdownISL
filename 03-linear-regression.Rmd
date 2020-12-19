@@ -1,6 +1,6 @@
 # Linear Regression {#linreg}
 
-```{r linreg-setup, include=F}
+```{r linreg-setup, include=F, cache=T}
 advertising = read_csv(here("data", "Advertising.csv"))
 
 credit = read_csv(here("data", "Credit.csv")) %>% 
@@ -106,7 +106,7 @@ There are a number of ways of measuring *closeness*.
 However, by far the most common approach involves minimizing the `r keyword_colour("least squares")` criterion, and we take that approach in this chapter.
 Alternative approaches will be considered in Chapter 6.
 
-```{r advertising-lm, fig.align = "center", fig.cap=paste("*For the", data_colour("Advertising"), "data, the least squares fit for the regression of", data_colour("sales"), "onto", data_colour("TV"), "is shown.  The fit is found by minimizing the sum of squared errors.  Each grey line segment represents an error, and the fit makes a compromise by averaging their squares.  In this case a linear fit captures the essence of the relationship, although it is somewhat deficient in the left of the plot.*"), fig.width= 12, fig.asp = 9/16}
+```{r advertising-lm, fig.align = "center", fig.cap=paste("*For the", data_colour("Advertising"), "data, the least squares fit for the regression of", data_colour("sales"), "onto", data_colour("TV"), "is shown.  The fit is found by minimizing the sum of squared errors.  Each grey line segment represents an error, and the fit makes a compromise by averaging their squares.  In this case a linear fit captures the essence of the relationship, although it is somewhat deficient in the left of the plot.*"), fig.width= 12, fig.asp = 9/16, cache = T}
 # Fit linear model regressing Sales on TV
 adv_lm = lm(sales~TV, advertising)
 
@@ -762,7 +762,7 @@ Each panel of Figure 3.6 is a scatterplot for a pair of variables whose identiti
 For example, the scatterplot directly to the right of the word "Balance" depicts `r data_colour("balance")` versus `r data_colour("age")`, while the plot directly to the right of "Age" corresponds to `r data_colour("age")` versus `r data_colour("cards")`.
 In addition to these quantitative variables, we also have four qualitative variables: `r data_colour("gender")`, `r data_colour("student")` (student status), `r data_colour("status")` (marital status), and `r data_colour("ethnicity")` (Caucasian, African American or Asian).
 
-```{r credit-overview, fig.align = "center", fig.cap=paste("*The", data_colour("Credit"), "data set contains information about ", data_colour("balance"), ", ", data_colour("age"), ", ", data_colour("cards"), ", ", data_colour("education"), ", ", data_colour("income"), ", ", data_colour("limit"), ", and ", data_colour("rating"), " for a number of potential customers.*"), fig.width= 12, fig.asp = 1}
+```{r credit-overview, fig.align = "center", fig.cap=paste("*The", data_colour("Credit"), "data set contains information about ", data_colour("balance"), ", ", data_colour("age"), ", ", data_colour("cards"), ", ", data_colour("education"), ", ", data_colour("income"), ", ", data_colour("limit"), ", and ", data_colour("rating"), " for a number of potential customers.*"), fig.width= 12, fig.asp = 1, cache = T}
 ggpairs(select(credit, Balance, Age, Cards, Education, Income, Limit, Rating), 
         upper = list(continuous = wrap("points", colour = "blue")), 
         lower = list(continuous = wrap("points", colour = "blue")), 
@@ -1047,7 +1047,7 @@ The right-hand panel of Figure 3.7 shows the estimated relationships between `r 
 We note that the slope for students is lower than the slope for non-students.
 This suggests that increases in income are associated with smaller increases in credit card balance among students as compared to non-students.
 
-```{r credit-lm, fig.align = "center", fig.cap=str_c("*For the ", data_colour("Credit"), " data, the least squares lines are shown for prediction of ", data_colour("balance"), " from ", data_colour("income"), " for students and non-students.* Left: *The model (3.34) was fit. There is no interaction between ", data_colour("income"), " and ", data_colour("student"), ".* Right: *The model (3.35) was fit. There is an interaction term between ", data_colour("income"), " and ", data_colour("student"), ".*"), fig.width= 12, fig.asp = 9/21}
+```{r credit-lm, fig.align = "center", fig.cap=str_c("*For the ", data_colour("Credit"), " data, the least squares lines are shown for prediction of ", data_colour("balance"), " from ", data_colour("income"), " for students and non-students.* Left: *The model (3.34) was fit. There is no interaction between ", data_colour("income"), " and ", data_colour("student"), ".* Right: *The model (3.35) was fit. There is an interaction term between ", data_colour("income"), " and ", data_colour("student"), ".*"), fig.width= 12, fig.asp = 9/21, cache = T}
 # glimpse(Credit)
 
 # create multiple linear model
@@ -1166,7 +1166,7 @@ In the case of a multiple linear regression model, since there are multiple pred
 Ideally, the residual plot will show no discernible pattern.
 The presence of a pattern may indicate a problem with some aspect of the linear model.
 
-```{r auto-res-plot, fig.align = "center", fig.cap=str_c("*Plots of residuals versus predicted (or fitted) values for the ", data_colour("Auto"), " data set. In each plot, the red line is a smooth fit to the residuals, intended to make it easier to identify a trend.* Left: *A linear regression of ", data_colour("mpg"), " on ", data_colour("horsepower"), ". A strong pattern in the residuals indicates non-linearity in the data.* Right: *A linear regression of ", data_colour("mpg"), " on ", data_colour("horsepower"), " and ", data_colour("horsepower^2"), ". There is little pattern in the residuals.*"), fig.width= 12, fig.asp = 9/21}
+```{r auto-res-plot, fig.align = "center", fig.cap=str_c("*Plots of residuals versus predicted (or fitted) values for the ", data_colour("Auto"), " data set. In each plot, the red line is a smooth fit to the residuals, intended to make it easier to identify a trend.* Left: *A linear regression of ", data_colour("mpg"), " on ", data_colour("horsepower"), ". A strong pattern in the residuals indicates non-linearity in the data.* Right: *A linear regression of ", data_colour("mpg"), " on ", data_colour("horsepower"), " and ", data_colour("horsepower^2"), ". There is little pattern in the residuals.*"), fig.width= 12, fig.asp = 9/21, cache = T}
 # fit simple linear model
 mpg_lm_simple = lm(mpg~horsepower, data = Auto)
 
@@ -1347,7 +1347,7 @@ The leverage statistic $h_i$ is always between $1/n$ and 1, and the average leve
 So if a given observation has a leverage statistic that greatly exceeds $(p + 1) / n$, then we may suspect that the corresponding point has high leverage.
 
 
-```{r  collinearity-plot, fig.align = "center", fig.cap=str_c("*Scatterplots of the observations from the ", data_colour("Credit"), " data set.* Left: *A plot of ", data_colour("age"), " versus ", data_colour("limit"), ". These two variables are not collinear.* Right: *A plot of ", data_colour("rating"), " versus ", data_colour("limit"), ". There is high collinearity.*"), fig.width= 12, fig.asp = 9/21}
+```{r  collinearity-plot, fig.align = "center", fig.cap=str_c("*Scatterplots of the observations from the ", data_colour("Credit"), " data set.* Left: *A plot of ", data_colour("age"), " versus ", data_colour("limit"), ". These two variables are not collinear.* Right: *A plot of ", data_colour("rating"), " versus ", data_colour("limit"), ". There is high collinearity.*"), fig.width= 12, fig.asp = 9/21, cache = T}
 coll_x_axis = scale_x_continuous(breaks = scales::pretty_breaks(6))
 
 (ggplot(credit, aes(x = Limit, y = Age))+
