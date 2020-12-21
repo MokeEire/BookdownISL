@@ -1,3 +1,4 @@
+eq:row-vector
 eq:linmod
 eq:linest
 fig:advertising-lm
