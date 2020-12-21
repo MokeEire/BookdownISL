@@ -24,7 +24,7 @@
 <meta name="author" content="Gareth James, Daniela Witten, Trevor Hastie, &amp; Robert Tibshirani" />
 
 
-<meta name="date" content="2020-11-24" />
+<meta name="date" content="2020-12-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,6 +53,12 @@
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="libs/core-js-2.5.3/shim.min.js"></script>
+<script src="libs/react-16.12.0/react.min.js"></script>
+<script src="libs/react-16.12.0/react-dom.min.js"></script>
+<script src="libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/reactable-binding-0.2.3/reactable.js"></script>
 
 <script>
 /* ========================================================================
@@ -862,7 +868,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="an-overview-of-statistical-learning.html"><a href="an-overview-of-statistical-learning.html"><i class="fa fa-check"></i><b>2.1</b> An Overview of Statistical Learning</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="an-overview-of-statistical-learning.html"><a href="an-overview-of-statistical-learning.html#wage-data"><i class="fa fa-check"></i><b>2.1.1</b> Wage Data</a></li>
+<li class="chapter" data-level="2.1.2" data-path="an-overview-of-statistical-learning.html"><a href="an-overview-of-statistical-learning.html#stock-market-data"><i class="fa fa-check"></i><b>2.1.2</b> Stock Market Data</a></li>
+<li class="chapter" data-level="2.1.3" data-path="an-overview-of-statistical-learning.html"><a href="an-overview-of-statistical-learning.html#gene-expression-data"><i class="fa fa-check"></i><b>2.1.3</b> Gene Expression Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="a-brief-history-of-statistical-learning.html"><a href="a-brief-history-of-statistical-learning.html"><i class="fa fa-check"></i><b>2.2</b> A Brief History of Statistical Learning</a></li>
+<li class="chapter" data-level="2.3" data-path="this-book.html"><a href="this-book.html"><i class="fa fa-check"></i><b>2.3</b> This Book</a></li>
+<li class="chapter" data-level="2.4" data-path="who-should-read-this-book.html"><a href="who-should-read-this-book.html"><i class="fa fa-check"></i><b>2.4</b> Who Should Read This Book</a></li>
+<li class="chapter" data-level="2.5" data-path="notation-and-simple-matrix-algebra.html"><a href="notation-and-simple-matrix-algebra.html"><i class="fa fa-check"></i><b>2.5</b> Notation and Simple Matrix Algebra</a></li>
+<li class="chapter" data-level="2.6" data-path="organization-of-this-book.html"><a href="organization-of-this-book.html"><i class="fa fa-check"></i><b>2.6</b> Organization of This Book</a></li>
+<li class="chapter" data-level="2.7" data-path="data-sets-used-in-labs-and-exercises.html"><a href="data-sets-used-in-labs-and-exercises.html"><i class="fa fa-check"></i><b>2.7</b> Data Sets Used in Labs and Exercises</a></li>
+<li class="chapter" data-level="2.8" data-path="book-website.html"><a href="book-website.html"><i class="fa fa-check"></i><b>2.8</b> Book Website</a></li>
+<li class="chapter" data-level="2.9" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>2.9</b> Acknowledgements</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="linreg.html"><a href="linreg.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a><ul>
 <li class="chapter" data-level="3.1" data-path="simple-lin-reg.html"><a href="simple-lin-reg.html"><i class="fa fa-check"></i><b>3.1</b> Simple Linear Regression</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="simple-lin-reg.html"><a href="simple-lin-reg.html#simple-coef-est"><i class="fa fa-check"></i><b>3.1.1</b> Estimating the Coefficients</a></li>
@@ -916,29 +936,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><callout>Click each question to see the answer, but it might be worth thinking about yourself before checking!</callout></p>
 <details>
 <summary>1. <em>Is there a relationship between advertising sales and budget?</em></summary><br />
-This question can be answered by fitting a multiple regression model of <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> onto <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong>, <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>, and <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong>, as in <a href="mult-lin-reg.html#eq:mlin-reg-adv">(3.20)</a>, and testing the hypothesis <span class="math inline">\(H_0 : \beta_{\color{#B44C1C}{TV}} = \beta_{\color{#B44C1C}{radio}} = \beta_{\color{#B44C1C}{newspaper}} = 0\)</span>.
+
+<div class="summary-content">
+<p>This question can be answered by fitting a multiple regression model of <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> onto <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong>, <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>, and <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong>, as in <a href="mult-lin-reg.html#eq:mlin-reg-adv">(3.20)</a>, and testing the hypothesis <span class="math inline">\(H_0 : \beta_{\color{#B44C1C}{TV}} = \beta_{\color{#B44C1C}{radio}} = \beta_{\color{#B44C1C}{newspaper}} = 0\)</span>.
 In Section 3.2.2, we showed that the F-statistic can be used to determine whether or not we should reject this null hypothesis.
-In this case the p-value corresponding to the F-statistic in Table 3.6 is very low, indicating clear evidence of a relationship between advertising and sales.
+In this case the p-value corresponding to the F-statistic in Table 3.6 is very low, indicating clear evidence of a relationship between advertising and sales.</p>
+</div>
 </details>
 <details>
 <summary>2. <em>How strong is the relationship?</em></summary><br />
-We discussed two measures of model accuracy in Section 3.1.3.
+
+<div class="summary-content">
+<p>We discussed two measures of model accuracy in Section 3.1.3.
 First the RSE estimates the standard deviation of the response from the population regression line.
 For the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data, the RSE is <span class="math inline">\(1,681\)</span> units while the mean value for the response is <span class="math inline">\(14,022\)</span>, indicating a percentage error of roughly <span class="math inline">\(12\%\)</span>.
 Second, the <span class="math inline">\(R^2\)</span> statistic records the percentage of variability in the response that is explained by the predictors.
 The predictors explain almost <span class="math inline">\(90\%\)</span> of the variance in <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
-The RSE and <span class="math inline">\(R^2\)</span> statistics are displayed in Table 3.6.
+The RSE and <span class="math inline">\(R^2\)</span> statistics are displayed in Table 3.6.</p>
+</div>
 </details>
 <details>
 <summary>3. <em>Which media contribute to sales?</em></summary><br />
-To answer this question, we can examine the p-values associated with each predictor’s t-statistic (Section 3.1.2).
+
+<div class="summary-content">
+<p>To answer this question, we can examine the p-values associated with each predictor’s t-statistic (Section 3.1.2).
 In the multiple linear regression displayed in Table 3.4, the p-values for <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are low, but the p-value for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> is not.
 This suggests that only <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are related to <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
-But the interval for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> includes zero, indicating that the variable is not statistically significant given the values of <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>.
+But the interval for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> includes zero, indicating that the variable is not statistically significant given the values of <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>.</p>
+</div>
 </details>
 <details>
 <summary>4. <em>How large is the effect of each medium on sales?</em></summary><br />
-We saw in Section 3.1.2 that the standard error of <span class="math inline">\(\hat{\beta_j}\)</span> can be used to construct confidence intervals for <span class="math inline">\(\beta_j\)</span>.
+
+<div class="summary-content">
+<p>We saw in Section 3.1.2 that the standard error of <span class="math inline">\(\hat{\beta_j}\)</span> can be used to construct confidence intervals for <span class="math inline">\(\beta_j\)</span>.
 For the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data, the <span class="math inline">\(95\%\)</span> confidence intervals are as follows: <span class="math inline">\((0.043, 0.049)\)</span> for <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong>, <span class="math inline">\((0.172, 0.206)\)</span> for <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>, and <span class="math inline">\((-0.013, 0.011)\)</span> for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong>.
 The confidence intervals for <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are narrow and far from zero, providing evidnece that these media are related to <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
 But the interval for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> includes zero, indicating that the variable is not statistically significant given the values of <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>.<br />
@@ -948,30 +979,40 @@ The VIF scores are <span class="math inline">\(1.005\)</span>, <span class="math
 In order to assess the association of each medium individually on sales, we can perform three separate simple linear regressions.
 Results are shown in Tables 3.1 and 3.3.
 There is evidence of an extremely strong association between <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> and between <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
-There is evidence of a mild association between <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>, when the values of <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are ignored.
+There is evidence of a mild association between <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>, when the values of <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are ignored.</p>
+</div>
 </details>
 <details>
 <summary>5. <em>How accurately can we predict future sales?</em></summary><br />
-The response can be predicted using <a href="mult-lin-reg.html#eq:mlin-reg-est">(3.21)</a>.
+
+<div class="summary-content">
+<p>The response can be predicted using <a href="mult-lin-reg.html#eq:mlin-reg-est">(3.21)</a>.
 The accuracy associated with this estimate depends on whether we wish to predict an individual response, <span class="math inline">\(Y = f(X) + \epsilon\)</span>, or the average response, <span class="math inline">\(f(X)\)</span> (Section 3.2.2).
 If the former, we use a prediction interval, and if the latter, we use a confidence interval.
-Prediction intervals will always be wider than confidence intervals because they account for the uncertainty associated with <span class="math inline">\(\epsilon\)</span>, the irreducible error.
+Prediction intervals will always be wider than confidence intervals because they account for the uncertainty associated with <span class="math inline">\(\epsilon\)</span>, the irreducible error.</p>
+</div>
 </details>
 <details>
 <summary>6. <em>Is the relationship linear?</em></summary><br />
-In Section 3.3.3, we saw that residual plots can be used in order to identify non-linearity.
+
+<div class="summary-content">
+<p>In Section 3.3.3, we saw that residual plots can be used in order to identify non-linearity.
 If the relationships are linear, then the residual plots should display no pattern.
 In the case of the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data, we observe a non-linear effect in Figure 3.5, though this effect could also be observed in a residual plot.
-In Section 3.3.2, we discussed the inclusion of transformations of the predictors in the linear regression model in order to accommodate non-linear relationships.
+In Section 3.3.2, we discussed the inclusion of transformations of the predictors in the linear regression model in order to accommodate non-linear relationships.</p>
+</div>
 </details>
 <details>
 <summary>7. <em>Is there synergy among the advertising media?</em></summary><br />
-The standard linear regression model assumes an additive relationship between predictors.
+
+<div class="summary-content">
+<p>The standard linear regression model assumes an additive relationship between predictors.
 However, the additive assumption may be unrealistic for certain data sets.
 In Section 3.3.2, we showed how to include an interaction term in the regression model in order to accommodate non-additive relationships.
 A small p-value associated with the interaction term indicates the presence of such relationships.
 Figure 3.5 suggested that the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data may not be additive.
-Including an interaction term in the model results in a substantial increase in <span class="math inline">\(R^2\)</span>, from around <span class="math inline">\(90\%\)</span> to almost <span class="math inline">\(97\%\)</span>.
+Including an interaction term in the model results in a substantial increase in <span class="math inline">\(R^2\)</span>, from around <span class="math inline">\(90\%\)</span> to almost <span class="math inline">\(97\%\)</span>.</p>
+</div>
 </details>
 </div>
             </section>

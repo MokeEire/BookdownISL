@@ -24,7 +24,7 @@
 <meta name="author" content="Gareth James, Daniela Witten, Trevor Hastie, &amp; Robert Tibshirani" />
 
 
-<meta name="date" content="2020-11-24" />
+<meta name="date" content="2020-12-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,6 +53,12 @@
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="libs/core-js-2.5.3/shim.min.js"></script>
+<script src="libs/react-16.12.0/react.min.js"></script>
+<script src="libs/react-16.12.0/react-dom.min.js"></script>
+<script src="libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/reactable-binding-0.2.3/reactable.js"></script>
 
 <script>
 /* ========================================================================
@@ -862,7 +868,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="an-overview-of-statistical-learning.html"><a href="an-overview-of-statistical-learning.html"><i class="fa fa-check"></i><b>2.1</b> An Overview of Statistical Learning</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="an-overview-of-statistical-learning.html"><a href="an-overview-of-statistical-learning.html#wage-data"><i class="fa fa-check"></i><b>2.1.1</b> Wage Data</a></li>
+<li class="chapter" data-level="2.1.2" data-path="an-overview-of-statistical-learning.html"><a href="an-overview-of-statistical-learning.html#stock-market-data"><i class="fa fa-check"></i><b>2.1.2</b> Stock Market Data</a></li>
+<li class="chapter" data-level="2.1.3" data-path="an-overview-of-statistical-learning.html"><a href="an-overview-of-statistical-learning.html#gene-expression-data"><i class="fa fa-check"></i><b>2.1.3</b> Gene Expression Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="a-brief-history-of-statistical-learning.html"><a href="a-brief-history-of-statistical-learning.html"><i class="fa fa-check"></i><b>2.2</b> A Brief History of Statistical Learning</a></li>
+<li class="chapter" data-level="2.3" data-path="this-book.html"><a href="this-book.html"><i class="fa fa-check"></i><b>2.3</b> This Book</a></li>
+<li class="chapter" data-level="2.4" data-path="who-should-read-this-book.html"><a href="who-should-read-this-book.html"><i class="fa fa-check"></i><b>2.4</b> Who Should Read This Book</a></li>
+<li class="chapter" data-level="2.5" data-path="notation-and-simple-matrix-algebra.html"><a href="notation-and-simple-matrix-algebra.html"><i class="fa fa-check"></i><b>2.5</b> Notation and Simple Matrix Algebra</a></li>
+<li class="chapter" data-level="2.6" data-path="organization-of-this-book.html"><a href="organization-of-this-book.html"><i class="fa fa-check"></i><b>2.6</b> Organization of This Book</a></li>
+<li class="chapter" data-level="2.7" data-path="data-sets-used-in-labs-and-exercises.html"><a href="data-sets-used-in-labs-and-exercises.html"><i class="fa fa-check"></i><b>2.7</b> Data Sets Used in Labs and Exercises</a></li>
+<li class="chapter" data-level="2.8" data-path="book-website.html"><a href="book-website.html"><i class="fa fa-check"></i><b>2.8</b> Book Website</a></li>
+<li class="chapter" data-level="2.9" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>2.9</b> Acknowledgements</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="linreg.html"><a href="linreg.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a><ul>
 <li class="chapter" data-level="3.1" data-path="simple-lin-reg.html"><a href="simple-lin-reg.html"><i class="fa fa-check"></i><b>3.1</b> Simple Linear Regression</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="simple-lin-reg.html"><a href="simple-lin-reg.html#simple-coef-est"><i class="fa fa-check"></i><b>3.1.1</b> Estimating the Coefficients</a></li>
@@ -967,399 +987,38 @@ Figure 3.4 illustrates an example of the least squares fit to a toy data set wit
 We interpret these results as follows: for a given amount of TV and newspaper advertising, spending an additional $1,000 on radio advertising leads to an increase in sales by approximately 189 units.
 Comparing these coefficient estimates to those displayed in Table 3.1 and 3.3, we notice that the multiple regression coefficient estimates for <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are pretty similar to the simple linear regression coefficient estimates.
 However, while the <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> regression coefficient estimate in Table 3.3 was significantly non-zero, the coefficient estimate for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> in the multiple regression model is close to zero, and the corresponding p-value is no longer significant, with a value around 0.86.</p>
-<p>{Table 3.4 goes here}</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="mult-lin-reg.html#cb2-1"></a>advertising_mlin_reg =<span class="st"> </span><span class="kw">lm</span>(sales<span class="op">~</span>TV<span class="op">+</span>radio<span class="op">+</span>newspaper, <span class="dt">data =</span> advertising)</span>
-<span id="cb2-2"><a href="mult-lin-reg.html#cb2-2"></a></span>
-<span id="cb2-3"><a href="mult-lin-reg.html#cb2-3"></a><span class="kw">reg_table</span>(advertising_mlin_reg) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb2-4"><a href="mult-lin-reg.html#cb2-4"></a><span class="st">  </span><span class="kw">tab_source_note</span>(<span class="kw">md</span>(<span class="kw">str_c</span>(<span class="st">&quot;&lt;span style=&#39;color:#1188ce&#39;&gt;TABLE 3.4.&lt;/span&gt; &quot;</span>, <span class="st">&quot;*For the &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;Advertising&quot;</span>), <span class="st">&quot; data, least squares coefficient estimates of the multiple linear regression of number of units sold on radio, TV, and newspaper advertising budgets.*&quot;</span>)))</span></code></pre></div>
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#otyxdmaozr .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: black;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#otyxdmaozr .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#otyxdmaozr .gt_title {
-  color: black;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#otyxdmaozr .gt_subtitle {
-  color: black;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 4px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#otyxdmaozr .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#otyxdmaozr .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: black;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: black;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#otyxdmaozr .gt_col_heading {
-  color: black;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#otyxdmaozr .gt_column_spanner_outer {
-  color: black;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#otyxdmaozr .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#otyxdmaozr .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#otyxdmaozr .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: black;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#otyxdmaozr .gt_group_heading {
-  padding: 8px;
-  color: black;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#otyxdmaozr .gt_empty_group_heading {
-  padding: 0.5px;
-  color: black;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#otyxdmaozr .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#otyxdmaozr .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#otyxdmaozr .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#otyxdmaozr .gt_stub {
-  color: black;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 12px;
-}
-
-#otyxdmaozr .gt_summary_row {
-  color: black;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#otyxdmaozr .gt_first_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-}
-
-#otyxdmaozr .gt_grand_summary_row {
-  color: black;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#otyxdmaozr .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#otyxdmaozr .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#otyxdmaozr .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: black;
-}
-
-#otyxdmaozr .gt_footnotes {
-  color: black;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#otyxdmaozr .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding: 4px;
-}
-
-#otyxdmaozr .gt_sourcenotes {
-  color: black;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#otyxdmaozr .gt_sourcenote {
-  font-size: 90%;
-  padding: 4px;
-}
-
-#otyxdmaozr .gt_left {
-  text-align: left;
-}
-
-#otyxdmaozr .gt_center {
-  text-align: center;
-}
-
-#otyxdmaozr .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#otyxdmaozr .gt_font_normal {
-  font-weight: normal;
-}
-
-#otyxdmaozr .gt_font_bold {
-  font-weight: bold;
-}
-
-#otyxdmaozr .gt_font_italic {
-  font-style: italic;
-}
-
-#otyxdmaozr .gt_super {
-  font-size: 65%;
-}
-
-#otyxdmaozr .gt_footnote_marks {
-  font-style: italic;
-  font-size: 65%;
-}
-</style>
-<div id="otyxdmaozr" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-right-width: 2px; border-right-style: solid; border-right-color: #000000;"></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Coefficient</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Std. Error</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">t-statistic</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">p-value</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr>
-      <td class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: #000000; border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;"><div class='gt_from_md'><p><span style='color:#B44C1C'>Intercept</span></p>
-</div></td>
-      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">2.9389</td>
-      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.312</td>
-      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">9.42</td>
-      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">&lt;0.0001</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: #000000; border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;"><div class='gt_from_md'><p><span style='color:#B44C1C'>TV</span></p>
-</div></td>
-      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.0458</td>
-      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.001</td>
-      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">32.81</td>
-      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">&lt;0.0001</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: #000000; border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;"><div class='gt_from_md'><p><span style='color:#B44C1C'>radio</span></p>
-</div></td>
-      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.1885</td>
-      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.009</td>
-      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">21.89</td>
-      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">&lt;0.0001</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: #000000; border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;"><div class='gt_from_md'><p><span style='color:#B44C1C'>newspaper</span></p>
-</div></td>
-      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">&minus;0.0010</td>
-      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.006</td>
-      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">&minus;0.18</td>
-      <td class="gt_row gt_right" style="border-bottom-width: 0; border-bottom-style: solid; border-bottom-color: #000000; border-top-width: 0; border-top-style: solid; border-top-color: #000000;">0.8599</td>
-    </tr>
-  </tbody>
-  <tfoot class="gt_sourcenotes">
-    <tr>
-      <td class="gt_sourcenote" colspan="5"><span style='color:#1188ce'>TABLE 3.4.</span> <em>For the <strong><span style='font-family:monospace; color: #B44C1C;'>Advertising</span></strong> data, least squares coefficient estimates of the multiple linear regression of number of units sold on radio, TV, and newspaper advertising budgets.</em></td>
-    </tr>
-  </tfoot>
-  
-</table></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="mult-lin-reg.html#cb2-1"></a><span class="co"># estimate linear model</span></span>
+<span id="cb2-2"><a href="mult-lin-reg.html#cb2-2"></a>advertising_mlin_reg =<span class="st"> </span><span class="kw">lm</span>(sales<span class="op">~</span>TV<span class="op">+</span>radio<span class="op">+</span>newspaper, <span class="dt">data =</span> advertising)</span>
+<span id="cb2-3"><a href="mult-lin-reg.html#cb2-3"></a></span>
+<span id="cb2-4"><a href="mult-lin-reg.html#cb2-4"></a><span class="co"># Clean up the model output</span></span>
+<span id="cb2-5"><a href="mult-lin-reg.html#cb2-5"></a><span class="kw">prep_reg_table</span>(advertising_mlin_reg) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-6"><a href="mult-lin-reg.html#cb2-6"></a><span class="st">  </span><span class="co"># use reactable to produce the table</span></span>
+<span id="cb2-7"><a href="mult-lin-reg.html#cb2-7"></a><span class="st">  </span><span class="kw">reactable</span>(</span>
+<span id="cb2-8"><a href="mult-lin-reg.html#cb2-8"></a>    <span class="dt">borderless =</span> T,</span>
+<span id="cb2-9"><a href="mult-lin-reg.html#cb2-9"></a>    <span class="dt">sortable =</span> F,</span>
+<span id="cb2-10"><a href="mult-lin-reg.html#cb2-10"></a>    <span class="dt">defaultColDef =</span> <span class="kw">colDef</span>(<span class="dt">format =</span> <span class="kw">colFormat</span>(<span class="dt">digits =</span> <span class="dv">3</span>)),</span>
+<span id="cb2-11"><a href="mult-lin-reg.html#cb2-11"></a>    <span class="co"># Specific column formats</span></span>
+<span id="cb2-12"><a href="mult-lin-reg.html#cb2-12"></a>    <span class="dt">columns =</span> <span class="kw">list</span>(</span>
+<span id="cb2-13"><a href="mult-lin-reg.html#cb2-13"></a>      <span class="dt">term =</span> <span class="kw">colDef</span>(</span>
+<span id="cb2-14"><a href="mult-lin-reg.html#cb2-14"></a>        <span class="dt">name =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb2-15"><a href="mult-lin-reg.html#cb2-15"></a>        <span class="dt">style =</span> <span class="kw">list</span>(<span class="dt">borderRight =</span> <span class="st">&quot;2px solid black&quot;</span>,</span>
+<span id="cb2-16"><a href="mult-lin-reg.html#cb2-16"></a>                                 <span class="dt">color =</span> <span class="st">&quot;#B44C1C&quot;</span>,</span>
+<span id="cb2-17"><a href="mult-lin-reg.html#cb2-17"></a>                                 <span class="dt">fontFamily =</span> <span class="st">&quot;Roboto Mono&quot;</span>),</span>
+<span id="cb2-18"><a href="mult-lin-reg.html#cb2-18"></a>        <span class="dt">headerStyle =</span> <span class="kw">list</span>(<span class="dt">borderRight =</span> <span class="st">&quot;2px solid black&quot;</span>)),</span>
+<span id="cb2-19"><a href="mult-lin-reg.html#cb2-19"></a>      <span class="st">`</span><span class="dt">t-statistic</span><span class="st">`</span> =<span class="st"> </span><span class="kw">colDef</span>(<span class="dt">format =</span> <span class="kw">colFormat</span>(<span class="dt">digits =</span> <span class="dv">2</span>))</span>
+<span id="cb2-20"><a href="mult-lin-reg.html#cb2-20"></a>    )</span>
+<span id="cb2-21"><a href="mult-lin-reg.html#cb2-21"></a>  )</span>
+<span id="cb2-22"><a href="mult-lin-reg.html#cb2-22"></a></span>
+<span id="cb2-23"><a href="mult-lin-reg.html#cb2-23"></a><span class="co"># Put the caption beneath the table</span></span>
+<span id="cb2-24"><a href="mult-lin-reg.html#cb2-24"></a><span class="kw">rt_caption</span>(</span>
+<span id="cb2-25"><a href="mult-lin-reg.html#cb2-25"></a>  <span class="dt">text =</span> <span class="kw">str_c</span>(<span class="st">&quot;For the &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;Advertising&quot;</span>), <span class="st">&quot; data, least squares coefficient estimates of the multiple linear regression of number of units sold on radio, TV, and newspaper advertising budgets.&quot;</span>), </span>
+<span id="cb2-26"><a href="mult-lin-reg.html#cb2-26"></a>  <span class="dt">tab_num =</span> <span class="fl">3.4</span></span>
+<span id="cb2-27"><a href="mult-lin-reg.html#cb2-27"></a>  )</span></code></pre></div>
+<p><div id="htmlwidget-d5f5b9dd9b2492fe3b9c" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-d5f5b9dd9b2492fe3b9c">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"term":["Intercept","TV","radio","newspaper"],"Coefficient":[2.93888936945942,0.0457646454553976,0.188530016918204,-0.00103749304247626],"Std. Error":[0.311908236321791,0.00139489680697498,0.00861123396730194,0.00587100964708637],"t-statistic":[9.42228844007638,32.8086244276697,21.8934960580654,-0.176714586560276],"p-value":["<0.0001","<0.0001","<0.0001","0.8599"]},"columns":[{"accessor":"term","name":"","type":"character","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"style":{"borderRight":"2px solid black","color":"#B44C1C","fontFamily":"Roboto Mono"},"headerStyle":{"borderRight":"2px solid black"}},{"accessor":"Coefficient","name":"Coefficient","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}}},{"accessor":"Std. Error","name":"Std. Error","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}}},{"accessor":"t-statistic","name":"t-statistic","type":"numeric","format":{"cell":{"digits":2},"aggregated":{"digits":2}}},{"accessor":"p-value","name":"p-value","type":"character","format":{"cell":{"digits":3},"aggregated":{"digits":3}}}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"borderless":true,"theme":{"color":"#333","tableStyle":{"borderTop":"2px solid black","borderBottom":"2px solid black"},"headerStyle":{"borderBottom":"2px solid black"}},"dataKey":"5f2607354a493267c6d0fb92eee9decb","key":"5f2607354a493267c6d0fb92eee9decb"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script><div class="rt-caption">
+<span class="tab-num">TABLE 3.4.</span>
+<em>For the <strong><span style='font-family:monospace; color: #B44C1C;'>Advertising</span></strong> data, least squares coefficient estimates of the multiple linear regression of number of units sold on radio, TV, and newspaper advertising budgets.</em>
+</div></p>
 <p>This illustrates that the simple and multiple regression coefficients can be quite different.
 This difference stems from the fact that in the simple regression case, the slope term represents the average effect of a $1,000 increase in newspaper advertising, ignoring other predictors such as <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>.
 In contrast, in the multiple regression setting, the coefficient for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> represents the average effect of increasing newspaper spending by $1,000 while holding <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> fixed.</p>

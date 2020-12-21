@@ -1,6 +1,8 @@
 :root {
   --islr-blue: #1188ce;
   --white: #ffffff;
+  --font-col: #333;
+  --font-mono: "Roboto Mono"
 }
 
 p.caption {
@@ -95,5 +97,86 @@ code, kbd, pre, samp, .sourceLine, .sourceCode {
     left: 350px;
   }
 }
-  
+
+.tab-num {
+  color: var(--islr-blue);
+}
+
+.data-colour {
+  color: "#B44C1C";
+  font-family: monospace;
+}
+
+.rt-caption {
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+details {
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+details[open] .summary-content {
+    background-color: var(--white);
+    animation: open .5s ease-in-out;
+}
+
+.summary-content {
+  margin-left: 30px;
+}
+
+summary {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+summary:focus {
+  outline: none;
+}
+
+details[open] summary {
+    color: var(--font-col);
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary:before {
+    content: "+"; /* the new icon */
+    color: var(--islr-blue);
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+details[open] summary:before {
+  content: "\2013";
+}
+
+
+
+@keyframes invisiblyGrowFontSize {
+	0% {
+    font-size: 0;
+    opacity: 0;
+	}
+	100% {
+    font-size: 1em;
+    opacity: 0;
+	}
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes open {
+  0% {opacity: 0; margin-left: -20px}
+  100% {opacity: 1; margin-left: 30px}
+}
   
