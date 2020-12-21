@@ -1674,7 +1674,7 @@ But for $p=3$ the results are mixed, and for $p\ge4$ linear regression is superi
 In fact, the increase in dimension has only caused a small deterioration in the linear regression test set MSE, but it has caused more than a ten-fold increase in the MSE for KNN.
 This decrease in performance as the dimension increases is a common problem for KNN, and results from the fact that in higher dimensions there is effectively a reduction in sample size.
 In this data set there are 100 training observations; when $p=1$, this provides enough information to accurately estimate $f(X)$.
-However, spreading 100 observations over $p=20$ dimensions results in a phenomenon in which a given observation has no *nearby neighbors*—this is the so-called `r keyword_color("curse of dimensionality")`.
+However, spreading 100 observations over $p=20$ dimensions results in a phenomenon in which a given observation has no *nearby neighbors*—this is the so-called `r keyword_colour("curse of dimensionality")`.
 That is, the $K$ observations that are nearest to a given test observation $x_0$ may be very far away from $x_0$ in *p*-dimensional space when *p* is large, leading to a very poor prediction of $f(x_0)$ and hence a poor KNN fit.
 As a general rule, parametric methods will tend to outerform non-parametric approaches when there is a small number of observations per predictor.
 
