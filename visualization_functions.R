@@ -1,3 +1,17 @@
+options(
+  reactable.theme = reactableTheme(
+    color = "#333",
+    headerStyle = list(
+      borderBottom = "2px solid black"
+    ),
+    tableStyle = list(
+      borderTop = "2px solid black",
+      borderBottom = "2px solid black"
+    )
+  )
+)
+
+
 theme_islr = function(){ 
   
   theme_bw(base_size = 14, base_family = "Roboto") %+replace%    #replace elements we want to change
@@ -29,18 +43,6 @@ theme_islr = function(){
     )
 }
 
-options(
-  reactable.theme = reactableTheme(
-    color = "#333",
-    headerStyle = list(
-      borderBottom = "2px solid black"
-    ),
-    tableStyle = list(
-      borderTop = "2px solid black",
-      borderBottom = "2px solid black"
-    )
-  )
-)
 rt_caption = function(text, tab_num){
   
   p(class = "caption",
@@ -66,45 +68,24 @@ prep_reg_table = function(reg_model){
     select(-pval)
 }
 
-reg_table = function(reg_df){
-   reg_df %>% 
-    gt() %>% 
-    cols_label(term ="") %>% 
-    cols_align(columns = vars(`p-value`), align = "right") %>% 
-    fmt_markdown(columns = vars(term)) %>% 
-    fmt_number(columns = vars(Coefficient),decimals = 4) %>% 
-    fmt_number(columns = vars(`Std. Error`), decimals = 3) %>% 
-    fmt_number(columns = vars(`t-statistic`), decimals = 2) %>% 
-    tab_style(
-      style = cell_borders(
-        sides = "right",
-        style = "solid",
-        weight = px(2)
-      ),
-      locations = list(
-        cells_body(
-          columns = vars(term)
-        ),
-        cells_column_labels(
-          columns = vars(term)
-        )
-      )
-    ) %>% 
-    tab_style(
-      style = cell_borders(
-        sides = c("bottom", "top"),
-        weight = NULL
-      ),
-      locations = cells_body(
-        columns = everything()
-      )
-    ) %>% 
-    tab_options(
-      column_labels.border.bottom.color = "black",
-      column_labels.border.bottom.style = "solid",
-      column_labels.border.top.color = "black",
-      column_labels.border.top.style = "solid",
-      table_body.border.bottom.color = "black",
-      table_body.border.bottom.style = "solid",table.font.color = "black",
-      row.striping.include_table_body = F)
+data_colour <- function(x) {
+  if (knitr::is_latex_output()) {
+    sprintf("\\textcolor{%s}{%s}", "#B44C1C", x)
+  } else if (knitr::is_html_output()) {
+    sprintf("<strong><span style='font-family:monospace; color: %s;'>%s</span></strong>", "#B44C1C", 
+            x)
+  } else 
+    strong(
+      span(class = "data-colour",
+           x)
+    )
+}
+
+keyword_colour <- function(x) {
+  if (knitr::is_latex_output()) {
+    sprintf("\\textcolor{%s}{%s}", "#1188ce", x)
+  } else if (knitr::is_html_output()) {
+    sprintf("<strong><span style='font-family:monospace; color: %s;'>%s</span></strong>", "#1188ce", 
+            x)
+  } else x
 }
