@@ -1,3 +1,9 @@
+rmd_files: 
+    - "index.Rmd"
+    - "01-intro.Rmd"
+    - "03-linear-regression.Rmd"
+new_session: yes
+before_chapter_script: ["before_script.R"]
 book_filename: "BookdownISL"
 delete_merged_file: true
 output_dir: "docs"
