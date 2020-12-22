@@ -2,7 +2,9 @@
   --islr-blue: #1188ce;
   --white: #ffffff;
   --font-col: #333;
-  --font-mono: "Roboto Mono"
+  --font-mono: "Roboto Mono";
+  --font-sans: "Roboto Regular";
+  --font-thin: "Roboto Thin";
 }
 
 .book .book-body .page-wrapper .page-inner section.normal code, .book .book-body .page-wrapper .page-inner section.normal pre {
@@ -37,27 +39,27 @@ pre {
   word-wrap: normal;
 }
 pre code {
-  font-family: "Roboto Mono";
+  font-family: var(--font-mono);
   white-space: inherit;
 }
 
 p, div {
-  font-family: "Roboto Regular";
+  font-family: var(--font-sans);
 }
 
 
 
 code, kbd, pre, samp, .sourceLine, .sourceCode {
-  font-family: "Roboto Light";
+  font-family: var(--font-mono);
 }
 
 
 
 .book.font-family-0 {
-  font-family: "Roboto Regular";
+  font-family: var(--font-sans);
 }
 .book.font-family-1 {
-  font-family: "Roboto Thin";
+  font-family: var(--font-thin);
 }
 
 .book .book-body .page-wrapper .page-inner {
@@ -74,7 +76,8 @@ code, kbd, pre, samp, .sourceLine, .sourceCode {
   background: #1188ce5e;
 }
 .book .book-summary ul.summary li {
-  font-family: "Roboto Light";
+  font-family: var(--font-thin);
+  font-weight: 600;
 }
 .book .book-summary ul.summary li:not(.chapter) a {
   color: var(--islr-blue);
@@ -93,7 +96,7 @@ code, kbd, pre, samp, .sourceLine, .sourceCode {
 .book .book-body .page-wrapper .page-inner section.normal h4, 
 .book .book-body .page-wrapper .page-inner section.normal h5 {
   color: var(--islr-blue);
-  font-family: "Roboto Thin";
+  font-family: var(--font-thin);
 }
 
 .dropdown-menu > li > a:hover, 
@@ -164,6 +167,14 @@ summary:before {
 
 details[open] summary:before {
   content: "\2013";
+}
+
+.corner-header {
+  margin: 5px;
+  text-align: center;
+  line-height: 17px;
+  font-weight: 600;
+  
 }
 
 

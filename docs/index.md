@@ -26,7 +26,7 @@ css: style.css
 
 I (not an author) am compiling this book for myself as a learning exercise for both the contents of ISLR and the use of the [**bookdown**](https://bookdown.org/) package. 
 
-From the [book's official website](http://faculty.marshall.usc.edu/gareth-james/ISL/):
+From the [book's official website](https://statlearning.com/):
 
 >This book provides an introduction to statistical learning methods. It is aimed for upper level undergraduate students, masters students and Ph.D. students in the non-mathematical sciences. The book also contains a number of R labs with detailed explanations on how to implement the various methods in real life settings, and should be a valuable resource for a practicing data scientist.
 
