@@ -6,7 +6,7 @@ bookdown::gitbook:
       collapse: section
       scroll_highlight: yes
       before: |
-        <li><a href="./">An Introduction to Statistical Learning</a></li>
+        <li><h1 class="corner-header"><a href="./">An Introduction to Statistical Learning</a></h1></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
         <li><a href="https://statlearning.com/" target="blank">Go to ISLR Website</a></li>
