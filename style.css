@@ -24,9 +24,8 @@ p.caption:not(em) {
   color: #1188ce;
 }
 */
-p code {
+p code, li code, summary code {
   white-space: inherit;
-  font-family: "Roboto Mono";
   color: #B44C1C !important;
   background-color: var(--white) !important;
   font-size: 1em !important;
