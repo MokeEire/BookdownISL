@@ -1,10 +1,9 @@
 bookdown::gitbook:
   includes:
     in_header: hide_code.html
-  split_by: section
   config:
     toc:
-      collapse: none
+      collapse: section
       scroll_highlight: yes
       before: |
         <li><a href="http://faculty.marshall.usc.edu/gareth-james/ISL/" target="blank">An Introduction to Statistical Learning</a></li>
