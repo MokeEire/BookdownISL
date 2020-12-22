@@ -789,12 +789,18 @@ Each panel of Figure 3.6 is a scatterplot for a pair of variables whose identiti
 For example, the scatterplot directly to the right of the word "Balance" depicts `balance` versus `age`, while the plot directly to the right of "Age" corresponds to `age` versus `cards`.
 In addition to these quantitative variables, we also have four qualitative variables: `gender`, `student` (student status), `status` (marital status), and `ethnicity` (Caucasian, African American or Asian).
 
-```{r credit-overview, fig.align = "center", fig.cap=paste("*The", data_colour("Credit"), "data set contains information about ", data_colour("balance"), ", ", data_colour("age"), ", ", data_colour("cards"), ", ", data_colour("education"), ", ", data_colour("income"), ", ", data_colour("limit"), ", and ", data_colour("rating"), " for a number of potential customers.*"), fig.width= 12, fig.asp = 1, cache = T}
+```{r credit-overview, fig.align = "center", fig.cap=paste("*The", data_colour("Credit"), "data set contains information about ", data_colour("balance"), ", ", data_colour("age"), ", ", data_colour("cards"), ", ", data_colour("education"), ", ", data_colour("income"), ", ", data_colour("limit"), ", and ", data_colour("rating"), " for a number of potential customers.*"), fig.width= 12, fig.asp = 1}
+# Need to use the GGally library
+library(GGally)
+
+# Select the relevant variables
 ggpairs(select(credit, Balance, Age, Cards, Education, Income, Limit, Rating), 
         upper = list(continuous = wrap("points", colour = "blue")), 
         lower = list(continuous = wrap("points", colour = "blue")), 
-        diag = "blank", 
-        axisLabels = "show", switch = "y")+
+        diag = "blank", # Set blank diagonal
+        axisLabels = "show", 
+        switch = "y")+
+  # Apply our ISLR theme object
   theme_islr()
 ```
 
