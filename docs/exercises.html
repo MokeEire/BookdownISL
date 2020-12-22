@@ -24,7 +24,7 @@
 <meta name="author" content="Gareth James, Daniela Witten, Trevor Hastie, &amp; Robert Tibshirani" />
 
 
-<meta name="date" content="2020-12-21" />
+<meta name="date" content="2020-12-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -864,7 +864,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="http://faculty.marshall.usc.edu/gareth-james/ISL/">An Introduction to Statistical Learning</a></li>
+<li><a href="http://faculty.marshall.usc.edu/gareth-james/ISL/" target="blank">An Introduction to Statistical Learning</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
@@ -905,10 +905,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6.2" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>3.6.2</b> Simple Linear Regression</a></li>
 <li class="chapter" data-level="3.6.3" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#multiple-linear-regression"><i class="fa fa-check"></i><b>3.6.3</b> Multiple Linear Regression</a></li>
 <li class="chapter" data-level="3.6.4" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#interaction-terms"><i class="fa fa-check"></i><b>3.6.4</b> Interaction Terms</a></li>
-<li class="chapter" data-level="3.6.5" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#qualitative-predictors-1"><i class="fa fa-check"></i><b>3.6.5</b> Qualitative Predictors</a></li>
-<li class="chapter" data-level="3.6.6" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#writing-functions"><i class="fa fa-check"></i><b>3.6.6</b> Writing Functions</a></li>
+<li class="chapter" data-level="3.6.5" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#non-linear-transformations-of-the-predictors"><i class="fa fa-check"></i><b>3.6.5</b> Non-linear Transformations of the Predictors</a></li>
+<li class="chapter" data-level="3.6.6" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#qualitative-predictors-1"><i class="fa fa-check"></i><b>3.6.6</b> Qualitative Predictors</a></li>
+<li class="chapter" data-level="3.6.7" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#writing-functions"><i class="fa fa-check"></i><b>3.6.7</b> Writing Functions</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
+<li class="chapter" data-level="3.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.7</b> Exercises</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="exercises.html"><a href="exercises.html#conceptual"><i class="fa fa-check"></i><b>3.7.1</b> Conceptual</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -932,7 +935,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="exercises" class="section level2">
 <h2><span class="header-section-number">3.7</span> Exercises</h2>
+<div id="conceptual" class="section level3">
+<h3><span class="header-section-number">3.7.1</span> Conceptual</h3>
+<ol style="list-style-type: decimal">
+<li>Describe the null hypotheses to which the p-values given in Table 3.4 correspond.
+Explain what conclusions you can draw based on these p-values.
+Your explanation should be phrased in terms of <code>sales</code>, <code>TV</code>, <code>radio</code>,and <code>newspaper</code>, rather than in terms of the coefficients of the linear model.
+<details>
+<summary>Answer</summary>
+<div class="summary-content">
+The null hypotheses which correspond to the p-values in Table 3.4 are:
+<ul>
+<li>
+<span class="math inline">\(H_{0a}\)</span>: A change in the advertising budget for <code>radio</code> is unrelated to changes in <code>sales</code> in the presence of <code>TV</code> and <code>newspaper</code> advertising.
+</li>
+<li>
+<span class="math inline">\(H_{0b}\)</span>: A change in the advertising budget for <code>TV</code> is unrelated to changes in <code>sales</code> in the presence of <code>radio</code> and <code>newspaper</code> advertising.
+</li>
+<li>
+<span class="math inline">\(H_{0c}\)</span>: A change in the advertising budget for <code>newspaper</code> is unrelated to changes in <code>sales</code> in the presence of <code>TV</code> and <code>radio</code> advertising.
+</li>
+</ul>
+<p>The p-values for <code>TV</code> and <code>radio</code> are very low (<span class="math inline">\(&lt;.0001\)</span>) which means we can conclude there is likely a relationship between these two media and <code>sales</code>, while the p-value for <code>newspaper</code> is very high (<span class="math inline">\(0.8599\)</span>) which means we can conclude that a relationship between <code>newspaper</code> and <code>sales</code> is unlikely based on this data.</p>
+</div>
+</details></li>
+</ol>
 
+</div>
 </div>
 <!-- </div> -->
 
@@ -1003,7 +1032,11 @@ gitbook.start({
 },
 "download": ["BookdownISL.pdf", "BookdownISL.epub"],
 "toc": {
-"collapse": "none"
+"collapse": "none",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
 }
 });
 });

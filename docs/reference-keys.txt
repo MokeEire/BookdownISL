@@ -88,6 +88,8 @@ libraries
 simple-linear-regression
 multiple-linear-regression
 interaction-terms
+non-linear-transformations-of-the-predictors
 qualitative-predictors-1
 writing-functions
 exercises
+conceptual

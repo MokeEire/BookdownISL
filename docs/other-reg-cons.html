@@ -24,7 +24,7 @@
 <meta name="author" content="Gareth James, Daniela Witten, Trevor Hastie, &amp; Robert Tibshirani" />
 
 
-<meta name="date" content="2020-12-21" />
+<meta name="date" content="2020-12-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -864,7 +864,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="http://faculty.marshall.usc.edu/gareth-james/ISL/">An Introduction to Statistical Learning</a></li>
+<li><a href="http://faculty.marshall.usc.edu/gareth-james/ISL/" target="blank">An Introduction to Statistical Learning</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
@@ -905,10 +905,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6.2" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>3.6.2</b> Simple Linear Regression</a></li>
 <li class="chapter" data-level="3.6.3" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#multiple-linear-regression"><i class="fa fa-check"></i><b>3.6.3</b> Multiple Linear Regression</a></li>
 <li class="chapter" data-level="3.6.4" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#interaction-terms"><i class="fa fa-check"></i><b>3.6.4</b> Interaction Terms</a></li>
-<li class="chapter" data-level="3.6.5" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#qualitative-predictors-1"><i class="fa fa-check"></i><b>3.6.5</b> Qualitative Predictors</a></li>
-<li class="chapter" data-level="3.6.6" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#writing-functions"><i class="fa fa-check"></i><b>3.6.6</b> Writing Functions</a></li>
+<li class="chapter" data-level="3.6.5" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#non-linear-transformations-of-the-predictors"><i class="fa fa-check"></i><b>3.6.5</b> Non-linear Transformations of the Predictors</a></li>
+<li class="chapter" data-level="3.6.6" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#qualitative-predictors-1"><i class="fa fa-check"></i><b>3.6.6</b> Qualitative Predictors</a></li>
+<li class="chapter" data-level="3.6.7" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#writing-functions"><i class="fa fa-check"></i><b>3.6.7</b> Writing Functions</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
+<li class="chapter" data-level="3.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.7</b> Exercises</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="exercises.html"><a href="exercises.html#conceptual"><i class="fa fa-check"></i><b>3.7.1</b> Conceptual</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -1110,8 +1113,8 @@ Notice that <a href="other-reg-cons.html#eq:interactionterm">(3.31)</a> can be r
 <span id="cb5-26"><a href="other-reg-cons.html#cb5-26"></a>  <span class="dt">text =</span> <span class="kw">str_c</span>(<span class="st">&quot;For the &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;Advertising&quot;</span>), <span class="st">&quot; data, least squares coefficient estimates associated with the regression of &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;sales&quot;</span>), <span class="st">&quot; onto &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;TV&quot;</span>), <span class="st">&quot; and &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;radio&quot;</span>), <span class="st">&quot;, with an interaction term, as in (3.33)&quot;</span>), </span>
 <span id="cb5-27"><a href="other-reg-cons.html#cb5-27"></a>  <span class="dt">tab_num =</span> <span class="fl">3.9</span></span>
 <span id="cb5-28"><a href="other-reg-cons.html#cb5-28"></a>  )</span></code></pre></div>
-<p><div id="htmlwidget-9ef308b7ef1bb02d9d34" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-9ef308b7ef1bb02d9d34">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"term":["Intercept","TV","radio","TV X radio"],"Coefficient":[6.75022020307515,0.019101073831043,0.0288603398999246,0.00108649469798996],"Std. Error":[0.247871369934467,0.00150414550866849,0.0089052728630375,5.24203957977123e-005],"t-statistic":[27.2327546535923,12.6989534728936,3.24081477836723,20.7265641828171],"p-value":["<0.0001","<0.0001","0.0014","<0.0001"]},"columns":[{"accessor":"term","name":"","type":"character","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"style":{"borderRight":"2px solid black","color":"#B44C1C","fontFamily":"Roboto Mono"},"headerStyle":{"borderRight":"2px solid black"}},{"accessor":"Coefficient","name":"Coefficient","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}}},{"accessor":"Std. Error","name":"Std. Error","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}}},{"accessor":"t-statistic","name":"t-statistic","type":"numeric","format":{"cell":{"digits":2},"aggregated":{"digits":2}}},{"accessor":"p-value","name":"p-value","type":"character","format":{"cell":{"digits":3},"aggregated":{"digits":3}}}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"borderless":true,"theme":{"color":"#333","tableStyle":{"borderTop":"2px solid black","borderBottom":"2px solid black"},"headerStyle":{"borderBottom":"2px solid black"}},"dataKey":"c6496af75eb7b76e2510535e6951e65d","key":"c6496af75eb7b76e2510535e6951e65d"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script><p class="caption">
+<p><div id="htmlwidget-9911d65b5ada4a06d0e7" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-9911d65b5ada4a06d0e7">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"term":["Intercept","TV","radio","TV X radio"],"Coefficient":[6.75022020307515,0.019101073831043,0.0288603398999246,0.00108649469798996],"Std. Error":[0.247871369934467,0.00150414550866849,0.0089052728630375,5.24203957977123e-005],"t-statistic":[27.2327546535923,12.6989534728936,3.24081477836723,20.7265641828171],"p-value":["<0.0001","<0.0001","0.0014","<0.0001"]},"columns":[{"accessor":"term","name":"","type":"character","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"style":{"borderRight":"2px solid black","color":"#B44C1C","fontFamily":"Roboto Mono"},"headerStyle":{"borderRight":"2px solid black"}},{"accessor":"Coefficient","name":"Coefficient","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}}},{"accessor":"Std. Error","name":"Std. Error","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}}},{"accessor":"t-statistic","name":"t-statistic","type":"numeric","format":{"cell":{"digits":2},"aggregated":{"digits":2}}},{"accessor":"p-value","name":"p-value","type":"character","format":{"cell":{"digits":3},"aggregated":{"digits":3}}}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"borderless":true,"theme":{"color":"#333","tableStyle":{"borderTop":"2px solid black","borderBottom":"2px solid black"},"headerStyle":{"borderBottom":"2px solid black"}},"dataKey":"c6496af75eb7b76e2510535e6951e65d","key":"c6496af75eb7b76e2510535e6951e65d"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script><p class="caption">
 <span class="tab-num">TABLE 3.9.</span>
 <em>For the <strong><span style='font-family:monospace; color: #B44C1C;'>Advertising</span></strong> data, least squares coefficient estimates associated with the regression of <strong><span style='font-family:monospace; color: #B44C1C;'>sales</span></strong> onto <strong><span style='font-family:monospace; color: #B44C1C;'>TV</span></strong> and <strong><span style='font-family:monospace; color: #B44C1C;'>radio</span></strong>, with an interaction term, as in (3.33)</em>
 </p></p>
@@ -1309,8 +1312,8 @@ The <span class="math inline">\(R^2\)</span> of the quadratic fit is <span class
 <span id="cb7-28"><a href="other-reg-cons.html#cb7-28"></a>  <span class="dt">text =</span> <span class="kw">str_c</span>(<span class="st">&quot;For the &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;Auto&quot;</span>), <span class="st">&quot; data set, least squares coefficient estimates associated with the regression of &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;mpg&quot;</span>), <span class="st">&quot; onto &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;horsepower&quot;</span>), <span class="st">&quot; and &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;horsepower^2&quot;</span>), <span class="st">&quot;.&quot;</span>), </span>
 <span id="cb7-29"><a href="other-reg-cons.html#cb7-29"></a>  <span class="dt">tab_num =</span> <span class="st">&quot;3.10&quot;</span></span>
 <span id="cb7-30"><a href="other-reg-cons.html#cb7-30"></a>  )</span></code></pre></div>
-<p><div id="htmlwidget-ad95a4ec65a92fe4fd5f" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-ad95a4ec65a92fe4fd5f">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"term":["Intercept","horsepower","horsepower^2"],"Coefficient":[56.9000997021131,-0.466189629947354,0.00123053610077392],"Std. Error":[1.80042680630742,0.0311246171195557,0.000122075862760411],"t-statistic":[31.6036728084559,-14.978164330717,10.0800934185409],"p-value":["<0.0001","<0.0001","<0.0001"]},"columns":[{"accessor":"term","name":"","type":"character","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"style":{"borderRight":"2px solid black","color":"#B44C1C","fontFamily":"Roboto Mono"},"headerStyle":{"borderRight":"2px solid black"}},{"accessor":"Coefficient","name":"Coefficient","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}}},{"accessor":"Std. Error","name":"Std. Error","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}}},{"accessor":"t-statistic","name":"t-statistic","type":"numeric","format":{"cell":{"digits":2},"aggregated":{"digits":2}}},{"accessor":"p-value","name":"p-value","type":"character","format":{"cell":{"digits":3},"aggregated":{"digits":3}}}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"borderless":true,"theme":{"color":"#333","tableStyle":{"borderTop":"2px solid black","borderBottom":"2px solid black"},"headerStyle":{"borderBottom":"2px solid black"}},"dataKey":"3ee1ae39c81f552d6546bbe3a8ddb95c","key":"3ee1ae39c81f552d6546bbe3a8ddb95c"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script><p class="caption">
+<p><div id="htmlwidget-4b0c43eaf4b193acdf9d" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4b0c43eaf4b193acdf9d">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"term":["Intercept","horsepower","horsepower^2"],"Coefficient":[56.9000997021131,-0.466189629947354,0.00123053610077392],"Std. Error":[1.80042680630742,0.0311246171195557,0.000122075862760411],"t-statistic":[31.6036728084559,-14.978164330717,10.0800934185409],"p-value":["<0.0001","<0.0001","<0.0001"]},"columns":[{"accessor":"term","name":"","type":"character","format":{"cell":{"digits":3},"aggregated":{"digits":3}},"style":{"borderRight":"2px solid black","color":"#B44C1C","fontFamily":"Roboto Mono"},"headerStyle":{"borderRight":"2px solid black"}},{"accessor":"Coefficient","name":"Coefficient","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}}},{"accessor":"Std. Error","name":"Std. Error","type":"numeric","format":{"cell":{"digits":3},"aggregated":{"digits":3}}},{"accessor":"t-statistic","name":"t-statistic","type":"numeric","format":{"cell":{"digits":2},"aggregated":{"digits":2}}},{"accessor":"p-value","name":"p-value","type":"character","format":{"cell":{"digits":3},"aggregated":{"digits":3}}}],"sortable":false,"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"borderless":true,"theme":{"color":"#333","tableStyle":{"borderTop":"2px solid black","borderBottom":"2px solid black"},"headerStyle":{"borderBottom":"2px solid black"}},"dataKey":"3ee1ae39c81f552d6546bbe3a8ddb95c","key":"3ee1ae39c81f552d6546bbe3a8ddb95c"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script><p class="caption">
 <span class="tab-num">TABLE 3.10.</span>
 <em>For the <strong><span style='font-family:monospace; color: #B44C1C;'>Auto</span></strong> data set, least squares coefficient estimates associated with the regression of <strong><span style='font-family:monospace; color: #B44C1C;'>mpg</span></strong> onto <strong><span style='font-family:monospace; color: #B44C1C;'>horsepower</span></strong> and <strong><span style='font-family:monospace; color: #B44C1C;'>horsepower^2</span></strong>.</em>
 </p></p>
@@ -1644,7 +1647,11 @@ gitbook.start({
 },
 "download": ["BookdownISL.pdf", "BookdownISL.epub"],
 "toc": {
-"collapse": "none"
+"collapse": "none",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
 }
 });
 });

@@ -24,7 +24,7 @@
 <meta name="author" content="Gareth James, Daniela Witten, Trevor Hastie, &amp; Robert Tibshirani" />
 
 
-<meta name="date" content="2020-12-21" />
+<meta name="date" content="2020-12-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -864,7 +864,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="http://faculty.marshall.usc.edu/gareth-james/ISL/">An Introduction to Statistical Learning</a></li>
+<li><a href="http://faculty.marshall.usc.edu/gareth-james/ISL/" target="blank">An Introduction to Statistical Learning</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
@@ -905,10 +905,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6.2" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>3.6.2</b> Simple Linear Regression</a></li>
 <li class="chapter" data-level="3.6.3" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#multiple-linear-regression"><i class="fa fa-check"></i><b>3.6.3</b> Multiple Linear Regression</a></li>
 <li class="chapter" data-level="3.6.4" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#interaction-terms"><i class="fa fa-check"></i><b>3.6.4</b> Interaction Terms</a></li>
-<li class="chapter" data-level="3.6.5" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#qualitative-predictors-1"><i class="fa fa-check"></i><b>3.6.5</b> Qualitative Predictors</a></li>
-<li class="chapter" data-level="3.6.6" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#writing-functions"><i class="fa fa-check"></i><b>3.6.6</b> Writing Functions</a></li>
+<li class="chapter" data-level="3.6.5" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#non-linear-transformations-of-the-predictors"><i class="fa fa-check"></i><b>3.6.5</b> Non-linear Transformations of the Predictors</a></li>
+<li class="chapter" data-level="3.6.6" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#qualitative-predictors-1"><i class="fa fa-check"></i><b>3.6.6</b> Qualitative Predictors</a></li>
+<li class="chapter" data-level="3.6.7" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#writing-functions"><i class="fa fa-check"></i><b>3.6.7</b> Writing Functions</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.7</b> Exercises</a></li>
+<li class="chapter" data-level="3.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.7</b> Exercises</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="exercises.html"><a href="exercises.html#conceptual"><i class="fa fa-check"></i><b>3.7.1</b> Conceptual</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -975,8 +978,8 @@ A couple of these data sets are also available as text files on the book website
 <span id="cb1-36"><a href="data-sets-used-in-labs-and-exercises.html#cb1-36"></a>  <span class="dt">text =</span> <span class="kw">str_c</span>(<span class="st">&quot;A List of the data sets to perform the labs and exercises in this textbook. All data sets are available in the &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;ISLR&quot;</span>), <span class="st">&quot; library, with the exception of &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;Boston&quot;</span>), <span class="st">&quot; (part of  &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;MASS&quot;</span>), <span class="st">&quot;) and &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;USArrests&quot;</span>), <span class="st">&quot; (part of the base &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;R&quot;</span>), <span class="st">&quot; distribution).&quot;</span>), </span>
 <span id="cb1-37"><a href="data-sets-used-in-labs-and-exercises.html#cb1-37"></a>  <span class="dt">tab_num =</span> <span class="fl">1.1</span></span>
 <span id="cb1-38"><a href="data-sets-used-in-labs-and-exercises.html#cb1-38"></a>  )</span></code></pre></div>
-<p><div id="htmlwidget-fdecde632eb6eba1d4bd" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-fdecde632eb6eba1d4bd">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Name":["Auto","Boston","Caravan","Carseats","College","Default","Hitters","Khan","NCI60","OJ","Portfolio","Smarket","USArrests","Wage","Weekly"],"Description":["Gas mileage, horsepower, and other information for cars.","Housing values and other information about Boston suburbs.","Information about individuals offered caravan insurance.","Information about car seat sales in 400 stores.","Demographic characteristics, tuition, and more for USA colleges.","Customer default records for a credit card company.","Records and salaries for baseball players.","Gene expression measurements for four cancer types.","Gene expression measurements for 64 cancer cell lines","Sales information for Citrus Hill and Minute Maid orange juice.","Past values of financial assets, for use in portfolio allocation.","Daily percentage returns for S&P 500 over a 5-year period.","Crime statistics per 100,000 residents in 50 states of USA.","Income survey data for males in central Atlantic region of USA.","1,089 weekly stock market returns for 21 years."]},"columns":[{"accessor":"Name","name":"Name","type":"character","width":120,"style":{"color":"#B44C1C","fontFamily":"Roboto Mono"}},{"accessor":"Description","name":"Description","type":"character"}],"sortable":false,"defaultPageSize":15,"paginationType":"numbers","showPageInfo":true,"minRows":1,"borderless":true,"theme":{"color":"#333","tableStyle":{"borderTop":"2px solid black","borderBottom":"2px solid black"},"headerStyle":{"borderBottom":"2px solid black"}},"dataKey":"f03e1d6d81a6e92d19bbeef08f5de63f","key":"f03e1d6d81a6e92d19bbeef08f5de63f"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script><p class="caption">
+<p><div id="htmlwidget-2165b690d99d39599485" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2165b690d99d39599485">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Name":["Auto","Boston","Caravan","Carseats","College","Default","Hitters","Khan","NCI60","OJ","Portfolio","Smarket","USArrests","Wage","Weekly"],"Description":["Gas mileage, horsepower, and other information for cars.","Housing values and other information about Boston suburbs.","Information about individuals offered caravan insurance.","Information about car seat sales in 400 stores.","Demographic characteristics, tuition, and more for USA colleges.","Customer default records for a credit card company.","Records and salaries for baseball players.","Gene expression measurements for four cancer types.","Gene expression measurements for 64 cancer cell lines","Sales information for Citrus Hill and Minute Maid orange juice.","Past values of financial assets, for use in portfolio allocation.","Daily percentage returns for S&P 500 over a 5-year period.","Crime statistics per 100,000 residents in 50 states of USA.","Income survey data for males in central Atlantic region of USA.","1,089 weekly stock market returns for 21 years."]},"columns":[{"accessor":"Name","name":"Name","type":"character","width":120,"style":{"color":"#B44C1C","fontFamily":"Roboto Mono"}},{"accessor":"Description","name":"Description","type":"character"}],"sortable":false,"defaultPageSize":15,"paginationType":"numbers","showPageInfo":true,"minRows":1,"borderless":true,"theme":{"color":"#333","tableStyle":{"borderTop":"2px solid black","borderBottom":"2px solid black"},"headerStyle":{"borderBottom":"2px solid black"}},"dataKey":"f03e1d6d81a6e92d19bbeef08f5de63f","key":"f03e1d6d81a6e92d19bbeef08f5de63f"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script><p class="caption">
 <span class="tab-num">TABLE 1.1.</span>
 <em>A List of the data sets to perform the labs and exercises in this textbook. All data sets are available in the <strong><span style='font-family:monospace; color: #B44C1C;'>ISLR</span></strong> library, with the exception of <strong><span style='font-family:monospace; color: #B44C1C;'>Boston</span></strong> (part of  <strong><span style='font-family:monospace; color: #B44C1C;'>MASS</span></strong>) and <strong><span style='font-family:monospace; color: #B44C1C;'>USArrests</span></strong> (part of the base <strong><span style='font-family:monospace; color: #B44C1C;'>R</span></strong> distribution).</em>
 </p></p>
@@ -1032,7 +1035,11 @@ gitbook.start({
 },
 "download": ["BookdownISL.pdf", "BookdownISL.epub"],
 "toc": {
-"collapse": "none"
+"collapse": "none",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
 }
 });
 });
