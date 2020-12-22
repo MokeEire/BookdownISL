@@ -141,3 +141,4 @@ prep_reg_table = function(reg_model){
     select(-pval)
 }
 ```
+
