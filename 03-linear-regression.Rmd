@@ -440,7 +440,7 @@ Then the multiple linear regression model takes the form
   (\#eq:mlin-reg)
 \end{equation} 
 
-where $X_j$ represents the _j_th predictor and $\beta_j$ quantifies the association between that variable and the response.
+where $X_j$ represents the *j*th predictor and $\beta_j$ quantifies the association between that variable and the response.
 We interpret $\beta_j$ as the _average_ effect on $Y$ of a one unit increase in $X_j$, _holding all other predictors fixed_.
 In the advertising example, \@ref(eq:mlin-reg) becomes
 
