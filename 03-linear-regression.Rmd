@@ -1885,7 +1885,7 @@ summary(lm(medv~lstat*age, data = Boston))
 The `lm()` function can also accommodate non-linear transformations of the predictors. 
 For instance, given a predictor X, we can create a predictor _**X**_ using `I(X^2)`. 
 The function `I()` is needed since the `^` has a special meaning in a formula; wrapping as we do allows the standard usage in `R`, which is to raise `X` to the power `2`. 
-We now perform a regression of `medv` onto `lstat` and `lstat`$^\color{#B44C1C}{2}$.
+We now perform a regression of `medv` onto `lstat` and $\color{#B44C1C}{lstat^2}$.
 
 ```{r lab-nlt1, cache=T}
 lm.fit2 = lm(medv~lstat+I(lstat^2))
@@ -1898,20 +1898,20 @@ We use the `anova()` function to further quantify the extent to which the quadra
 lm.fit = lm(medv~lstat)
 anova(lm.fit, lm.fit2)
 ```
-Here Model 1 represents the linear submodel containing only one predictor, `lstat`, while Model 2 corresponds to the larger quadratic model that has two predictors, `lstat` and `lstat`$\color{#B44C1C}^2$.
+Here Model 1 represents the linear submodel containing only one predictor, `lstat`, while Model 2 corresponds to the larger quadratic model that has two predictors, `lstat` and $\color{#B44C1C}{lstat^2}$.
 The `anova()` function performs a hypothesis test comparing the two models. 
 The null hypothesis is that the two models fit the data equally well, and the alternative hypothesis is that the full model is superior. 
 Here the F-statistic is 135 and the associated p-value is virtually zero. 
-This provides very clear evidence that the model containing the predictors `lstat` and `lstat`$\color{#B44C1C}^2$ is far superior to the model that only contains the predictor `lstat`. 
+This provides very clear evidence that the model containing the predictors `lstat` and $\color{#B44C1C}{\textbf{lstat}^2}$ is far superior to the model that only contains the predictor `lstat`. 
 This is not surprising, since earlier we saw evidence for non-linearity in the relationship between `medv` and `lstat`.
 If we type
 
-```{r lab-nlt3, cache=T}
+```{r lab-nlt3, cache=T, fig.width = 8, fig.height = 6}
 par(mfrow = c(2,2))
 plot(lm.fit2)
 ```
 
-then we see that when the `lstat`$\color{#B44C1C}^2$ term is included in the model, there is little discernible pattern in the residuals.
+then we see that when the $\color{#B44C1C}{lstat^2}$ term is included in the model, there is little discernible pattern in the residuals.
 
 In order to create a cubic fit, we can include a predictor of the form `I(X^3)`. 
 However, this approach can start to get cumbersome for higher order polynomials. 
