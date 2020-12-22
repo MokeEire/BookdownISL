@@ -54,6 +54,10 @@ source("visualization_functions.R")
 ```
 
 # Preface
+***
+<div style="text-align:center;">
+![](https://images-na.ssl-images-amazon.com/images/I/41pP5+SAv-L._SX330_BO1,204,203,200_.jpg)
+</div>
 
 I (not an author) am compiling this book for myself as a learning exercise for both the contents of ISLR and the use of the [**bookdown**](https://bookdown.org/) package. 
 
