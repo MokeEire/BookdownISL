@@ -1730,7 +1730,7 @@ The command causes an error because `R` does not know where to find the variable
 in `Boston.` If we attach `Boston`, the first line works fine because `R` now recognizes the variables.
 
 ```{r lab-slr3, cache=T}
-lm.fit=lm(medv~lstat, data=Boston)
+lm.fit = lm(medv~lstat, data=Boston)
 attach(Boston)
 lm.fit = lm(medv~lstat)
 ```
@@ -1742,6 +1742,7 @@ This gives us p-values and standard errors for the coefficients, as well as the 
 ```{r lab-slr4, cache=T}
 lm.fit
 ```
+
 ```{r lab-slr5, cache=T}
 summary(lm.fit)
 ```
@@ -1760,7 +1761,7 @@ The `predict()` function can be used to produce confidence intervals and predict
 
 ```{r lab-slr8, cache=T}
 predict(lm.fit, 
-        data.frame(lstat=c(5,10,15)),
+        data.frame(lstat = c(5,10,15)),
         interval="prediction")
 ```
 For instance, the $95\%$ confidence interval associated with a `lstat` value of 10 is $(24.47, 25.63)$, and the $95\%$ prediction interval is $(12.828, 37.28)$. 
@@ -1769,7 +1770,7 @@ As expected, the confidence and prediction intervals are centered around the sam
 We will now plot `medv` and `lstat` along with the least squares regression line using the `plot()` and `abline()` functions.
 
 ```{r lab-slr9, cache=T}
-plot(lstat,medv)
+plot(lstat, medv)
 abline(lm.fit)
 ```
 
@@ -1860,7 +1861,7 @@ summary(lm.fit1)
 Alternatively, the `update()` function can be used.
 
 ```{r lab-mlr5, cache=T}
-lm.fit1=update(lm.fit, ~.-age)
+lm.fit1 = update(lm.fit, ~.-age)
 ```
 
 ### Interaction Terms
@@ -1870,8 +1871,9 @@ The syntax `lstat:black` tells `R` to include an interaction term between `lstat
 The syntax `lstat*age` simultaneously includes `lstat`, `age`, and the interaction term `lstat`$\times$`age` as predictors; it is a shorthand for `lstat+age+lstat:age`.
 
 ```{r lab-mlr6, cache=T}
-summary(lm(medv~lstat*age, data =))
+summary(lm(medv~lstat*age, data = Boston))
 ```
+
 ### Non-linear Transformations of the Predictors
 
 The `lm()` function can also accommodate non-linear transformations of the predictors. 
@@ -1899,7 +1901,7 @@ This is not surprising, since earlier we saw evidence for non-linearity in the r
 If we type
 
 ```{r lab-nlt3, cache=T}
-par(mfrow=c(2,2))
+par(mfrow = c(2,2))
 plot(lm.fit2)
 ```
 
