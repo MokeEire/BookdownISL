@@ -4,22 +4,22 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Introduction | An Introduction to Statistical Learning: with Applications in R</title>
+  <title>1 Introduction | An Introduction to Statistical Learning: with Applications in R</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Introduction | An Introduction to Statistical Learning: with Applications in R" />
+  <meta property="og:title" content="1 Introduction | An Introduction to Statistical Learning: with Applications in R" />
   <meta property="og:type" content="book" />
-  
-  
+  <meta property="og:url" content="http://faculty.marshall.usc.edu/gareth-james/ISL/" />
+  <meta property="og:image" content="http://faculty.marshall.usc.edu/gareth-james/ISL/images/isl_cover.jpg" />
   <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="github-repo" content="MokeEire/BookdownISL" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Introduction | An Introduction to Statistical Learning: with Applications in R" />
+  <meta name="twitter:title" content="1 Introduction | An Introduction to Statistical Learning: with Applications in R" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  
+  <meta name="twitter:image" content="http://faculty.marshall.usc.edu/gareth-james/ISL/images/isl_cover.jpg" />
 
 <meta name="author" content="Gareth James, Daniela Witten, Trevor Hastie, &amp; Robert Tibshirani" />
 
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="an-overview-of-statistical-learning.html"/>
+<link rel="next" href="linreg.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -867,50 +867,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="http://faculty.marshall.usc.edu/gareth-james/ISL/" target="blank">An Introduction to Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
-<li class="chapter" data-level="2.1" data-path="an-overview-of-statistical-learning.html"><a href="an-overview-of-statistical-learning.html"><i class="fa fa-check"></i><b>2.1</b> An Overview of Statistical Learning</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="an-overview-of-statistical-learning.html"><a href="an-overview-of-statistical-learning.html#wage-data"><i class="fa fa-check"></i><b>2.1.1</b> Wage Data</a></li>
-<li class="chapter" data-level="2.1.2" data-path="an-overview-of-statistical-learning.html"><a href="an-overview-of-statistical-learning.html#stock-market-data"><i class="fa fa-check"></i><b>2.1.2</b> Stock Market Data</a></li>
-<li class="chapter" data-level="2.1.3" data-path="an-overview-of-statistical-learning.html"><a href="an-overview-of-statistical-learning.html#gene-expression-data"><i class="fa fa-check"></i><b>2.1.3</b> Gene Expression Data</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#resources-used-in-making-this-book"><i class="fa fa-check"></i>Resources used in making this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#custom-functions-used-throughout-the-book"><i class="fa fa-check"></i>Custom functions used throughout the book</a><ul>
+<li><a href="index.html#theme_islr"><code>theme_islr()</code></a></li>
+<li><a href="index.html#prep_reg_table"><code>prep_reg_table()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="a-brief-history-of-statistical-learning.html"><a href="a-brief-history-of-statistical-learning.html"><i class="fa fa-check"></i><b>2.2</b> A Brief History of Statistical Learning</a></li>
-<li class="chapter" data-level="2.3" data-path="this-book.html"><a href="this-book.html"><i class="fa fa-check"></i><b>2.3</b> This Book</a></li>
-<li class="chapter" data-level="2.4" data-path="who-should-read-this-book.html"><a href="who-should-read-this-book.html"><i class="fa fa-check"></i><b>2.4</b> Who Should Read This Book</a></li>
-<li class="chapter" data-level="2.5" data-path="notation-and-simple-matrix-algebra.html"><a href="notation-and-simple-matrix-algebra.html"><i class="fa fa-check"></i><b>2.5</b> Notation and Simple Matrix Algebra</a></li>
-<li class="chapter" data-level="2.6" data-path="organization-of-this-book.html"><a href="organization-of-this-book.html"><i class="fa fa-check"></i><b>2.6</b> Organization of This Book</a></li>
-<li class="chapter" data-level="2.7" data-path="data-sets-used-in-labs-and-exercises.html"><a href="data-sets-used-in-labs-and-exercises.html"><i class="fa fa-check"></i><b>2.7</b> Data Sets Used in Labs and Exercises</a></li>
-<li class="chapter" data-level="2.8" data-path="book-website.html"><a href="book-website.html"><i class="fa fa-check"></i><b>2.8</b> Book Website</a></li>
-<li class="chapter" data-level="2.9" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>2.9</b> Acknowledgements</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="linreg.html"><a href="linreg.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a><ul>
-<li class="chapter" data-level="3.1" data-path="simple-lin-reg.html"><a href="simple-lin-reg.html"><i class="fa fa-check"></i><b>3.1</b> Simple Linear Regression</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="simple-lin-reg.html"><a href="simple-lin-reg.html#simple-coef-est"><i class="fa fa-check"></i><b>3.1.1</b> Estimating the Coefficients</a></li>
-<li class="chapter" data-level="3.1.2" data-path="simple-lin-reg.html"><a href="simple-lin-reg.html#assess-coef-acc"><i class="fa fa-check"></i><b>3.1.2</b> Assessing the Accuracy of the Coefficient Estimates</a></li>
-<li class="chapter" data-level="3.1.3" data-path="simple-lin-reg.html"><a href="simple-lin-reg.html#assess-model-acc"><i class="fa fa-check"></i><b>3.1.3</b> Assessing the Accuracy of the Model</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#an-overview-of-statistical-learning"><i class="fa fa-check"></i><b>1.1</b> An Overview of Statistical Learning</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#wage-data"><i class="fa fa-check"></i><b>1.1.1</b> Wage Data</a></li>
+<li class="chapter" data-level="1.1.2" data-path="intro.html"><a href="intro.html#stock-market-data"><i class="fa fa-check"></i><b>1.1.2</b> Stock Market Data</a></li>
+<li class="chapter" data-level="1.1.3" data-path="intro.html"><a href="intro.html#gene-expression-data"><i class="fa fa-check"></i><b>1.1.3</b> Gene Expression Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="mult-lin-reg.html"><a href="mult-lin-reg.html"><i class="fa fa-check"></i><b>3.2</b> Multiple Linear Regression</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="mult-lin-reg.html"><a href="mult-lin-reg.html#est-reg-coef"><i class="fa fa-check"></i><b>3.2.1</b> Estimating the Regression Coefficients</a></li>
-<li class="chapter" data-level="3.2.2" data-path="mult-lin-reg.html"><a href="mult-lin-reg.html#important-questions"><i class="fa fa-check"></i><b>3.2.2</b> Some Important Questions</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#a-brief-history-of-statistical-learning"><i class="fa fa-check"></i><b>1.2</b> A Brief History of Statistical Learning</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#this-book"><i class="fa fa-check"></i><b>1.3</b> This Book</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#who-should-read-this-book"><i class="fa fa-check"></i><b>1.4</b> Who Should Read This Book</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#notation-and-simple-matrix-algebra"><i class="fa fa-check"></i><b>1.5</b> Notation and Simple Matrix Algebra</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#organization-of-this-book"><i class="fa fa-check"></i><b>1.6</b> Organization of This Book</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#data-sets-used-in-labs-and-exercises"><i class="fa fa-check"></i><b>1.7</b> Data Sets Used in Labs and Exercises</a></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#book-website"><i class="fa fa-check"></i><b>1.8</b> Book Website</a></li>
+<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#acknowledgements"><i class="fa fa-check"></i><b>1.9</b> Acknowledgements</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="other-reg-cons.html"><a href="other-reg-cons.html"><i class="fa fa-check"></i><b>3.3</b> Other Considerations in the Regression Model</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="other-reg-cons.html"><a href="other-reg-cons.html#qualitative-predictors"><i class="fa fa-check"></i><b>3.3.1</b> Qualitative Predictors</a></li>
-<li class="chapter" data-level="3.3.2" data-path="other-reg-cons.html"><a href="other-reg-cons.html#extensions-of-the-linear-model"><i class="fa fa-check"></i><b>3.3.2</b> Extensions of the Linear Model</a></li>
-<li class="chapter" data-level="3.3.3" data-path="other-reg-cons.html"><a href="other-reg-cons.html#potential-problems"><i class="fa fa-check"></i><b>3.3.3</b> Potential Problems</a></li>
+<li class="chapter" data-level="2" data-path="linreg.html"><a href="linreg.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a><ul>
+<li class="chapter" data-level="2.1" data-path="linreg.html"><a href="linreg.html#simple-lin-reg"><i class="fa fa-check"></i><b>2.1</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="linreg.html"><a href="linreg.html#simple-coef-est"><i class="fa fa-check"></i><b>2.1.1</b> Estimating the Coefficients</a></li>
+<li class="chapter" data-level="2.1.2" data-path="linreg.html"><a href="linreg.html#assess-coef-acc"><i class="fa fa-check"></i><b>2.1.2</b> Assessing the Accuracy of the Coefficient Estimates</a></li>
+<li class="chapter" data-level="2.1.3" data-path="linreg.html"><a href="linreg.html#assess-model-acc"><i class="fa fa-check"></i><b>2.1.3</b> Assessing the Accuracy of the Model</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="the-marketing-plan.html"><a href="the-marketing-plan.html"><i class="fa fa-check"></i><b>3.4</b> The Marketing Plan</a></li>
-<li class="chapter" data-level="3.5" data-path="comparison-of-linear-regression-with-k-nearest-neighbors.html"><a href="comparison-of-linear-regression-with-k-nearest-neighbors.html"><i class="fa fa-check"></i><b>3.5</b> Comparison of Linear Regression with K-Nearest Neighbors</a></li>
-<li class="chapter" data-level="3.6" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html"><i class="fa fa-check"></i><b>3.6</b> Lab: Linear Regression</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#libraries"><i class="fa fa-check"></i><b>3.6.1</b> Libraries</a></li>
-<li class="chapter" data-level="3.6.2" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>3.6.2</b> Simple Linear Regression</a></li>
-<li class="chapter" data-level="3.6.3" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#multiple-linear-regression"><i class="fa fa-check"></i><b>3.6.3</b> Multiple Linear Regression</a></li>
-<li class="chapter" data-level="3.6.4" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#interaction-terms"><i class="fa fa-check"></i><b>3.6.4</b> Interaction Terms</a></li>
-<li class="chapter" data-level="3.6.5" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#non-linear-transformations-of-the-predictors"><i class="fa fa-check"></i><b>3.6.5</b> Non-linear Transformations of the Predictors</a></li>
-<li class="chapter" data-level="3.6.6" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#qualitative-predictors-1"><i class="fa fa-check"></i><b>3.6.6</b> Qualitative Predictors</a></li>
-<li class="chapter" data-level="3.6.7" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#writing-functions"><i class="fa fa-check"></i><b>3.6.7</b> Writing Functions</a></li>
+<li class="chapter" data-level="2.2" data-path="linreg.html"><a href="linreg.html#mult-lin-reg"><i class="fa fa-check"></i><b>2.2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="linreg.html"><a href="linreg.html#est-reg-coef"><i class="fa fa-check"></i><b>2.2.1</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="2.2.2" data-path="linreg.html"><a href="linreg.html#important-questions"><i class="fa fa-check"></i><b>2.2.2</b> Some Important Questions</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.7</b> Exercises</a><ul>
-<li class="chapter" data-level="3.7.1" data-path="exercises.html"><a href="exercises.html#conceptual"><i class="fa fa-check"></i><b>3.7.1</b> Conceptual</a></li>
+<li class="chapter" data-level="2.3" data-path="linreg.html"><a href="linreg.html#other-reg-cons"><i class="fa fa-check"></i><b>2.3</b> Other Considerations in the Regression Model</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="linreg.html"><a href="linreg.html#qualitative-predictors"><i class="fa fa-check"></i><b>2.3.1</b> Qualitative Predictors</a></li>
+<li class="chapter" data-level="2.3.2" data-path="linreg.html"><a href="linreg.html#extensions-of-the-linear-model"><i class="fa fa-check"></i><b>2.3.2</b> Extensions of the Linear Model</a></li>
+<li class="chapter" data-level="2.3.3" data-path="linreg.html"><a href="linreg.html#potential-problems"><i class="fa fa-check"></i><b>2.3.3</b> Potential Problems</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="linreg.html"><a href="linreg.html#the-marketing-plan"><i class="fa fa-check"></i><b>2.4</b> The Marketing Plan</a></li>
+<li class="chapter" data-level="2.5" data-path="linreg.html"><a href="linreg.html#comparison-of-linear-regression-with-k-nearest-neighbors"><i class="fa fa-check"></i><b>2.5</b> Comparison of Linear Regression with K-Nearest Neighbors</a></li>
+<li class="chapter" data-level="2.6" data-path="linreg.html"><a href="linreg.html#lab-linear-regression"><i class="fa fa-check"></i><b>2.6</b> Lab: Linear Regression</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="linreg.html"><a href="linreg.html#libraries"><i class="fa fa-check"></i><b>2.6.1</b> Libraries</a></li>
+<li class="chapter" data-level="2.6.2" data-path="linreg.html"><a href="linreg.html#simple-linear-regression"><i class="fa fa-check"></i><b>2.6.2</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="2.6.3" data-path="linreg.html"><a href="linreg.html#multiple-linear-regression"><i class="fa fa-check"></i><b>2.6.3</b> Multiple Linear Regression</a></li>
+<li class="chapter" data-level="2.6.4" data-path="linreg.html"><a href="linreg.html#interaction-terms"><i class="fa fa-check"></i><b>2.6.4</b> Interaction Terms</a></li>
+<li class="chapter" data-level="2.6.5" data-path="linreg.html"><a href="linreg.html#non-linear-transformations-of-the-predictors"><i class="fa fa-check"></i><b>2.6.5</b> Non-linear Transformations of the Predictors</a></li>
+<li class="chapter" data-level="2.6.6" data-path="linreg.html"><a href="linreg.html#qualitative-predictors-1"><i class="fa fa-check"></i><b>2.6.6</b> Qualitative Predictors</a></li>
+<li class="chapter" data-level="2.6.7" data-path="linreg.html"><a href="linreg.html#writing-functions"><i class="fa fa-check"></i><b>2.6.7</b> Writing Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="linreg.html"><a href="linreg.html#exercises"><i class="fa fa-check"></i><b>2.7</b> Exercises</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="linreg.html"><a href="linreg.html#conceptual"><i class="fa fa-check"></i><b>2.7.1</b> Conceptual</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -934,7 +940,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="intro" class="section level1">
-<h1><span class="header-section-number">2</span> Introduction</h1>
+<h1><span class="header-section-number">1</span> Introduction</h1>
 <p>In progress.
 But for now, in case anyone manages to stumble across this repository, it is probably good to know a few things before you read ahead:</p>
 <ol style="list-style-type: decimal">
@@ -946,6 +952,402 @@ In a bid to use the authors’ formatting, words in orange/red are related to <c
 In attempting to bring the user-friendliness of online books to the material, words in blue indicate <strong><span style="font-family:monospace; color: #1188ce;">keywords</span></strong>.
 In the book, these words are italicized and marked in the margins of the page.</li>
 </ol>
+<div id="an-overview-of-statistical-learning" class="section level2">
+<h2><span class="header-section-number">1.1</span> An Overview of Statistical Learning</h2>
+<p><em>Statistical learning</em> refers to a vast set of tools for <em>understanding data</em>.
+These tools can be classified as <em>supervised</em> or <em>unsupervised.</em> Broadly speaking, supervised statistical learning involves building a statistical model for predicting, or estimating, an <em>output</em> based on one or more <em>inputs.</em>
+Problems of this nature occur in fields as diverse as business, medicine, astrophysics, and public policy.
+With unsupervised statistical learning, there are inputs but
+no supervising output; nevertheless we can learn relationships and structure from such data.
+To provide an illustration of some applications of statistical learning, we briefly discuss three real-world data sets that are considered in this book.</p>
+<div id="wage-data" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Wage Data</h3>
+<p>In this application (which we refer to as the <code>Wage</code> data set throughout this book), we examine a number of factors that relate to wages for a group of males from the Atlantic region of the United States.
+In particular, we wish to understand the association between an employee’s <code>age</code> and <code>education</code>, as well as the calendar <code>year</code>,on his <code>wage</code>. Consider, for example, the left-hand panel of Figure 1.1, which displays <code>wage</code> versus <code>age</code> for each of the individuals in the data set.
+There is evidence that <code>wage</code> increases with <code>age</code> but then decreases again after approximately age 60.
+The blue line, which provides an estimate of the average <code>wage</code> for a given <code>age</code>, makes this trend clearer.</p>
+<p>FIGURE 1.1</p>
+<p>Given an employee’s <code>age</code>, we can use this curve to <em>predict</em> his <code>wage</code>. However, it is also clear from Figure 1.1 that there is a signiﬁcant amount of variability associated with this average value, and so <code>age</code> alone is unlikely to provide an accurate prediction of a particular man’s <code>wage</code>.</p>
+<p>We also have information regarding each employee’s education level and the year in which the <code>wage</code> was earned.
+The center and right-hand panels of Figure 1.1, which display <code>wage</code> as a function of both <code>year</code> and <code>education</code>, indicate that both of these factors are associated with <code>wage</code>.
+Wages increase by approximately $10,000, in a roughly linear (or straight-line) fashion, between 2003 and 2009, though this rise is very slight relative to the variability in the data.
+Wages are also typically greater for individuals with higher education levels: men with the lowest education level (1) tend to
+have substantially lower wages than those with the highest education level (5).
+Clearly, the most accurate prediction of a given man’s <code>wage</code> will be obtained by combining his <code>age</code>, his <code>education</code>,and the <code>year</code>.
+In Chapter 3, we discuss linear regression, which can be used to predict <code>wage</code> from this data set.
+Ideally, we should predict <code>wage</code> in a way that accounts for the non-linear relationship between <code>wage</code> and <code>age</code>.
+In Chapter 7, we discuss a class of approaches for addressing this problem.</p>
+</div>
+<div id="stock-market-data" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Stock Market Data</h3>
+<p>The <code>Wage</code> data involves predicting a <em>continuous</em> or <em>quantitative</em> output value.
+This is often referred to as a <em>regression</em> problem.
+However, in certain cases we may instead wish to predict a non-numerical value—that is, a <em>categorical</em> or <em>qualitative</em> output.
+For example, in Chapter 4 we examine a stock market data set that contains the daily movements in the Standard &amp; Poor’s 500 (S&amp;P) stock index over a 5-year period between 2001 and 2005.
+We refer to this as the <code>Smarket</code> data.
+The goal is to predict whether the index will <em>increase</em> or <em>decrease</em> on a given day using the past 5 days’ percentage changes in the index.
+Here the statistical learning problem does not involve predicting a numerical value.
+Instead it involves predicting whether a given day’s stock market performance will fall into the <code>Up</code> bucket or the <code>Down</code> bucket.
+This is known as a <em>classiﬁcation</em> problem.
+A model that could accurately predict the direction in which the market will move would be very useful!</p>
+<p>FIGURE 1.2</p>
+<p>The left-hand panel of Figure 1.2 displays two boxplots of the previous
+day’s percentage changes in the stock index: one for the 648 days for which the market increased on the subsequent day, and one for the 602 days for which the market decreased.
+The two plots look almost identical, suggesting that there is no simple strategy for using yesterday’s movement in the S&amp;P to predict today’s returns.
+The remaining panels, which display boxplots for the percentage changes 2 and 3 days previous to today, similarly indicate little association between past and present returns.
+Of course, this lack of pattern is to be expected: in the presence of strong correlations between successive days’ returns, one could adopt a simple trading strategy to generate profits from the market.
+Nevertheless, in Chapter 4, we explore these data using several different statistical learning methods.
+Interestingly, there are hints of some weak trends in the data that suggest that, at least for this 5-year period, it is possible to correctly predict the direction of movement in the market approximately 60% of the time (Figure 1.3).</p>
+<p>FIGURE 1.3</p>
+</div>
+<div id="gene-expression-data" class="section level3">
+<h3><span class="header-section-number">1.1.3</span> Gene Expression Data</h3>
+<p>The previous two applications illustrate data sets with both input and output variables.
+However, another important class of problems involves situations in which we only observe input variables, with no corresponding output.
+For example, in a marketing setting, we might have demographic information for a number of current or potential customers.
+We may wish to understand which types of customers are similar to each other by grouping individuals according to their observed characteristics.
+This is known as a <em>clustering</em> problem.
+Unlike in the previous examples, here we are not trying to predict an output variable.</p>
+<p>We devote Chapter 10 to a discussion of statistical learning methods for problems in which no natural output variable is available.
+We consider the <strong><span style="font-family:monospace; color: #B44C1C;">NCI60</span></strong> data set, which consists of <span class="math inline">\(6,830\)</span> gene expression measurements for each of 64 cancer cell lines.
+Instead of predicting a particular output variable, we are interested in determining whether there are groups, or clusters, among the cell lines based on their gene expression measurements.
+This is a diﬃcult question to address, in part because there are thousands of gene expression measurements per cell line, making it hard to visualize the data.</p>
+<p>The left-hand panel of Figure 1.4 addresses this problem by representing each of the 64 cell lines using just two numbers, <span class="math inline">\(Z_1\)</span>
+and <span class="math inline">\(Z_2\)</span>.
+These are the first two <em>principal components</em> of the data, which summarize the <span class="math inline">\(6,830\)</span> expression measurements for each cell line down to two numbers or <em>dimensions.</em>
+While it is likely that this dimension reduction has resulted in some loss of information, it is now possible to visually examine the data for evidence of clustering.
+Deciding on the number of clusters is often a difficult problem.
+But the left-hand panel of Figure 1.4 suggests at least four groups of cell lines, which we have represented using separate colors.
+We can now examine the cell lines within each cluster for similarities in their types of cancer, in order to better understand the relationship between gene expression levels and cancer.</p>
+<p>In this particular data set, it turns out that the cell lines correspond to 14 different types of cancer. (However, this information was not used to create the left-hand panel of Figure 1.4.)
+The right-hand panel of Figure 1.4 is identical to the left-hand panel, except that the 14 cancer types are shown using distinct colored symbols.
+There is clear evidence that cell lines with the same cancer type tend to be located near each other in this two-dimensional representation.
+In addition, even though the cancer information was not used to produce the left-hand panel, the clustering obtained does bear some resemblance to some of the actual cancer types observed in the right-hand panel.
+This provides some independent verification of the accuracy of our clustering analysis.</p>
+</div>
+</div>
+<div id="a-brief-history-of-statistical-learning" class="section level2">
+<h2><span class="header-section-number">1.2</span> A Brief History of Statistical Learning</h2>
+<p>Though the term <em>statistical learning</em> is fairly new, many of the concepts that underlie the ﬁeld were developed long ago.
+At the beginning of the nineteenth century, Legendre and Gauss published papers on the <em>method of least squares</em>, which implemented the earliest form of what is now known as <em>linear regression</em>.
+The approach was first successfully applied to problems in astronomy.
+Linear regression is used for predicting quantitative values, such as an individual’s salary.
+In order to predict qualitative values, such as whether a patient survives or dies, or whether the stock market increases or decreases, Fisher proposed <em>linear discriminant analysis</em> in 1936.
+In the 1940s, various authors put forth an alternative approach, <em>logistic regression</em>.
+In the early 1970s, Nelder and Wedderburn coined the term <em>generalized linear models</em> for an entire class of statistical learning methods that include both linear and logistic regression as special cases.</p>
+<p>By the end of the 1970s, many more techniques for learning from data were available.
+However, they were almost exclusively <em>linear</em> methods, because fitting <em>non-linear</em> relationships was computationally infeasible at the time.
+By the 1980s, computing technology had finally improved sufficiently that non-linear methods were no longer computationally prohibitive.
+In mid 1980s Breiman, Friedman, Olshen and Stone introduced <em>classification and regression trees</em>, and were among the first to demonstrate the power of a detailed practical implementation of a method, including cross-validation for model selection.
+Hastie and Tibshirani coined the term <em>generalized additive models</em> in 1986 for a class of non-linear extensions to generalized linear
+models, and also provided a practical software implementation.</p>
+<p>Since that time, inspired by the advent of <em>machine learning</em> and other disciplines, statistical learning has emerged as a new subfield in statistics, focused on supervised and unsupervised modeling and prediction.
+In recent years, progress in statistical learning has been marked by the increasing availability of powerful and relatively user-friendly software, such as the popular and freely available <code>R</code> system.
+This has the potential to continue the transformation of the field from a set of techniques used and developed by statisticians and computer scientists to an essential toolkit for a much broader community.</p>
+</div>
+<div id="this-book" class="section level2">
+<h2><span class="header-section-number">1.3</span> This Book</h2>
+<p><em>The Elements of Statistical Learning</em> (ESL) by Hastie, Tibshirani, and Friedman was first published in 2001.
+Since that time, it has become an important reference on the fundamentals of statistical machine learning.
+Its success derives from its comprehensive and detailed treatment of many important topics in statistical learning, as well as the fact that (relative to many upper-level statistics textbooks) it is accessible to a wide audience.
+However, the greatest factor behind the success of ESL has been its topical nature.
+At the time of its publication, interest in the field of statistical learning was starting to explode.
+ESL provided one of the first accessible and comprehensive introductions to the topic.</p>
+<p>Since ESL was first published, the field of statistical learning has continued to flourish.
+The field’s expansion has taken two forms.
+The most obvious growth has involved the development of new and improved statistical learning approaches aimed at answering a range of scientific questions across a number of fields.
+However, the field of statistical learning has also expanded its audience.
+In the 1990s, increases in computational power generated a surge of interest in the field from non-statisticians who were eager to use cutting-edge statistical tools to analyze their data.
+Unfortunately, the highly technical nature of these approaches meant that the user community remained primarily restricted to experts in statistics, computer science, and related fields with the training (and time) to understand and implement them.</p>
+<p>In recent years, new and improved software packages have significantly eased the implementation burden for many statistical learning methods.
+At the same time, there has been growing recognition across a number of fields, from business to health care to genetics to the social sciences and beyond, that statistical learning is a powerful tool with important practical applications.
+As a result, the field has moved from one of primarily academic interest to a mainstream discipline, with an enormous potential audience.
+This trend will surely continue with the increasing availability of enormous quantities of data and the software to analyze it.</p>
+<p>The purpose of <em>An Introduction to Statistical Learning</em> (ISL) is to facilitate the transition of statistical learning from an academic to a mainstream field.
+ISL is not intended to replace ESL, which is a far more comprehensive text both in terms of the number of approaches considered and the depth to which they are explored.
+We consider ESL to be an important companion for professionals (with graduate degrees in statistics, machine learning, or related fields) who need to understand the technical details behind statistical learning approaches.
+However, the community of users of statistical learning techniques has expanded to include individuals with a wider range of interests and backgrounds.
+Therefore, we believe that there is now a place for a less technical and more accessible version of ESL.</p>
+<p>In teaching these topics over the years, we have discovered that they are of interest to master’s and PhD students in fields as disparate as business administration, biology, and computer science, as well as to quantitatively oriented upper-division undergraduates.
+It is important for this diverse group to be able to understand the models, intuitions, and strengths and weaknesses of the various approaches.
+But for this audience, many of the technical details behind statistical learning methods, such as optimization algorithms and theoretical properties, are not of primary interest.
+We believe that these students do not need a deep understanding of these aspects in order to become informed users of the various methodologies, and in order to contribute to their chosen fields through the use of statistical learning tools.</p>
+<p>ISLR is based on the following four premises.</p>
+<ol style="list-style-type: decimal">
+<li><p><em>Many statistical learning methods are relevant and useful in a wide range of academic and non-academic disciplines, beyond just the statistical sciences</em>.
+We believe that many contemporary statistical learning procedures should, and will, become as widely available and used as is currently the case for classical methods such as linear regression.
+As a result, rather than attempting to consider every possible approach (an impossible task), we have concentrated on presenting the methods that we believe are most widely applicable.</p></li>
+<li><p><em>Statistical learning should not be viewed as a series of black boxes</em>.
+No single approach will perform well in all possible applications.
+Without understanding all of the cogs inside the box, or the interaction between those cogs, it is impossible to select the best box.
+Hence, we have attempted to carefully describe the model, intuition, assumptions, and trade-offs behind each of the methods that we consider.</p></li>
+<li><p><em>While it is important to know what job is performed by each cog, it is not necessary to have the skills to construct the machine inside the box!</em>
+Thus, we have minimized discussion of technical details related to fitting procedures and theoretical properties.
+We assume that the reader is comfortable with basic mathematical concepts, but we do not assume a graduate degree in the mathematical sciences.
+For instance, we have almost completely avoided the use of matrix algebra, and it is possible to understand the entire book without a detailed knowledge of matrices and vectors.</p></li>
+<li><p><em>We presume that the reader is interested in applying statistical learning methods to real-world problems.</em>
+In order to facilitate this, as well as to motivate the techniques discussed, we have devoted a section within each chapter to <code>R</code> computer labs.
+In each lab, we walk the reader through a realistic application of the methods considered in that chapter.
+When we have taught this material in our courses, we have allocated roughly one-third of classroom time to working through the labs, and we have found them to be extremely useful.
+Many of the less computationally-oriented students who were initially intimidated by <code>R</code>’s command level interface got the hang of things over the course of the quarter or semester.
+We have used <code>R</code> because it is freely available and is powerful enough to implement all of the methods discussed in the book.
+It also has optional packages that can be downloaded to implement literally thousands of additional methods.
+Most importantly, <code>R</code> is the language of choice for academic statisticians, and new approaches often become available in <code>R</code> years before they are implemented in commercial packages.
+However, the labs in ISL are self-contained, and can be skipped if the reader wishes to use a different software package or does not wish to apply the methods discussed to real-world problems.</p></li>
+</ol>
+</div>
+<div id="who-should-read-this-book" class="section level2">
+<h2><span class="header-section-number">1.4</span> Who Should Read This Book</h2>
+<p>This book is intended for anyone who is interested in using modern statistical methods for modeling and prediction from data.
+This group includes scientists, engineers, data analysts, or <em>quants</em>, but also less technical individuals with degrees in non-quantitative fields such as the social sciences or business.
+We expect that the reader will have had at least one elementary course in statistics.
+Background in linear regression is also useful, though not required, since we review the key concepts behind linear regression in Chapter 3.
+The mathematical level of this book is modest, and a detailed knowledge of matrix operations is not required.
+This book provides an introduction to the statistical programming language <code>R</code>.
+Previous exposure to a programming language, such as <code>MATLAB</code> or <code>Python</code>, is useful but not required.</p>
+<p>We have successfully taught material at this level to master’s and PhD students in business, computer science, biology, earth sciences, psychology, and many other areas of the physical and social sciences. This book could also be appropriate for advanced undergraduates who have already taken a course on linear regression.
+In the context of a more mathematically rigorous course in which ESL serves as the primary textbook, ISL could be used as a supplementary text for teaching computational aspects of the various approaches.</p>
+</div>
+<div id="notation-and-simple-matrix-algebra" class="section level2">
+<h2><span class="header-section-number">1.5</span> Notation and Simple Matrix Algebra</h2>
+<p>Choosing notation for a textbook is always a difficult task.
+For the most part we adopt the same notational conventions as ESL.
+We will use <em>n</em> to represent the number of distinct data points, or observations, in our sample.
+We will let <em>p</em> denote the number of variables that are available for use in making predictions.
+For example, the <code>Wage</code> data set consists of 12 variables for <span class="math inline">\(3,000\)</span> people, so we have <span class="math inline">\(n =3,000\)</span> observations and
+<span class="math inline">\(p = 12\)</span> variables (such as <code>year</code>, <code>age</code>, <code>wage</code>, and more).
+Note that throughout this book, we indicate variable names using colored font: <code>Variable Name</code>.
+In some examples, <em>p</em> might be quite large, such as on the order of thousands or even millions; this situation arises quite often, for example, in the analysis of modern biological data or web-based advertising data.</p>
+<p>In general, we will let <span class="math inline">\(x_{ij}\)</span> represent the value of the <em>j</em>th variable for the <em>i</em>th observation, where <span class="math inline">\(i =1, 2,...,n\)</span> and <span class="math inline">\(j =1, 2,...,p\)</span>.
+Throughout this book, <em>i</em> will be used to index the samples or observations (from 1 to <em>n</em>) and <em>j</em> will be used to index the variables (from 1 to <em>p</em>).
+We let <em><strong>X</strong></em> denote a <span class="math inline">\(n \times p\)</span> matrix whose (<em>i, j</em>)th element is <span class="math inline">\(x_{ij}\)</span>.
+That is,</p>
+<p><span class="math display">\[
+X = \begin{pmatrix}
+x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1p} \\
+x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np} \\
+\end{pmatrix}
+\]</span></p>
+<p>For readers who are unfamiliar with matrices, it is useful to visualize <em><strong>X</strong></em> as a spreadsheet of numbers with <em>n</em> rows and <em>p</em> columns.</p>
+<p>At times we will be interested in the rows of <em><strong>X</strong></em>, which we write as <span class="math inline">\(x_1,x_2,...,x_n\)</span>.
+Here <em>x</em> is a vector of length <em>p</em>, containing the <em>p</em> variable measurements for the <em>i</em>th observation.
+That is,</p>
+<p><span class="math display" id="eq:row-vector">\[\begin{equation}
+
+x_i = \begin{pmatrix}
+x_{i1}\\
+x_{i2}\\
+\vdots\\
+x_{ip}\\
+\end{pmatrix}
+\tag{1.1}
+\end{equation}\]</span></p>
+<p>(Vectors are by default represented as columns.)
+For example, for the Wage data, <span class="math inline">\(x_i\)</span> is a vector of length 12, consisting of year, age, wage, and other values for the <em>i</em>th individual.
+At other times we will instead be interested in the columns of <em><strong>X</strong></em>, which we write as <span class="math inline">\(x_1, x_2, \dots, x_p\)</span>.
+Each is a vector of length <em>n</em>.
+That is,</p>
+<p><span class="math display">\[
+x_i = \begin{pmatrix}
+x_{1j}\\
+x_{2j}\\
+\vdots\\
+x_{nj}\\
+\end{pmatrix}
+\]</span>
+For example, for the <code>Wage</code> data, <span class="math inline">\(x_1\)</span> contains the <span class="math inline">\(n=3,000\)</span> values for <code>year</code>.
+Using this notation, the matrix <em><strong>X</strong></em> can be written as</p>
+<p><span class="math display">\[
+X = \begin{pmatrix}
+x_1 &amp; x_2 &amp; \cdots &amp; x_p
+\end{pmatrix},
+\]</span>
+or</p>
+<p><span class="math display">\[
+X = \begin{pmatrix}
+x^T_1 \\ x^T_2 \\ \vdots \\ x^T_n
+\end{pmatrix}.
+\]</span>
+The <span class="math inline">\(^T\)</span> notation denotes the <em>transpose</em> of a matrix or vector.
+So, for example,</p>
+<p><span class="math display">\[
+X^T = \begin{pmatrix}
+x_11 &amp; x_21 &amp; \cdots &amp; x_n1 \\
+x_12 &amp; x_22 &amp; \cdots &amp; x_n2 \\
+\vdots &amp; \vdots &amp; &amp; \vdots \\
+x_1p &amp; x_2p &amp; \cdots &amp; x_np 
+\end{pmatrix}
+\]</span>
+while</p>
+<p><span class="math display">\[
+x^T_i = \begin{pmatrix}
+x_{i1} &amp; x_{i2} &amp; \cdots &amp; x_ip
+\end{pmatrix}.
+\]</span></p>
+<p>We use <span class="math inline">\(y_i\)</span> to denote the <em>i</em>th observation of the variable on which we wish to make predictions such as <code>wage</code>.
+Hence, we write the set of all <em>n</em> observations in vector form as</p>
+<p><span class="math display">\[
+y = \begin{pmatrix}
+y_1 \\ y_2 \\ \vdots \\ y_n
+\end{pmatrix}
+\]</span>
+Then our observed data consists of <span class="math inline">\({(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)}\)</span>, where each <span class="math inline">\(x_i\)</span> is a vector of length <em>p</em>.
+(If <span class="math inline">\(p=1\)</span>, then <span class="math inline">\(x_1\)</span> is simply a scalar.)</p>
+<p>In this text, a vector of length <em>n</em> will always be denoted in <em>lower case bold</em>; e.g.</p>
+<p><span class="math display">\[
+\textbf{a} = \begin{pmatrix}
+a_1 \\ a_2 \\ \vdots \\ a_n
+\end{pmatrix}
+\]</span>
+However, vectors that are not of length <em>n</em> (such as feature vectors of length <em>p</em>, as in <a href="intro.html#eq:row-vector">(1.1)</a>) will be denoted in <em>lower case normal font</em>, e.g. <em>a</em>.
+Scalars will also be denoted in <em>lower case normal font</em> e.g. <em>a</em>.
+In the rare cases in which these two uses for lower case normal font lead to ambiguity, we will clarify which use is intended.
+Matrices will be denoted using <em>bold capitals</em>, such as <em><strong>A</strong></em>.
+Random variables will be denoted using <em>capital normal font</em>, e.g. <em>A</em>, regardless of their dimensions.</p>
+<p>Occasionally we will want to indicate the dimension of a particular object.
+To indicate that an object is a scalar, we will use the notation <span class="math inline">\(a \in \mathbb{R}\)</span>.
+To indicate that it is a vector of length <em>k</em>, we will use <span class="math inline">\(a \in \mathbb{R}^k\)</span> (or <span class="math inline">\(\textbf{a} \in \mathbb{R}^n\)</span> if it is of length <em>n</em>).
+We will indicate that an object is a <span class="math inline">\(r \times s\)</span> matrix using <span class="math inline">\(\textbf{A} \in \mathbb{R}^{r\times s}\)</span>.</p>
+<p>We have avoided using matrix algebra whenever possible.
+However, in a few instances it becomes too cumbersome to avoid it entirely.
+In these rare instances it is important to understand the concept of multiplying two matrices.
+Suppose that <span class="math inline">\(\textbf{A} \in \mathbb{R}^{r \times d}\)</span> and <span class="math inline">\(\textbf{B} \in \mathbb{R}^{r \times s}\)</span>.
+Then the product of <em><strong>A</strong></em> and <em><strong>B</strong></em> is denoted <em><strong>AB</strong></em>.
+The (<em>i, j</em>)th element of <em><strong>AB</strong></em> is computed by multiplying each element of the <em>i</em>th row of <em><strong>A</strong></em> by the corresponding element of the <em>j</em>th column of <em><strong>B</strong></em>.
+That is, <span class="math inline">\((\textbf{AB})_{ij} = \sum_{k=1}^{d} a_{ik}b_{kj}\)</span>.
+As an example, consider</p>
+<p><span class="math display">\[\textbf{A} = \begin{pmatrix}
+1 &amp; 2 \\
+3 &amp; 4 \\
+\end{pmatrix}
+\ \ \ 
+and 
+\ \ \
+\textbf{B} = \begin{pmatrix}
+5 &amp; 6 \\
+7 &amp; 8 \\
+\end{pmatrix}
+\]</span>
+Then</p>
+<p><span class="math display">\[
+\textbf{AB} = \begin{pmatrix}
+1 &amp; 2 \\
+3 &amp; 4 \\
+\end{pmatrix}
+\begin{pmatrix}
+5 &amp; 6 \\
+7 &amp; 8 \\
+\end{pmatrix}
+= 
+\begin{pmatrix}
+1 \times 5 + 2 \times 7 &amp; 1 \times 6 + 2 \times 8 \\
+3 \times 5 + 4 \times 7 &amp; 3 \times 6 + 4 \times 8 \\
+\end{pmatrix}
+= 
+\begin{pmatrix}
+19 &amp; 22 \\
+43 &amp; 50 \\
+\end{pmatrix}
+\]</span>
+Note that this operation produces an <span class="math inline">\(r \times s\)</span> matrix.
+It is only possible to compute <span class="math inline">\(\textbf{AB}\)</span> if the number of columns of <em><strong>A</strong></em> is the same as the number of rows of <em><strong>B</strong></em>.</p>
+</div>
+<div id="organization-of-this-book" class="section level2">
+<h2><span class="header-section-number">1.6</span> Organization of This Book</h2>
+<p>Chapter 2 introduces the basic terminology and concepts behind statistical learning.
+This chapter also presents the <em>K-nearest neighbor</em> classifier, a very simple method that works surprisingly well on many problems.
+Chapters 3 and 4 cover classical linear methods for regression and classification.
+In particular, Chapter 3 reviews <em>linear regression</em>, the fundamental starting point for all regression methods.
+In Chapter 4 we discuss two of the most important classical classification methods, <em>logistic regression</em> and <em>linear discriminant analysis</em>.</p>
+<p>A central problem in all statistical learning situations involves choosing the best method for a given application.
+Hence, in Chapter 5 we introduce <em>cross-validation</em> and the <em>bootstrap</em>, which can be used to estimate the accuracy of a number of different methods in order to choose the best one.</p>
+<p>Much of the recent research in statistical learning has concentrated on non-linear methods.
+However, linear methods often have advantages over their non-linear competitors in terms of interpretability and sometimes also accuracy.
+Hence, in Chapter 6 we consider a host of linear methods, both classical and more modern, which offer potential improvements over standard linear regression.
+These include <em>stepwise selection</em>, <em>ridge regression</em>, <em>principal components regression</em>, <em>partial least squares</em>,and the <em>lasso.</em></p>
+<p>The remaining chapters move into the world of non-linear statistical learning.
+We first introduce in Chapter 7 a number of non-linear methods that work well for problems with a single input variable.
+We then show how these methods can be used to fit non-linear <em>additive</em> models for which there is more than one input.
+In Chapter 8, we investigate <em>tree-based</em> methods, including <em>bagging</em>, <em>boosting</em>,and <em>random forests</em>.
+<em>Support vector machines</em>, a set of approaches for performing both linear and non-linear classification, are discussed in Chapter 9.
+Finally, in Chapter 10, we consider a setting in which we have input variables but no output variable.
+In particular, we present <em>principal components analysis</em>, <em>K-means clustering</em>,and <em>hierarchical clustering</em>.</p>
+<p>At the end of each chapter, we present one or more <code>R</code> lab sections in which we systematically work through applications of the various methods discussed in that chapter.
+These labs demonstrate the strengths and weaknesses of the various approaches, and also provide a useful reference for the syntax required to implement the various methods.
+The reader may choose to work through the labs at his or her own pace, or the labs may be the focus of group sessions as part of a classroom environment.
+Within each <code>R</code> lab, we present the results that we obtained when we performed the lab at the time of writing this book.
+However, new versions of <code>R</code> are continuously released, and over time, the packages called in the labs will be updated.
+Therefore, in the future, it is possible that the results shown in
+the lab sections may no longer correspond precisely to the results obtained by the reader who performs the labs.
+As necessary, we will post updates to the labs on the book website.</p>
+<p>We use the UPHILL symbol to denote sections or exercises that contain more challenging concepts.
+These can be easily skipped by readers who do not wish to delve as deeply into the material, or who lack the mathematical background.</p>
+</div>
+<div id="data-sets-used-in-labs-and-exercises" class="section level2">
+<h2><span class="header-section-number">1.7</span> Data Sets Used in Labs and Exercises</h2>
+<p>In this textbook, we illustrate statistical learning methods using applications from marketing, finance, biology, and other areas.
+The <code>ISLR</code> package available on the book website contains a number of data sets that are required in order to perform the labs and exercises associated with this book.
+One other data set is contained in the <code>MASS</code> library, and yet another is part of the base <code>R</code> distribution.
+Table 1.1 contains a summary of the data sets required to perform the labs and exercises.
+A couple of these data sets are also available as text files on the book website, for use in Chapter 2.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="intro.html#cb3-1"></a><span class="co"># Make the dataframe of datasets</span></span>
+<span id="cb3-2"><a href="intro.html#cb3-2"></a><span class="kw">tribble</span>(</span>
+<span id="cb3-3"><a href="intro.html#cb3-3"></a>  <span class="op">~</span>Name, <span class="op">~</span>Description,</span>
+<span id="cb3-4"><a href="intro.html#cb3-4"></a>  <span class="st">&quot;Auto&quot;</span>, <span class="st">&quot;Gas mileage, horsepower, and other information for cars.&quot;</span>,</span>
+<span id="cb3-5"><a href="intro.html#cb3-5"></a>  <span class="st">&quot;Boston&quot;</span>, <span class="st">&quot;Housing values and other information about Boston suburbs.&quot;</span>,</span>
+<span id="cb3-6"><a href="intro.html#cb3-6"></a>  <span class="st">&quot;Caravan&quot;</span>, <span class="st">&quot;Information about individuals offered caravan insurance.&quot;</span>,</span>
+<span id="cb3-7"><a href="intro.html#cb3-7"></a>  <span class="st">&quot;Carseats&quot;</span>, <span class="st">&quot;Information about car seat sales in 400 stores.&quot;</span>,</span>
+<span id="cb3-8"><a href="intro.html#cb3-8"></a>  <span class="st">&quot;College&quot;</span>, <span class="st">&quot;Demographic characteristics, tuition, and more for USA colleges.&quot;</span>,</span>
+<span id="cb3-9"><a href="intro.html#cb3-9"></a>  <span class="st">&quot;Default&quot;</span>, <span class="st">&quot;Customer default records for a credit card company.&quot;</span>,</span>
+<span id="cb3-10"><a href="intro.html#cb3-10"></a>  <span class="st">&quot;Hitters&quot;</span>, <span class="st">&quot;Records and salaries for baseball players.&quot;</span>,</span>
+<span id="cb3-11"><a href="intro.html#cb3-11"></a>  <span class="st">&quot;Khan&quot;</span>, <span class="st">&quot;Gene expression measurements for four cancer types.&quot;</span>,</span>
+<span id="cb3-12"><a href="intro.html#cb3-12"></a>  <span class="st">&quot;NCI60&quot;</span>, <span class="st">&quot;Gene expression measurements for 64 cancer cell lines&quot;</span>,</span>
+<span id="cb3-13"><a href="intro.html#cb3-13"></a>  <span class="st">&quot;OJ&quot;</span>, <span class="st">&quot;Sales information for Citrus Hill and Minute Maid orange juice.&quot;</span>,</span>
+<span id="cb3-14"><a href="intro.html#cb3-14"></a>  <span class="st">&quot;Portfolio&quot;</span>, <span class="st">&quot;Past values of financial assets, for use in portfolio allocation.&quot;</span>,</span>
+<span id="cb3-15"><a href="intro.html#cb3-15"></a>  <span class="st">&quot;Smarket&quot;</span>, <span class="st">&quot;Daily percentage returns for S&amp;P 500 over a 5-year period.&quot;</span>,</span>
+<span id="cb3-16"><a href="intro.html#cb3-16"></a>  <span class="st">&quot;USArrests&quot;</span>, <span class="st">&quot;Crime statistics per 100,000 residents in 50 states of USA.&quot;</span>,</span>
+<span id="cb3-17"><a href="intro.html#cb3-17"></a>  <span class="st">&quot;Wage&quot;</span>, <span class="st">&quot;Income survey data for males in central Atlantic region of USA.&quot;</span>, </span>
+<span id="cb3-18"><a href="intro.html#cb3-18"></a>  <span class="st">&quot;Weekly&quot;</span>, <span class="st">&quot;1,089 weekly stock market returns for 21 years.&quot;</span></span>
+<span id="cb3-19"><a href="intro.html#cb3-19"></a>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb3-20"><a href="intro.html#cb3-20"></a><span class="st">  </span><span class="co"># use reactable to produce the table</span></span>
+<span id="cb3-21"><a href="intro.html#cb3-21"></a><span class="st">  </span><span class="kw">reactable</span>(</span>
+<span id="cb3-22"><a href="intro.html#cb3-22"></a>    <span class="dt">borderless =</span> T, </span>
+<span id="cb3-23"><a href="intro.html#cb3-23"></a>    <span class="dt">defaultPageSize =</span> <span class="dv">15</span>,</span>
+<span id="cb3-24"><a href="intro.html#cb3-24"></a>    <span class="dt">sortable =</span> F,</span>
+<span id="cb3-25"><a href="intro.html#cb3-25"></a>    <span class="co"># Specific column formats</span></span>
+<span id="cb3-26"><a href="intro.html#cb3-26"></a>    <span class="dt">columns =</span> <span class="kw">list</span>(</span>
+<span id="cb3-27"><a href="intro.html#cb3-27"></a>      <span class="dt">Name =</span> <span class="kw">colDef</span>(</span>
+<span id="cb3-28"><a href="intro.html#cb3-28"></a>        <span class="dt">width =</span> <span class="dv">120</span>,</span>
+<span id="cb3-29"><a href="intro.html#cb3-29"></a>        <span class="dt">style =</span> <span class="kw">list</span>(<span class="dt">color =</span> <span class="st">&quot;#B44C1C&quot;</span>,</span>
+<span id="cb3-30"><a href="intro.html#cb3-30"></a>                     <span class="dt">fontFamily =</span> <span class="st">&quot;Roboto Mono&quot;</span>))</span>
+<span id="cb3-31"><a href="intro.html#cb3-31"></a>    )</span>
+<span id="cb3-32"><a href="intro.html#cb3-32"></a>  )</span>
+<span id="cb3-33"><a href="intro.html#cb3-33"></a></span>
+<span id="cb3-34"><a href="intro.html#cb3-34"></a><span class="co"># Put the caption beneath the table</span></span>
+<span id="cb3-35"><a href="intro.html#cb3-35"></a><span class="kw">rt_caption</span>(</span>
+<span id="cb3-36"><a href="intro.html#cb3-36"></a>  <span class="dt">text =</span> <span class="kw">str_c</span>(<span class="st">&quot;A List of the data sets to perform the labs and exercises in this textbook. All data sets are available in the &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;ISLR&quot;</span>), <span class="st">&quot; library, with the exception of &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;Boston&quot;</span>), <span class="st">&quot; (part of  &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;MASS&quot;</span>), <span class="st">&quot;) and &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;USArrests&quot;</span>), <span class="st">&quot; (part of the base &quot;</span>, <span class="kw">data_colour</span>(<span class="st">&quot;R&quot;</span>), <span class="st">&quot; distribution).&quot;</span>), </span>
+<span id="cb3-37"><a href="intro.html#cb3-37"></a>  <span class="dt">tab_num =</span> <span class="fl">1.1</span></span>
+<span id="cb3-38"><a href="intro.html#cb3-38"></a>  )</span></code></pre></div>
+<p><div id="htmlwidget-681ba3b60c1f0a0a790a" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-681ba3b60c1f0a0a790a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Name":["Auto","Boston","Caravan","Carseats","College","Default","Hitters","Khan","NCI60","OJ","Portfolio","Smarket","USArrests","Wage","Weekly"],"Description":["Gas mileage, horsepower, and other information for cars.","Housing values and other information about Boston suburbs.","Information about individuals offered caravan insurance.","Information about car seat sales in 400 stores.","Demographic characteristics, tuition, and more for USA colleges.","Customer default records for a credit card company.","Records and salaries for baseball players.","Gene expression measurements for four cancer types.","Gene expression measurements for 64 cancer cell lines","Sales information for Citrus Hill and Minute Maid orange juice.","Past values of financial assets, for use in portfolio allocation.","Daily percentage returns for S&P 500 over a 5-year period.","Crime statistics per 100,000 residents in 50 states of USA.","Income survey data for males in central Atlantic region of USA.","1,089 weekly stock market returns for 21 years."]},"columns":[{"accessor":"Name","name":"Name","type":"character","width":120,"style":{"color":"#B44C1C","fontFamily":"Roboto Mono"}},{"accessor":"Description","name":"Description","type":"character"}],"sortable":false,"defaultPageSize":15,"paginationType":"numbers","showPageInfo":true,"minRows":1,"borderless":true,"theme":{"color":"#333","tableStyle":{"borderTop":"2px solid black","borderBottom":"2px solid black"},"headerStyle":{"borderBottom":"2px solid black"}},"dataKey":"f03e1d6d81a6e92d19bbeef08f5de63f","key":"f03e1d6d81a6e92d19bbeef08f5de63f"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script><p class="caption">
+<span class="tab-num">TABLE 1.1.</span>
+<em>A List of the data sets to perform the labs and exercises in this textbook. All data sets are available in the <strong><span style='font-family:monospace; color: #B44C1C;'>ISLR</span></strong> library, with the exception of <strong><span style='font-family:monospace; color: #B44C1C;'>Boston</span></strong> (part of  <strong><span style='font-family:monospace; color: #B44C1C;'>MASS</span></strong>) and <strong><span style='font-family:monospace; color: #B44C1C;'>USArrests</span></strong> (part of the base <strong><span style='font-family:monospace; color: #B44C1C;'>R</span></strong> distribution).</em>
+</p></p>
+<p>It contains a number of resources, including the <code>R</code> package associated with this book, and some additional data sets.</p>
+</div>
+<div id="book-website" class="section level2">
+<h2><span class="header-section-number">1.8</span> Book Website</h2>
+<p>The website for this book is located at</p>
+<p><a href="www.StatLearning.com">www.StatLearning.com</a></p>
+</div>
+<div id="acknowledgements" class="section level2">
+<h2><span class="header-section-number">1.9</span> Acknowledgements</h2>
+<p>A few of the plots in this book were taken from ESL: Figures 6.7, 8.3, and 10.12.
+All other plots are new to this book.</p>
+
+</div>
 </div>
             </section>
 
@@ -953,7 +1355,7 @@ In the book, these words are italicized and marked in the margins of the page.</
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="an-overview-of-statistical-learning.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="linreg.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -997,7 +1399,7 @@ gitbook.start({
 },
 "download": ["BookdownISL.pdf", "BookdownISL.epub"],
 "toc": {
-"collapse": "none",
+"collapse": "section",
 "scroll_highlight": true
 },
 "toolbar": {

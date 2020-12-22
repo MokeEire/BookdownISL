@@ -41,7 +41,6 @@ eq:mpg-quad
 fig:auto-res-plot
 eq:leverage-stat
 fig:collinearity-plot
-preface
 intro
 an-overview-of-statistical-learning
 wage-data

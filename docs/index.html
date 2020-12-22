@@ -10,8 +10,8 @@
 
   <meta property="og:title" content="An Introduction to Statistical Learning: with Applications in R" />
   <meta property="og:type" content="book" />
-  
-  
+  <meta property="og:url" content="http://faculty.marshall.usc.edu/gareth-james/ISL/" />
+  <meta property="og:image" content="http://faculty.marshall.usc.edu/gareth-james/ISL/images/isl_cover.jpg" />
   <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="github-repo" content="MokeEire/BookdownISL" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="An Introduction to Statistical Learning: with Applications in R" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
-  
+  <meta name="twitter:image" content="http://faculty.marshall.usc.edu/gareth-james/ISL/images/isl_cover.jpg" />
 
 <meta name="author" content="Gareth James, Daniela Witten, Trevor Hastie, &amp; Robert Tibshirani" />
 
@@ -867,50 +867,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="http://faculty.marshall.usc.edu/gareth-james/ISL/" target="blank">An Introduction to Statistical Learning</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
-<li class="chapter" data-level="2.1" data-path="an-overview-of-statistical-learning.html"><a href="an-overview-of-statistical-learning.html"><i class="fa fa-check"></i><b>2.1</b> An Overview of Statistical Learning</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="an-overview-of-statistical-learning.html"><a href="an-overview-of-statistical-learning.html#wage-data"><i class="fa fa-check"></i><b>2.1.1</b> Wage Data</a></li>
-<li class="chapter" data-level="2.1.2" data-path="an-overview-of-statistical-learning.html"><a href="an-overview-of-statistical-learning.html#stock-market-data"><i class="fa fa-check"></i><b>2.1.2</b> Stock Market Data</a></li>
-<li class="chapter" data-level="2.1.3" data-path="an-overview-of-statistical-learning.html"><a href="an-overview-of-statistical-learning.html#gene-expression-data"><i class="fa fa-check"></i><b>2.1.3</b> Gene Expression Data</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#resources-used-in-making-this-book"><i class="fa fa-check"></i>Resources used in making this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#custom-functions-used-throughout-the-book"><i class="fa fa-check"></i>Custom functions used throughout the book</a><ul>
+<li><a href="index.html#theme_islr"><code>theme_islr()</code></a></li>
+<li><a href="index.html#prep_reg_table"><code>prep_reg_table()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="a-brief-history-of-statistical-learning.html"><a href="a-brief-history-of-statistical-learning.html"><i class="fa fa-check"></i><b>2.2</b> A Brief History of Statistical Learning</a></li>
-<li class="chapter" data-level="2.3" data-path="this-book.html"><a href="this-book.html"><i class="fa fa-check"></i><b>2.3</b> This Book</a></li>
-<li class="chapter" data-level="2.4" data-path="who-should-read-this-book.html"><a href="who-should-read-this-book.html"><i class="fa fa-check"></i><b>2.4</b> Who Should Read This Book</a></li>
-<li class="chapter" data-level="2.5" data-path="notation-and-simple-matrix-algebra.html"><a href="notation-and-simple-matrix-algebra.html"><i class="fa fa-check"></i><b>2.5</b> Notation and Simple Matrix Algebra</a></li>
-<li class="chapter" data-level="2.6" data-path="organization-of-this-book.html"><a href="organization-of-this-book.html"><i class="fa fa-check"></i><b>2.6</b> Organization of This Book</a></li>
-<li class="chapter" data-level="2.7" data-path="data-sets-used-in-labs-and-exercises.html"><a href="data-sets-used-in-labs-and-exercises.html"><i class="fa fa-check"></i><b>2.7</b> Data Sets Used in Labs and Exercises</a></li>
-<li class="chapter" data-level="2.8" data-path="book-website.html"><a href="book-website.html"><i class="fa fa-check"></i><b>2.8</b> Book Website</a></li>
-<li class="chapter" data-level="2.9" data-path="acknowledgements.html"><a href="acknowledgements.html"><i class="fa fa-check"></i><b>2.9</b> Acknowledgements</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="linreg.html"><a href="linreg.html"><i class="fa fa-check"></i><b>3</b> Linear Regression</a><ul>
-<li class="chapter" data-level="3.1" data-path="simple-lin-reg.html"><a href="simple-lin-reg.html"><i class="fa fa-check"></i><b>3.1</b> Simple Linear Regression</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="simple-lin-reg.html"><a href="simple-lin-reg.html#simple-coef-est"><i class="fa fa-check"></i><b>3.1.1</b> Estimating the Coefficients</a></li>
-<li class="chapter" data-level="3.1.2" data-path="simple-lin-reg.html"><a href="simple-lin-reg.html#assess-coef-acc"><i class="fa fa-check"></i><b>3.1.2</b> Assessing the Accuracy of the Coefficient Estimates</a></li>
-<li class="chapter" data-level="3.1.3" data-path="simple-lin-reg.html"><a href="simple-lin-reg.html#assess-model-acc"><i class="fa fa-check"></i><b>3.1.3</b> Assessing the Accuracy of the Model</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#an-overview-of-statistical-learning"><i class="fa fa-check"></i><b>1.1</b> An Overview of Statistical Learning</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#wage-data"><i class="fa fa-check"></i><b>1.1.1</b> Wage Data</a></li>
+<li class="chapter" data-level="1.1.2" data-path="intro.html"><a href="intro.html#stock-market-data"><i class="fa fa-check"></i><b>1.1.2</b> Stock Market Data</a></li>
+<li class="chapter" data-level="1.1.3" data-path="intro.html"><a href="intro.html#gene-expression-data"><i class="fa fa-check"></i><b>1.1.3</b> Gene Expression Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="mult-lin-reg.html"><a href="mult-lin-reg.html"><i class="fa fa-check"></i><b>3.2</b> Multiple Linear Regression</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="mult-lin-reg.html"><a href="mult-lin-reg.html#est-reg-coef"><i class="fa fa-check"></i><b>3.2.1</b> Estimating the Regression Coefficients</a></li>
-<li class="chapter" data-level="3.2.2" data-path="mult-lin-reg.html"><a href="mult-lin-reg.html#important-questions"><i class="fa fa-check"></i><b>3.2.2</b> Some Important Questions</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#a-brief-history-of-statistical-learning"><i class="fa fa-check"></i><b>1.2</b> A Brief History of Statistical Learning</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#this-book"><i class="fa fa-check"></i><b>1.3</b> This Book</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#who-should-read-this-book"><i class="fa fa-check"></i><b>1.4</b> Who Should Read This Book</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#notation-and-simple-matrix-algebra"><i class="fa fa-check"></i><b>1.5</b> Notation and Simple Matrix Algebra</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#organization-of-this-book"><i class="fa fa-check"></i><b>1.6</b> Organization of This Book</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#data-sets-used-in-labs-and-exercises"><i class="fa fa-check"></i><b>1.7</b> Data Sets Used in Labs and Exercises</a></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#book-website"><i class="fa fa-check"></i><b>1.8</b> Book Website</a></li>
+<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#acknowledgements"><i class="fa fa-check"></i><b>1.9</b> Acknowledgements</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="other-reg-cons.html"><a href="other-reg-cons.html"><i class="fa fa-check"></i><b>3.3</b> Other Considerations in the Regression Model</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="other-reg-cons.html"><a href="other-reg-cons.html#qualitative-predictors"><i class="fa fa-check"></i><b>3.3.1</b> Qualitative Predictors</a></li>
-<li class="chapter" data-level="3.3.2" data-path="other-reg-cons.html"><a href="other-reg-cons.html#extensions-of-the-linear-model"><i class="fa fa-check"></i><b>3.3.2</b> Extensions of the Linear Model</a></li>
-<li class="chapter" data-level="3.3.3" data-path="other-reg-cons.html"><a href="other-reg-cons.html#potential-problems"><i class="fa fa-check"></i><b>3.3.3</b> Potential Problems</a></li>
+<li class="chapter" data-level="2" data-path="linreg.html"><a href="linreg.html"><i class="fa fa-check"></i><b>2</b> Linear Regression</a><ul>
+<li class="chapter" data-level="2.1" data-path="linreg.html"><a href="linreg.html#simple-lin-reg"><i class="fa fa-check"></i><b>2.1</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="linreg.html"><a href="linreg.html#simple-coef-est"><i class="fa fa-check"></i><b>2.1.1</b> Estimating the Coefficients</a></li>
+<li class="chapter" data-level="2.1.2" data-path="linreg.html"><a href="linreg.html#assess-coef-acc"><i class="fa fa-check"></i><b>2.1.2</b> Assessing the Accuracy of the Coefficient Estimates</a></li>
+<li class="chapter" data-level="2.1.3" data-path="linreg.html"><a href="linreg.html#assess-model-acc"><i class="fa fa-check"></i><b>2.1.3</b> Assessing the Accuracy of the Model</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="the-marketing-plan.html"><a href="the-marketing-plan.html"><i class="fa fa-check"></i><b>3.4</b> The Marketing Plan</a></li>
-<li class="chapter" data-level="3.5" data-path="comparison-of-linear-regression-with-k-nearest-neighbors.html"><a href="comparison-of-linear-regression-with-k-nearest-neighbors.html"><i class="fa fa-check"></i><b>3.5</b> Comparison of Linear Regression with K-Nearest Neighbors</a></li>
-<li class="chapter" data-level="3.6" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html"><i class="fa fa-check"></i><b>3.6</b> Lab: Linear Regression</a><ul>
-<li class="chapter" data-level="3.6.1" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#libraries"><i class="fa fa-check"></i><b>3.6.1</b> Libraries</a></li>
-<li class="chapter" data-level="3.6.2" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#simple-linear-regression"><i class="fa fa-check"></i><b>3.6.2</b> Simple Linear Regression</a></li>
-<li class="chapter" data-level="3.6.3" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#multiple-linear-regression"><i class="fa fa-check"></i><b>3.6.3</b> Multiple Linear Regression</a></li>
-<li class="chapter" data-level="3.6.4" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#interaction-terms"><i class="fa fa-check"></i><b>3.6.4</b> Interaction Terms</a></li>
-<li class="chapter" data-level="3.6.5" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#non-linear-transformations-of-the-predictors"><i class="fa fa-check"></i><b>3.6.5</b> Non-linear Transformations of the Predictors</a></li>
-<li class="chapter" data-level="3.6.6" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#qualitative-predictors-1"><i class="fa fa-check"></i><b>3.6.6</b> Qualitative Predictors</a></li>
-<li class="chapter" data-level="3.6.7" data-path="lab-linear-regression.html"><a href="lab-linear-regression.html#writing-functions"><i class="fa fa-check"></i><b>3.6.7</b> Writing Functions</a></li>
+<li class="chapter" data-level="2.2" data-path="linreg.html"><a href="linreg.html#mult-lin-reg"><i class="fa fa-check"></i><b>2.2</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="linreg.html"><a href="linreg.html#est-reg-coef"><i class="fa fa-check"></i><b>2.2.1</b> Estimating the Regression Coefficients</a></li>
+<li class="chapter" data-level="2.2.2" data-path="linreg.html"><a href="linreg.html#important-questions"><i class="fa fa-check"></i><b>2.2.2</b> Some Important Questions</a></li>
 </ul></li>
-<li class="chapter" data-level="3.7" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>3.7</b> Exercises</a><ul>
-<li class="chapter" data-level="3.7.1" data-path="exercises.html"><a href="exercises.html#conceptual"><i class="fa fa-check"></i><b>3.7.1</b> Conceptual</a></li>
+<li class="chapter" data-level="2.3" data-path="linreg.html"><a href="linreg.html#other-reg-cons"><i class="fa fa-check"></i><b>2.3</b> Other Considerations in the Regression Model</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="linreg.html"><a href="linreg.html#qualitative-predictors"><i class="fa fa-check"></i><b>2.3.1</b> Qualitative Predictors</a></li>
+<li class="chapter" data-level="2.3.2" data-path="linreg.html"><a href="linreg.html#extensions-of-the-linear-model"><i class="fa fa-check"></i><b>2.3.2</b> Extensions of the Linear Model</a></li>
+<li class="chapter" data-level="2.3.3" data-path="linreg.html"><a href="linreg.html#potential-problems"><i class="fa fa-check"></i><b>2.3.3</b> Potential Problems</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="linreg.html"><a href="linreg.html#the-marketing-plan"><i class="fa fa-check"></i><b>2.4</b> The Marketing Plan</a></li>
+<li class="chapter" data-level="2.5" data-path="linreg.html"><a href="linreg.html#comparison-of-linear-regression-with-k-nearest-neighbors"><i class="fa fa-check"></i><b>2.5</b> Comparison of Linear Regression with K-Nearest Neighbors</a></li>
+<li class="chapter" data-level="2.6" data-path="linreg.html"><a href="linreg.html#lab-linear-regression"><i class="fa fa-check"></i><b>2.6</b> Lab: Linear Regression</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="linreg.html"><a href="linreg.html#libraries"><i class="fa fa-check"></i><b>2.6.1</b> Libraries</a></li>
+<li class="chapter" data-level="2.6.2" data-path="linreg.html"><a href="linreg.html#simple-linear-regression"><i class="fa fa-check"></i><b>2.6.2</b> Simple Linear Regression</a></li>
+<li class="chapter" data-level="2.6.3" data-path="linreg.html"><a href="linreg.html#multiple-linear-regression"><i class="fa fa-check"></i><b>2.6.3</b> Multiple Linear Regression</a></li>
+<li class="chapter" data-level="2.6.4" data-path="linreg.html"><a href="linreg.html#interaction-terms"><i class="fa fa-check"></i><b>2.6.4</b> Interaction Terms</a></li>
+<li class="chapter" data-level="2.6.5" data-path="linreg.html"><a href="linreg.html#non-linear-transformations-of-the-predictors"><i class="fa fa-check"></i><b>2.6.5</b> Non-linear Transformations of the Predictors</a></li>
+<li class="chapter" data-level="2.6.6" data-path="linreg.html"><a href="linreg.html#qualitative-predictors-1"><i class="fa fa-check"></i><b>2.6.6</b> Qualitative Predictors</a></li>
+<li class="chapter" data-level="2.6.7" data-path="linreg.html"><a href="linreg.html#writing-functions"><i class="fa fa-check"></i><b>2.6.7</b> Writing Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="linreg.html"><a href="linreg.html#exercises"><i class="fa fa-check"></i><b>2.7</b> Exercises</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="linreg.html"><a href="linreg.html#conceptual"><i class="fa fa-check"></i><b>2.7.1</b> Conceptual</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -938,8 +944,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p class="author"><em>Gareth James, Daniela Witten, Trevor Hastie, &amp; Robert Tibshirani</em></p>
 <p class="date"><em>2020-12-22</em></p>
 </div>
-<div id="preface" class="section level1">
-<h1><span class="header-section-number">1</span> Preface</h1>
+<div id="preface" class="section level1 unnumbered">
+<h1>Preface</h1>
 <hr />
 <div style="text-align:center;">
 <p><img src="https://images-na.ssl-images-amazon.com/images/I/41pP5+SAv-L._SX330_BO1,204,203,200_.jpg" /></p>
@@ -949,7 +955,81 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>This book provides an introduction to statistical learning methods. It is aimed for upper level undergraduate students, masters students and Ph.D. students in the non-mathematical sciences. The book also contains a number of R labs with detailed explanations on how to implement the various methods in real life settings, and should be a valuable resource for a practicing data scientist.</p>
 </blockquote>
+<div id="resources-used-in-making-this-book" class="section level2 unnumbered">
+<h2>Resources used in making this book</h2>
+<ul>
+<li>The first place you should go to learn about bookdown.
+<ul>
+<li><a href="https://bookdown.org/yihui/bookdown/">bookdown: Authoring Books and Technical Documents with R Markdown</a></li>
+</ul></li>
+<li>Getting code folding to work using a variety of StackOverflow posts
+<ul>
+<li><a href="https://stackoverflow.com/questions/45360998/code-folding-in-bookdown">Code folding in bookdown</a></li>
+<li><a href="https://stackoverflow.com/questions/37755037/how-to-add-code-folding-to-output-chunks-in-rmarkdown-html-documents">How to add code folding to output chunks in rmarkdown html documents</a></li>
+<li><a href="https://statnmap.com/2017-11-13-enable-code-folding-in-bookdown-and-blogdown/">Enable code folding in bookdown and blogdown</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="custom-functions-used-throughout-the-book" class="section level2 unnumbered">
+<h2>Custom functions used throughout the book</h2>
+<p>In order to make some of the tables and plots, I wrote some custom functions.
+They are contained in the file <a href="https://github.com/MokeEire/BookdownISL/blob/master/visualization_functions.R"><code>visualization_functions.R</code></a>, but here is a description of each function and why it is used.</p>
+<div id="theme_islr" class="section level3 unnumbered">
+<h3><code>theme_islr()</code></h3>
+<p>This is a plot theming function to mimic the figure style found in the book.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1"></a>theme_islr =<span class="st"> </span><span class="cf">function</span>(){ </span>
+<span id="cb1-2"><a href="index.html#cb1-2"></a>  </span>
+<span id="cb1-3"><a href="index.html#cb1-3"></a>  <span class="kw">theme_bw</span>(<span class="dt">base_size =</span> <span class="dv">14</span>, <span class="dt">base_family =</span> <span class="st">&quot;Roboto&quot;</span>) <span class="op">%+replace%</span><span class="st">    </span><span class="co">#replace elements we want to change</span></span>
+<span id="cb1-4"><a href="index.html#cb1-4"></a><span class="st">    </span></span>
+<span id="cb1-5"><a href="index.html#cb1-5"></a><span class="st">    </span><span class="kw">theme</span>(</span>
+<span id="cb1-6"><a href="index.html#cb1-6"></a>      </span>
+<span id="cb1-7"><a href="index.html#cb1-7"></a>      <span class="co">#grid elements</span></span>
+<span id="cb1-8"><a href="index.html#cb1-8"></a>      <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),    <span class="co">#strip major gridlines</span></span>
+<span id="cb1-9"><a href="index.html#cb1-9"></a>      <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),    <span class="co">#strip minor gridlines</span></span>
+<span id="cb1-10"><a href="index.html#cb1-10"></a>      </span>
+<span id="cb1-11"><a href="index.html#cb1-11"></a>      <span class="co">#text elements</span></span>
+<span id="cb1-12"><a href="index.html#cb1-12"></a>      <span class="dt">plot.title =</span> <span class="kw">element_text</span>(             <span class="co">#title</span></span>
+<span id="cb1-13"><a href="index.html#cb1-13"></a>        <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>,            <span class="co">#bold typeface</span></span>
+<span id="cb1-14"><a href="index.html#cb1-14"></a>        <span class="dt">hjust =</span> <span class="dv">0</span>,                <span class="co">#left align</span></span>
+<span id="cb1-15"><a href="index.html#cb1-15"></a>        <span class="dt">vjust =</span> <span class="dv">2</span>),               <span class="co">#raise slightly</span></span>
+<span id="cb1-16"><a href="index.html#cb1-16"></a>      </span>
+<span id="cb1-17"><a href="index.html#cb1-17"></a>      <span class="dt">plot.caption =</span> <span class="kw">element_text</span>(           <span class="co">#caption</span></span>
+<span id="cb1-18"><a href="index.html#cb1-18"></a>        <span class="dt">hjust =</span> <span class="dv">1</span>),               <span class="co">#right align</span></span>
+<span id="cb1-19"><a href="index.html#cb1-19"></a>      </span>
+<span id="cb1-20"><a href="index.html#cb1-20"></a>      </span>
+<span id="cb1-21"><a href="index.html#cb1-21"></a>      <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(            <span class="co">#margin for axis text</span></span>
+<span id="cb1-22"><a href="index.html#cb1-22"></a>        <span class="dt">margin=</span><span class="kw">margin</span>(<span class="dv">5</span>, <span class="dt">b =</span> <span class="dv">10</span>))</span>
+<span id="cb1-23"><a href="index.html#cb1-23"></a>      </span>
+<span id="cb1-24"><a href="index.html#cb1-24"></a>      <span class="co">#since the legend often requires manual tweaking </span></span>
+<span id="cb1-25"><a href="index.html#cb1-25"></a>      <span class="co">#based on plot content, don&#39;t define it here</span></span>
+<span id="cb1-26"><a href="index.html#cb1-26"></a>    )</span>
+<span id="cb1-27"><a href="index.html#cb1-27"></a>}</span></code></pre></div>
+</div>
+<div id="prep_reg_table" class="section level3 unnumbered">
+<h3><code>prep_reg_table()</code></h3>
+<p>This function takes the output from an <code>lm()</code> object and formats it for regression tables.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1"></a>prep_reg_table =<span class="st"> </span><span class="cf">function</span>(reg_model){</span>
+<span id="cb2-2"><a href="index.html#cb2-2"></a>  <span class="co"># Select the coefficients object from the summary of the regression model</span></span>
+<span id="cb2-3"><a href="index.html#cb2-3"></a>  <span class="kw">summary</span>(reg_model)<span class="op">$</span>coefficients <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-4"><a href="index.html#cb2-4"></a><span class="st">    </span><span class="co"># Convert it to a tibble, and make the rownames a column</span></span>
+<span id="cb2-5"><a href="index.html#cb2-5"></a><span class="st">    </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;term&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-6"><a href="index.html#cb2-6"></a><span class="st">    </span><span class="co"># Rename the columns to match ISLR&#39;s tables</span></span>
+<span id="cb2-7"><a href="index.html#cb2-7"></a><span class="st">    </span><span class="kw">rename</span>(<span class="dt">Coefficient =</span> Estimate, </span>
+<span id="cb2-8"><a href="index.html#cb2-8"></a>           <span class="st">`</span><span class="dt">t-statistic</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">t value</span><span class="st">`</span>, </span>
+<span id="cb2-9"><a href="index.html#cb2-9"></a>           <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr(&gt;|t|)</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-10"><a href="index.html#cb2-10"></a><span class="st">    </span></span>
+<span id="cb2-11"><a href="index.html#cb2-11"></a><span class="st">    </span><span class="kw">mutate</span>(</span>
+<span id="cb2-12"><a href="index.html#cb2-12"></a>      <span class="co"># Replace the shorthand formulas given to lm() with regression publishing style</span></span>
+<span id="cb2-13"><a href="index.html#cb2-13"></a>      <span class="dt">term =</span> <span class="kw">str_replace_all</span>(term, <span class="kw">c</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">:&quot;</span> =<span class="st"> &quot; X &quot;</span>, <span class="co"># Interaction terms</span></span>
+<span id="cb2-14"><a href="index.html#cb2-14"></a>                                     <span class="st">&quot;I(?=</span><span class="ch">\\</span><span class="st">()|[</span><span class="ch">\\</span><span class="st">(</span><span class="ch">\\</span><span class="st">)]&quot;</span> =<span class="st"> &quot;&quot;</span>)), <span class="co"># Identity function</span></span>
+<span id="cb2-15"><a href="index.html#cb2-15"></a>      <span class="co"># Create a p-value column which shows a less than sign in cases of very small p-values</span></span>
+<span id="cb2-16"><a href="index.html#cb2-16"></a>      <span class="st">`</span><span class="dt">p-value</span><span class="st">`</span> =<span class="st"> </span><span class="kw">case_when</span>(pval <span class="op">&lt;</span><span class="st"> </span><span class="fl">.0001</span> <span class="op">~</span><span class="st"> &quot;&lt;0.0001&quot;</span>,</span>
+<span id="cb2-17"><a href="index.html#cb2-17"></a>                            T <span class="op">~</span><span class="st"> </span><span class="kw">str_c</span>(<span class="kw">round</span>(pval, <span class="dv">4</span>)))) <span class="op">%&gt;%</span></span>
+<span id="cb2-18"><a href="index.html#cb2-18"></a><span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>pval)</span>
+<span id="cb2-19"><a href="index.html#cb2-19"></a>}</span></code></pre></div>
 
+</div>
+</div>
 </div>
             </section>
 
@@ -1001,7 +1081,7 @@ gitbook.start({
 },
 "download": ["BookdownISL.pdf", "BookdownISL.epub"],
 "toc": {
-"collapse": "none",
+"collapse": "section",
 "scroll_highlight": true
 },
 "toolbar": {

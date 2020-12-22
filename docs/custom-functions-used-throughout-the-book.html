@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.6 Organization of This Book | An Introduction to Statistical Learning: with Applications in R</title>
+  <title>Custom functions used throughout the book | An Introduction to Statistical Learning: with Applications in R</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.6 Organization of This Book | An Introduction to Statistical Learning: with Applications in R" />
+  <meta property="og:title" content="Custom functions used throughout the book | An Introduction to Statistical Learning: with Applications in R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="http://faculty.marshall.usc.edu/gareth-james/ISL/" />
   <meta property="og:image" content="http://faculty.marshall.usc.edu/gareth-james/ISL/images/isl_cover.jpg" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="MokeEire/BookdownISL" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.6 Organization of This Book | An Introduction to Statistical Learning: with Applications in R" />
+  <meta name="twitter:title" content="Custom functions used throughout the book | An Introduction to Statistical Learning: with Applications in R" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="twitter:image" content="http://faculty.marshall.usc.edu/gareth-james/ISL/images/isl_cover.jpg" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="notation-and-simple-matrix-algebra.html"/>
-<link rel="next" href="data-sets-used-in-labs-and-exercises.html"/>
+<link rel="prev" href="resources-used-in-making-this-book.html"/>
+<link rel="next" href="intro.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -939,44 +939,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="organization-of-this-book" class="section level2">
-<h2><span class="header-section-number">1.6</span> Organization of This Book</h2>
-<p>Chapter 2 introduces the basic terminology and concepts behind statistical learning.
-This chapter also presents the <em>K-nearest neighbor</em> classifier, a very simple method that works surprisingly well on many problems.
-Chapters 3 and 4 cover classical linear methods for regression and classification.
-In particular, Chapter 3 reviews <em>linear regression</em>, the fundamental starting point for all regression methods.
-In Chapter 4 we discuss two of the most important classical classification methods, <em>logistic regression</em> and <em>linear discriminant analysis</em>.</p>
-<p>A central problem in all statistical learning situations involves choosing the best method for a given application.
-Hence, in Chapter 5 we introduce <em>cross-validation</em> and the <em>bootstrap</em>, which can be used to estimate the accuracy of a number of different methods in order to choose the best one.</p>
-<p>Much of the recent research in statistical learning has concentrated on non-linear methods.
-However, linear methods often have advantages over their non-linear competitors in terms of interpretability and sometimes also accuracy.
-Hence, in Chapter 6 we consider a host of linear methods, both classical and more modern, which offer potential improvements over standard linear regression.
-These include <em>stepwise selection</em>, <em>ridge regression</em>, <em>principal components regression</em>, <em>partial least squares</em>,and the <em>lasso.</em></p>
-<p>The remaining chapters move into the world of non-linear statistical learning.
-We first introduce in Chapter 7 a number of non-linear methods that work well for problems with a single input variable.
-We then show how these methods can be used to fit non-linear <em>additive</em> models for which there is more than one input.
-In Chapter 8, we investigate <em>tree-based</em> methods, including <em>bagging</em>, <em>boosting</em>,and <em>random forests</em>.
-<em>Support vector machines</em>, a set of approaches for performing both linear and non-linear classification, are discussed in Chapter 9.
-Finally, in Chapter 10, we consider a setting in which we have input variables but no output variable.
-In particular, we present <em>principal components analysis</em>, <em>K-means clustering</em>,and <em>hierarchical clustering</em>.</p>
-<p>At the end of each chapter, we present one or more <code>R</code> lab sections in which we systematically work through applications of the various methods discussed in that chapter.
-These labs demonstrate the strengths and weaknesses of the various approaches, and also provide a useful reference for the syntax required to implement the various methods.
-The reader may choose to work through the labs at his or her own pace, or the labs may be the focus of group sessions as part of a classroom environment.
-Within each <code>R</code> lab, we present the results that we obtained when we performed the lab at the time of writing this book.
-However, new versions of <code>R</code> are continuously released, and over time, the packages called in the labs will be updated.
-Therefore, in the future, it is possible that the results shown in
-the lab sections may no longer correspond precisely to the results obtained by the reader who performs the labs.
-As necessary, we will post updates to the labs on the book website.</p>
-<p>We use the UPHILL symbol to denote sections or exercises that contain more challenging concepts.
-These can be easily skipped by readers who do not wish to delve as deeply into the material, or who lack the mathematical background.</p>
+<div id="custom-functions-used-throughout-the-book" class="section level2 unnumbered">
+<h2>Custom functions used throughout the book</h2>
+<p>In order to make some of the tables and plots, I wrote some custom functions.
+They are contained in the file <a href="https://github.com/MokeEire/BookdownISL/blob/master/visualization_functions.R"><code>visualization_functions.R</code></a>, but here is a description of each function and why it is used.</p>
+<div id="theme_islr" class="section level3 unnumbered">
+<h3><code>theme_islr()</code></h3>
+<p>This is a plot theming function to mimic the figure style found in the book.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="custom-functions-used-throughout-the-book.html#cb1-1"></a>theme_islr =<span class="st"> </span><span class="cf">function</span>(){ </span>
+<span id="cb1-2"><a href="custom-functions-used-throughout-the-book.html#cb1-2"></a>  </span>
+<span id="cb1-3"><a href="custom-functions-used-throughout-the-book.html#cb1-3"></a>  <span class="kw">theme_bw</span>(<span class="dt">base_size =</span> <span class="dv">14</span>, <span class="dt">base_family =</span> <span class="st">&quot;Roboto&quot;</span>) <span class="op">%+replace%</span><span class="st">    </span><span class="co">#replace elements we want to change</span></span>
+<span id="cb1-4"><a href="custom-functions-used-throughout-the-book.html#cb1-4"></a><span class="st">    </span></span>
+<span id="cb1-5"><a href="custom-functions-used-throughout-the-book.html#cb1-5"></a><span class="st">    </span><span class="kw">theme</span>(</span>
+<span id="cb1-6"><a href="custom-functions-used-throughout-the-book.html#cb1-6"></a>      </span>
+<span id="cb1-7"><a href="custom-functions-used-throughout-the-book.html#cb1-7"></a>      <span class="co">#grid elements</span></span>
+<span id="cb1-8"><a href="custom-functions-used-throughout-the-book.html#cb1-8"></a>      <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(),    <span class="co">#strip major gridlines</span></span>
+<span id="cb1-9"><a href="custom-functions-used-throughout-the-book.html#cb1-9"></a>      <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),    <span class="co">#strip minor gridlines</span></span>
+<span id="cb1-10"><a href="custom-functions-used-throughout-the-book.html#cb1-10"></a>      </span>
+<span id="cb1-11"><a href="custom-functions-used-throughout-the-book.html#cb1-11"></a>      <span class="co">#text elements</span></span>
+<span id="cb1-12"><a href="custom-functions-used-throughout-the-book.html#cb1-12"></a>      <span class="dt">plot.title =</span> <span class="kw">element_text</span>(             <span class="co">#title</span></span>
+<span id="cb1-13"><a href="custom-functions-used-throughout-the-book.html#cb1-13"></a>        <span class="dt">face =</span> <span class="st">&#39;bold&#39;</span>,            <span class="co">#bold typeface</span></span>
+<span id="cb1-14"><a href="custom-functions-used-throughout-the-book.html#cb1-14"></a>        <span class="dt">hjust =</span> <span class="dv">0</span>,                <span class="co">#left align</span></span>
+<span id="cb1-15"><a href="custom-functions-used-throughout-the-book.html#cb1-15"></a>        <span class="dt">vjust =</span> <span class="dv">2</span>),               <span class="co">#raise slightly</span></span>
+<span id="cb1-16"><a href="custom-functions-used-throughout-the-book.html#cb1-16"></a>      </span>
+<span id="cb1-17"><a href="custom-functions-used-throughout-the-book.html#cb1-17"></a>      <span class="dt">plot.caption =</span> <span class="kw">element_text</span>(           <span class="co">#caption</span></span>
+<span id="cb1-18"><a href="custom-functions-used-throughout-the-book.html#cb1-18"></a>        <span class="dt">hjust =</span> <span class="dv">1</span>),               <span class="co">#right align</span></span>
+<span id="cb1-19"><a href="custom-functions-used-throughout-the-book.html#cb1-19"></a>      </span>
+<span id="cb1-20"><a href="custom-functions-used-throughout-the-book.html#cb1-20"></a>      </span>
+<span id="cb1-21"><a href="custom-functions-used-throughout-the-book.html#cb1-21"></a>      <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(            <span class="co">#margin for axis text</span></span>
+<span id="cb1-22"><a href="custom-functions-used-throughout-the-book.html#cb1-22"></a>        <span class="dt">margin=</span><span class="kw">margin</span>(<span class="dv">5</span>, <span class="dt">b =</span> <span class="dv">10</span>))</span>
+<span id="cb1-23"><a href="custom-functions-used-throughout-the-book.html#cb1-23"></a>      </span>
+<span id="cb1-24"><a href="custom-functions-used-throughout-the-book.html#cb1-24"></a>      <span class="co">#since the legend often requires manual tweaking </span></span>
+<span id="cb1-25"><a href="custom-functions-used-throughout-the-book.html#cb1-25"></a>      <span class="co">#based on plot content, don&#39;t define it here</span></span>
+<span id="cb1-26"><a href="custom-functions-used-throughout-the-book.html#cb1-26"></a>    )</span>
+<span id="cb1-27"><a href="custom-functions-used-throughout-the-book.html#cb1-27"></a>}</span></code></pre></div>
 </div>
+<div id="prep_reg_table" class="section level3 unnumbered">
+<h3><code>prep_reg_table()</code></h3>
+<p>This function takes the output from an <code>lm()</code> object and formats it for regression tables.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="custom-functions-used-throughout-the-book.html#cb2-1"></a>prep_reg_table =<span class="st"> </span><span class="cf">function</span>(reg_model){</span>
+<span id="cb2-2"><a href="custom-functions-used-throughout-the-book.html#cb2-2"></a>  <span class="co"># Select the coefficients object from the summary of the regression model</span></span>
+<span id="cb2-3"><a href="custom-functions-used-throughout-the-book.html#cb2-3"></a>  <span class="kw">summary</span>(reg_model)<span class="op">$</span>coefficients <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-4"><a href="custom-functions-used-throughout-the-book.html#cb2-4"></a><span class="st">    </span><span class="co"># Convert it to a tibble, and make the rownames a column</span></span>
+<span id="cb2-5"><a href="custom-functions-used-throughout-the-book.html#cb2-5"></a><span class="st">    </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;term&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-6"><a href="custom-functions-used-throughout-the-book.html#cb2-6"></a><span class="st">    </span><span class="co"># Rename the columns to match ISLR&#39;s tables</span></span>
+<span id="cb2-7"><a href="custom-functions-used-throughout-the-book.html#cb2-7"></a><span class="st">    </span><span class="kw">rename</span>(<span class="dt">Coefficient =</span> Estimate, </span>
+<span id="cb2-8"><a href="custom-functions-used-throughout-the-book.html#cb2-8"></a>           <span class="st">`</span><span class="dt">t-statistic</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">t value</span><span class="st">`</span>, </span>
+<span id="cb2-9"><a href="custom-functions-used-throughout-the-book.html#cb2-9"></a>           <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr(&gt;|t|)</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-10"><a href="custom-functions-used-throughout-the-book.html#cb2-10"></a><span class="st">    </span></span>
+<span id="cb2-11"><a href="custom-functions-used-throughout-the-book.html#cb2-11"></a><span class="st">    </span><span class="kw">mutate</span>(</span>
+<span id="cb2-12"><a href="custom-functions-used-throughout-the-book.html#cb2-12"></a>      <span class="co"># Replace the shorthand formulas given to lm() with regression publishing style</span></span>
+<span id="cb2-13"><a href="custom-functions-used-throughout-the-book.html#cb2-13"></a>      <span class="dt">term =</span> <span class="kw">str_replace_all</span>(term, <span class="kw">c</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">:&quot;</span> =<span class="st"> &quot; X &quot;</span>, <span class="co"># Interaction terms</span></span>
+<span id="cb2-14"><a href="custom-functions-used-throughout-the-book.html#cb2-14"></a>                                     <span class="st">&quot;I(?=</span><span class="ch">\\</span><span class="st">()|[</span><span class="ch">\\</span><span class="st">(</span><span class="ch">\\</span><span class="st">)]&quot;</span> =<span class="st"> &quot;&quot;</span>)), <span class="co"># Identity function</span></span>
+<span id="cb2-15"><a href="custom-functions-used-throughout-the-book.html#cb2-15"></a>      <span class="co"># Create a p-value column which shows a less than sign in cases of very small p-values</span></span>
+<span id="cb2-16"><a href="custom-functions-used-throughout-the-book.html#cb2-16"></a>      <span class="st">`</span><span class="dt">p-value</span><span class="st">`</span> =<span class="st"> </span><span class="kw">case_when</span>(pval <span class="op">&lt;</span><span class="st"> </span><span class="fl">.0001</span> <span class="op">~</span><span class="st"> &quot;&lt;0.0001&quot;</span>,</span>
+<span id="cb2-17"><a href="custom-functions-used-throughout-the-book.html#cb2-17"></a>                            T <span class="op">~</span><span class="st"> </span><span class="kw">str_c</span>(<span class="kw">round</span>(pval, <span class="dv">4</span>)))) <span class="op">%&gt;%</span></span>
+<span id="cb2-18"><a href="custom-functions-used-throughout-the-book.html#cb2-18"></a><span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>pval)</span>
+<span id="cb2-19"><a href="custom-functions-used-throughout-the-book.html#cb2-19"></a>}</span></code></pre></div>
+
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="notation-and-simple-matrix-algebra.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-sets-used-in-labs-and-exercises.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="resources-used-in-making-this-book.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
