@@ -6,7 +6,7 @@ bookdown::gitbook:
       collapse: section
       scroll_highlight: yes
       before: |
-        <li><a href="http://faculty.marshall.usc.edu/gareth-james/ISL/" target="blank">An Introduction to Statistical Learning</a></li>
+        <li><a href="./">An Introduction to Statistical Learning</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     download: ["pdf", "epub"]
@@ -14,6 +14,6 @@ bookdown::gitbook:
       position: fixed
     sharing:
       github: yes
-      twitter: no
       facebook: no
+      twitter: no
       all: no
