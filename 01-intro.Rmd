@@ -7,7 +7,7 @@ But for now, in case anyone manages to stumble across this repository, it is pro
 You can also [submit any issues as needed](https://github.com/MokeEire/BookdownISL/issues).
 2. I am attempting to stay completely faithful to the text. 
 It cannot be understated -- **this is not my work**, I am merely transcribing and learning. 
-In a bid to use the authors' formatting, words in orange/red are related to `r data_colour("data")`.
+In a bid to use the authors' formatting, words in orange/red are related to `data`.
 In attempting to bring the user-friendliness of online books to the material, words in blue indicate `r keyword_colour("keywords")`.
 In the book, these words are italicized and marked in the margins of the page.
 
@@ -22,35 +22,35 @@ To provide an illustration of some applications of statistical learning, we brie
 
 ### Wage Data
 
-In this application (which we refer to as the `r data_colour("Wage")` data set throughout this book), we examine a number of factors that relate to wages for a group of males from the Atlantic region of the United States. 
-In particular, we wish to understand the association between an employee’s `r data_colour("age")` and `r data_colour("education")`, as well as the calendar `r data_colour("year")`,on his `r data_colour("wage")`. Consider, for example, the left-hand panel of Figure 1.1, which displays `r data_colour("wage")` versus `r data_colour("age")` for each of the individuals in the data set. 
-There is evidence that `r data_colour("wage")` increases with `r data_colour("age")` but then decreases again after approximately age 60.
-The blue line, which provides an estimate of the average `r data_colour("wage")` for a given `r data_colour("age")`, makes this trend clearer.
+In this application (which we refer to as the `Wage` data set throughout this book), we examine a number of factors that relate to wages for a group of males from the Atlantic region of the United States. 
+In particular, we wish to understand the association between an employee’s `age` and `education`, as well as the calendar `year`,on his `wage`. Consider, for example, the left-hand panel of Figure 1.1, which displays `wage` versus `age` for each of the individuals in the data set. 
+There is evidence that `wage` increases with `age` but then decreases again after approximately age 60.
+The blue line, which provides an estimate of the average `wage` for a given `age`, makes this trend clearer.
 
 FIGURE 1.1
 
-Given an employee’s `r data_colour("age")`, we can use this curve to *predict* his `r data_colour("wage")`. However, it is also clear from Figure 1.1 that there is a signiﬁcant amount of variability associated with this average value, and so `r data_colour("age")` alone is unlikely to provide an accurate prediction of a particular man’s `r data_colour("wage")`.
+Given an employee’s `age`, we can use this curve to *predict* his `wage`. However, it is also clear from Figure 1.1 that there is a signiﬁcant amount of variability associated with this average value, and so `age` alone is unlikely to provide an accurate prediction of a particular man’s `wage`.
 
-We also have information regarding each employee’s education level and the year in which the `r data_colour("wage")` was earned. 
-The center and right-hand panels of Figure 1.1, which display `r data_colour("wage")` as a function of both `r data_colour("year")` and `r data_colour("education")`, indicate that both of these factors are associated with `r data_colour("wage")`.
+We also have information regarding each employee’s education level and the year in which the `wage` was earned. 
+The center and right-hand panels of Figure 1.1, which display `wage` as a function of both `year` and `education`, indicate that both of these factors are associated with `wage`.
 Wages increase by approximately $10,000, in a roughly linear (or straight-line) fashion, between 2003 and 2009, though this rise is very slight relative to the variability in the data. 
 Wages are also typically greater for individuals with higher education levels: men with the lowest education level (1) tend to
 have substantially lower wages than those with the highest education level (5). 
-Clearly, the most accurate prediction of a given man’s `r data_colour("wage")` will be obtained by combining his `r data_colour("age")`, his `r data_colour("education")`,and the `r data_colour("year")`.
-In Chapter 3, we discuss linear regression, which can be used to predict `r data_colour("wage")` from this data set. 
-Ideally, we should predict `r data_colour("wage")` in a way that accounts for the non-linear relationship between `r data_colour("wage")` and `r data_colour("age")`. 
+Clearly, the most accurate prediction of a given man’s `wage` will be obtained by combining his `age`, his `education`,and the `year`.
+In Chapter 3, we discuss linear regression, which can be used to predict `wage` from this data set. 
+Ideally, we should predict `wage` in a way that accounts for the non-linear relationship between `wage` and `age`. 
 In Chapter 7, we discuss a class of approaches for addressing this problem.
 
 ### Stock Market Data
 
-The `r data_colour("Wage")` data involves predicting a *continuous* or *quantitative* output value.
+The `Wage` data involves predicting a *continuous* or *quantitative* output value.
 This is often referred to as a *regression* problem. 
 However, in certain cases we may instead wish to predict a non-numerical value—that is, a *categorical* or *qualitative* output. 
 For example, in Chapter 4 we examine a stock market data set that contains the daily movements in the Standard & Poor’s 500 (S&P) stock index over a 5-year period between 2001 and 2005. 
-We refer to this as the `r data_colour("Smarket")` data. 
+We refer to this as the `Smarket` data. 
 The goal is to predict whether the index will *increase* or *decrease* on a given day using the past 5 days’ percentage changes in the index. 
 Here the statistical learning problem does not involve predicting a numerical value. 
-Instead it involves predicting whether a given day’s stock market performance will fall into the `r data_colour("Up")` bucket or the `r data_colour("Down")` bucket. 
+Instead it involves predicting whether a given day’s stock market performance will fall into the `Up` bucket or the `Down` bucket. 
 This is known as a *classiﬁcation* problem. 
 A model that could accurately predict the direction in which the market will move would be very useful!
 
@@ -112,7 +112,7 @@ Hastie and Tibshirani coined the term *generalized additive models* in 1986 for 
 models, and also provided a practical software implementation.
 
 Since that time, inspired by the advent of *machine learning* and other disciplines, statistical learning has emerged as a new subfield in statistics, focused on supervised and unsupervised modeling and prediction. 
-In recent years, progress in statistical learning has been marked by the increasing availability of powerful and relatively user-friendly software, such as the popular and freely available `r data_colour("R")` system. 
+In recent years, progress in statistical learning has been marked by the increasing availability of powerful and relatively user-friendly software, such as the popular and freely available `R` system. 
 This has the potential to continue the transformation of the field from a set of techniques used and developed by statisticians and computer scientists to an essential toolkit for a much broader community.
 
 ## This Book
@@ -164,13 +164,13 @@ We assume that the reader is comfortable with basic mathematical concepts, but w
 For instance, we have almost completely avoided the use of matrix algebra, and it is possible to understand the entire book without a detailed knowledge of matrices and vectors.
 
 4. *We presume that the reader is interested in applying statistical learning methods to real-world problems.* 
-In order to facilitate this, as well as to motivate the techniques discussed, we have devoted a section within each chapter to `r data_colour("R")` computer labs. 
+In order to facilitate this, as well as to motivate the techniques discussed, we have devoted a section within each chapter to `R` computer labs. 
 In each lab, we walk the reader through a realistic application of the methods considered in that chapter. 
 When we have taught this material in our courses, we have allocated roughly one-third of classroom time to working through the labs, and we have found them to be extremely useful.
-Many of the less computationally-oriented students who were initially intimidated by `r data_colour("R")`’s command level interface got the hang of things over the course of the quarter or semester. 
-We have used `r data_colour("R")` because it is freely available and is powerful enough to implement all of the methods discussed in the book.
+Many of the less computationally-oriented students who were initially intimidated by `R`’s command level interface got the hang of things over the course of the quarter or semester. 
+We have used `R` because it is freely available and is powerful enough to implement all of the methods discussed in the book.
 It also has optional packages that can be downloaded to implement literally thousands of additional methods. 
-Most importantly, `r data_colour("R")` is the language of choice for academic statisticians, and new approaches often become available in `r data_colour("R")` years before they are implemented in commercial packages. 
+Most importantly, `R` is the language of choice for academic statisticians, and new approaches often become available in `R` years before they are implemented in commercial packages. 
 However, the labs in ISL are self-contained, and can be skipped if the reader wishes to use a different software package or does not wish to apply the methods discussed to real-world problems.
 
 ## Who Should Read This Book
@@ -180,8 +180,8 @@ This group includes scientists, engineers, data analysts, or *quants*, but also 
 We expect that the reader will have had at least one elementary course in statistics. 
 Background in linear regression is also useful, though not required, since we review the key concepts behind linear regression in Chapter 3.
 The mathematical level of this book is modest, and a detailed knowledge of matrix operations is not required. 
-This book provides an introduction to the statistical programming language `r data_colour("R")`. 
-Previous exposure to a programming language, such as `r data_colour("MATLAB")` or `r data_colour("Python")`, is useful but not required.
+This book provides an introduction to the statistical programming language `R`. 
+Previous exposure to a programming language, such as `MATLAB` or `Python`, is useful but not required.
 
 We have successfully taught material at this level to master’s and PhD students in business, computer science, biology, earth sciences, psychology, and many other areas of the physical and social sciences. This book could also be appropriate for advanced undergraduates who have already taken a course on linear regression. 
 In the context of a more mathematically rigorous course in which ESL serves as the primary textbook, ISL could be used as a supplementary text for teaching computational aspects of the various approaches.
@@ -192,9 +192,9 @@ Choosing notation for a textbook is always a difficult task.
 For the most part we adopt the same notational conventions as ESL.
 We will use *n* to represent the number of distinct data points, or observations, in our sample. 
 We will let *p* denote the number of variables that are available for use in making predictions. 
-For example, the `r data_colour("Wage")` data set consists of 12 variables for $3,000$ people, so we have $n =3,000$ observations and
-$p = 12$ variables (such as `r data_colour("year")`, `r data_colour("age")`, `r data_colour("wage")`, and more). 
-Note that throughout this book, we indicate variable names using colored font: `r data_colour("Variable Name")`.
+For example, the `Wage` data set consists of 12 variables for $3,000$ people, so we have $n =3,000$ observations and
+$p = 12$ variables (such as `year`, `age`, `wage`, and more). 
+Note that throughout this book, we indicate variable names using colored font: `Variable Name`.
 In some examples, *p* might be quite large, such as on the order of thousands or even millions; this situation arises quite often, for example, in the analysis of modern biological data or web-based advertising data.
 
 In general, we will let $x_{ij}$ represent the value of the *j*th variable for the *i*th observation, where $i =1, 2,...,n$ and $j =1, 2,...,p$. 
@@ -242,7 +242,7 @@ x_{2j}\\
 x_{nj}\\
 \end{pmatrix}
 $$
-For example, for the `r data_colour("Wage")` data, $x_1$ contains the $n=3,000$ values for `r data_colour("year")`.
+For example, for the `Wage` data, $x_1$ contains the $n=3,000$ values for `year`.
 Using this notation, the matrix _**X**_ can be written as
 
 $$
@@ -276,7 +276,7 @@ x_{i1} & x_{i2} & \cdots & x_ip
 \end{pmatrix}.
 $$
 
-We use $y_i$ to denote the *i*th observation of the variable on which we wish to make predictions such as `r data_colour("wage")`.
+We use $y_i$ to denote the *i*th observation of the variable on which we wish to make predictions such as `wage`.
 Hence, we write the set of all *n* observations in vector form as 
 
 $$
@@ -376,11 +376,11 @@ In Chapter 8, we investigate *tree-based* methods, including *bagging*, *boostin
 Finally, in Chapter 10, we consider a setting in which we have input variables but no output variable. 
 In particular, we present *principal components analysis*, *K-means clustering*,and *hierarchical clustering*.
 
-At the end of each chapter, we present one or more `r data_colour("R")` lab sections in which we systematically work through applications of the various methods discussed in that chapter. 
+At the end of each chapter, we present one or more `R` lab sections in which we systematically work through applications of the various methods discussed in that chapter. 
 These labs demonstrate the strengths and weaknesses of the various approaches, and also provide a useful reference for the syntax required to implement the various methods. 
 The reader may choose to work through the labs at his or her own pace, or the labs may be the focus of group sessions as part of a classroom environment.
-Within each `r data_colour("R")` lab, we present the results that we obtained when we performed the lab at the time of writing this book. 
-However, new versions of `r data_colour("R")` are continuously released, and over time, the packages called in the labs will be updated. 
+Within each `R` lab, we present the results that we obtained when we performed the lab at the time of writing this book. 
+However, new versions of `R` are continuously released, and over time, the packages called in the labs will be updated. 
 Therefore, in the future, it is possible that the results shown in
 the lab sections may no longer correspond precisely to the results obtained by the reader who performs the labs. 
 As necessary, we will post updates to the labs on the book website.
@@ -391,8 +391,8 @@ These can be easily skipped by readers who do not wish to delve as deeply into t
 ## Data Sets Used in Labs and Exercises
 
 In this textbook, we illustrate statistical learning methods using applications from marketing, finance, biology, and other areas. 
-The `r data_colour("ISLR")` package available on the book website contains a number of data sets that are required in order to perform the labs and exercises associated with this book. 
-One other data set is contained in the `r data_colour("MASS")` library, and yet another is part of the base `r data_colour("R")` distribution. 
+The `ISLR` package available on the book website contains a number of data sets that are required in order to perform the labs and exercises associated with this book. 
+One other data set is contained in the `MASS` library, and yet another is part of the base `R` distribution. 
 Table 1.1 contains a summary of the data sets required to perform the labs and exercises. 
 A couple of these data sets are also available as text files on the book website, for use in Chapter 2.
 
@@ -442,7 +442,7 @@ rt_caption(
 
 ```
 
-It contains a number of resources, including the `r data_colour("R")` package associated with this book, and some additional data sets.
+It contains a number of resources, including the `R` package associated with this book, and some additional data sets.
 
 ## Book Website
 

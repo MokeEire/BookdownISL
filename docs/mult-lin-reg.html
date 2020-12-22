@@ -934,7 +934,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.2</span> Multiple Linear Regression</h2>
 <p>Simple linear regression is a useful approach for predicting a response on the basis of a single predictor variable.
 However, in practice we often have more than one predictor.
-For example, in the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data, we have examined the relationship between sales and TV advertising.
+For example, in the <code>Advertising</code> data, we have examined the relationship between sales and TV advertising.
 We also have data for the amount of money spent on advertising on the radio and in newspapers, and we may want to know whether either of these two media is associated with sales.
 How can we extend our analysis of the advertising data in order to accommodate these two additional predictors?</p>
 <p>One option is to run three separate simple linear regressions, each of which uses a different advertising medium as a predictor.
@@ -981,12 +981,12 @@ We choose <span class="math inline">\(\beta_0, \beta_1, ..., \beta_p\)</span> to
 <p>The values <span class="math inline">\(\hat{\beta_0}, \hat{\beta_1}, ..., \hat{\beta_p}\)</span> that minimize <a href="mult-lin-reg.html#eq:m-rssmin">(3.22)</a> are the multiple least squares regression coefficient estimates.
 Unlike the simple linear regression estimates given in <a href="simple-lin-reg.html#eq:rssmin">(3.4)</a>, the multiple regression coefficient estimates have somewhat complicated forms that are most easily represented using matrix algebra.
 For this reason, we do not provide them here.
-Any statistical software package can be used to compute these coefficient estimates, and later in this chapter we will show how this can be done in <strong><span style="font-family:monospace; color: #B44C1C;">R</span></strong>.
+Any statistical software package can be used to compute these coefficient estimates, and later in this chapter we will show how this can be done in <code>R</code>.
 Figure 3.4 illustrates an example of the least squares fit to a toy data set with <span class="math inline">\(p = 2\)</span> predictors.</p>
-<p>Table 3.4 displays the multiple regression coefficient estimates when TV, radio, and advertising budgets are used to predict product sales using the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data.
+<p>Table 3.4 displays the multiple regression coefficient estimates when TV, radio, and advertising budgets are used to predict product sales using the <code>Advertising</code> data.
 We interpret these results as follows: for a given amount of TV and newspaper advertising, spending an additional $1,000 on radio advertising leads to an increase in sales by approximately 189 units.
-Comparing these coefficient estimates to those displayed in Table 3.1 and 3.3, we notice that the multiple regression coefficient estimates for <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are pretty similar to the simple linear regression coefficient estimates.
-However, while the <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> regression coefficient estimate in Table 3.3 was significantly non-zero, the coefficient estimate for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> in the multiple regression model is close to zero, and the corresponding p-value is no longer significant, with a value around 0.86.</p>
+Comparing these coefficient estimates to those displayed in Table 3.1 and 3.3, we notice that the multiple regression coefficient estimates for <code>TV</code> and <code>radio</code> are pretty similar to the simple linear regression coefficient estimates.
+However, while the <code>newspaper</code> regression coefficient estimate in Table 3.3 was significantly non-zero, the coefficient estimate for <code>newspaper</code> in the multiple regression model is close to zero, and the corresponding p-value is no longer significant, with a value around 0.86.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="mult-lin-reg.html#cb3-1"></a><span class="co"># estimate linear model</span></span>
 <span id="cb3-2"><a href="mult-lin-reg.html#cb3-2"></a>advertising_mlin_reg =<span class="st"> </span><span class="kw">lm</span>(sales<span class="op">~</span>TV<span class="op">+</span>radio<span class="op">+</span>newspaper, <span class="dt">data =</span> advertising)</span>
 <span id="cb3-3"><a href="mult-lin-reg.html#cb3-3"></a></span>
@@ -1020,20 +1020,20 @@ However, while the <strong><span style="font-family:monospace; color: #B44C1C;">
 <em>For the <strong><span style='font-family:monospace; color: #B44C1C;'>Advertising</span></strong> data, least squares coefficient estimates of the multiple linear regression of number of units sold on radio, TV, and newspaper advertising budgets.</em>
 </div></p>
 <p>This illustrates that the simple and multiple regression coefficients can be quite different.
-This difference stems from the fact that in the simple regression case, the slope term represents the average effect of a $1,000 increase in newspaper advertising, ignoring other predictors such as <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>.
-In contrast, in the multiple regression setting, the coefficient for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> represents the average effect of increasing newspaper spending by $1,000 while holding <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> fixed.</p>
-<p>Does it make sense for the multiple regression to suggest no relationship between <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> while the simple linear regression implies the opposite?
+This difference stems from the fact that in the simple regression case, the slope term represents the average effect of a $1,000 increase in newspaper advertising, ignoring other predictors such as <code>TV</code> and <code>radio</code>.
+In contrast, in the multiple regression setting, the coefficient for <code>newspaper</code> represents the average effect of increasing newspaper spending by $1,000 while holding <code>TV</code> and <code>radio</code> fixed.</p>
+<p>Does it make sense for the multiple regression to suggest no relationship between <code>sales</code> and <code>newspaper</code> while the simple linear regression implies the opposite?
 In fact it does.
 Consider the correlation matrix for the three predictor variables and response variable, displayed in Table 3.5.
-Notice that the correlation between <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> is 0.35.
+Notice that the correlation between <code>radio</code> and <code>newspaper</code> is 0.35.
 This reveals a tendency to spend more on newspaper advertising in markets where more is spent on radio advertising.
 Now suppose that the multiple regression is correct and newspaper advertising has no direct impact on sales, but radio advertising does increase sales.
 Then in markets where we spend more on radio our sales will tend to be higher, and as our correlation matrix shows, we also tend to spend more on newspaper advertising in those same markets.
-Hence, in a simple linear regression which only examines <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> versus <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong>, we will observe that higher values of <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> tend to be associated with higher values of <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>, even though newspaper advertising does not actually affect sales.
-So <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> sales are a surrogate for <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> advertising; newspaper gets “credit” for the effect of <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> on <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.</p>
+Hence, in a simple linear regression which only examines <code>sales</code> versus <code>newspaper</code>, we will observe that higher values of <code>newspaper</code> tend to be associated with higher values of <code>sales</code>, even though newspaper advertising does not actually affect sales.
+So <code>newspaper</code> sales are a surrogate for <code>radio</code> advertising; newspaper gets “credit” for the effect of <code>radio</code> on <code>sales</code>.</p>
 <p>This slightly counterintuitive result is very common in many real life situations.
 Consider an absurd example to illustrate the point.
-Running a regression of shark attacks versus ice cream sales for data collected at a given beach community over a period of time would show a positive relationship, similar to that seen between <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong>.
+Running a regression of shark attacks versus ice cream sales for data collected at a given beach community over a period of time would show a positive relationship, similar to that seen between <code>sales</code> and <code>newspaper</code>.
 Of course no one (yet) has suggested that ice creams should be banned at beaches to reduce shark attacks.
 In reality, higher temperatures cause more people to visit the beach, which in turn results in more ice cream sales and more shark attacks.
 A multiple regression of attacks versus ice cream sales and temperature reveals that, as intuition implies, the former predictor is no longer significant after adjusting for temperature.</p>
@@ -1069,10 +1069,10 @@ If the linear model assumptions are correct, one can show that</p>
 <p><span class="math display">\[ E\{TSS-RSS/p\} = \sigma^2. \]</span></p>
 <p>Hence, when there is no relationship between the response and predictors, one would expect the F-statistic to take on a value close to 1.
 On the other hand, if <span class="math inline">\(H_a\)</span> is true, then $ E{TSS-RSS/p} &gt; ^2 $, so we expect <span class="math inline">\(F\)</span> t obe greater than 1.</p>
-<p>The F-statistic for the multiple linear regression model obtained by regressing <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> onto <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>, <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong>, and <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> is shown in Table 3.6.
+<p>The F-statistic for the multiple linear regression model obtained by regressing <code>sales</code> onto <code>radio</code>, <code>TV</code>, and <code>newspaper</code> is shown in Table 3.6.
 In this example the F-statistic is 570.
 Since this is far larger than 1, it provides compelling evidence against the null hypothesis <span class="math inline">\(H_0\)</span>.
-In other words, the large F-statistic suggests that at least one of the advertising media must be related to <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
+In other words, the large F-statistic suggests that at least one of the advertising media must be related to <code>sales</code>.
 However, what if the F-statistic had been closer to
 1? How large does the F-statistic need to be before we can reject <span class="math inline">\(H_0\)</span> and conclude that there is a relationship?
 It turns out that the answer depends on the values of <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>.
@@ -1081,7 +1081,7 @@ In contrast, a larger F-statistic is needed to reject <span class="math inline">
 When <span class="math inline">\(H_0\)</span> is true, and the errors <span class="math inline">\(\epsilon_i\)</span> have a normal distribution, the F-statistic follows an F-distribution.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>
 For any given value of <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>, any statistical software package can be used to compute the p-value associated with the F-statistic using this distribution.
 Based on this p-value, we can determine whether or not to reject <span class="math inline">\(H_0\)</span>.
-For the advertising data, the p-value associated with the F-statistic in Table 3.6 is essentially zero, so we have extremely strong evidence that at least one of the media is associated with increased <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.</p>
+For the advertising data, the p-value associated with the F-statistic in Table 3.6 is essentially zero, so we have extremely strong evidence that at least one of the media is associated with increased <code>sales</code>.</p>
 <p>In <a href="mult-lin-reg.html#eq:fstat">(3.23)</a> we are testing <span class="math inline">\(H_0\)</span> that all the coefficients are zero.
 Sometimes we want to test that a partiuclar subset of <span class="math inline">\(q\)</span> of the coefficients are zero.
 This corresponds to a null hypothesis</p>
@@ -1098,7 +1098,7 @@ Then the appropriate F-statistic is</p>
 These provide information about whether each individual predictor is related to the response, after adjusting for the other predictors.
 It turns out that each of these are exactly equivalent<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> to the F-test that omits that single variable from the model, leaving all others in—i.e. <span class="math inline">\(q=1\)</span> in <a href="mult-lin-reg.html#eq:fstat2">(3.24)</a>.
 So it reports the <em>partial effect</em> of adding that variable to the model.
-For instance, as we discussed earlier, these p-values indicate that <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are related to <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>, but that there is no evidence that <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> is associated with <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>, in the presence of these two.</p>
+For instance, as we discussed earlier, these p-values indicate that <code>TV</code> and <code>radio</code> are related to <code>sales</code>, but that there is no evidence that <code>newspaper</code> is associated with <code>sales</code>, in the presence of these two.</p>
 <p>Given these individual p-values for each variable, why do we need to look at the overall F-statistic?
 After all, it seems likely that if any one of the p-values for the individual variables is very small, then <em>at least one of the predictors is related to the response</em>.
 However, this logic is flawed, especially when the number of predictors p is large.</p>
@@ -1155,7 +1155,7 @@ For instance, we may stop when all remaining variables have a p-value below some
 This is a combination of forward and backward selection.
 We start with no variables in the model, and as with forward selection, we add the variable that provides the best fit.
 We continue to add variables one-by-one.
-Of course, as we noted with the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> example, the p-values for the variables can become larger as the new predictors are added to the model.
+Of course, as we noted with the <code>Advertising</code> example, the p-values for the variables can become larger as the new predictors are added to the model.
 Hence, if at any point the p-value for one of the variables in the model rises above a certain threshold, then we remove that variable from the model.
 We continue to perform these forward and backward steps until all variables in the model have a sufficiently low p-value, and all variables outside the model would have a large p-value if added to the model.</li>
 </ul>
@@ -1172,23 +1172,23 @@ These quantities are computed and interpreted in the same fashion as for simple 
 In multiple linear regression, it turns out that it equals Cor(Y, <span class="math inline">\(\hat{Y})^2\)</span>, the square of the correlation between the response and
 the fitted linear model; in fact one property of the fitted linear model is that it maximizes this correlation among all possible linear models.</p>
 <p>An <span class="math inline">\(R^2\)</span> value close to 1 indicates that the model explains a large portion of the variance in the response variable.
-As an example, we saw in Table 3.6 that for the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data, the model that uses all three advertising media to predict <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> has an <span class="math inline">\(R^2\)</span> of 0.8972.
-On the other hand, the model that uses only <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> to predict <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> has an <span class="math inline">\(R^2\)</span> value of 0.89719.
+As an example, we saw in Table 3.6 that for the <code>Advertising</code> data, the model that uses all three advertising media to predict <code>sales</code> has an <span class="math inline">\(R^2\)</span> of 0.8972.
+On the other hand, the model that uses only <code>TV</code> and <code>radio</code> to predict <code>sales</code> has an <span class="math inline">\(R^2\)</span> value of 0.89719.
 In other words, there is a small increase in <span class="math inline">\(R^2\)</span> if we include newspaper advertising in the model that already contains TV and radio advertising, even though we saw earlier that the p-value for newspaper advertising in Table 3.4 is not significant.
 It turns out that <span class="math inline">\(R^2\)</span> will always increase when more variables are added to the model, even if those variables are only weakly associated with the response.
 This is due to the fact that adding another variable to the least squares equations must allow us to fit the training data (though not necessarily the testing data) more accurately.
 Thus, the <span class="math inline">\(R^2\)</span> statistic, which is also computed on the training data, must increase.
-The fact that adding newspaper advertising to the model containing only TV and radio advertising leads to just a tiny increase in <span class="math inline">\(R^2\)</span> provides additional evidence that <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> can be dropped from the model.
-Essentially, <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> provides no real improvement in the model fit to the training samples, and its inclusion will likely lead to poor results on independent test samples due to overfitting.</p>
-<p>In contrast, the model containing only <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> as a predictor had an <span class="math inline">\(R^2\)</span> of 0.61 (Table 3.2).
-Adding <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> to the model leads to a substantial improvement in <span class="math inline">\(R^2\)</span>.
+The fact that adding newspaper advertising to the model containing only TV and radio advertising leads to just a tiny increase in <span class="math inline">\(R^2\)</span> provides additional evidence that <code>newspaper</code> can be dropped from the model.
+Essentially, <code>newspaper</code> provides no real improvement in the model fit to the training samples, and its inclusion will likely lead to poor results on independent test samples due to overfitting.</p>
+<p>In contrast, the model containing only <code>TV</code> as a predictor had an <span class="math inline">\(R^2\)</span> of 0.61 (Table 3.2).
+Adding <code>radio</code> to the model leads to a substantial improvement in <span class="math inline">\(R^2\)</span>.
 This implies that a model that uses TV and radio expenditures to predict sales is substantially better than one that uses only TV advertising.
-We could further quantify this improvement by looking at the p-value for the <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> coefficient in a model that contains only <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> as predictors.</p>
-<p>The model that contains only <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> as predictors has an RSE of 1.681, and the model that also contains <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> as a predictor has an RSE of 1.686 (Table 3.6).
-In contrast, the model that contains only <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> has an RSE of 3.26 (Table 3.2).
+We could further quantify this improvement by looking at the p-value for the <code>radio</code> coefficient in a model that contains only <code>TV</code> and <code>radio</code> as predictors.</p>
+<p>The model that contains only <code>TV</code> and <code>radio</code> as predictors has an RSE of 1.681, and the model that also contains <code>newspaper</code> as a predictor has an RSE of 1.686 (Table 3.6).
+In contrast, the model that contains only <code>TV</code> has an RSE of 3.26 (Table 3.2).
 This corroborates our previous conclusion that a model that uses TV and radio expenditures to predict sales is much more accurate (on the training data) than one that only uses TV spending.
 Furthermore, given that TV and radio expenditures are used as predictors, there is no point in also using newspaper spending as a predictor in the model.
-The observant reader may wonder how RSE can increase when <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> is added to the model given that RSS must decrease.
+The observant reader may wonder how RSE can increase when <code>newspaper</code> is added to the model given that RSS must decrease.
 In general RSE is defined as</p>
 <p><span class="math display" id="eq:rse-def">\[\begin{equation}
   RSE = \sqrt{\frac{1}{n-p-1}RSS,}
@@ -1198,10 +1198,10 @@ In general RSE is defined as</p>
 Thus, models with more variables can have higher RSE if the decrease in RSS is small relative to the increaes in <em>p</em>.</p>
 <p>In addition to looking at the RSE and <span class="math inline">\(R^2\)</span> statistics just discussed, it can be useful to plot the data.
 Graphical summaries can reveal problems with a model that are not visible from numerical statistics.
-For example, Figure 3.5 displays a three-dimensional plot of <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> versus <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
+For example, Figure 3.5 displays a three-dimensional plot of <code>TV</code> and <code>radio</code> versus <code>sales</code>.
 We see that some observations lie above and some observations lie below the least squares regression plane.
-In particular, the linear model seems to overestimate <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> for instances in which most of the advertising money was spent exclusively on either <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> or <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>.
-It underestimates <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> for instances where the budget was split between the two media.
+In particular, the linear model seems to overestimate <code>sales</code> for instances in which most of the advertising money was spent exclusively on either <code>TV</code> or <code>radio</code>.
+It underestimates <code>sales</code> for instances where the budget was split between the two media.
 This pronounced non-linear pattern cannot be modeled accurately using linear regression.
 It suggests a <em>synergy</em> or <em>interaction</em> effect between the advertising media, whereby combining the media together results in a bigger boost to sales than using any single medium.
 In Section 3.3.2, we will discuss extending the linear model to accomodate such synergistic effects through the use of interaction terms.</p>
@@ -1229,13 +1229,13 @@ How much will Y vary from <span class="math inline">\(\hat{Y}\)</span>?
 We use prediction intervals to answer this question.
 Prediction intervals are always wider than confidence intervals, because they incorporate both the error in the estimate for f(X) (the reducible error) and the uncertainty as to how much an individual point will differ from the population regression plane (the irreducible error).</p></li>
 </ol>
-<p>We use a <strong><span style="font-family:monospace; color: #1188ce;">confidence interval</span></strong> to quantify the uncertainty surrounding the <em>average</em> <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> over a large number of cities.
-For example, given that $100,000 is spent on <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> advertising and $20,000 is spent on <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> advertising in each city, the 95% confidence interval is [10,985, 11,528].
+<p>We use a <strong><span style="font-family:monospace; color: #1188ce;">confidence interval</span></strong> to quantify the uncertainty surrounding the <em>average</em> <code>sales</code> over a large number of cities.
+For example, given that $100,000 is spent on <code>TV</code> advertising and $20,000 is spent on <code>radio</code> advertising in each city, the 95% confidence interval is [10,985, 11,528].
 We interpret this to mean that 95% of intervals of this form will contain the true value of f(X).<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>
-On the other hand, a <strong><span style="font-family:monospace; color: #1188ce;">prediction interval</span></strong> can be used to quantify the uncertainty surrounding <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> for a <em>particular</em> city.
-Given that $100,000 is spent on <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> advertising and $20,000 is spent on <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> advertising in that city the 95% prediction interval is [7,930, 14,580].
+On the other hand, a <strong><span style="font-family:monospace; color: #1188ce;">prediction interval</span></strong> can be used to quantify the uncertainty surrounding <code>sales</code> for a <em>particular</em> city.
+Given that $100,000 is spent on <code>TV</code> advertising and $20,000 is spent on <code>radio</code> advertising in that city the 95% prediction interval is [7,930, 14,580].
 We interpret this to mean that 95% of intervals of this form will contain the true value of <em>Y</em> for this city.
-Note that both intervals are centered at 11,256, but that the prediction interval is substantially wider than the confidence interval, reflecting the increased uncertainty about <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> for a given city in comparison to the average <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> over many locations.</p>
+Note that both intervals are centered at 11,256, but that the prediction interval is substantially wider than the confidence interval, reflecting the increased uncertainty about <code>sales</code> for a given city in comparison to the average <code>sales</code> over many locations.</p>
 </div>
 </div>
 </div>
@@ -1244,7 +1244,7 @@ Note that both intervals are centered at 11,256, but that the prediction interva
 <ol start="6">
 <li id="fn6"><p>Even if the errors are not normally-distributed, the F-statistic approximately follows an F-distribution provided that the sample size <span class="math inline">\(n\)</span> is large.<a href="mult-lin-reg.html#fnref6" class="footnote-back">↩︎</a></p></li>
 <li id="fn7"><p>The squar eof each t-statistic is the corresponding F-statistic.<a href="mult-lin-reg.html#fnref7" class="footnote-back">↩︎</a></p></li>
-<li id="fn8"><p>In other words, if we collect a large number of data sets like the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data set, and we construct a confidence interval for the average <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> on the basis of each data set (given $100,000 in <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and $20,000 in <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> advertising), then 95% of these confidence intervals will contain the true value of average <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong><a href="mult-lin-reg.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn8"><p>In other words, if we collect a large number of data sets like the <code>Advertising</code> data set, and we construct a confidence interval for the average <code>sales</code> on the basis of each data set (given $100,000 in <code>TV</code> and $20,000 in <code>radio</code> advertising), then 95% of these confidence intervals will contain the true value of average <code>sales</code><a href="mult-lin-reg.html#fnref8" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

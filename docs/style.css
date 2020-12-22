@@ -5,6 +5,14 @@
   --font-mono: "Roboto Mono"
 }
 
+.book .book-body .page-wrapper .page-inner section.normal code, .book .book-body .page-wrapper .page-inner section.normal pre {
+  font-family: var(--font-mono) !important;
+}
+
+code:before, code:after {
+  content: none !important;
+}
+
 p.caption {
   margin-top:10px;
   color: var(--islr-blue);
@@ -19,6 +27,11 @@ p.caption:not(em) {
 p code {
   white-space: inherit;
   font-family: "Roboto Mono";
+  color: #B44C1C !important;
+  background-color: var(--white) !important;
+  font-size: 1em !important;
+  font-weight: 500;
+  padding: 0 !important;
 }
 pre {
   word-break: normal;

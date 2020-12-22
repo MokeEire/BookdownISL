@@ -940,32 +940,32 @@ no supervising output; nevertheless we can learn relationships and structure fro
 To provide an illustration of some applications of statistical learning, we briefly discuss three real-world data sets that are considered in this book.</p>
 <div id="wage-data" class="section level3">
 <h3><span class="header-section-number">2.1.1</span> Wage Data</h3>
-<p>In this application (which we refer to as the <strong><span style="font-family:monospace; color: #B44C1C;">Wage</span></strong> data set throughout this book), we examine a number of factors that relate to wages for a group of males from the Atlantic region of the United States.
-In particular, we wish to understand the association between an employee’s <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">education</span></strong>, as well as the calendar <strong><span style="font-family:monospace; color: #B44C1C;">year</span></strong>,on his <strong><span style="font-family:monospace; color: #B44C1C;">wage</span></strong>. Consider, for example, the left-hand panel of Figure 1.1, which displays <strong><span style="font-family:monospace; color: #B44C1C;">wage</span></strong> versus <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong> for each of the individuals in the data set.
-There is evidence that <strong><span style="font-family:monospace; color: #B44C1C;">wage</span></strong> increases with <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong> but then decreases again after approximately age 60.
-The blue line, which provides an estimate of the average <strong><span style="font-family:monospace; color: #B44C1C;">wage</span></strong> for a given <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong>, makes this trend clearer.</p>
+<p>In this application (which we refer to as the <code>Wage</code> data set throughout this book), we examine a number of factors that relate to wages for a group of males from the Atlantic region of the United States.
+In particular, we wish to understand the association between an employee’s <code>age</code> and <code>education</code>, as well as the calendar <code>year</code>,on his <code>wage</code>. Consider, for example, the left-hand panel of Figure 1.1, which displays <code>wage</code> versus <code>age</code> for each of the individuals in the data set.
+There is evidence that <code>wage</code> increases with <code>age</code> but then decreases again after approximately age 60.
+The blue line, which provides an estimate of the average <code>wage</code> for a given <code>age</code>, makes this trend clearer.</p>
 <p>FIGURE 1.1</p>
-<p>Given an employee’s <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong>, we can use this curve to <em>predict</em> his <strong><span style="font-family:monospace; color: #B44C1C;">wage</span></strong>. However, it is also clear from Figure 1.1 that there is a signiﬁcant amount of variability associated with this average value, and so <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong> alone is unlikely to provide an accurate prediction of a particular man’s <strong><span style="font-family:monospace; color: #B44C1C;">wage</span></strong>.</p>
-<p>We also have information regarding each employee’s education level and the year in which the <strong><span style="font-family:monospace; color: #B44C1C;">wage</span></strong> was earned.
-The center and right-hand panels of Figure 1.1, which display <strong><span style="font-family:monospace; color: #B44C1C;">wage</span></strong> as a function of both <strong><span style="font-family:monospace; color: #B44C1C;">year</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">education</span></strong>, indicate that both of these factors are associated with <strong><span style="font-family:monospace; color: #B44C1C;">wage</span></strong>.
+<p>Given an employee’s <code>age</code>, we can use this curve to <em>predict</em> his <code>wage</code>. However, it is also clear from Figure 1.1 that there is a signiﬁcant amount of variability associated with this average value, and so <code>age</code> alone is unlikely to provide an accurate prediction of a particular man’s <code>wage</code>.</p>
+<p>We also have information regarding each employee’s education level and the year in which the <code>wage</code> was earned.
+The center and right-hand panels of Figure 1.1, which display <code>wage</code> as a function of both <code>year</code> and <code>education</code>, indicate that both of these factors are associated with <code>wage</code>.
 Wages increase by approximately $10,000, in a roughly linear (or straight-line) fashion, between 2003 and 2009, though this rise is very slight relative to the variability in the data.
 Wages are also typically greater for individuals with higher education levels: men with the lowest education level (1) tend to
 have substantially lower wages than those with the highest education level (5).
-Clearly, the most accurate prediction of a given man’s <strong><span style="font-family:monospace; color: #B44C1C;">wage</span></strong> will be obtained by combining his <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong>, his <strong><span style="font-family:monospace; color: #B44C1C;">education</span></strong>,and the <strong><span style="font-family:monospace; color: #B44C1C;">year</span></strong>.
-In Chapter 3, we discuss linear regression, which can be used to predict <strong><span style="font-family:monospace; color: #B44C1C;">wage</span></strong> from this data set.
-Ideally, we should predict <strong><span style="font-family:monospace; color: #B44C1C;">wage</span></strong> in a way that accounts for the non-linear relationship between <strong><span style="font-family:monospace; color: #B44C1C;">wage</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong>.
+Clearly, the most accurate prediction of a given man’s <code>wage</code> will be obtained by combining his <code>age</code>, his <code>education</code>,and the <code>year</code>.
+In Chapter 3, we discuss linear regression, which can be used to predict <code>wage</code> from this data set.
+Ideally, we should predict <code>wage</code> in a way that accounts for the non-linear relationship between <code>wage</code> and <code>age</code>.
 In Chapter 7, we discuss a class of approaches for addressing this problem.</p>
 </div>
 <div id="stock-market-data" class="section level3">
 <h3><span class="header-section-number">2.1.2</span> Stock Market Data</h3>
-<p>The <strong><span style="font-family:monospace; color: #B44C1C;">Wage</span></strong> data involves predicting a <em>continuous</em> or <em>quantitative</em> output value.
+<p>The <code>Wage</code> data involves predicting a <em>continuous</em> or <em>quantitative</em> output value.
 This is often referred to as a <em>regression</em> problem.
 However, in certain cases we may instead wish to predict a non-numerical value—that is, a <em>categorical</em> or <em>qualitative</em> output.
 For example, in Chapter 4 we examine a stock market data set that contains the daily movements in the Standard &amp; Poor’s 500 (S&amp;P) stock index over a 5-year period between 2001 and 2005.
-We refer to this as the <strong><span style="font-family:monospace; color: #B44C1C;">Smarket</span></strong> data.
+We refer to this as the <code>Smarket</code> data.
 The goal is to predict whether the index will <em>increase</em> or <em>decrease</em> on a given day using the past 5 days’ percentage changes in the index.
 Here the statistical learning problem does not involve predicting a numerical value.
-Instead it involves predicting whether a given day’s stock market performance will fall into the <strong><span style="font-family:monospace; color: #B44C1C;">Up</span></strong> bucket or the <strong><span style="font-family:monospace; color: #B44C1C;">Down</span></strong> bucket.
+Instead it involves predicting whether a given day’s stock market performance will fall into the <code>Up</code> bucket or the <code>Down</code> bucket.
 This is known as a <em>classiﬁcation</em> problem.
 A model that could accurately predict the direction in which the market will move would be very useful!</p>
 <p>FIGURE 1.2</p>

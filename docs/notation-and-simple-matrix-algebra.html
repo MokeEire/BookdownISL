@@ -936,9 +936,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 For the most part we adopt the same notational conventions as ESL.
 We will use <em>n</em> to represent the number of distinct data points, or observations, in our sample.
 We will let <em>p</em> denote the number of variables that are available for use in making predictions.
-For example, the <strong><span style="font-family:monospace; color: #B44C1C;">Wage</span></strong> data set consists of 12 variables for <span class="math inline">\(3,000\)</span> people, so we have <span class="math inline">\(n =3,000\)</span> observations and
-<span class="math inline">\(p = 12\)</span> variables (such as <strong><span style="font-family:monospace; color: #B44C1C;">year</span></strong>, <strong><span style="font-family:monospace; color: #B44C1C;">age</span></strong>, <strong><span style="font-family:monospace; color: #B44C1C;">wage</span></strong>, and more).
-Note that throughout this book, we indicate variable names using colored font: <strong><span style="font-family:monospace; color: #B44C1C;">Variable Name</span></strong>.
+For example, the <code>Wage</code> data set consists of 12 variables for <span class="math inline">\(3,000\)</span> people, so we have <span class="math inline">\(n =3,000\)</span> observations and
+<span class="math inline">\(p = 12\)</span> variables (such as <code>year</code>, <code>age</code>, <code>wage</code>, and more).
+Note that throughout this book, we indicate variable names using colored font: <code>Variable Name</code>.
 In some examples, <em>p</em> might be quite large, such as on the order of thousands or even millions; this situation arises quite often, for example, in the analysis of modern biological data or web-based advertising data.</p>
 <p>In general, we will let <span class="math inline">\(x_{ij}\)</span> represent the value of the <em>j</em>th variable for the <em>i</em>th observation, where <span class="math inline">\(i =1, 2,...,n\)</span> and <span class="math inline">\(j =1, 2,...,p\)</span>.
 Throughout this book, <em>i</em> will be used to index the samples or observations (from 1 to <em>n</em>) and <em>j</em> will be used to index the variables (from 1 to <em>p</em>).
@@ -979,7 +979,7 @@ x_{2j}\\
 x_{nj}\\
 \end{pmatrix}
 \]</span>
-For example, for the <strong><span style="font-family:monospace; color: #B44C1C;">Wage</span></strong> data, <span class="math inline">\(x_1\)</span> contains the <span class="math inline">\(n=3,000\)</span> values for <strong><span style="font-family:monospace; color: #B44C1C;">year</span></strong>.
+For example, for the <code>Wage</code> data, <span class="math inline">\(x_1\)</span> contains the <span class="math inline">\(n=3,000\)</span> values for <code>year</code>.
 Using this notation, the matrix <em><strong>X</strong></em> can be written as</p>
 <p><span class="math display">\[
 X = \begin{pmatrix}
@@ -1008,7 +1008,7 @@ x^T_i = \begin{pmatrix}
 x_{i1} &amp; x_{i2} &amp; \cdots &amp; x_ip
 \end{pmatrix}.
 \]</span></p>
-<p>We use <span class="math inline">\(y_i\)</span> to denote the <em>i</em>th observation of the variable on which we wish to make predictions such as <strong><span style="font-family:monospace; color: #B44C1C;">wage</span></strong>.
+<p>We use <span class="math inline">\(y_i\)</span> to denote the <em>i</em>th observation of the variable on which we wish to make predictions such as <code>wage</code>.
 Hence, we write the set of all <em>n</em> observations in vector form as</p>
 <p><span class="math display">\[
 y = \begin{pmatrix}

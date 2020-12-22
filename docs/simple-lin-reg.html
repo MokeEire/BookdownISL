@@ -941,9 +941,11 @@ Mathematically we can write this linear relationship as</p>
 \end{equation}\]</span></p>
 <p>You might read “<span class="math inline">\(\approx\)</span>” as “<em>is approximately modeled as</em>”.
 We will sometimes describe <a href="simple-lin-reg.html#eq:linmod">(3.1)</a> by saying we are <em>regressing</em> Y on X (or Y <em>onto</em> X).
-For example, <em>X</em> may represent <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> advertising and <em>Y</em> may represent <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
-Then we can regress <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> onto <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> by fitting the model:</p>
-<p><span class="math display">\[\color{#B44C1C}{\textbf{sales}} = \beta_0+\beta_1\times\color{#B44C1C}{\textbf{TV}}\]</span></p>
+For example, <em>X</em> may represent <code>TV</code> advertising and <em>Y</em> may represent <code>sales</code>.
+Then we can regress <code>sales</code> onto <code>TV</code> by fitting the model:</p>
+<p><span class="math display">\[
+\color{#B44C1C}{\textbf{sales}} = \beta_0+\beta_1\times\color{#B44C1C}{\textbf{TV}}
+\]</span></p>
 <p>In Equation <a href="simple-lin-reg.html#eq:linmod">(3.1)</a>, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are two unknown constants that represent the <strong><span style="font-family:monospace; color: #1188ce;">intercept</span></strong> and the <strong><span style="font-family:monospace; color: #1188ce;">slope</span></strong> terms in the linear model.
 Together, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are known as the model <strong><span style="font-family:monospace; color: #1188ce;">coefficients</span></strong> or <strong><span style="font-family:monospace; color: #1188ce;">parameters</span></strong>.
 Once we have used our training data to produce estimates <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> for our model parameters, we can predict future sales on the basis of a particular value of TV advertising by computing</p>
@@ -959,7 +961,7 @@ Here we use the <em>hat</em> symbol, ^ , to denote the estimated value of an unk
 So before we can use <a href="simple-lin-reg.html#eq:linmod">(3.1)</a> to make predictions, we must use data to estimate the coefficients. Let</p>
 <p><span class="math display">\[(x_1, y_1), (x_2, y_2), ..., (x_n, y_n)\]</span></p>
 <p>represent <em>n</em> observation pairs, each of which consists of a measurement of <em>X</em> and a measurement of <em>Y</em>.
-In the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> example, this data set consists of the TV advertising budget and product sales in <span class="math inline">\(n = 200\)</span> different markets.
+In the <code>Advertising</code> example, this data set consists of the TV advertising budget and product sales in <span class="math inline">\(n = 200\)</span> different markets.
 (Recall that the data are displayed in <strong>Figure 2.1</strong>.)
 Our goal is to obtain coefficient estimates <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> such that the linear model <a href="simple-lin-reg.html#eq:linmod">(3.1)</a> fits the available data well—that is, so that <span class="math inline">\(y_i \approx \hat{\beta_0}+\hat{\beta_1}x_i\)</span> for <span class="math inline">\(i = 1,...,n\)</span>.
 In other words, we want to find an intercept b0 and a slope b1 such that the resulting line is as close as possible to the <span class="math inline">\(n = 200\)</span> data points.
@@ -1006,9 +1008,9 @@ Using some calculus, one can show that the minimizers are</p>
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(\bar{y} \equiv \frac{1}{n}\sum_{i=1}^{n}y_i\)</span> and <span class="math inline">\(\bar{x} \equiv \frac{1}{n}\sum_{i=1}^{n}x_i\)</span> are the sample means.
 In other words, <a href="simple-lin-reg.html#eq:rssmin">(3.4)</a> defines the <em>least squares coefficient estimates</em> for simple linear regression.</p>
-<p><a href="simple-lin-reg.html#fig:advertising-lm">3.1</a> displays the simple linear regression fit to the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data, where <span class="math inline">\(\hat{\beta_0} = 7.03\)</span> and <span class="math inline">\(\hat{\beta_1} = 0.0475\)</span>.
+<p><a href="simple-lin-reg.html#fig:advertising-lm">3.1</a> displays the simple linear regression fit to the <code>Advertising</code> data, where <span class="math inline">\(\hat{\beta_0} = 7.03\)</span> and <span class="math inline">\(\hat{\beta_1} = 0.0475\)</span>.
 In other words, according to this approximation, an additional $1,000 spent on TV advertising is associated with selling approximately 47.5 additional units of the product.
-In <strong>Figure 3.2</strong>, we have computed RSS for a number of values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, using the advertising data with <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> as the response and <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> as the predictor.
+In <strong>Figure 3.2</strong>, we have computed RSS for a number of values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, using the advertising data with <code>sales</code> as the response and <code>TV</code> as the predictor.
 In each plot, the red dot represents the pair of least squares estimates <span class="math inline">\((\hat{\beta_0}, \hat{\beta_1})\)</span> given by <a href="simple-lin-reg.html#eq:rssmin">(3.4)</a>.
 These values clearly minimize the RSS.</p>
 <p>[FIGURE 3.2 HERE]</p>
@@ -1136,7 +1138,7 @@ We <em>reject the null hypothesis</em>—that is, we declare a relationship to e
 Typical p-value cutoffs for rejecting the null hypothesis are 5 or 1%.
 When <span class="math inline">\(n=30\)</span>, these correspond to t-statistics <a href="simple-lin-reg.html#eq:t-stat">(3.14)</a> of around 2 and 2.75, respectively.</p>
 <p>{ Table 3.1 goes here }</p>
-<p>Table 3.1 provides details of the least squares model for the regression of number of units sold on TV advertising budget for the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data.
+<p>Table 3.1 provides details of the least squares model for the regression of number of units sold on TV advertising budget for the <code>Advertising</code> data.
 Notice that the coefficients for <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span> are very large relative to their standard errors, so the t-statistics are also large; the probabilities of seeing such values if <span class="math inline">\(H_0\)</span> is true are virtually zero.
 Hence we can conclude that <span class="math inline">\(\beta_0 \neq 0\)</span> and <span class="math inline">\(\beta_1 \neq 0\)</span>.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
 </div>
@@ -1164,7 +1166,7 @@ RSS = \sum_{i=1}^{n} (y_i - \hat{y_i})^2 . \tag{3.16}
 In other words, actual sales in each market deviate from the true regression line by approximately 3,260 units, on average.
 Another way to think about this is that even if the model were correct and the true values of the unknown coefficients <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> were known exactly, any prediction of sales on the basis of TV advertising would still be off by about 3,260 units on average.
 Of course, whether or not 3,260 units is an acceptable prediction error depends on the problem context.
-In the advertising data set, the mean value of <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> over all markets is approximately 14,000 units, and so the percentage error is <span class="math inline">\(3,260/14,000 = 23\%\)</span>.</p>
+In the advertising data set, the mean value of <code>sales</code> over all markets is approximately 14,000 units, and so the percentage error is <span class="math inline">\(3,260/14,000 = 23\%\)</span>.</p>
 <p>The RSE is considered a measure of the <em>lack of fit</em> of the model <a href="simple-lin-reg.html#eq:lin-rel">(3.5)</a> to the data.
 If the predictions obtained using the model are very close to the true outcome values—that is, if <span class="math inline">\(\hat{y_i} \approx y_i\)</span> for <span class="math inline">\(i = 1, ..., n\)</span>—then <a href="simple-lin-reg.html#eq:rse">(3.15)</a> will be small, and we can conclude that the model fits the data very well.
 On the other hand, if <span class="math inline">\(\hat{y_i}\)</span> is very far from <span class="math inline">\(y_i\)</span> for one or more observations, then the RSE may be quite large, indicating that the model doesn’t fit the data well.</p>
@@ -1185,7 +1187,7 @@ In contrast, RSS measures the amount of variability that is left unexplained aft
 Hence, <span class="math inline">\(TSS - RSS\)</span> measures the amount of variability in the response that is explained (or removed) by performing the regression, and <span class="math inline">\(R^2\)</span> measures the <em>proportion of variability in Y that can be explained using X</em>.
 An <span class="math inline">\(R^2\)</span> statistic that is close to 1 indicates that a large proportion of the variability in the response has been explained by the regression.
 A number near 0 indicates that the regression did not explain much of the variability in the response; this might occur because the linear model is wrong, or the inherent error <span class="math inline">\(\sigma^2\)</span> is high, or both.
-In Table 3.2, the <span class="math inline">\(R^2\)</span> was 0.61, and so just under two-thirds of the variability in <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> is explained by a linear regression on <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong>.</p>
+In Table 3.2, the <span class="math inline">\(R^2\)</span> was 0.61, and so just under two-thirds of the variability in <code>sales</code> is explained by a linear regression on <code>TV</code>.</p>
 <p>The <span class="math inline">\(R^2\)</span> statistic is a measure of the linear relationship between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.
 Recall that <strong><span style="font-family:monospace; color: #1188ce;">correlation</span></strong>, defined as</p>
 <p><span class="math display" id="eq:correlation">\[\begin{equation}
@@ -1210,9 +1212,9 @@ However, despite what many textbooks might tell us, we seldom believe that the t
 <li id="fn3"><p> <em>Approximately</em> for several reasons. Equation <a href="simple-lin-reg.html#eq:b1-interval">(3.10)</a> relies on the assumption that the errors are Guassian. Also, the factor of 2 in front of the <span class="math inline">\(SE(\hat{\beta_1})\)</span> term will vary slightly depending on the number of observations <em>n</em> in the linear regression.
 To be precise, rather than the number 2, <a href="simple-lin-reg.html#eq:b1-interval">(3.10)</a> should contain the 97.5% quantile of a <em>t</em>-distribution with <span class="math inline">\(n-2\)</span> degrees of freedom.
 Details of how to compute the 95% confidence interval precisely in <code>R</code> will be preovided later in this chapter.<a href="simple-lin-reg.html#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>In Table 3.1, a small p-value for the intercept indicates that we can reject the null hpothesis that <span class="math inline">\(\beta_0 = 0\)</span>, and a small p-value for <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> indicates that we can reject the null hypothesis that <span class="math inline">\(\beta_1 = 0\)</span>.
-Rejecting the latter null hypothesis allows us to conclude that there is a relationship between <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
-Rejecting the former allows us to conclude that in the absence of <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> expenditure, <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> are non-zero.<a href="simple-lin-reg.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>In Table 3.1, a small p-value for the intercept indicates that we can reject the null hpothesis that <span class="math inline">\(\beta_0 = 0\)</span>, and a small p-value for <code>TV</code> indicates that we can reject the null hypothesis that <span class="math inline">\(\beta_1 = 0\)</span>.
+Rejecting the latter null hypothesis allows us to conclude that there is a relationship between <code>TV</code> and <code>sales</code>.
+Rejecting the former allows us to conclude that in the absence of <code>TV</code> expenditure, <code>sales</code> are non-zero.<a href="simple-lin-reg.html#fnref4" class="footnote-back">↩︎</a></p></li>
 <li id="fn5"><p>We should note that in fact, the right hand side of <a href="simple-lin-reg.html#eq:correlation">(3.18)</a> is the sample correlation; thus, it would be more correct to write <span class="math inline">\(\widehat{Cor(X,Y)}\)</span>; however, we omit the “hat” for ease of notation.<a href="simple-lin-reg.html#fnref5" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>

@@ -932,13 +932,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="the-marketing-plan" class="section level2">
 <h2><span class="header-section-number">3.4</span> The Marketing Plan</h2>
-<p>We now briefly return to the seven questions about the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data that we set out to answer at the beginning of this chapter.</p>
+<p>We now briefly return to the seven questions about the <code>Advertising</code> data that we set out to answer at the beginning of this chapter.</p>
 <p><callout>Click each question to see the answer, but it might be worth thinking about yourself before checking!</callout></p>
 <details>
 <summary>1. <em>Is there a relationship between advertising sales and budget?</em></summary><br />
 
 <div class="summary-content">
-<p>This question can be answered by fitting a multiple regression model of <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> onto <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong>, <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>, and <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong>, as in <a href="mult-lin-reg.html#eq:mlin-reg-adv">(3.20)</a>, and testing the hypothesis <span class="math inline">\(H_0 : \beta_{\color{#B44C1C}{TV}} = \beta_{\color{#B44C1C}{radio}} = \beta_{\color{#B44C1C}{newspaper}} = 0\)</span>.
+<p>This question can be answered by fitting a multiple regression model of <code>sales</code> onto <code>TV</code>, <code>radio</code>, and <code>newspaper</code>, as in <a href="mult-lin-reg.html#eq:mlin-reg-adv">(3.20)</a>, and testing the hypothesis <span class="math inline">\(H_0 : \beta_{\color{#B44C1C}{TV}} = \beta_{\color{#B44C1C}{radio}} = \beta_{\color{#B44C1C}{newspaper}} = 0\)</span>.
 In Section 3.2.2, we showed that the F-statistic can be used to determine whether or not we should reject this null hypothesis.
 In this case the p-value corresponding to the F-statistic in Table 3.6 is very low, indicating clear evidence of a relationship between advertising and sales.</p>
 </div>
@@ -949,9 +949,9 @@ In this case the p-value corresponding to the F-statistic in Table 3.6 is very l
 <div class="summary-content">
 <p>We discussed two measures of model accuracy in Section 3.1.3.
 First the RSE estimates the standard deviation of the response from the population regression line.
-For the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data, the RSE is <span class="math inline">\(1,681\)</span> units while the mean value for the response is <span class="math inline">\(14,022\)</span>, indicating a percentage error of roughly <span class="math inline">\(12\%\)</span>.
+For the <code>Advertising</code> data, the RSE is <span class="math inline">\(1,681\)</span> units while the mean value for the response is <span class="math inline">\(14,022\)</span>, indicating a percentage error of roughly <span class="math inline">\(12\%\)</span>.
 Second, the <span class="math inline">\(R^2\)</span> statistic records the percentage of variability in the response that is explained by the predictors.
-The predictors explain almost <span class="math inline">\(90\%\)</span> of the variance in <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
+The predictors explain almost <span class="math inline">\(90\%\)</span> of the variance in <code>sales</code>.
 The RSE and <span class="math inline">\(R^2\)</span> statistics are displayed in Table 3.6.</p>
 </div>
 </details>
@@ -960,9 +960,9 @@ The RSE and <span class="math inline">\(R^2\)</span> statistics are displayed in
 
 <div class="summary-content">
 <p>To answer this question, we can examine the p-values associated with each predictor’s t-statistic (Section 3.1.2).
-In the multiple linear regression displayed in Table 3.4, the p-values for <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are low, but the p-value for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> is not.
-This suggests that only <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are related to <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
-But the interval for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> includes zero, indicating that the variable is not statistically significant given the values of <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>.</p>
+In the multiple linear regression displayed in Table 3.4, the p-values for <code>TV</code> and <code>radio</code> are low, but the p-value for <code>newspaper</code> is not.
+This suggests that only <code>TV</code> and <code>radio</code> are related to <code>sales</code>.
+But the interval for <code>newspaper</code> includes zero, indicating that the variable is not statistically significant given the values of <code>TV</code> and <code>radio</code>.</p>
 </div>
 </details>
 <details>
@@ -970,16 +970,16 @@ But the interval for <strong><span style="font-family:monospace; color: #B44C1C;
 
 <div class="summary-content">
 <p>We saw in Section 3.1.2 that the standard error of <span class="math inline">\(\hat{\beta_j}\)</span> can be used to construct confidence intervals for <span class="math inline">\(\beta_j\)</span>.
-For the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data, the <span class="math inline">\(95\%\)</span> confidence intervals are as follows: <span class="math inline">\((0.043, 0.049)\)</span> for <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong>, <span class="math inline">\((0.172, 0.206)\)</span> for <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>, and <span class="math inline">\((-0.013, 0.011)\)</span> for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong>.
-The confidence intervals for <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are narrow and far from zero, providing evidnece that these media are related to <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
-But the interval for <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> includes zero, indicating that the variable is not statistically significant given the values of <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>.<br />
+For the <code>Advertising</code> data, the <span class="math inline">\(95\%\)</span> confidence intervals are as follows: <span class="math inline">\((0.043, 0.049)\)</span> for <code>TV</code>, <span class="math inline">\((0.172, 0.206)\)</span> for <code>radio</code>, and <span class="math inline">\((-0.013, 0.011)\)</span> for <code>newspaper</code>.
+The confidence intervals for <code>TV</code> and <code>radio</code> are narrow and far from zero, providing evidnece that these media are related to <code>sales</code>.
+But the interval for <code>newspaper</code> includes zero, indicating that the variable is not statistically significant given the values of <code>TV</code> and <code>radio</code>.<br />
 We saw in Section 3.3.3 that collinearity can result in very wide standard errors.
-Could collinearity be the reason that the confidence intervals associated with <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> is so wide?
-The VIF scores are <span class="math inline">\(1.005\)</span>, <span class="math inline">\(1.145\)</span>, and <span class="math inline">\(1.145\)</span> for <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong>, <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong>, and <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong>, suggesting no evidence of collinearity.<br />
+Could collinearity be the reason that the confidence intervals associated with <code>newspaper</code> is so wide?
+The VIF scores are <span class="math inline">\(1.005\)</span>, <span class="math inline">\(1.145\)</span>, and <span class="math inline">\(1.145\)</span> for <code>TV</code>, <code>radio</code>, and <code>newspaper</code>, suggesting no evidence of collinearity.<br />
 In order to assess the association of each medium individually on sales, we can perform three separate simple linear regressions.
 Results are shown in Tables 3.1 and 3.3.
-There is evidence of an extremely strong association between <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong> and between <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>.
-There is evidence of a mild association between <strong><span style="font-family:monospace; color: #B44C1C;">newspaper</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">sales</span></strong>, when the values of <strong><span style="font-family:monospace; color: #B44C1C;">TV</span></strong> and <strong><span style="font-family:monospace; color: #B44C1C;">radio</span></strong> are ignored.</p>
+There is evidence of an extremely strong association between <code>TV</code> and <code>sales</code> and between <code>radio</code> and <code>sales</code>.
+There is evidence of a mild association between <code>newspaper</code> and <code>sales</code>, when the values of <code>TV</code> and <code>radio</code> are ignored.</p>
 </div>
 </details>
 <details>
@@ -998,7 +998,7 @@ Prediction intervals will always be wider than confidence intervals because they
 <div class="summary-content">
 <p>In Section 3.3.3, we saw that residual plots can be used in order to identify non-linearity.
 If the relationships are linear, then the residual plots should display no pattern.
-In the case of the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data, we observe a non-linear effect in Figure 3.5, though this effect could also be observed in a residual plot.
+In the case of the <code>Advertising</code> data, we observe a non-linear effect in Figure 3.5, though this effect could also be observed in a residual plot.
 In Section 3.3.2, we discussed the inclusion of transformations of the predictors in the linear regression model in order to accommodate non-linear relationships.</p>
 </div>
 </details>
@@ -1010,7 +1010,7 @@ In Section 3.3.2, we discussed the inclusion of transformations of the predictor
 However, the additive assumption may be unrealistic for certain data sets.
 In Section 3.3.2, we showed how to include an interaction term in the regression model in order to accommodate non-additive relationships.
 A small p-value associated with the interaction term indicates the presence of such relationships.
-Figure 3.5 suggested that the <strong><span style="font-family:monospace; color: #B44C1C;">Advertising</span></strong> data may not be additive.
+Figure 3.5 suggested that the <code>Advertising</code> data may not be additive.
 Including an interaction term in the model results in a substantial increase in <span class="math inline">\(R^2\)</span>, from around <span class="math inline">\(90\%\)</span> to almost <span class="math inline">\(97\%\)</span>.</p>
 </div>
 </details>
